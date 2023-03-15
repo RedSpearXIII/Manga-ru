@@ -1,16 +1,9 @@
 import React from "react"
-import Button from "~components/button"
-import Input from "~components/input"
-import { TbBrandMailgun } from "react-icons/all"
+import { ToggleTheme } from "~features/toggle-theme"
 const MainPage = () => {
   return (
     <div>
-      <Button>Смотреть</Button>
-      <Input
-        placeholder={"email"}
-        label={"Введи email"}
-        icon={<TbBrandMailgun />}
-      />
+      <ToggleTheme />
     </div>
   )
 }

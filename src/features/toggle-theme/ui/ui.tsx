@@ -3,7 +3,13 @@ import { useToggleTheme } from "../model"
 import { BsSun } from "react-icons/all"
 
 export const ToggleTheme = () => {
-  const { toggleTheme, themeName } = useToggleTheme()
+  const { toggleTheme } = useToggleTheme()
 
-  return <BsSun />
+  useToggleTheme.subscribe((state) => {
+    if (state.themeName === "dark")
+      document.documentElement.classList.add("dark")
+    else document.documentElement.classList.remove("dark")
+  })
+
+  return <BsSun onClick={toggleTheme} />
 }
