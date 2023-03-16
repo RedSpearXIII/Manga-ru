@@ -19,6 +19,7 @@ specifiers:
   react-icons: ^4.8.0
   react-query: ^3.39.3
   react-router-dom: ^6.9.0
+  string-hash: ^1.1.3
   tailwindcss: ^3.2.7
   typescript: ^4.9.3
   vite: ^4.1.4
@@ -34,6 +35,7 @@ dependencies:
   react-icons: 4.8.0_react@18.2.0
   react-query: 3.39.3_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.9.0_biqbaboplfbrettd7655fr4n2y
+  string-hash: 1.1.3
   zustand: 4.3.6_react@18.2.0
 
 devDependencies:
@@ -1477,6 +1479,10 @@ packages:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /string-hash/1.1.3:
+    resolution: {integrity: sha512-kJUvRUFK49aub+a7T1nNE66EJbZBMnBgoC1UbCZ5n6bsZKBRga4KgBRTMn/pFkeCZSYtNeSyMxPDM0AXWELk2A==}
+    dev: false
 
   /supports-color/5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
