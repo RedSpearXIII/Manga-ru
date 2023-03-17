@@ -10,7 +10,7 @@ type Actions = {
   toggleTheme: () => any
 }
 
-type StateType = (State & Actions) | Partial<State & Actions>
+type Store = (State & Actions) | Partial<State & Actions>
 
 const prefersColorScheme = (): ThemeVariants =>
   window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
@@ -24,11 +24,11 @@ const currentTheme: ThemeVariants =
       : prefersColorScheme()
     : prefersColorScheme()
 
-export const useToggleTheme = create<StateType>((set) => ({
+export const useToggleTheme = create<Store>((setState) => ({
   themeName: currentTheme,
   toggleTheme: () =>
-    set((state) => ({
-      ...state,
-      themeName: state.themeName === "light" ? "dark" : "light",
+    setState((store) => ({
+      ...store,
+      themeName: store.themeName === "light" ? "dark" : "light",
     })),
 }))

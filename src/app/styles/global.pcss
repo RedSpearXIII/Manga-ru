@@ -1,4 +1,16 @@
-body{
-  @apply bg-white dark:bg-gray-900;
-  @apply min-h-screen
+body {
+  @apply bg-white text-gray-900 font-bold;
+  @apply dark:bg-gray-900 dark:text-gray-400;
+  @apply min-h-screen;
+}
+
+input {
+  @apply border-none bg-transparent font-bold;
+  &:focus {
+    @apply outline-none;
+  }
+}
+
+a {
+  @apply hover:text-orange-500 hover:dark:text-orange-200 transition-all;
 }

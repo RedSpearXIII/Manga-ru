@@ -12,6 +12,7 @@
     "@types/node": "^18.15.3",
     "compose-function": "^3.0.3",
     "framer-motion": "^10.2.4",
+    "immer": "^9.0.19",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

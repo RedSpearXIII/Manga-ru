@@ -1,9 +1,8 @@
 import React from "react"
-import { ToggleTheme } from "~features/toggle-theme"
 const MainPage = () => {
   return (
     <div>
-      <ToggleTheme />
+      <h1>Main Page</h1>
     </div>
   )
 }

@@ -1,4 +1,16 @@
-.sidebar{
-  @apply min-h-screen w-20 border-r border-gray-200 dark:border-gray-800 py-2;
-  @apply flex flex-col items-center justify-between
+.sidebar {
+  @apply min-h-screen w-36 border-r border-gray-200 dark:border-gray-800 py-5;
+  @apply flex flex-col items-center justify-between;
+
+  nav {
+    .sidebarNavLink {
+      @apply cursor-pointer flex items-center justify-center my-8;
+      p {
+        @apply ml-2;
+      }
+      svg {
+        @apply text-2xl;
+      }
+    }
+  }
 }

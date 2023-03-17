@@ -1,0 +1,18 @@
+.search {
+  @apply fixed right-1/2 top-12 translate-x-1/2 max-w-3xl w-full;
+}
+
+.searchOverlay {
+  @apply w-screen h-screen fixed left-0 top-0 backdrop-blur-sm;
+}
+
+.searchButton {
+  @apply cursor-pointer flex items-center justify-center hover:text-orange-500 hover:dark:text-orange-200 transition-all;
+
+  p {
+    @apply ml-2;
+  }
+  svg {
+    @apply text-2xl;
+  }
+}

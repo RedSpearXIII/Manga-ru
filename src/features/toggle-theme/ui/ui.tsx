@@ -15,5 +15,5 @@ export const ToggleTheme = () => {
     }
   })
 
-  return <BsSun onClick={toggleTheme} />
+  return <BsSun size={24} onClick={toggleTheme} />
 }
