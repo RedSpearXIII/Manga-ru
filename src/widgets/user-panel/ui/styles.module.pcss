@@ -1,0 +1,38 @@
+.panel {
+  @apply relative;
+  .dropdown {
+    @apply bg-gray-100 dark:bg-gray-800 rounded-xl p-2 gap-2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, minmax(60px, auto));
+    grid-template-areas:
+      "a a b"
+      "c d b"
+      "c d e";
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 500px;
+
+    .dropdownItem {
+      @apply border-gray-200 dark:border-gray-900 border-2 rounded h-full;
+    }
+
+    & :first-child {
+      grid-area: a;
+    }
+    & :nth-child(2) {
+      grid-area: b;
+    }
+    & :nth-child(3) {
+      grid-area: c;
+    }
+    & :nth-child(4) {
+      grid-area: d;
+    }
+    & :last-child {
+      grid-area: e;
+    }
+  }
+}

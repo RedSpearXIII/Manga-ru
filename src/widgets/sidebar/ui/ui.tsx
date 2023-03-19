@@ -4,7 +4,7 @@ import SiteLogo from "~components/site-logo"
 import CatalogSearch from "~features/catalog-search/ui/ui"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import { FaBookOpen, FaPlay } from "react-icons/all"
+import { FaBookOpen, FaPlay, IoLogIn } from "react-icons/all"
 
 const links = [
   { icon: <FaPlay />, to: "/anime", title: "Аниме" },
@@ -22,11 +22,20 @@ export const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
       <SiteLogo />
-      <motion.nav initial={{ scale: 0.8 }} animate={{ scale: 1 }}>
+      <motion.div
+        className={styles.sideBarCenter}
+        initial={{ scale: 0.5 }}
+        animate={{ scale: 1 }}
+      >
         {navLinks}
         <CatalogSearch />
-      </motion.nav>
-      <p>Foot</p>
+      </motion.div>
+      <div>
+        <Link className={styles.sidebarNavLink} to={"/login"}>
+          <IoLogIn />
+          <p>Войти</p>
+        </Link>
+      </div>
     </div>
   )
 }

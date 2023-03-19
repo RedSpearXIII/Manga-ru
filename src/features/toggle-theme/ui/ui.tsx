@@ -1,9 +1,10 @@
 import React from "react"
 import { useToggleTheme } from "../model"
-import { BsSun } from "react-icons/all"
+import { BsMoonStarsFill, BsSunFill } from "react-icons/all"
+import styles from "./styles.module.pcss"
 
 export const ToggleTheme = () => {
-  const { toggleTheme } = useToggleTheme()
+  const { toggleTheme, themeName } = useToggleTheme()
 
   useToggleTheme.subscribe((state) => {
     if (state.themeName === "dark") {
@@ -15,5 +16,15 @@ export const ToggleTheme = () => {
     }
   })
 
-  return <BsSun size={24} onClick={toggleTheme} />
+  return (
+    <div onClick={toggleTheme} className={styles.toggleTheme}>
+      <div className={styles.icon}>
+        {themeName === "light" ? <BsSunFill /> : <BsMoonStarsFill />}
+      </div>
+
+      <p className={styles.text}>
+        {themeName === "light" ? "Светлая" : "Темная"}
+      </p>
+    </div>
+  )
 }

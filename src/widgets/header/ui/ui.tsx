@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "./styles.module.pcss"
-import { ToggleTheme } from "~features/toggle-theme"
 import { Link } from "react-router-dom"
+import UserPanel from "~widgets/user-panel/ui/ui"
 
 export const Header = () => {
   return (
@@ -14,7 +14,7 @@ export const Header = () => {
         <Link to={"/anime"}>link</Link>
       </nav>
       <div>
-        <ToggleTheme />
+        <UserPanel />
       </div>
     </header>
   )
