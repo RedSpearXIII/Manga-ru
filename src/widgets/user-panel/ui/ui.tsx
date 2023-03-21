@@ -16,14 +16,14 @@ const UserPanel = () => {
 
   return (
     <div className={styles.panel} {...hoverProps}>
-      <div className={"hover:text-red-400 transition-colors"}>
+      <div className={styles.button}>
         <Avatar />
 
         <motion.div
           animate={isHover ? "open" : "close"}
           variants={chevronVariants}
         >
-          <BiChevronDown size={24} />
+          <BiChevronDown style={{ color: "inherit" }} size={24} />
         </motion.div>
       </div>
 

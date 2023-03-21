@@ -1,7 +1,7 @@
 import React from "react"
 import SitePresentationFigures from "~components/site-presentation-figures"
 import SiteFeatures from "~components/site-features"
-const MainPage = () => {
+export const MainPage = () => {
   return (
     <div>
       <SiteFeatures />
@@ -9,5 +9,3 @@ const MainPage = () => {
     </div>
   )
 }
-
-export default MainPage

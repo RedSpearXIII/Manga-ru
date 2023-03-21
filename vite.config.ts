@@ -11,6 +11,7 @@ export default defineConfig({
         find: "~components",
         replacement: path.resolve(__dirname, "src/shared/components"),
       },
+      { find: "~api", replacement: path.resolve(__dirname, "src/shared/api") },
       {
         find: "~assets",
         replacement: path.resolve(__dirname, "src/shared/assets"),

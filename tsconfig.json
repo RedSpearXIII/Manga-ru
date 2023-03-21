@@ -4,6 +4,7 @@
     "paths": {
       "~components/*": ["shared/components/*"],
       "~assets/*": ["shared/assets/*"],
+      "~api/*": ["shared/api/*"],
       "~pages/*": ["pages/*"],
       "~entities/*": ["entities/*"],
       "~features/*": ["features/*"],

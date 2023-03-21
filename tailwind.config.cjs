@@ -11,6 +11,6 @@ module.exports = {
       sans: ['Nunito', 'sans-serif'],
     }
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
   darkMode: "class"
 }
