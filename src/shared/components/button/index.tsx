@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes, ReactNode } from "react"
 import { motion } from "framer-motion"
+import styles from "./styles.module.pcss"
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode
@@ -7,9 +8,14 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 
 const Button: FC<ButtonProps> = ({ children, color, ...other }) => {
   return (
-    <motion.div layout whileTap={{ y: 3 }}>
-      <button {...other}>{children}</button>
-    </motion.div>
+    <motion.button
+      className={styles.button}
+      {...(other as any)}
+      layout
+      whileTap={{ y: 3 }}
+    >
+      {children}
+    </motion.button>
   )
 }
 

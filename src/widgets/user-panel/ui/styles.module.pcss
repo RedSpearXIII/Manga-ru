@@ -1,7 +1,7 @@
 .panel {
   @apply relative;
   .dropdown {
-    @apply bg-gray-100 dark:bg-gray-800 rounded-xl p-2 gap-2;
+    @apply bg-gray-100 dark:bg-slate-800 rounded-xl p-2 gap-2 shadow;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -16,7 +16,7 @@
     width: 500px;
 
     .dropdownItem {
-      @apply border-gray-200 dark:border-gray-900 border-2 rounded h-full;
+      @apply rounded-xl h-full dark:bg-slate-700 bg-slate-200;
     }
 
     & :first-child {

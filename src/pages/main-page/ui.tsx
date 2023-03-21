@@ -1,8 +1,11 @@
 import React from "react"
+import SitePresentationFigures from "~components/site-presentation-figures"
+import SiteFeatures from "~components/site-features"
 const MainPage = () => {
   return (
     <div>
-      <h1>Main Page</h1>
+      <SiteFeatures />
+      <SitePresentationFigures />
     </div>
   )
 }

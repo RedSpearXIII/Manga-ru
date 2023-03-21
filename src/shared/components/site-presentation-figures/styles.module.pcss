@@ -1,0 +1,19 @@
+.icons {
+  @apply absolute h-screen w-screen top-0 left-0 -z-10;
+  .icon {
+    @apply absolute;
+    img {
+      @apply w-32;
+    }
+  }
+
+  & :first-child {
+    @apply top-1/4 left-32;
+  }
+  & :nth-child(2) {
+    @apply top-24 right-32;
+  }
+  & :last-child {
+    @apply bottom-36 right-1/2 translate-x-1/2;
+  }
+}
