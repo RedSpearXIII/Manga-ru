@@ -5,6 +5,14 @@ import stringHash from "string-hash"
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    watch: {
+      usePolling: true,
+    },
+    host: true,
+    strictPort: true,
+    port: 80,
+  },
   resolve: {
     alias: [
       {
