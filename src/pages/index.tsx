@@ -1,11 +1,13 @@
-import React from "react"
+import React, { lazy } from "react"
 import { Route, Routes } from "react-router-dom"
 import { MainLayout } from "~layouts/main-layout"
-import { HomePage } from "~pages/home-page"
-import { MainPage } from "~pages/main-page"
-import { LoginPage } from "~pages/login-page"
-import { SignupPage } from "~pages/signup-page"
-import { MangaPage } from "~pages/manga-page"
+
+const HomePage = lazy(() => import("~pages/home-page"))
+const MainPage = lazy(() => import("~pages/main-page"))
+const LoginPage = lazy(() => import("~pages/login-page"))
+const SignupPage = lazy(() => import("~pages/signup-page"))
+const MangaPage = lazy(() => import("~pages/manga-page"))
+const MangaDetailingPage = lazy(() => import("~pages/manga-detailing-page"))
 
 const Routing = () => {
   return (
@@ -13,7 +15,10 @@ const Routing = () => {
       <Route path={"/"} element={<MainLayout />}>
         <Route index element={<MainPage />} />
         <Route path={"home"} element={<HomePage />} />
-        <Route path={"manga"} element={<MangaPage />} />
+        <Route path={"manga"}>
+          <Route index element={<MangaPage />} />
+          <Route path={"title/:mangaId"} element={<MangaDetailingPage />} />
+        </Route>
         <Route path="*" element={"NOT FOUND"} />
       </Route>
       <Route path={"/login"} element={<LoginPage />} />

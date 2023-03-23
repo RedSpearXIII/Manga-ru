@@ -1,5 +1,7 @@
 import React from "react"
 
-export const SignupPage = () => {
+const HomePage = () => {
   return <div></div>
 }
+
+export default HomePage

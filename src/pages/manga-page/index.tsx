@@ -1,5 +1,5 @@
 import React from "react"
-import { MangaList } from "~features/fetch-manga-list"
+import { MangaList } from "~widgets/manga-list"
 
 export const MangaPage = () => {
   return (

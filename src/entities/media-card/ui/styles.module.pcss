@@ -1,10 +1,27 @@
 .card {
-  @apply w-full overflow-hidden;
+  @apply w-full overflow-hidden relative;
 
   .cardImage {
-    @apply w-full h-72 object-cover rounded-lg;
+    @apply w-full h-64 object-cover rounded transition-opacity opacity-0 transition-opacity duration-500 ease-in;
+  }
+  .cardImageLoaded {
+    @apply opacity-100;
+  }
+  .cardImageLoader {
+    @apply absolute left-0 top-0 w-full h-64 object-cover rounded animate-pulse dark:bg-slate-800 bg-slate-200;
   }
   .cardTitle {
     @apply pt-1 line-clamp-2;
+  }
+}
+
+.skeleton {
+  @apply w-full animate-pulse;
+
+  .imageLoader {
+    @apply w-full h-64 object-cover rounded dark:bg-slate-800 bg-slate-200;
+  }
+  .titleLoader {
+    @apply mt-3 h-6 dark:bg-slate-800 bg-slate-200 rounded;
   }
 }
