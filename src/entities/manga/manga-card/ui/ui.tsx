@@ -2,7 +2,8 @@ import React, { FC } from "react"
 import styles from "./styles.module.pcss"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import useImageLoaded from "../../../shared/hooks/useImageLoading"
+import useImageLoaded from "~shared/hooks/useImageLoading"
+import clsx from "clsx"
 
 interface MediaCardProps {
   manga: { id: string; title: string; image: string }
@@ -20,9 +21,7 @@ export const MediaCard: FC<MediaCardProps> = ({ manga }) => {
         <img
           onLoad={onLoad}
           onError={onError}
-          className={`${styles.cardImage} ${
-            isLoaded && styles.cardImageLoaded
-          }`}
+          className={clsx(styles.cardImage, isLoaded && styles.cardImageLoaded)}
           alt={"Отсутствует изображение"}
           src={manga.image}
         />

@@ -1,0 +1,23 @@
+.card {
+  @apply grid grid-cols-[85px_auto] gap-2 dark:bg-slate-800 bg-slate-200 shadow rounded overflow-hidden;
+
+  .image {
+    @apply object-cover h-[130px];
+  }
+
+  .content {
+    @apply pr-4;
+    .titleName {
+      h6 {
+        @apply text-purple-300;
+      }
+      p {
+        @apply text-xs line-clamp-3;
+      }
+    }
+  }
+}
+
+.loader {
+  @apply animate-pulse;
+}

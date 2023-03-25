@@ -5,7 +5,7 @@ import styles from "./styles.module.pcss"
 import playIcon from "./assets/play.webp"
 import searchIcon from "./assets/search.jpg"
 import bookIcon from "./assets/book.png"
-import Portal from "~components/portal"
+import { Portal } from "~shared/components"
 
 const SitePresentationFigures = () => {
   const [x, y] = useMousePosition()

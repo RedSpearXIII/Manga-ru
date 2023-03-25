@@ -1,10 +1,10 @@
 import React from "react"
 import styles from "./styles.module.pcss"
-import Avatar from "~components/avatar"
 import { AnimatePresence, motion } from "framer-motion"
 import useHover from "../../../shared/hooks/useHover"
 import { BiChevronDown } from "react-icons/all"
 import { ToggleTheme } from "~features/toggle-theme"
+import { Avatar } from "~shared/components"
 
 const chevronVariants = {
   open: { rotate: 0 },
@@ -23,7 +23,7 @@ const UserPanel = () => {
           animate={isHover ? "open" : "close"}
           variants={chevronVariants}
         >
-          <BiChevronDown style={{ color: "inherit" }} size={24} />
+          <BiChevronDown size={24} />
         </motion.div>
       </div>
 

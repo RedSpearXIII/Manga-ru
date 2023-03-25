@@ -1,10 +1,10 @@
 import React from "react"
 import styles from "./styles.module.pcss"
-import SiteLogo from "~components/site-logo"
 import CatalogSearch from "~features/catalog-search/ui/ui"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { FaBookOpen, FaPlay, IoLogIn } from "react-icons/all"
+import { SiteLogo } from "~shared/components"
 
 const links = [
   { icon: <FaPlay />, to: "/anime", title: "Аниме" },

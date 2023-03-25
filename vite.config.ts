@@ -16,13 +16,8 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: "~components",
-        replacement: path.resolve(__dirname, "src/shared/components"),
-      },
-      { find: "~api", replacement: path.resolve(__dirname, "src/shared/api") },
-      {
-        find: "~assets",
-        replacement: path.resolve(__dirname, "src/shared/assets"),
+        find: "~shared",
+        replacement: path.resolve(__dirname, "src/shared"),
       },
       { find: "~pages", replacement: path.resolve(__dirname, "src/pages") },
       {

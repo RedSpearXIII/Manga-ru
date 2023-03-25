@@ -4,8 +4,8 @@ import clockIcon from "./asstes/fast-clock.png"
 import heartIcon from "./asstes/heart.webp"
 import watchIcon from "./asstes/watch.png"
 import conversationIcon from "./asstes/conversation.png"
-import Button from "~components/button"
 import { Link } from "react-router-dom"
+import { Button } from "~shared/components"
 
 const features = [
   {

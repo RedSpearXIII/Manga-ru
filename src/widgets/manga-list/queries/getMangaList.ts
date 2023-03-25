@@ -1,13 +1,13 @@
 import { useInfiniteQuery } from "react-query"
-import { publicApi } from "~api/http"
+import { publicApi } from "~shared/api"
 
 export type MangaResponse = { id: string; title: string; image: string }
 
-interface getMangaParams {
+interface GetMangaParams {
   pageSize?: number
 }
 
-export const useGetMangaList = ({ pageSize }: getMangaParams) =>
+export const useGetMangaList = ({ pageSize }: GetMangaParams) =>
   useInfiniteQuery<MangaResponse[]>(
     "getAnimeList",
     async ({ pageParam = 0 }) => {

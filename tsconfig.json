@@ -2,9 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "~components/*": ["shared/components/*"],
-      "~assets/*": ["shared/assets/*"],
-      "~api/*": ["shared/api/*"],
+      "~shared/*": ["shared/*"],
       "~pages/*": ["pages/*"],
       "~entities/*": ["entities/*"],
       "~features/*": ["features/*"],

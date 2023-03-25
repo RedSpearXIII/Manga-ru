@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from "react"
 import styles from "./styles.module.pcss"
 import { FaSearch } from "react-icons/all"
-import Portal from "~components/portal"
-import Input from "~components/input"
 import { AnimatePresence, motion } from "framer-motion"
 import { useCatalogSearchStore } from "~features/catalog-search/model"
+import { Input, Portal } from "~shared/components"
 
 const CatalogSearch = () => {
   const { query, setQuery, searchOpen, toggleSearchOpen } =

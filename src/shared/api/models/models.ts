@@ -1,6 +1,6 @@
 import { Genres, MediaType } from "./types"
 
-export interface Manga {
+export interface MangaModel {
   id: string
   title: string
   image: string

@@ -1,5 +1,5 @@
 body {
-  @apply bg-white text-gray-900 font-bold;
+  @apply bg-slate-100 text-slate-900 font-bold;
   @apply dark:bg-gray-900 dark:text-slate-400;
   @apply min-h-screen overflow-x-hidden;
 }
@@ -52,4 +52,19 @@ h6 {
 
 button {
   @apply px-8 py-2 bg-orange-400 rounded text-white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply rounded;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply dark:bg-slate-800 dark:hover:bg-slate-700 bg-gray-300 hover:bg-slate-400;
+  border-radius: 10px;
 }

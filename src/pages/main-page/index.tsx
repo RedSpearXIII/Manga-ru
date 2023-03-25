@@ -1,6 +1,5 @@
 import React from "react"
-import SitePresentationFigures from "~components/site-presentation-figures"
-import SiteFeatures from "~components/site-features"
+import { SiteFeatures, SitePresentationFigures } from "~shared/components"
 const MainPage = () => {
   return (
     <div>

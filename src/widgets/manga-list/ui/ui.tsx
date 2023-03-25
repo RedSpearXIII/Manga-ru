@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react"
 import styles from "./styles.module.pcss"
 import { useGetMangaList } from "~widgets/manga-list"
-import { MediaCard, MediaCardSkeleton } from "~entities/media-card"
+import { MediaCard, MediaCardSkeleton } from "~entities/manga/manga-card"
 import usePageOffset from "../../../shared/hooks/usePageOffset"
 
 export const MangaList = () => {
@@ -41,7 +41,9 @@ export const MangaList = () => {
             ))}
           </Fragment>
         ))
-      : loaders
+      : Array.from({ length: 20 }, (_, index) => (
+          <MediaCardSkeleton key={index} />
+        ))
 
   return (
     <div className={"container mx-auto"}>

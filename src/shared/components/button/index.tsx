@@ -6,7 +6,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode
 }
 
-const Button: FC<ButtonProps> = ({ children, color, ...other }) => {
+const Button: FC<ButtonProps> = ({ children, ...other }) => {
   return (
     <motion.button
       className={styles.button}

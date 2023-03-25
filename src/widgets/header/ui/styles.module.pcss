@@ -1,10 +1,7 @@
-.wrapper {
-  width: calc(100% - 9rem);
-  @apply fixed left-36 transition-all top-0 z-20;
-}
-
 .header {
-  @apply h-20 flex items-center dark:bg-gray-900 bg-white justify-between px-10 w-full;
+  @apply h-20 flex items-center justify-between px-10;
+  @apply dark:bg-gray-900 bg-slate-100 fixed left-36 top-0 z-20 transition-transform duration-500 shadow-sm;
+  width: calc(100% - 9rem);
 
   .rightBlock {
     @apply flex items-center;
@@ -18,4 +15,8 @@
       @apply mr-20 uppercase font-extrabold;
     }
   }
+}
+
+.hidden {
+  @apply -translate-y-full;
 }
