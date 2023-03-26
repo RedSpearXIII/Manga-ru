@@ -5,19 +5,23 @@ export type MangaResponse = { id: string; title: string; image: string }
 
 interface GetMangaParams {
   pageSize?: number
+  searchQuery?: string
 }
 
-export const useGetMangaList = ({ pageSize }: GetMangaParams) =>
+export const useGetMangaList = ({ pageSize, searchQuery }: GetMangaParams) =>
   useInfiniteQuery<MangaResponse[]>(
-    "getAnimeList",
+    ["getAnimeList", searchQuery],
     async ({ pageParam = 0 }) => {
+      const params = {
+        pageSize: pageSize ? pageSize : 20,
+        pageNum: pageParam,
+        ...(searchQuery && { searchQuery }),
+      }
+
       const {
         data: { data },
       } = await publicApi.get("manga/", {
-        params: {
-          pageSize: pageSize ? pageSize : 20,
-          pageNum: pageParam,
-        },
+        params,
       })
       return data
     },

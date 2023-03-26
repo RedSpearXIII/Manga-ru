@@ -9,3 +9,5 @@ export type MediaType = {
   status: string // поправить на enums
   limitation: string
 }
+
+export type MangaStatus = "онгоинг" | "завершён" | "продолжается" | "заброшен"

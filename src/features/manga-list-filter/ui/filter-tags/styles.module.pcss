@@ -1,0 +1,16 @@
+.filterTags {
+  @apply flex mb-6;
+  .tags {
+    @apply flex flex-wrap items-center ml-2;
+  }
+  .tagItem {
+    @apply mr-2 mb-2 cursor-pointer opacity-90 hover:opacity-100 transition-opacity;
+
+    .content {
+      @apply flex items-center break-words;
+      svg {
+        @apply ml-0.5 text-base;
+      }
+    }
+  }
+}

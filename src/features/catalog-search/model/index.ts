@@ -1,1 +1,1 @@
-export { useCatalogSearchStore } from "./catalog-search"
+export * from "./catalog-search"

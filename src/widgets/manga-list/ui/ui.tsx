@@ -1,10 +1,18 @@
 import React, { Fragment, useEffect } from "react"
 import styles from "./styles.module.pcss"
-import { useGetMangaList } from "~widgets/manga-list"
 import { MediaCard, MediaCardSkeleton } from "~entities/manga/manga-card"
 import usePageOffset from "../../../shared/hooks/usePageOffset"
+import { useGetMangaList } from "~shared/api"
+import {
+  MangaListFilter,
+  useMangaListFilterStore,
+} from "~features/manga-list-filter"
+import { shallow } from "zustand/shallow"
+import { BiError } from "react-icons/all"
 
 export const MangaList = () => {
+  const { searchQuery } = useMangaListFilterStore((state) => state, shallow)
+
   const {
     data,
     isLoading,
@@ -14,6 +22,7 @@ export const MangaList = () => {
     hasNextPage,
   } = useGetMangaList({
     pageSize: 30,
+    searchQuery,
   })
 
   const { y } = usePageOffset()
@@ -27,7 +36,6 @@ export const MangaList = () => {
     }
   }, [bottomScrollPosition >= 0])
 
-  if (error) return <h1>Error</h1>
   const loaders = Array.from({ length: 6 }, (_, index) => (
     <MediaCardSkeleton key={index} />
   ))
@@ -45,10 +53,24 @@ export const MangaList = () => {
           <MediaCardSkeleton key={index} />
         ))
 
+  if (error)
+    return (
+      <div className={styles.error}>
+        <BiError />
+        <div>
+          <p>
+            На нашем сервере произошла ошибочка :( <br />
+          </p>
+          <p>попробуйте перезагрузить страницу</p>
+        </div>
+      </div>
+    )
+
   return (
     <div className={"container mx-auto"}>
+      <MangaListFilter />
       <div className={styles.list}>
-        {cards}
+        {cards.length > 0 ? cards : <div></div>}
         {isFetchingNextPage && hasNextPage && loaders}
       </div>
     </div>
