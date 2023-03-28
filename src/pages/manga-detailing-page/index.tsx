@@ -1,9 +1,8 @@
 import React from "react"
-
-import { MangaContent } from "./ui/manga-content"
+import { MangaContent } from "./ui"
+import { SimilarMangaList } from "./ui"
 import { useGetMangaById } from "~shared/api"
 import { useParams } from "react-router-dom"
-import SimilarMangaList from "./ui/similar-manga-list"
 
 const MangaDetailingPage = () => {
   const { mangaId } = useParams()
