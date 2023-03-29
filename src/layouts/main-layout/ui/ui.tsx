@@ -3,6 +3,7 @@ import styles from "./styles.module.pcss"
 import { Outlet } from "react-router-dom"
 import { Header } from "~widgets/header"
 import { Sidebar } from "~widgets/sidebar"
+import { Footer } from "~widgets/footer"
 
 export const MainLayout = () => {
   return (
@@ -11,8 +12,11 @@ export const MainLayout = () => {
       <div className={styles.content}>
         <Header />
         <div className={styles.pageContent}>
-          <Outlet />
+          <main>
+            <Outlet />
+          </main>
         </div>
+        <Footer />
       </div>
     </div>
   )

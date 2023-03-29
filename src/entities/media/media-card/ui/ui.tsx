@@ -7,14 +7,15 @@ import clsx from "clsx"
 
 interface MediaCardProps {
   manga: { id: string; title: string; image: string }
+  type: "anime" | "manga"
 }
 
-export const MediaCard: FC<MediaCardProps> = ({ manga }) => {
+export const MediaCard: FC<MediaCardProps> = ({ manga, type }) => {
   const { isLoaded, onLoad, isError, onError } = useImageLoaded()
 
   return (
     <div className={styles.card}>
-      <Link to={`/manga/title/${manga.id}`}>
+      <Link to={`/${type}/title/${manga.id}`}>
         <span
           className={`${!isLoaded && !isError && styles.cardImageLoader}`}
         />

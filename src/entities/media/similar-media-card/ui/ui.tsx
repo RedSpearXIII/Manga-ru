@@ -8,21 +8,21 @@ type Props = {
   image: string
 }
 
-export const SimilarMangaCard: FC<Props> = ({ image, title }) => {
+export const SimilarMediaCard: FC<Props> = ({ image, title }) => {
   return (
     <div className={styles.card}>
       <img className={styles.image} src={image} alt={"manga-image"} />
       <div className={styles.content}>
         <div className={styles.titleName}>
-          <h6>Манга</h6>
-          <p>{title}</p>
+          <h6>{title}</h6>
+          <p>Lorem ipsum dolor sit</p>
         </div>
       </div>
     </div>
   )
 }
 
-export const SimilarMangaCardLoader = () => {
+export const SimilarMediaCardLoader = () => {
   return (
     <div className={clsx(styles.card, styles.loader)}>
       <div

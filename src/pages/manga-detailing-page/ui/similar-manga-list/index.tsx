@@ -1,9 +1,12 @@
 import React, { useState } from "react"
 import { useGetMangaSimilar } from "~shared/api"
 import { Link, useParams } from "react-router-dom"
-import { SimilarMangaCard, SimilarMangaCardLoader } from "~entities/manga"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
+import {
+  SimilarMediaCard,
+  SimilarMediaCardLoader,
+} from "~entities/media/similar-media-card"
 
 export const SimilarMangaList = () => {
   const { mangaId } = useParams()
@@ -23,7 +26,7 @@ export const SimilarMangaList = () => {
   if (!isLoading && data && data.length === 0) return null
 
   const loader = Array.from({ length: 10 }, (_, index) => (
-    <SimilarMangaCardLoader key={index} />
+    <SimilarMediaCardLoader key={index} />
   ))
 
   return (
@@ -37,7 +40,7 @@ export const SimilarMangaList = () => {
             <>
               {data.map((manga) => (
                 <Link to={`/manga/title/${manga.id}`}>
-                  <SimilarMangaCard
+                  <SimilarMediaCard
                     key={manga.id}
                     id={manga.id}
                     title={manga.title}
