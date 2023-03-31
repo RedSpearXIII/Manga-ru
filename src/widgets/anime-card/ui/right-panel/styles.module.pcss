@@ -10,6 +10,7 @@
   }
 
   .studio {
+    @apply my-1;
     p {
       @apply text-sm;
     }
@@ -18,14 +19,18 @@
     }
 
     .animeProgress {
-      @apply mt-0.5 flex items-center justify-between;
+      @apply my-0.5 flex items-center justify-between;
+
+      .status {
+        @apply opacity-90 hover:opacity-100 cursor-pointer;
+      }
     }
   }
 
   .genres {
     @apply flex items-center mt-4 flex-wrap;
     .genre {
-      @apply mx-0.5 mb-1 grow text-center text-xs bg-purple-400 text-white px-2 rounded whitespace-nowrap;
+      @apply mx-0.5 mb-1 py-0.5 grow text-center text-xs bg-purple-400 text-white px-2 rounded whitespace-nowrap opacity-90 hover:opacity-100 cursor-pointer;
     }
   }
 }

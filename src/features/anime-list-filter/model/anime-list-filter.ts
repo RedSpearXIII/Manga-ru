@@ -12,7 +12,7 @@ type State = {
   searchQuery: string
   status: AnimeStatuses | null
   orderBy: AnimeOrderVariants | null
-  genres: string[]
+  genres: { id: string; genre: string }[]
   season: AnimeSeasons | null
   ratingMpa: AnimeRatingMpa | null
   minimalAge: AnimeMinimalAge | null
@@ -22,14 +22,15 @@ type Actions = {
   setSearchQuery: (queryString: string) => void
   setStatus: (status: AnimeStatuses | null) => void
   setOrderBy: (payload: AnimeOrderVariants | null) => void
-  setGenres: (genres: string[]) => void
+  addGenre: (genre: { id: string; genre: string }) => void
+  removeGenre: (genreId: string) => void
   setSeason: (value: AnimeSeasons | null) => void
   setRatingMpa: (value: AnimeRatingMpa | null) => void
   setMinimalAge: (value: AnimeMinimalAge | null) => void
   resetFilter: () => void
 }
 
-type Store = State & Actions
+export type Store = State & Actions
 
 const initialState: State = {
   orderBy: null,
@@ -56,9 +57,14 @@ export const useAnimeListFilterStore = create(
       setState((store) => {
         store.orderBy = value
       }),
-    setGenres: (genres) =>
+    addGenre: (genre) =>
       setState((store) => {
-        store.genres = genres
+        const candidate = store.genres.find((el) => el.id === genre.id)
+        if (!candidate) store.genres.push(genre)
+      }),
+    removeGenre: (genreId) =>
+      setState((store) => {
+        store.genres = store.genres.filter((genre) => genre.id !== genreId)
       }),
     setSeason: (season) =>
       setState((store) => {

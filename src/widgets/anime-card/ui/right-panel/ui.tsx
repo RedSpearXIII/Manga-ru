@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import styles from "./styles.module.pcss"
 import { motion } from "framer-motion"
-import { AnimeResponse } from "~shared/api"
+import { AnimeResponse, AnimeStatuses } from "~shared/api"
 import { Badge } from "~shared/components"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
@@ -11,13 +11,18 @@ interface RightPanelProps {
 }
 
 export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
-  const { setRatingMpa, setGenres, setStatus, setSeason } =
+  const { setRatingMpa, addGenre, setStatus, setSeason } =
     useAnimeListFilterStore((state) => state, shallow)
 
   const onSetRatingMpa = () => {
     setRatingMpa(anime.ratingMpa)
   }
-  const onSetGenre = () => {}
+  const onAddGenre = (id: string, genre: string) => {
+    addGenre({ id, genre })
+  }
+  const onClickStatus = (status: AnimeStatuses) => {
+    setStatus(status)
+  }
 
   return (
     <motion.div
@@ -36,7 +41,12 @@ export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
         <p className={styles.studioName}>Студия {anime.studio[0].studio}</p>
         <div className={styles.animeProgress}>
           <p>{anime.episodesCount} серий/я</p>-
-          <p>{anime.status === "ongoing" ? "Онгоинг" : "Выпущен"}</p>
+          <p
+            onClick={() => onClickStatus(anime.status)}
+            className={styles.status}
+          >
+            {anime.status === "ongoing" ? "Онгоинг" : "Выпущен"}
+          </p>
         </div>
       </div>
 
@@ -44,7 +54,11 @@ export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
         {anime.genres.map(({ genre, id }, index) => {
           if (index < 3)
             return (
-              <div className={styles.genre} key={id}>
+              <div
+                className={styles.genre}
+                onClick={() => onAddGenre(id, genre)}
+                key={id}
+              >
                 {genre}
               </div>
             )

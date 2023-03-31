@@ -1,0 +1,25 @@
+.selectContainer {
+  @apply relative;
+  label {
+    @apply text-sm;
+  }
+  .selectInput {
+    @apply bg-slate-200 dark:bg-slate-800 rounded-lg drop-shadow p-2 flex items-center justify-between px-4 relative;
+
+    .value {
+      @apply absolute;
+    }
+
+    .placeholder {
+      @apply absolute;
+    }
+
+    input {
+    }
+    .selectIcon {
+      svg {
+        @apply text-xl;
+      }
+    }
+  }
+}

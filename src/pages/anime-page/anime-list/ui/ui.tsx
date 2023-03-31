@@ -5,10 +5,7 @@ import { shallow } from "zustand/shallow"
 import { BiError } from "react-icons/all"
 import { MediaCardSkeleton } from "~entities/media"
 import { useGetAnimeList } from "~shared/api"
-import {
-  AnimeListFilter,
-  useAnimeListFilterStore,
-} from "~features/anime-list-filter"
+import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { AnimeCard } from "~widgets/anime-card"
 
 export const AnimeList = () => {
@@ -32,7 +29,7 @@ export const AnimeList = () => {
   } = useGetAnimeList({
     pageSize: 30,
     searchQuery,
-    genres,
+    genres: genres.map(({ id }) => id),
     status,
     season,
     ratingMpa,
@@ -83,7 +80,6 @@ export const AnimeList = () => {
 
   return (
     <div className={"container mx-auto"}>
-      <AnimeListFilter />
       <div className={styles.list}>
         {cards.length > 0 ? cards : <div>Нет результатов</div>}
         {isFetchingNextPage && hasNextPage && loaders}

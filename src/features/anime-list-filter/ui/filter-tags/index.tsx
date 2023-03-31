@@ -17,14 +17,33 @@ export const FilterTags = () => {
     status,
     searchQuery,
     setSearchQuery,
+    setRatingMpa,
     resetFilter,
+    removeGenre,
+    setStatus,
   } = useAnimeListFilterStore((state) => state, shallow)
 
   const resetSearchFilter = () => {
     setSearchQuery("")
   }
+  const removeGenreFilter = (id: string) => {
+    removeGenre(id)
+  }
+  const removeStatusFilter = () => {
+    setStatus(null)
+  }
+  const removeRatingMpaFilter = () => {
+    setRatingMpa(null)
+  }
 
-  const filterIsActive = !!(orderBy || status || searchQuery)
+  const filterIsActive = !!(
+    orderBy ||
+    status ||
+    searchQuery ||
+    ratingMpa ||
+    genres.length > 0 ||
+    status
+  )
   if (!filterIsActive) return null
 
   return (
@@ -39,6 +58,40 @@ export const FilterTags = () => {
             <Badge className={"bg-red-400"}>
               <div className={styles.content}>
                 Поиск: {searchQuery} <GrFormClose />
+              </div>
+            </Badge>
+          </div>
+        )}
+        {ratingMpa && (
+          <div onClick={removeRatingMpaFilter} className={styles.tagItem}>
+            <Badge className={"bg-orange-400 dark:bg-orange-300"}>
+              <div className={styles.content}>
+                MPA: {ratingMpa} <GrFormClose />
+              </div>
+            </Badge>
+          </div>
+        )}
+        {genres.length > 0 && (
+          <>
+            {genres.map((genre) => (
+              <div
+                onClick={() => removeGenreFilter(genre.id)}
+                className={styles.tagItem}
+              >
+                <Badge className={"bg-blue-400"}>
+                  <div className={styles.content}>
+                    {genre.genre} <GrFormClose />
+                  </div>
+                </Badge>
+              </div>
+            ))}
+          </>
+        )}
+        {status && (
+          <div onClick={removeStatusFilter} className={styles.tagItem}>
+            <Badge className={"bg-blue-400"}>
+              <div className={styles.content}>
+                {status === "ongoing" ? "Онгоинг" : "Выпущен"} <GrFormClose />
               </div>
             </Badge>
           </div>
