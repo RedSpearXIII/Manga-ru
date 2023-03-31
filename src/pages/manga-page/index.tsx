@@ -1,5 +1,5 @@
 import React from "react"
-import { MangaList } from "~widgets/manga-list"
+import { MangaList } from "./manga-list"
 
 export const MangaPage = () => {
   return (

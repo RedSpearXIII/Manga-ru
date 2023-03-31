@@ -1,21 +1,39 @@
 import { useInfiniteQuery } from "react-query"
 import { publicApi } from "~shared/api"
+import { AnimeResponse, GetAnimeParams } from "./types"
 
-export type AnimeResponse = { id: string; title: string; image: string }
-
-interface GetAnimeParams {
-  pageSize?: number
-  searchQuery?: string
-}
-
-export const useGetAnimeList = ({ pageSize, searchQuery }: GetAnimeParams) =>
+export const useGetAnimeList = ({
+  pageSize,
+  searchQuery,
+  status,
+  season,
+  ratingMpa,
+  genres,
+  minimalAge,
+  order,
+}: GetAnimeParams) =>
   useInfiniteQuery<AnimeResponse[]>(
-    ["getMangaList", searchQuery],
+    [
+      "getMangaList",
+      searchQuery,
+      status,
+      season,
+      ratingMpa,
+      genres,
+      minimalAge,
+      order,
+    ],
     async ({ pageParam = 0 }) => {
       const params = {
         pageSize: pageSize ? pageSize : 20,
         pageNum: pageParam,
         ...(searchQuery && { searchQuery }),
+        ...(minimalAge && { minimalAge }),
+        ...(ratingMpa && { ratingMpa }),
+        ...(status && { status }),
+        ...(season && { season }),
+        ...(genres && { genres }),
+        ...(order && { order }),
       }
 
       const {

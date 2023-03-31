@@ -1,0 +1,31 @@
+.rightPanel {
+  @apply dark:bg-slate-800 bg-slate-200 drop-shadow backdrop-opacity-30 px-4 py-2 w-64 absolute rounded-md left-full top-2 z-10 overflow-hidden;
+
+  .topInfo {
+    @apply flex items-center justify-between mb-3;
+
+    .mpaRating {
+      @apply opacity-90 hover:opacity-100 cursor-pointer;
+    }
+  }
+
+  .studio {
+    p {
+      @apply text-sm;
+    }
+    .studioName {
+      @apply text-purple-300;
+    }
+
+    .animeProgress {
+      @apply mt-0.5 flex items-center justify-between;
+    }
+  }
+
+  .genres {
+    @apply flex items-center mt-4 flex-wrap;
+    .genre {
+      @apply mx-0.5 mb-1 grow text-center text-xs bg-purple-400 text-white px-2 rounded whitespace-nowrap;
+    }
+  }
+}

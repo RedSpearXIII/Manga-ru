@@ -20,7 +20,6 @@ const CatalogSearch = () => {
     <>
       <div onClick={toggleSearchOpen} className={styles.searchButton}>
         <FaSearch />
-        <p>Поиск</p>
       </div>
       <Portal>
         <AnimatePresence>

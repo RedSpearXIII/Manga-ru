@@ -1,7 +1,11 @@
 import { useInfiniteQuery } from "react-query"
 import { publicApi } from "~shared/api"
 
-export type MangaResponse = { id: string; title: string; image: string }
+export type MangaResponse = {
+  id: string
+  title: string
+  image: string
+}
 
 interface GetMangaParams {
   pageSize?: number

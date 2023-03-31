@@ -10,6 +10,9 @@ export const Footer = () => {
           <Link to={"/right-holders"}>Для правообладателей</Link>
         </div>
       </div>
+      <div className={styles.site}>
+        <p>© anifox.club 2023 - current time</p>
+      </div>
     </div>
   )
 }

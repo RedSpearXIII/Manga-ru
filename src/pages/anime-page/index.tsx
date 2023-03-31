@@ -1,5 +1,5 @@
 import React from "react"
-import { AnimeList } from "~widgets/anime-list"
+import { AnimeList } from "./anime-list"
 
 export const AnimePage = () => {
   return (

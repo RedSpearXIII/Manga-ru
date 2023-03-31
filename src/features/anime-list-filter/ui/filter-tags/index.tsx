@@ -10,8 +10,15 @@ import { useAnimeListFilterStore } from "~features/anime-list-filter"
 export const FilterTags = () => {
   const [isHovered, hoveredProps] = useHover()
 
-  const { orderBy, status, searchQuery, setSearchQuery, resetFilter } =
-    useAnimeListFilterStore((state) => state, shallow)
+  const {
+    orderBy,
+    genres,
+    ratingMpa,
+    status,
+    searchQuery,
+    setSearchQuery,
+    resetFilter,
+  } = useAnimeListFilterStore((state) => state, shallow)
 
   const resetSearchFilter = () => {
     setSearchQuery("")
