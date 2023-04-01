@@ -1,29 +1,49 @@
 import { create } from "zustand"
-import { MangaStatus } from "~shared/api"
 import { immer } from "zustand/middleware/immer"
+import {
+  AnimeMinimalAge,
+  AnimeOrderVariants,
+  AnimeRatingMpa,
+  AnimeSeasons,
+  AnimeStatuses,
+  AnimeTypeVariants,
+} from "~shared/api"
 
 type State = {
   searchQuery: string
-  status: MangaStatus | null
-  orderBy: "random" | "popular" | "views" | null
-  genres: string[]
+  status: AnimeStatuses | null
+  orderBy: AnimeOrderVariants | null
+  genres: { id: string; genre: string }[]
+  season: AnimeSeasons | null
+  ratingMpa: AnimeRatingMpa | null
+  minimalAge: AnimeMinimalAge | null
+  type: AnimeTypeVariants | null
 }
 
 type Actions = {
   setSearchQuery: (queryString: string) => void
-  setStatus: (status: MangaStatus | null) => void
-  setOrderBy: (payload: "random" | "popular" | "views" | null) => void
+  setStatus: (status: AnimeStatuses | null) => void
+  setOrderBy: (payload: AnimeOrderVariants | null) => void
+  addGenre: (genre: { id: string; genre: string }) => void
+  removeGenre: (genreId: string) => void
+  setSeason: (value: AnimeSeasons | null) => void
+  setRatingMpa: (value: AnimeRatingMpa | null) => void
+  setMinimalAge: (value: AnimeMinimalAge | null) => void
+  setType: (value: AnimeTypeVariants | null) => void
   resetFilter: () => void
-  setGenres: (genres: string[]) => void
 }
 
-type Store = State & Actions
+export type Store = State & Actions
 
 const initialState: State = {
   orderBy: null,
   status: null,
   searchQuery: "",
   genres: [],
+  minimalAge: null,
+  ratingMpa: null,
+  season: null,
+  type: null,
 }
 
 export const useAnimeListFilterStore = create(
@@ -41,10 +61,31 @@ export const useAnimeListFilterStore = create(
       setState((store) => {
         store.orderBy = value
       }),
-    resetFilter: () => setState(initialState),
-    setGenres: (genres) =>
+    addGenre: (genre) =>
       setState((store) => {
-        store.genres = genres
+        const candidate = store.genres.find((el) => el.id === genre.id)
+        if (!candidate) store.genres.push(genre)
       }),
+    removeGenre: (genreId) =>
+      setState((store) => {
+        store.genres = store.genres.filter((genre) => genre.id !== genreId)
+      }),
+    setSeason: (season) =>
+      setState((store) => {
+        store.season = season
+      }),
+    setRatingMpa: (rating) =>
+      setState((store) => {
+        store.ratingMpa = rating
+      }),
+    setMinimalAge: (ageValue) =>
+      setState((store) => {
+        store.minimalAge = ageValue
+      }),
+    setType: (type) =>
+      setState((store) => {
+        store.type = type
+      }),
+    resetFilter: () => setState(initialState),
   }))
 )

@@ -1,18 +1,24 @@
-.header {
-  @apply h-20 flex items-center justify-between px-10;
-  @apply dark:bg-gray-900 bg-slate-100 fixed left-36 top-0 z-20 transition-transform duration-500 shadow-sm;
-  width: calc(100% - 9rem);
+.wrapper {
+  @apply fixed h-20 w-full items-center;
+  @apply dark:bg-slate-800 bg-slate-800 left-0 top-0 z-20 transition-transform duration-500 shadow-sm text-white;
+}
 
+.header {
+  @apply flex items-center justify-between h-full max-w-screen-2xl mx-auto;
   .rightBlock {
-    @apply flex items-center;
+    @apply flex items-center h-full;
     .rightItem {
-      @apply ml-5;
+      @apply pl-5;
     }
   }
 
-  nav {
-    a {
-      @apply mr-20 uppercase font-extrabold;
+  .navLinks {
+    @apply flex items-center h-full;
+    .link {
+      @apply flex items-center h-full px-5 hover:text-slate-300;
+      svg {
+        @apply mr-2;
+      }
     }
   }
 }

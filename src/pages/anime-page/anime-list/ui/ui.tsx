@@ -1,17 +1,24 @@
 import React, { Fragment, useEffect } from "react"
 import styles from "./styles.module.pcss"
-import usePageOffset from "../../../shared/hooks/usePageOffset"
-import { useGetMangaList } from "~shared/api"
-import {
-  MangaListFilter,
-  useMangaListFilterStore,
-} from "~features/manga-list-filter"
+import usePageOffset from "~shared/hooks/usePageOffset"
 import { shallow } from "zustand/shallow"
 import { BiError } from "react-icons/all"
-import { MediaCard, MediaCardSkeleton } from "~entities/media/media-card"
+import { MediaCardSkeleton } from "~entities/media"
+import { useGetAnimeList } from "~shared/api"
+import { useAnimeListFilterStore } from "~features/anime-list-filter"
+import { AnimeCard } from "~widgets/anime-card"
 
-export const MangaList = () => {
-  const { searchQuery } = useMangaListFilterStore((state) => state, shallow)
+export const AnimeList = () => {
+  const {
+    searchQuery,
+    genres,
+    minimalAge,
+    ratingMpa,
+    orderBy,
+    season,
+    status,
+    type,
+  } = useAnimeListFilterStore((state) => state, shallow)
 
   const {
     data,
@@ -20,9 +27,16 @@ export const MangaList = () => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = useGetMangaList({
+  } = useGetAnimeList({
     pageSize: 30,
     searchQuery,
+    genres: genres.map(({ id }) => id),
+    status,
+    season,
+    ratingMpa,
+    minimalAge,
+    order: orderBy,
+    type,
   })
 
   const { y } = usePageOffset()
@@ -44,8 +58,8 @@ export const MangaList = () => {
     data && !isLoading
       ? data.pages.map((group, index) => (
           <Fragment key={index}>
-            {group.map((manga) => (
-              <MediaCard type={"manga"} key={manga.id} manga={manga} />
+            {group.map((anime) => (
+              <AnimeCard anime={anime} key={anime.id} />
             ))}
           </Fragment>
         ))
@@ -68,9 +82,8 @@ export const MangaList = () => {
 
   return (
     <div className={"container mx-auto"}>
-      <MangaListFilter />
       <div className={styles.list}>
-        {cards.length > 0 ? cards : <div></div>}
+        {cards.length > 0 ? cards : <div>Нет результатов</div>}
         {isFetchingNextPage && hasNextPage && loaders}
       </div>
     </div>

@@ -4,22 +4,52 @@ import UserPanel from "~widgets/user-panel/ui/ui"
 import NoticePanel from "~widgets/notice-panel/ui/ui"
 import useSticky from "~widgets/header/hooks/useSticky"
 import clsx from "clsx"
+import { SiteLogo } from "~shared/components"
+import { FaBookOpen, FaPlay } from "react-icons/all"
+import { Link } from "react-router-dom"
+import { motion } from "framer-motion"
+import CatalogSearch from "~features/catalog-search/ui/ui"
+
+const links = [
+  { icon: <FaPlay />, to: "/anime", title: "Аниме" },
+  { icon: <FaBookOpen />, to: "/manga", title: "Манга" },
+]
 
 export const Header = () => {
   const isSticky = useSticky()
 
-  return (
-    <header className={clsx(styles.header, !isSticky && styles.hidden)}>
-      <h3></h3>
+  const navLinks = links.map(({ to, title, icon: Icon }) => (
+    <Link className={styles.link} key={to} to={to}>
+      {Icon}
+      <p>{title}</p>
+    </Link>
+  ))
 
-      <div className={styles.rightBlock}>
-        <div className={styles.rightItem}>
-          <NoticePanel />
+  return (
+    <div className={clsx(styles.wrapper, !isSticky && styles.hidden)}>
+      <header className={styles.header}>
+        <SiteLogo />
+
+        <motion.nav
+          className={styles.navLinks}
+          initial={{ scale: 0.5 }}
+          animate={{ scale: 1 }}
+        >
+          {navLinks}
+        </motion.nav>
+
+        <div className={styles.rightBlock}>
+          <div className={styles.rightItem}>
+            <CatalogSearch />
+          </div>
+          <div className={styles.rightItem}>
+            <NoticePanel />
+          </div>
+          <div className={styles.rightItem}>
+            <UserPanel />
+          </div>
         </div>
-        <div className={styles.rightItem}>
-          <UserPanel />
-        </div>
-      </div>
-    </header>
+      </header>
+    </div>
   )
 }

@@ -3,10 +3,7 @@ import { useGetMangaSimilar } from "~shared/api"
 import { Link, useParams } from "react-router-dom"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
-import {
-  SimilarMediaCard,
-  SimilarMediaCardLoader,
-} from "~entities/media/similar-media-card"
+import { SimilarMediaCard, SimilarMediaCardLoader } from "~entities/media"
 
 export const SimilarMangaList = () => {
   const { mangaId } = useParams()

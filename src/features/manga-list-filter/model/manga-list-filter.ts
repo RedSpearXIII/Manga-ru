@@ -1,6 +1,6 @@
 import { create } from "zustand"
-import { MangaStatus } from "~shared/api"
 import { immer } from "zustand/middleware/immer"
+import { MangaStatus } from "~shared/types"
 
 type State = {
   searchQuery: string

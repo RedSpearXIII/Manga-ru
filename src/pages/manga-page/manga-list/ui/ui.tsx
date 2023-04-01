@@ -1,17 +1,17 @@
 import React, { Fragment, useEffect } from "react"
 import styles from "./styles.module.pcss"
-import usePageOffset from "../../../shared/hooks/usePageOffset"
+import usePageOffset from "~shared/hooks/usePageOffset"
+import { useGetMangaList } from "~shared/api"
+import {
+  MangaListFilter,
+  useMangaListFilterStore,
+} from "~features/manga-list-filter"
 import { shallow } from "zustand/shallow"
 import { BiError } from "react-icons/all"
-import { MediaCard, MediaCardSkeleton } from "~entities/media/media-card"
-import { useGetAnimeList } from "~shared/api/queries/anime/useGetAnimeList"
-import {
-  AnimeListFilter,
-  useAnimeListFilterStore,
-} from "~features/anime-list-filter"
+import { MediaCard, MediaCardSkeleton } from "~entities/media"
 
-export const AnimeList = () => {
-  const { searchQuery } = useAnimeListFilterStore((state) => state, shallow)
+export const MangaList = () => {
+  const { searchQuery } = useMangaListFilterStore((state) => state, shallow)
 
   const {
     data,
@@ -20,7 +20,7 @@ export const AnimeList = () => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = useGetAnimeList({
+  } = useGetMangaList({
     pageSize: 30,
     searchQuery,
   })
@@ -45,7 +45,7 @@ export const AnimeList = () => {
       ? data.pages.map((group, index) => (
           <Fragment key={index}>
             {group.map((manga) => (
-              <MediaCard type={"anime"} key={manga.id} manga={manga} />
+              <MediaCard type={"manga"} key={manga.id} media={manga} />
             ))}
           </Fragment>
         ))
@@ -68,9 +68,9 @@ export const AnimeList = () => {
 
   return (
     <div className={"container mx-auto"}>
-      <AnimeListFilter />
+      <MangaListFilter />
       <div className={styles.list}>
-        {cards.length > 0 ? cards : <div>Нет результатов</div>}
+        {cards.length > 0 ? cards : <div></div>}
         {isFetchingNextPage && hasNextPage && loaders}
       </div>
     </div>
