@@ -11,6 +11,7 @@ export const useGetAnimeList = ({
   genres,
   minimalAge,
   order,
+  type,
 }: GetAnimeParams) =>
   useInfiniteQuery<AnimeResponse[]>(
     [
@@ -22,6 +23,7 @@ export const useGetAnimeList = ({
       genres,
       minimalAge,
       order,
+      type,
     ],
     async ({ pageParam = 0 }) => {
       const params = {
@@ -32,8 +34,12 @@ export const useGetAnimeList = ({
         ...(ratingMpa && { ratingMpa }),
         ...(status && { status }),
         ...(season && { season }),
-        ...(genres && { genres }),
+        ...(genres &&
+          genres.length > 0 && {
+            genres: genres.map((genre) => `genres=${genre}`).join("&"), //пофиксить
+          }),
         ...(order && { order }),
+        ...(type && { type }),
       }
 
       const {

@@ -31,7 +31,7 @@ export const Search = () => {
       <Input
         maxLength={40}
         label={"Поиск"}
-        placeholder={"Название манги"}
+        placeholder={"Название аниме"}
         value={searchValue}
         onChange={onChange}
         icon={<FaSearch />}

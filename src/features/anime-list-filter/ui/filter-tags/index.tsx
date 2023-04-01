@@ -15,12 +15,18 @@ export const FilterTags = () => {
     genres,
     ratingMpa,
     status,
+    season,
     searchQuery,
+    type,
+    minimalAge,
     setSearchQuery,
     setRatingMpa,
     resetFilter,
     removeGenre,
     setStatus,
+    setSeason,
+    setType,
+    setMinimalAge,
   } = useAnimeListFilterStore((state) => state, shallow)
 
   const resetSearchFilter = () => {
@@ -35,6 +41,17 @@ export const FilterTags = () => {
   const removeRatingMpaFilter = () => {
     setRatingMpa(null)
   }
+  const removeSeasonFilter = () => {
+    setSeason(null)
+  }
+
+  const removeTypeFilter = () => {
+    setType(null)
+  }
+
+  const removeMinimalAgeFilter = () => {
+    setMinimalAge(null)
+  }
 
   const filterIsActive = !!(
     orderBy ||
@@ -42,7 +59,10 @@ export const FilterTags = () => {
     searchQuery ||
     ratingMpa ||
     genres.length > 0 ||
-    status
+    status ||
+    season ||
+    type ||
+    minimalAge !== null
   )
   if (!filterIsActive) return null
 
@@ -75,6 +95,7 @@ export const FilterTags = () => {
           <>
             {genres.map((genre) => (
               <div
+                key={genre.id}
                 onClick={() => removeGenreFilter(genre.id)}
                 className={styles.tagItem}
               >
@@ -89,9 +110,47 @@ export const FilterTags = () => {
         )}
         {status && (
           <div onClick={removeStatusFilter} className={styles.tagItem}>
-            <Badge className={"bg-blue-400"}>
+            <Badge className={"bg-purple-400"}>
               <div className={styles.content}>
                 {status === "ongoing" ? "Онгоинг" : "Выпущен"} <GrFormClose />
+              </div>
+            </Badge>
+          </div>
+        )}
+        {season && (
+          <div onClick={removeSeasonFilter} className={styles.tagItem}>
+            <Badge className={"bg-emerald-400"}>
+              <div className={styles.content}>
+                {season === "Fall" && "Осень"}
+                {season === "Spring" && "Весна"}
+                {season === "Winter" && "Зима"}
+                {season === "Summer" && "Лето"}
+                <GrFormClose />
+              </div>
+            </Badge>
+          </div>
+        )}
+        {type && (
+          <div onClick={removeTypeFilter} className={styles.tagItem}>
+            <Badge className={"bg-pink-400"}>
+              <div className={styles.content}>
+                {type === "movie" && "Фильм"}
+                {type === "ona" && "Ona"}
+                {type === "ova" && "Ova"}
+                {type === "music" && "Музыкальный"}
+                {type === "special" && "Специальный"}
+                {type === "tv" && "Телесериал"}
+                <GrFormClose />
+              </div>
+            </Badge>
+          </div>
+        )}
+        {minimalAge !== null && (
+          <div onClick={removeMinimalAgeFilter} className={styles.tagItem}>
+            <Badge className={"bg-cyan-500"}>
+              <div className={styles.content}>
+                {`${minimalAge}+`}
+                <GrFormClose />
               </div>
             </Badge>
           </div>

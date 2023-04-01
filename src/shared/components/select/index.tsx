@@ -18,7 +18,7 @@ interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   value: string
   onValueChange: (value: string) => void
   options: { value: string; label: string }[]
-  searchable: boolean
+  searchable?: boolean
 }
 const Select: FC<SelectProps> = forwardRef(
   (
@@ -74,6 +74,10 @@ const Select: FC<SelectProps> = forwardRef(
       setDropdownIsOpened(false)
     })
 
+    const onInputBlur = () => {
+      setInputValue("")
+    }
+
     return (
       <div ref={selectRef}>
         <div
@@ -92,6 +96,7 @@ const Select: FC<SelectProps> = forwardRef(
                 <div className={styles.placeholder}>{placeholder}</div>
               )}
               <input
+                onBlur={onInputBlur}
                 value={inputValue}
                 onChange={(e) => onChangeInputValue(e.currentTarget.value)}
               />

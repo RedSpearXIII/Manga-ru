@@ -1,9 +1,12 @@
-import React, { useState } from "react"
+import React from "react"
 import { Select } from "~shared/components"
+import { useAnimeListFilterStore } from "~features/anime-list-filter"
+import { shallow } from "zustand/shallow"
+import { AnimeStatuses } from "~shared/api"
 
 const options = [
   {
-    value: "realised",
+    value: "released",
     label: "Выпущен",
   },
   {
@@ -13,13 +16,16 @@ const options = [
 ]
 
 export const Status = () => {
-  const [value, setValue] = useState("")
+  const { status, setStatus } = useAnimeListFilterStore(
+    (state) => state,
+    shallow
+  )
   return (
     <div>
       <Select
         searchable={true}
-        value={value}
-        onValueChange={(val) => setValue(val)}
+        value={status || ""}
+        onValueChange={(val) => setStatus(val ? (val as AnimeStatuses) : null)}
         options={options}
         label={"Статус"}
         placeholder={"Любой"}

@@ -3,6 +3,13 @@ export type AnimeRatingMpa = "PG" | "PG-13" | "R" | "R+" | "G"
 export type AnimeSeasons = "Winter" | "Spring" | "Summer" | "Fall"
 export type AnimeStatuses = "released" | "ongoing"
 export type AnimeOrderVariants = "random" | "popular" | "views"
+export type AnimeTypeVariants =
+  | "movie"
+  | "ona"
+  | "ova"
+  | "music"
+  | "special"
+  | "tv"
 
 export type AnimeResponse = {
   id: string
@@ -28,4 +35,5 @@ export type GetAnimeParams = {
   season?: AnimeSeasons | null
   genres?: string[] | null
   order?: AnimeOrderVariants | null
+  type?: AnimeTypeVariants | null
 }

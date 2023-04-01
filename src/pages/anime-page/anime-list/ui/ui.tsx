@@ -17,6 +17,7 @@ export const AnimeList = () => {
     orderBy,
     season,
     status,
+    type,
   } = useAnimeListFilterStore((state) => state, shallow)
 
   const {
@@ -35,6 +36,7 @@ export const AnimeList = () => {
     ratingMpa,
     minimalAge,
     order: orderBy,
+    type,
   })
 
   const { y } = usePageOffset()

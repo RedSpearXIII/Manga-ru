@@ -31,21 +31,27 @@ export const SelectDropdown: FC<SelectDropdownProps> = ({
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.5 }}
       >
-        {options.map((item, index) => (
-          <li
-            onClick={(e) => {
-              e.stopPropagation()
-              selectItem(item.value)
-            }}
-            className={clsx(
-              currentSelectedItem === item.value && styles.itemSelected,
-              styles.item
-            )}
-            key={`${item.value}-${index}`}
-          >
-            {item.label}
+        {options.length > 0 ? (
+          options.map((item, index) => (
+            <li
+              onClick={(e) => {
+                e.stopPropagation()
+                selectItem(item.value)
+              }}
+              className={clsx(
+                currentSelectedItem === item.value && styles.itemSelected,
+                styles.item
+              )}
+              key={`${item.value}-${index}`}
+            >
+              {item.label}
+            </li>
+          ))
+        ) : (
+          <li className={"text-center text-sm text-red-400"}>
+            Ничего не найдено :(
           </li>
-        ))}
+        )}
       </motion.ul>
     </div>
   )

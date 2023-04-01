@@ -6,6 +6,7 @@ import {
   AnimeRatingMpa,
   AnimeSeasons,
   AnimeStatuses,
+  AnimeTypeVariants,
 } from "~shared/api"
 
 type State = {
@@ -16,6 +17,7 @@ type State = {
   season: AnimeSeasons | null
   ratingMpa: AnimeRatingMpa | null
   minimalAge: AnimeMinimalAge | null
+  type: AnimeTypeVariants | null
 }
 
 type Actions = {
@@ -27,6 +29,7 @@ type Actions = {
   setSeason: (value: AnimeSeasons | null) => void
   setRatingMpa: (value: AnimeRatingMpa | null) => void
   setMinimalAge: (value: AnimeMinimalAge | null) => void
+  setType: (value: AnimeTypeVariants | null) => void
   resetFilter: () => void
 }
 
@@ -40,6 +43,7 @@ const initialState: State = {
   minimalAge: null,
   ratingMpa: null,
   season: null,
+  type: null,
 }
 
 export const useAnimeListFilterStore = create(
@@ -77,6 +81,10 @@ export const useAnimeListFilterStore = create(
     setMinimalAge: (ageValue) =>
       setState((store) => {
         store.minimalAge = ageValue
+      }),
+    setType: (type) =>
+      setState((store) => {
+        store.type = type
       }),
     resetFilter: () => setState(initialState),
   }))
