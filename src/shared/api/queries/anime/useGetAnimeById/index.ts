@@ -1,2 +1,2 @@
-export * from "./useGetAnimeList"
 export * from "./useGetAnimeById"
+export * from "./types"

@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "react-query"
-import { publicApi } from "~shared/api"
+import { createArrayQueryParam, publicApi } from "~shared/api"
 import { AnimeResponse, GetAnimeParams } from "./types"
 
 export const useGetAnimeList = ({
@@ -34,19 +34,27 @@ export const useGetAnimeList = ({
         ...(ratingMpa && { ratingMpa }),
         ...(status && { status }),
         ...(season && { season }),
-        ...(genres &&
-          genres.length > 0 && {
-            genres: genres.map((genre) => `genres=${genre}`).join("&"), //пофиксить
-          }),
         ...(order && { order }),
         ...(type && { type }),
       }
 
+      console.log(
+        createArrayQueryParam([
+          { paramName: "genres", array: genres },
+          { paramName: "test", array: genres },
+        ])
+      )
+
       const {
         data: { data },
-      } = await publicApi.get("anime/", {
-        params,
-      })
+      } = await publicApi.get(
+        `anime/${createArrayQueryParam([
+          { paramName: "genres", array: genres },
+        ])}`,
+        {
+          params,
+        }
+      )
       return data
     },
     {

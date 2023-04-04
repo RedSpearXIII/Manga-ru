@@ -1,11 +1,7 @@
 .layout {
-  @apply flex;
+  @apply w-full overflow-hidden min-h-screen flex flex-col justify-between;
 
-  .content {
-    @apply w-full overflow-hidden min-h-screen flex flex-col justify-between;
-
-    .pageContent {
-      @apply px-8 pb-8 pt-28 min-h-max;
-    }
+  .pageContent {
+    @apply pb-8 pt-28 min-h-max;
   }
 }

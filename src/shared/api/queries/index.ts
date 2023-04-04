@@ -1,2 +1,2 @@
 export * from "./manga"
-export * from "./anime/useGetAnimeList"
+export * from "./anime"

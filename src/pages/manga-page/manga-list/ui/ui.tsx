@@ -16,7 +16,7 @@ export const MangaList = () => {
   const {
     data,
     isLoading,
-    error,
+    isError,
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
@@ -53,7 +53,7 @@ export const MangaList = () => {
           <MediaCardSkeleton key={index} />
         ))
 
-  if (error)
+  if (isError)
     return (
       <div className={styles.error}>
         <BiError />
