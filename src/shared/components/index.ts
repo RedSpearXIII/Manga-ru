@@ -4,6 +4,7 @@ import Button from "./button"
 import Input from "./input"
 import Portal from "./portal"
 import Select from "./select"
+import MultiSelect from "./multi-select"
 import SiteFeatures from "./site-features"
 import SiteLogo from "./site-logo"
 import SitePresentationFigures from "./site-presentation-figures"
@@ -18,4 +19,5 @@ export {
   Button,
   Badge,
   Select,
+  MultiSelect,
 }

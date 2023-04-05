@@ -7,15 +7,13 @@ import { Footer } from "~widgets/footer"
 export const MainLayout = () => {
   return (
     <div className={styles.layout}>
-      <div className={styles.content}>
-        <Header />
-        <div className={styles.pageContent}>
-          <main>
-            <Outlet />
-          </main>
-        </div>
-        <Footer />
+      <Header />
+      <div className={styles.pageContent}>
+        <main>
+          <Outlet />
+        </main>
       </div>
+      <Footer />
     </div>
   )
 }

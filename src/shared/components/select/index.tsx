@@ -64,7 +64,6 @@ const Select: FC<SelectProps> = forwardRef(
 
     const removeSelectItem = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
       e.stopPropagation()
-
       onValueChange("")
       setDropdownIsOpened(false)
       setInputValue("")

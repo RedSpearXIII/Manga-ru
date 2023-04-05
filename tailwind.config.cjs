@@ -11,6 +11,9 @@ module.exports = {
       sans: ['Nunito', 'sans-serif'],
     }
   },
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    require('./tw-plugins/tailwind-scrollbar.cjs'),
+  ],
   darkMode: "class"
 }
