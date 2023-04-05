@@ -3,21 +3,33 @@ import React, { FC } from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 
-interface SelectDropdownProps {
+interface MultiSelectDropdownProps {
   options: { value: string; label: string }[]
-  onSelectItem: (value: string) => void
+  onSelectItem: (item: { value: string; label: string }) => void
+  onRemoveItem: (value: string) => void
   isOpen: boolean
-  currentSelectedItem: string
+  selectedItems: { value: string; label: string }[]
 }
 
-export const SelectDropdown: FC<SelectDropdownProps> = ({
+export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
   options,
   onSelectItem,
   isOpen,
-  currentSelectedItem,
+  selectedItems,
+  onRemoveItem,
 }) => {
-  const selectItem = (value: string) => {
-    onSelectItem(value)
+  const selectItem = (item: { value: string; label: string }) => {
+    onSelectItem(item)
+  }
+  const removeItem = (value: string) => {
+    onRemoveItem(value)
+  }
+  const elementIsSelected = (value: string) => {
+    return selectedItems.some((item) => item.value === value)
+  }
+
+  const onClickItem = (item: { value: string; label: string }) => {
+    elementIsSelected(item.value) ? removeItem(item.value) : selectItem(item)
   }
 
   return (
@@ -34,10 +46,10 @@ export const SelectDropdown: FC<SelectDropdownProps> = ({
               <li
                 onClick={(e) => {
                   e.stopPropagation()
-                  selectItem(item.value)
+                  onClickItem(item)
                 }}
                 className={clsx(
-                  currentSelectedItem === item.value && styles.itemSelected,
+                  elementIsSelected(item.value) && styles.itemSelected,
                   styles.item
                 )}
                 key={`${item.value}-${index}`}

@@ -38,13 +38,6 @@ export const useGetAnimeList = ({
         ...(type && { type }),
       }
 
-      console.log(
-        createArrayQueryParam([
-          { paramName: "genres", array: genres },
-          { paramName: "test", array: genres },
-        ])
-      )
-
       const {
         data: { data },
       } = await publicApi.get(

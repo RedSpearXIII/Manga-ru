@@ -25,6 +25,7 @@ type Actions = {
   setStatus: (status: AnimeStatuses | null) => void
   setOrderBy: (payload: AnimeOrderVariants | null) => void
   addGenre: (genre: { id: string; genre: string }) => void
+  setGenres: (genres: { id: string; genre: string }[]) => void
   removeGenre: (genreId: string) => void
   setSeason: (value: AnimeSeasons | null) => void
   setRatingMpa: (value: AnimeRatingMpa | null) => void
@@ -69,6 +70,10 @@ export const useAnimeListFilterStore = create(
     removeGenre: (genreId) =>
       setState((store) => {
         store.genres = store.genres.filter((genre) => genre.id !== genreId)
+      }),
+    setGenres: (genres) =>
+      setState((store) => {
+        store.genres = genres
       }),
     setSeason: (season) =>
       setState((store) => {

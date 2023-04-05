@@ -1,9 +1,11 @@
 import { stagger, useAnimate } from "framer-motion"
 import { useEffect } from "react"
 
-const staggerMenuItems = stagger(0.1, { startDelay: 0.15 })
+const useListAnimation = (isOpen: boolean, duration?: number) => {
+  const staggerMenuItems = stagger(duration || 0.1, {
+    startDelay: duration || 0.15,
+  })
 
-const useListAnimation = (isOpen: boolean) => {
   const [scope, animate] = useAnimate()
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const useListAnimation = (isOpen: boolean) => {
         ? { opacity: 1, scale: 1, filter: "blur(0px)" }
         : { opacity: 0, scale: 0.3, filter: "blur(5px)" },
       {
-        duration: 0.1,
+        duration: duration || 0.1,
         delay: isOpen ? staggerMenuItems : 0,
       }
     )

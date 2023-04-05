@@ -7,6 +7,7 @@ import Season from "./season"
 import RatingMpa from "./rating-mpa"
 import AnimeType from "./anime-type"
 import MinimalAge from "~features/anime-list-filter/ui/minimal-age"
+import { Genres } from "~features/anime-list-filter/ui/genres"
 
 export const AnimeListFilter = () => {
   return (
@@ -18,6 +19,7 @@ export const AnimeListFilter = () => {
         <RatingMpa />
         <MinimalAge />
         <AnimeType />
+        <Genres />
       </div>
       <div>
         <FilterTags />
