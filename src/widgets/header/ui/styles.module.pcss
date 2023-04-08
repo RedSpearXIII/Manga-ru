@@ -4,16 +4,16 @@
 }
 
 .header {
-  @apply flex items-center justify-between h-full max-w-screen-2xl mx-auto;
+  @apply grid grid-cols-3 items-center h-full max-w-screen-2xl mx-auto;
   .rightBlock {
-    @apply flex items-center h-full;
+    @apply flex items-center justify-end h-full;
     .rightItem {
       @apply pl-5;
     }
   }
 
   .navLinks {
-    @apply flex items-center h-full;
+    @apply flex items-center justify-center h-full;
     .link {
       @apply flex items-center h-full px-5 hover:text-slate-300;
       svg {

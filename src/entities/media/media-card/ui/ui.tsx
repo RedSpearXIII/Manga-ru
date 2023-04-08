@@ -14,7 +14,7 @@ export const MediaCard: FC<MediaCardProps> = ({ media, type }) => {
   const { isLoaded, isError, ...props } = useImageLoaded()
 
   return (
-    <div className={styles.card}>
+    <div className={clsx(styles.card)}>
       <Link to={`/${type}/title/${media.id}`}>
         <span
           className={`${!isLoaded && !isError && styles.cardImageLoader}`}
@@ -25,8 +25,7 @@ export const MediaCard: FC<MediaCardProps> = ({ media, type }) => {
           alt={"Отсутствует изображение"}
           src={media.image}
         />
-
-        <p className={styles.cardTitle}>{media.title}</p>
+        <p className={clsx(styles.cardTitle)}>{media.title}</p>
       </Link>
     </div>
   )

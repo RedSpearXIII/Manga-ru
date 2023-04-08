@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react"
 import styles from "./styles.module.pcss"
 import usePageOffset from "~shared/hooks/usePageOffset"
 import { shallow } from "zustand/shallow"
-import { BiError } from "react-icons/all"
+import { BiError, FaSadCry } from "react-icons/all"
 import { MediaCardSkeleton } from "~entities/media"
 import { useGetAnimeList } from "~shared/api"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
@@ -79,11 +79,23 @@ export const AnimeList = () => {
         </div>
       </div>
     )
+  if (data?.pages[0].length === 0)
+    return (
+      <div className={styles.notFound}>
+        <FaSadCry />
+        <div>
+          <p>
+            Мы ничего не нашли :( <br />
+          </p>
+          <p>попробуйте другие фильтры</p>
+        </div>
+      </div>
+    )
 
   return (
     <div className={"container mx-auto"}>
       <div className={styles.list}>
-        {cards.length > 0 ? cards : <div>Нет результатов</div>}
+        {cards}
         {isFetchingNextPage && hasNextPage && loaders}
       </div>
     </div>

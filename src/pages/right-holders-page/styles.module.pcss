@@ -1,12 +1,36 @@
 .content {
   @apply mx-auto container;
-  .copyrights {
-    h4 {
-      @apply text-center;
+
+  .list {
+    @apply list-disc max-w-[90%] mx-auto;
+
+    .listItem {
+      @apply py-2;
     }
   }
 
-  .forBoxes {
-    @apply mb-2;
+  .copyrights {
+    h4 {
+      @apply text-center mb-5;
+    }
+  }
+
+  .box {
+    @apply max-md:max-w-[95%] mx-auto px-10 py-5 rounded dark:bg-slate-800 bg-slate-200 mb-5;
+
+    h6 {
+      @apply dark:text-white mb-3;
+    }
+  }
+
+  .linksContainer {
+    @apply mt-5 max-md:max-w-[95%] mx-auto;
+    .links {
+      @apply flex items-center flex-wrap mt-1;
+
+      .linkItem {
+        @apply py-4 px-2 mr-3 h-10 dark:bg-slate-800 bg-slate-300 rounded-lg flex items-center;
+      }
+    }
   }
 }

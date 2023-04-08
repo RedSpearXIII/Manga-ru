@@ -7,7 +7,9 @@ export const Footer = () => {
     <div className={styles.footer}>
       <div className={styles.links}>
         <div className={styles.linkItem}>
-          <Link to={"/right-holders"}>Для правообладателей</Link>
+          <Link to={"/right-holders"}>
+            <p>Для правообладателей</p>
+          </Link>
         </div>
       </div>
       <div className={styles.site}>
