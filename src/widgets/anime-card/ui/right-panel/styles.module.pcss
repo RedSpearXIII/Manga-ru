@@ -1,11 +1,15 @@
 .rightPanel {
   @apply dark:bg-slate-800 bg-slate-200 drop-shadow backdrop-opacity-30 px-4 py-2 w-64 absolute rounded-md left-full top-2 z-10 overflow-hidden;
 
+  .season {
+    @apply cursor-pointer hover:underline;
+  }
+
   .topInfo {
     @apply flex items-center justify-between mb-3;
 
     .mpaRating {
-      @apply opacity-90 hover:opacity-100 cursor-pointer;
+      @apply opacity-90 hover:opacity-100 cursor-pointer bg-[var(--card-background-color)] text-[var(--card-background-text-color)];
     }
   }
 
@@ -15,7 +19,7 @@
       @apply text-sm;
     }
     .studioName {
-      @apply text-purple-300;
+      @apply text-[var(--card-overlay-text-color)];
     }
 
     .animeProgress {
@@ -30,7 +34,7 @@
   .genres {
     @apply flex items-center mt-4 flex-wrap;
     .genre {
-      @apply mx-0.5 mb-1 py-0.5 grow text-center text-xs bg-purple-400 text-white px-2 rounded whitespace-nowrap opacity-90 hover:opacity-100 cursor-pointer;
+      @apply mx-0.5 mb-1 py-0.5 grow text-center text-xs bg-[var(--card-background-color)] text-[var(--card-background-text-color)] px-2 rounded whitespace-nowrap opacity-90 hover:opacity-100 cursor-pointer;
     }
   }
 }

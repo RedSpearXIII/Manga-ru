@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-const useOnKeyDown = (
+export const useOnKeyDown = (
   keyCode: number,
   action: (e: globalThis.KeyboardEvent) => void
 ) => {
@@ -12,5 +12,3 @@ const useOnKeyDown = (
     }
   }, [])
 }
-
-export default useOnKeyDown

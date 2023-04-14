@@ -1,13 +1,12 @@
 import React from "react"
-import { AnimeList } from "./anime-list"
+import { AnimeList } from "./ui/anime-list"
 import { AnimeListFilter } from "~features/anime-list-filter"
 
 export const AnimePage = () => {
   return (
     <div>
-      <div className={"container mx-auto"}>
-        <AnimeListFilter />
-      </div>
+      <AnimeListFilter />
+
       <AnimeList />
     </div>
   )

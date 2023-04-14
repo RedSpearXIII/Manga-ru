@@ -8,6 +8,7 @@ import MultiSelect from "./multi-select"
 import SiteFeatures from "./site-features"
 import SiteLogo from "./site-logo"
 import SitePresentationFigures from "./site-presentation-figures"
+import SuspenseLoader from "./suspense-loader"
 
 export {
   Avatar,
@@ -20,4 +21,5 @@ export {
   Badge,
   Select,
   MultiSelect,
+  SuspenseLoader,
 }

@@ -1,14 +1,14 @@
 import React from "react"
 import styles from "./styles.module.pcss"
-import UserPanel from "~widgets/user-panel/ui/ui"
-import NoticePanel from "~widgets/notice-panel/ui/ui"
+import { UserPanel } from "~widgets/user-panel"
+import { NoticePanel } from "~widgets/notice-panel"
 import useSticky from "~widgets/header/hooks/useSticky"
 import clsx from "clsx"
 import { SiteLogo } from "~shared/components"
 import { FaBookOpen, FaPlay } from "react-icons/all"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import CatalogSearch from "~features/catalog-search/ui/ui"
+import CatalogSearch from "~features/catalog-search/ui"
 
 const links = [
   { icon: <FaPlay />, to: "/anime", title: "Аниме" },

@@ -13,7 +13,7 @@ const options = [
   { value: "tv", label: "Телесериал" },
 ]
 
-const AnimeType = () => {
+export const AnimeType = () => {
   const { type, setType } = useAnimeListFilterStore((state) => state, shallow)
 
   return (
@@ -30,5 +30,3 @@ const AnimeType = () => {
     </div>
   )
 }
-
-export default AnimeType

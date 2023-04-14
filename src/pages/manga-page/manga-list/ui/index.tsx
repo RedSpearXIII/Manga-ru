@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react"
 import styles from "./styles.module.pcss"
-import usePageOffset from "~shared/hooks/usePageOffset"
+import { usePageOffset } from "~shared/hooks"
 import { useGetMangaList } from "~shared/api"
 import {
   MangaListFilter,

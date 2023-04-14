@@ -12,7 +12,7 @@ const options = [
   { value: "G", label: "G" },
 ]
 
-const RatingMpa = () => {
+export const RatingMpa = () => {
   const { ratingMpa, setRatingMpa } = useAnimeListFilterStore(
     (state) => state,
     shallow
@@ -21,6 +21,7 @@ const RatingMpa = () => {
   return (
     <div>
       <Select
+        color={"slateDark"}
         value={ratingMpa || ""}
         onValueChange={(val) =>
           setRatingMpa(val ? (val as AnimeRatingMpa) : null)
@@ -32,5 +33,3 @@ const RatingMpa = () => {
     </div>
   )
 }
-
-export default RatingMpa

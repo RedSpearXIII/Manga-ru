@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react"
 
-const useImageLoading = (): {
+export const useImageLoading = (): {
   isLoaded: boolean
   isError: boolean
   onLoad: (e: SyntheticEvent<HTMLImageElement, Event>) => void
@@ -17,5 +17,3 @@ const useImageLoading = (): {
 
   return { isLoaded, isError, onLoad, onError }
 }
-
-export default useImageLoading

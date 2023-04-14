@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import React from "react"
-import useMousePosition from "../../hooks/useMousePosition"
+import { useMousePosition } from "~shared/hooks"
 import styles from "./styles.module.pcss"
 import playIcon from "./assets/play.webp"
 import searchIcon from "./assets/search.jpg"

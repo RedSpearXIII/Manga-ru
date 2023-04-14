@@ -12,7 +12,7 @@ const options = [
   { value: "0", label: "0+" },
 ]
 
-const MyComponent = () => {
+export const MinimalAge = () => {
   const { minimalAge, setMinimalAge } = useAnimeListFilterStore(
     (state) => state,
     shallow
@@ -31,5 +31,3 @@ const MyComponent = () => {
     </div>
   )
 }
-
-export default MyComponent

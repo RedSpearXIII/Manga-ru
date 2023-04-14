@@ -38,8 +38,8 @@ const SiteFeatures = () => {
       <p>Смотри, читай и делись своим любимым аниме или мангой!</p>
 
       <div className={styles.container}>
-        {features.map((feature) => (
-          <div className={styles.featureBlock}>
+        {features.map((feature, index) => (
+          <div key={index} className={styles.featureBlock}>
             <img
               src={feature.icon}
               alt={feature.title}

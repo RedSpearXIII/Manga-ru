@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { FaSearch } from "react-icons/all"
 import { Input } from "~shared/components"
 import { useMangaListFilterStore } from "~features/manga-list-filter"
-import useDebounce from "~shared/hooks/useDebounce"
+import { useDebounce } from "~shared/hooks"
 
 export const Search = () => {
   const searchQuery = useMangaListFilterStore((state) => state.searchQuery)

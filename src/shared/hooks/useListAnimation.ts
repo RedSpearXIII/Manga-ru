@@ -1,7 +1,7 @@
 import { stagger, useAnimate } from "framer-motion"
 import { useEffect } from "react"
 
-const useListAnimation = (isOpen: boolean, duration?: number) => {
+export const useListAnimation = (isOpen: boolean, duration?: number) => {
   const staggerMenuItems = stagger(duration || 0.1, {
     startDelay: duration || 0.15,
   })
@@ -28,5 +28,3 @@ const useListAnimation = (isOpen: boolean, duration?: number) => {
 
   return scope
 }
-
-export default useListAnimation

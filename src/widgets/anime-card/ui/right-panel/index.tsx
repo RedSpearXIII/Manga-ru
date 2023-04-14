@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import styles from "./styles.module.pcss"
 import { motion } from "framer-motion"
-import { AnimeResponse, AnimeStatuses } from "~shared/api"
+import { AnimeResponse, AnimeSeasons, AnimeStatuses } from "~shared/api"
 import { Badge } from "~shared/components"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
@@ -20,8 +20,11 @@ export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
   const onAddGenre = (id: string, genre: string) => {
     addGenre({ id, genre })
   }
-  const onClickStatus = (status: AnimeStatuses) => {
+  const onSetStatus = (status: AnimeStatuses) => {
     setStatus(status)
+  }
+  const onSetSeason = (season: AnimeSeasons) => {
+    setSeason(season)
   }
 
   return (
@@ -31,7 +34,9 @@ export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
       animate={{ scale: 1, opacity: 1, left: "105%" }}
     >
       <div className={styles.topInfo}>
-        <p>{anime.season}</p>
+        <p className={styles.season} onClick={() => onSetSeason(anime.season)}>
+          {anime.season}
+        </p>
         <Badge className={styles.mpaRating} onClick={onSetRatingMpa}>
           {anime.ratingMpa}
         </Badge>
@@ -42,7 +47,7 @@ export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
         <div className={styles.animeProgress}>
           <p>{anime.episodesCount} серий/я</p>-
           <p
-            onClick={() => onClickStatus(anime.status)}
+            onClick={() => onSetStatus(anime.status)}
             className={styles.status}
           >
             {anime.status === "ongoing" ? "Онгоинг" : "Выпущен"}

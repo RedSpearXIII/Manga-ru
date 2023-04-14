@@ -18,6 +18,7 @@ type State = {
   ratingMpa: AnimeRatingMpa | null
   minimalAge: AnimeMinimalAge | null
   type: AnimeTypeVariants | null
+  years: string[]
 }
 
 type Actions = {
@@ -27,6 +28,9 @@ type Actions = {
   addGenre: (genre: { id: string; genre: string }) => void
   setGenres: (genres: { id: string; genre: string }[]) => void
   removeGenre: (genreId: string) => void
+  setYears: (years: string[]) => void
+  addYear: (year: string) => void
+  removeYear: (year: string) => void
   setSeason: (value: AnimeSeasons | null) => void
   setRatingMpa: (value: AnimeRatingMpa | null) => void
   setMinimalAge: (value: AnimeMinimalAge | null) => void
@@ -45,6 +49,7 @@ const initialState: State = {
   ratingMpa: null,
   season: null,
   type: null,
+  years: [],
 }
 
 export const useAnimeListFilterStore = create(
@@ -74,6 +79,19 @@ export const useAnimeListFilterStore = create(
     setGenres: (genres) =>
       setState((store) => {
         store.genres = genres
+      }),
+    addYear: (year) =>
+      setState((store) => {
+        const candidate = store.years.find((value) => value === year)
+        if (!candidate) store.years.push(year)
+      }),
+    removeYear: (year) =>
+      setState((store) => {
+        store.years = store.years.filter((value) => value !== year)
+      }),
+    setYears: (years) =>
+      setState((store) => {
+        store.years = years
       }),
     setSeason: (season) =>
       setState((store) => {

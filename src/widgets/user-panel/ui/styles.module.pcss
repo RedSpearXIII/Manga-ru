@@ -5,7 +5,7 @@
     @apply transition-colors flex items-center;
   }
   .dropdown {
-    @apply bg-gray-100 dark:bg-slate-800 rounded-xl p-2 gap-2 shadow-2xl dark:text-white text-black;
+    @apply bg-slate-100 dark:bg-slate-800 rounded p-2 gap-2 drop-shadow dark:text-white text-black absolute right-0 top-20 w-[500px];
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -14,13 +14,9 @@
       "a a b"
       "c d b"
       "c d e";
-    position: absolute;
-    right: 0;
-    top: 60px;
-    width: 500px;
 
     .dropdownItem {
-      @apply rounded-xl h-full dark:bg-slate-700 bg-slate-200;
+      @apply rounded h-full dark:bg-slate-700 bg-slate-200;
     }
 
     & :first-child {

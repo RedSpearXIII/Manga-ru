@@ -10,7 +10,8 @@ import React, {
 import { SelectDropdown } from "./select-dropdown"
 import styles from "./styles.module.pcss"
 import { FiChevronDown, MdOutlineClear } from "react-icons/all"
-import useOnClickOutside from "~shared/hooks/useOnClickOutside"
+import { useOnClickOutside } from "~shared/hooks"
+import clsx from "clsx"
 
 interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   placeholder?: string
@@ -19,6 +20,7 @@ interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   onValueChange: (value: string) => void
   options: { value: string; label: string }[]
   searchable?: boolean
+  color?: "slateDark"
 }
 const Select: FC<SelectProps> = forwardRef(
   (
@@ -29,10 +31,13 @@ const Select: FC<SelectProps> = forwardRef(
       value,
       onValueChange,
       searchable,
+      color,
       ...other
     }: SelectProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
+    const colorClass = color === "slateDark" && styles.slateDark
+
     const selectRef = useRef(null)
     const [dropdownIsOpened, setDropdownIsOpened] = useState(false)
     const [optionsList, setOptionsList] = useState(options)
@@ -87,7 +92,7 @@ const Select: FC<SelectProps> = forwardRef(
         >
           <div>
             {label && <label>{label}</label>}
-            <div className={styles.selectInput}>
+            <div className={clsx(styles.selectInput, colorClass)}>
               {selectedItem && !dropdownIsOpened && (
                 <div className={styles.value}>{selectedItem.label}</div>
               )}

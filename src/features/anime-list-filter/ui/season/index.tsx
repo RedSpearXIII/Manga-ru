@@ -11,7 +11,7 @@ const options = [
   { value: "Summer", label: "Лето" },
 ]
 
-const Season = () => {
+export const Season = () => {
   const { season, setSeason } = useAnimeListFilterStore(
     (state) => state,
     shallow
@@ -29,5 +29,3 @@ const Season = () => {
     </div>
   )
 }
-
-export default Season

@@ -1,5 +1,9 @@
-.container {
-  .filter {
-    @apply grid grid-cols-[repeat(7,209px)] gap-3 mb-6;
+.wrapper {
+  @apply mx-auto xl:container max-xl:px-3;
+  .filters {
+    @apply grid grid grid-cols-[auto_40px] items-center;
+    .filter {
+      @apply grid grid-cols-[repeat(6,220px)] max-2xl:grid-cols-[repeat(6,auto)] gap-3 mb-6;
+    }
   }
 }

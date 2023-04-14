@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { FaSearch } from "react-icons/all"
 import { Input } from "~shared/components"
-import useDebounce from "~shared/hooks/useDebounce"
+import { useDebounce } from "~shared/hooks"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 
 export const Search = () => {

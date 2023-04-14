@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect } from "react"
+import React, { Fragment, Suspense, useEffect } from "react"
 import styles from "./styles.module.pcss"
-import usePageOffset from "~shared/hooks/usePageOffset"
+import { usePageOffset } from "~shared/hooks"
 import { shallow } from "zustand/shallow"
 import { BiError, FaSadCry } from "react-icons/all"
 import { MediaCardSkeleton } from "~entities/media"
@@ -18,6 +18,7 @@ export const AnimeList = () => {
     season,
     status,
     type,
+    years,
   } = useAnimeListFilterStore((state) => state, shallow)
 
   const {
@@ -37,6 +38,7 @@ export const AnimeList = () => {
     minimalAge,
     order: orderBy,
     type,
+    years,
   })
 
   const { y } = usePageOffset()
@@ -81,15 +83,17 @@ export const AnimeList = () => {
     )
   if (data?.pages[0].length === 0)
     return (
-      <div className={styles.notFound}>
-        <FaSadCry />
-        <div>
-          <p>
-            Мы ничего не нашли :( <br />
-          </p>
-          <p>попробуйте другие фильтры</p>
+      <Suspense>
+        <div className={styles.notFound}>
+          <FaSadCry />
+          <div>
+            <p>
+              Мы ничего не нашли :( <br />
+            </p>
+            <p>попробуйте другие фильтры</p>
+          </div>
         </div>
-      </div>
+      </Suspense>
     )
 
   return (

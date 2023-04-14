@@ -12,10 +12,11 @@ export const useGetAnimeList = ({
   minimalAge,
   order,
   type,
+  years,
 }: GetAnimeParams) =>
   useInfiniteQuery<AnimeResponse[]>(
     [
-      "getMangaList",
+      "getAnimeList",
       searchQuery,
       status,
       season,
@@ -24,6 +25,7 @@ export const useGetAnimeList = ({
       minimalAge,
       order,
       type,
+      years,
     ],
     async ({ pageParam = 0 }) => {
       const params = {
@@ -43,6 +45,7 @@ export const useGetAnimeList = ({
       } = await publicApi.get(
         `anime/${createArrayQueryParam([
           { paramName: "genres", array: genres },
+          { paramName: "years", array: years },
         ])}`,
         {
           params,

@@ -3,7 +3,7 @@ import { shallow } from "zustand/shallow"
 import { FaTags, GrFormClose } from "react-icons/all"
 import styles from "./styles.module.pcss"
 import { Badge } from "~shared/components"
-import useHover from "~shared/hooks/useHover"
+import { useHover } from "~shared/hooks"
 import { AnimatePresence, motion } from "framer-motion"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 
@@ -27,6 +27,8 @@ export const FilterTags = () => {
     setSeason,
     setType,
     setMinimalAge,
+    years,
+    removeYear,
   } = useAnimeListFilterStore((state) => state, shallow)
 
   const resetSearchFilter = () => {
@@ -53,6 +55,10 @@ export const FilterTags = () => {
     setMinimalAge(null)
   }
 
+  const removeYearItem = (year: string) => {
+    removeYear(year)
+  }
+
   const filterIsActive = !!(
     orderBy ||
     status ||
@@ -62,7 +68,8 @@ export const FilterTags = () => {
     status ||
     season ||
     type ||
-    minimalAge !== null
+    minimalAge !== null ||
+    years.length > 0
   )
   if (!filterIsActive) return null
 
@@ -154,6 +161,23 @@ export const FilterTags = () => {
               </div>
             </Badge>
           </div>
+        )}
+        {years.length > 0 && (
+          <>
+            {years.map((year) => (
+              <div
+                key={year}
+                onClick={() => removeYearItem(year)}
+                className={styles.tagItem}
+              >
+                <Badge className={"bg-rose-500"}>
+                  <div className={styles.content}>
+                    {year} г. <GrFormClose />
+                  </div>
+                </Badge>
+              </div>
+            ))}
+          </>
         )}
 
         <AnimatePresence>

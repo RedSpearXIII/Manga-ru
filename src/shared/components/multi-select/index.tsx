@@ -11,31 +11,41 @@ import React, {
 import { MultiSelectDropdown } from "./multi-select-dropdown"
 import styles from "./styles.module.pcss"
 import { FiChevronDown, MdOutlineClear } from "react-icons/all"
-import useOnClickOutside from "~shared/hooks/useOnClickOutside"
+import { useOnClickOutside } from "~shared/hooks"
+import clsx from "clsx"
 
 interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   placeholder?: string
   label?: string
   values: string[]
   onValuesChange: (value: string[]) => void
-  options: { value: string; label: string }[]
+  options: { value: string; label: string }[] | string[]
   searchable?: boolean
+  color?: "slateDark"
 }
+
 const MultiSelect: FC<SelectProps> = forwardRef(
   (
     {
       label,
       placeholder,
-      options,
+      options: optionsValues,
       values,
       onValuesChange,
       searchable,
+      color,
       ...other
     }: SelectProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
+    const colorClass = color === "slateDark" && styles.slateDark
+
     const selectRef = useRef(null)
 
+    const options = optionsValues.map((option) => {
+      if (typeof option === "string") return { value: option, label: option }
+      return option
+    })
     const [dropdownIsOpened, setDropdownIsOpened] = useState(false)
     const [selectedItems, setSelectedItems] = useState<
       { value: string; label: string }[]
@@ -118,7 +128,7 @@ const MultiSelect: FC<SelectProps> = forwardRef(
         >
           <div>
             {label && <label>{label}</label>}
-            <div className={styles.selectInput}>
+            <div className={clsx(styles.selectInput, colorClass)}>
               {itemsIsSelected && !inputInFocus && (
                 <div className={styles.itemsContainer}>
                   <div

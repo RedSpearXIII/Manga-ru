@@ -1,8 +1,8 @@
 import React, { FC } from "react"
-import styles from "./styles.module.pcss"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import useImageLoaded from "~shared/hooks/useImageLoading"
+import { useImageLoading } from "~shared/hooks"
+import styles from "./styles.module.pcss"
 import clsx from "clsx"
 
 interface MediaCardProps {
@@ -11,21 +11,22 @@ interface MediaCardProps {
 }
 
 export const MediaCard: FC<MediaCardProps> = ({ media, type }) => {
-  const { isLoaded, isError, ...props } = useImageLoaded()
+  const { isLoaded, isError, ...props } = useImageLoading()
 
   return (
     <div className={clsx(styles.card)}>
+      <span className={`${!isLoaded && !isError && styles.cardImageLoader}`} />
       <Link to={`/${type}/title/${media.id}`}>
-        <span
-          className={`${!isLoaded && !isError && styles.cardImageLoader}`}
-        />
         <img
           {...props}
           className={clsx(styles.cardImage, isLoaded && styles.cardImageLoaded)}
           alt={"Отсутствует изображение"}
           src={media.image}
         />
-        <p className={clsx(styles.cardTitle)}>{media.title}</p>
+      </Link>
+
+      <Link className={styles.cardTitle} to={`/${type}/title/${media.id}`}>
+        {media.title}
       </Link>
     </div>
   )

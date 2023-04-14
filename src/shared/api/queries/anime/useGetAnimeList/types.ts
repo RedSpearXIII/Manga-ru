@@ -36,4 +36,5 @@ export type GetAnimeParams = {
   genres?: string[] | null
   order?: AnimeOrderVariants | null
   type?: AnimeTypeVariants | null
+  years?: string[] | null
 }

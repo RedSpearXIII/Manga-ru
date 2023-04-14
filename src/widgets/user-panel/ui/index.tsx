@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "./styles.module.pcss"
 import { AnimatePresence, motion } from "framer-motion"
-import useHover from "../../../shared/hooks/useHover"
+import { useHover } from "~shared/hooks"
 import { BiChevronDown } from "react-icons/all"
 import { ToggleTheme } from "~features/toggle-theme"
 import { Avatar } from "~shared/components"
@@ -11,7 +11,7 @@ const chevronVariants = {
   close: { rotate: 180 },
 }
 
-const UserPanel = () => {
+export const UserPanel = () => {
   const [isHover, hoverProps] = useHover()
 
   return (
@@ -76,5 +76,3 @@ const UserPanel = () => {
     </div>
   )
 }
-
-export default UserPanel

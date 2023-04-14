@@ -1,6 +1,10 @@
 .card {
   @apply w-full relative;
 
+  &:hover {
+    color: var(--card-text-color);
+  }
+
   .cardImage {
     @apply w-full h-64 object-cover rounded opacity-0 transition-opacity duration-500 ease-in drop-shadow-xl shadow-slate-900;
   }
@@ -11,7 +15,8 @@
     @apply absolute left-0 top-0 w-full h-64 object-cover rounded animate-pulse dark:bg-slate-800 bg-slate-200;
   }
   .cardTitle {
-    @apply pt-1 line-clamp-2 transition-colors;
+    @apply pt-1 line-clamp-2;
+    color: inherit !important;
   }
 }
 

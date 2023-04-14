@@ -4,7 +4,7 @@ import { shallow } from "zustand/shallow"
 import { FaTags, GrFormClose } from "react-icons/all"
 import styles from "./styles.module.pcss"
 import { Badge } from "~shared/components"
-import useHover from "~shared/hooks/useHover"
+import { useHover } from "~shared/hooks"
 import { AnimatePresence, motion } from "framer-motion"
 
 export const FilterTags = () => {

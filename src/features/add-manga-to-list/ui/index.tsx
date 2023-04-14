@@ -1,9 +1,9 @@
 import React from "react"
-import useHover from "~shared/hooks/useHover"
+import { useHover } from "~shared/hooks"
 import styles from "./styles.module.pcss"
 import { BiChevronDown } from "react-icons/all"
 import { motion } from "framer-motion"
-import useListAnimation from "~shared/hooks/useListAnimation"
+import { useListAnimation } from "~shared/hooks"
 
 const chevronVariants = {
   open: { rotate: 0 },

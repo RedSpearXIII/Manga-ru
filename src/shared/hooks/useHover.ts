@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 
-function useHover(
+export function useHover(
   timeout: number = 300
 ): [boolean, { onMouseEnter: () => void; onMouseLeave: () => void }] {
   const [isHovered, setIsHovered] = useState(false)
@@ -35,5 +35,3 @@ function useHover(
 
   return [isHovered, hoverProps]
 }
-
-export default useHover
