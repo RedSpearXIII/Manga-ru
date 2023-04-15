@@ -45,7 +45,7 @@ export const useGetAnimeList = ({
       } = await publicApi.get(
         `anime/${createArrayQueryParam([
           { paramName: "genres", array: genres },
-          { paramName: "years", array: years },
+          { paramName: "year", array: years },
         ])}`,
         {
           params,

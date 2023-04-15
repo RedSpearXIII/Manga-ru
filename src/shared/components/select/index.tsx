@@ -3,6 +3,7 @@ import React, {
   ForwardedRef,
   forwardRef,
   HTMLAttributes,
+  memo,
   useEffect,
   useRef,
   useState,
@@ -21,6 +22,7 @@ interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   options: { value: string; label: string }[]
   searchable?: boolean
   color?: "slateDark"
+  isLoading?: boolean
 }
 const Select: FC<SelectProps> = forwardRef(
   (
@@ -32,6 +34,7 @@ const Select: FC<SelectProps> = forwardRef(
       onValueChange,
       searchable,
       color,
+      isLoading,
       ...other
     }: SelectProps,
     ref: ForwardedRef<HTMLInputElement>
@@ -55,6 +58,9 @@ const Select: FC<SelectProps> = forwardRef(
         )
       )
     }, [inputValue])
+    useEffect(() => {
+      setOptionsList(options)
+    }, [options])
 
     const openDropdown = () => {
       setDropdownIsOpened(true)
@@ -92,7 +98,13 @@ const Select: FC<SelectProps> = forwardRef(
         >
           <div>
             {label && <label>{label}</label>}
-            <div className={clsx(styles.selectInput, colorClass)}>
+            <div
+              className={clsx(
+                styles.selectInput,
+                colorClass,
+                !searchable && "cursor-pointer"
+              )}
+            >
               {selectedItem && !dropdownIsOpened && (
                 <div className={styles.value}>{selectedItem.label}</div>
               )}
@@ -100,6 +112,8 @@ const Select: FC<SelectProps> = forwardRef(
                 <div className={styles.placeholder}>{placeholder}</div>
               )}
               <input
+                disabled={!searchable}
+                className={clsx(!searchable && "cursor-pointer")}
                 onBlur={onInputBlur}
                 value={inputValue}
                 onChange={(e) => onChangeInputValue(e.currentTarget.value)}
@@ -130,4 +144,4 @@ const Select: FC<SelectProps> = forwardRef(
   }
 )
 
-export default Select
+export default memo(Select)

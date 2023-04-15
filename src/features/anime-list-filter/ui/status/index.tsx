@@ -23,7 +23,6 @@ export const Status = () => {
   return (
     <div>
       <Select
-        searchable={true}
         value={status || ""}
         onValueChange={(val) => setStatus(val ? (val as AnimeStatuses) : null)}
         options={options}

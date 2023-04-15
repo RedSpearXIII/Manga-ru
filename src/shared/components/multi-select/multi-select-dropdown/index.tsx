@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import React, { FC } from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
+import { ImSpinner9 } from "react-icons/all"
 
 interface MultiSelectDropdownProps {
   options: { value: string; label: string }[]
@@ -9,6 +10,7 @@ interface MultiSelectDropdownProps {
   onRemoveItem: (value: string) => void
   isOpen: boolean
   selectedItems: { value: string; label: string }[]
+  isLoading?: boolean
 }
 
 export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
@@ -17,6 +19,7 @@ export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
   isOpen,
   selectedItems,
   onRemoveItem,
+  isLoading,
 }) => {
   const selectItem = (item: { value: string; label: string }) => {
     onSelectItem(item)
@@ -41,7 +44,7 @@ export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
         >
-          {options.length > 0 ? (
+          {options.length > 0 && !isLoading ? (
             options.map((item, index) => (
               <li
                 onClick={(e) => {
@@ -57,6 +60,10 @@ export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
                 {item.label}
               </li>
             ))
+          ) : isLoading ? (
+            <li className={styles.spinnerLoader}>
+              <ImSpinner9 />
+            </li>
           ) : (
             <li className={"text-center text-sm"}>Ничего не найдено :(</li>
           )}

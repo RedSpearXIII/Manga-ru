@@ -12,16 +12,14 @@ export const Genres = () => {
 
   const { data, isLoading } = useGetAnimeGenres()
 
-  if (!data && isLoading) return <p>loading</p>
-
-  if (!data && !isLoading) return null
-
   const values = genres.map((genre) => genre.id)
 
-  const genreOptions = data.map(({ genre, id }) => ({
-    value: id,
-    label: genre,
-  }))
+  const genreOptions = data
+    ? data.map(({ genre, id }) => ({
+        value: id,
+        label: genre,
+      }))
+    : []
 
   const onSelectGenre = (values: string[]) => {
     const genres = genreOptions
@@ -34,6 +32,8 @@ export const Genres = () => {
   return (
     <div>
       <MultiSelect
+        searchable
+        isLoading={isLoading}
         label={"Жанры"}
         placeholder={"Любой"}
         values={values}

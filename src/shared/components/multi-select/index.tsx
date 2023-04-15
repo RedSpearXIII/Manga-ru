@@ -3,6 +3,7 @@ import React, {
   ForwardedRef,
   forwardRef,
   HTMLAttributes,
+  memo,
   useEffect,
   useMemo,
   useRef,
@@ -22,6 +23,7 @@ interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   options: { value: string; label: string }[] | string[]
   searchable?: boolean
   color?: "slateDark"
+  isLoading?: boolean
 }
 
 const MultiSelect: FC<SelectProps> = forwardRef(
@@ -34,6 +36,7 @@ const MultiSelect: FC<SelectProps> = forwardRef(
       onValuesChange,
       searchable,
       color,
+      isLoading,
       ...other
     }: SelectProps,
     ref: ForwardedRef<HTMLInputElement>
@@ -46,6 +49,7 @@ const MultiSelect: FC<SelectProps> = forwardRef(
       if (typeof option === "string") return { value: option, label: option }
       return option
     })
+
     const [dropdownIsOpened, setDropdownIsOpened] = useState(false)
     const [selectedItems, setSelectedItems] = useState<
       { value: string; label: string }[]
@@ -68,6 +72,11 @@ const MultiSelect: FC<SelectProps> = forwardRef(
     }, [cachedValues])
 
     const [optionsList, setOptionsList] = useState(options)
+
+    useEffect(() => {
+      setOptionsList(options)
+    }, [optionsValues])
+
     const [inputValue, setInputValue] = useState("")
 
     const itemsIsSelected = selectedItems.length > 0
@@ -89,7 +98,6 @@ const MultiSelect: FC<SelectProps> = forwardRef(
     }
 
     const onSelectItem = (item: { value: string; label: string }) => {
-      console.log(item)
       setSelectedItems((prev) => {
         const values = prev.map((item) => item.value)
         onValuesChange([item.value, ...values])
@@ -128,7 +136,13 @@ const MultiSelect: FC<SelectProps> = forwardRef(
         >
           <div>
             {label && <label>{label}</label>}
-            <div className={clsx(styles.selectInput, colorClass)}>
+            <div
+              className={clsx(
+                styles.selectInput,
+                colorClass,
+                !searchable && "cursor-pointer"
+              )}
+            >
               {itemsIsSelected && !inputInFocus && (
                 <div className={styles.itemsContainer}>
                   <div
@@ -151,6 +165,7 @@ const MultiSelect: FC<SelectProps> = forwardRef(
                 <div className={styles.placeholder}>{placeholder}</div>
               )}
               <input
+                disabled={!searchable}
                 onFocus={() => {
                   setInputInFocus(true)
                 }}
@@ -159,6 +174,7 @@ const MultiSelect: FC<SelectProps> = forwardRef(
                 }}
                 value={inputValue}
                 onChange={(e) => onChangeInputValue(e.currentTarget.value)}
+                className={clsx(!searchable && "cursor-pointer")}
               />
 
               <div className={styles.selectIcon}>
@@ -174,6 +190,7 @@ const MultiSelect: FC<SelectProps> = forwardRef(
             </div>
 
             <MultiSelectDropdown
+              isLoading={isLoading}
               selectedItems={selectedItems}
               isOpen={dropdownIsOpened}
               options={optionsList}
@@ -187,4 +204,4 @@ const MultiSelect: FC<SelectProps> = forwardRef(
   }
 )
 
-export default MultiSelect
+export default memo(MultiSelect)

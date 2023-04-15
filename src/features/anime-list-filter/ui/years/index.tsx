@@ -12,18 +12,17 @@ export const Years = () => {
 
   const { data, isLoading } = useGetAnimeYears()
 
-  if (!data && !isLoading) return <p>error</p>
-  if (!data && isLoading) return <p>loading</p>
-
   return (
     <div>
       <MultiSelect
+        searchable
         color={"slateDark"}
         label={"Года"}
         placeholder={"Любой"}
         values={years}
         onValuesChange={onChange}
-        options={data}
+        options={data || []}
+        isLoading={isLoading}
       />
     </div>
   )
