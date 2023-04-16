@@ -5,6 +5,7 @@ module.exports = plugin(function ({ addComponents,theme  }) {
     ".scrollbar": {
       "&::-webkit-scrollbar": {
         width: "5px",
+        height: "5px"
       },
       "&::-webkit-scrollbar-track": {
         borderRadius: theme("borderRadius.sm"),

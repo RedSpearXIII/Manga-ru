@@ -3,6 +3,7 @@ import styles from "./styles.module.pcss"
 import { useParams } from "react-router-dom"
 import { useGetAnimeById } from "~shared/api"
 import clsx from "clsx"
+import { Badge } from "~shared/components"
 
 export const AnimeContent = () => {
   const { animeId } = useParams()
@@ -27,7 +28,12 @@ export const AnimeContent = () => {
   return (
     <div className={styles.bg}>
       <div className={styles.content}>
-        <img className={styles.image} src={data.image} alt={"Постер аниме"} />
+        <div className={styles.poster}>
+          <img className={styles.image} src={data.image} alt={"Постер аниме"} />
+          <span className={styles.minimalAgeBadge}>
+            <Badge>{data.minimalAge} +</Badge>
+          </span>
+        </div>
 
         <div className={styles.animeContent}>
           <h4>{data.title}</h4>

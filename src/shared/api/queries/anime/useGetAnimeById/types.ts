@@ -22,6 +22,7 @@ export type AnimeDetailingResponse = {
   airedAt: string
   type: AnimeTypeVariants
   episodesCount: number
+  episodesCountAired: number
   genres: { id: string; genre: string }[]
   status: AnimeStatuses
   ratingMpa: AnimeRatingMpa

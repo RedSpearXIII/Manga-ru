@@ -19,14 +19,16 @@ export const Genres = () => {
         value: id,
         label: genre,
       }))
-    : []
+    : null
 
   const onSelectGenre = (values: string[]) => {
-    const genres = genreOptions
-      .filter((genre) => values.includes(genre.value))
-      .map((genre) => ({ id: genre.value, genre: genre.label }))
+    if (genreOptions) {
+      const genres = genreOptions
+        .filter((genre) => values.includes(genre.value))
+        .map((genre) => ({ id: genre.value, genre: genre.label }))
 
-    setGenres(genres)
+      setGenres(genres)
+    }
   }
 
   return (
