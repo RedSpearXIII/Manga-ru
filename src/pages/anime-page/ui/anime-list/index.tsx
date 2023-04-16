@@ -1,14 +1,17 @@
-import React, { Fragment, Suspense, useEffect } from "react"
+import React, { Fragment, Suspense, useEffect, useRef } from "react"
 import styles from "./styles.module.pcss"
-import { usePageOffset } from "~shared/hooks"
 import { shallow } from "zustand/shallow"
 import { BiError, FaSadCry } from "react-icons/all"
 import { MediaCardSkeleton } from "~entities/media"
 import { useGetAnimeList } from "~shared/api"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { AnimeCard } from "~widgets/anime-card"
+import { useInView } from "framer-motion"
 
 export const AnimeList = () => {
+  const lastElementRef = useRef(null)
+  const lastElementInView = useInView(lastElementRef)
+
   const {
     searchQuery,
     genres,
@@ -41,16 +44,9 @@ export const AnimeList = () => {
     years,
   })
 
-  const { y } = usePageOffset()
-
-  const bottomScrollPosition =
-    y + window.innerHeight + 400 - document.body.scrollHeight
-
   useEffect(() => {
-    if (hasNextPage && bottomScrollPosition >= 0) {
-      fetchNextPage()
-    }
-  }, [bottomScrollPosition >= 0])
+    if (lastElementInView && !isFetchingNextPage && hasNextPage) fetchNextPage()
+  }, [lastElementInView])
 
   const loaders = Array.from({ length: 6 }, (_, index) => (
     <MediaCardSkeleton key={index} />
@@ -101,6 +97,7 @@ export const AnimeList = () => {
       <div className={styles.list}>
         {cards}
         {isFetchingNextPage && hasNextPage && loaders}
+        <span ref={lastElementRef} />
       </div>
     </div>
   )

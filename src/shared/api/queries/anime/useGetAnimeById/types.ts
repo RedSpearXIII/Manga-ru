@@ -6,7 +6,7 @@ import {
 } from "~shared/api"
 
 export type GetAnimeByIdParams = {
-  id: string
+  animeId: string
 }
 
 export type AnimeDetailingResponse = {
@@ -15,7 +15,7 @@ export type AnimeDetailingResponse = {
   image: string
   studio: { id: string; studio: string }[]
   season: AnimeSeasons
-  description: string
+  description?: string
   otherTitles: string[]
   year: number
   releasedAt: string
@@ -27,4 +27,5 @@ export type AnimeDetailingResponse = {
   status: AnimeStatuses
   ratingMpa: AnimeRatingMpa
   minimalAge: number
+  linkPlayer: string
 }

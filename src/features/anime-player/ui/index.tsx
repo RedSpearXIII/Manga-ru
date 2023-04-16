@@ -1,28 +1,24 @@
 import React, { FC } from "react"
 import styles from "./styles.module.pcss"
-import { useGetAnimeEpisodes } from "~shared/api"
-import { useAnimePlayerEpisodeModel } from "../model"
-import { Episodes } from "~features/anime-player/ui/episodes"
+import { getPlayerLinkFromParams } from "../lib"
 
 interface AnimePlayerProps {
-  animeId: string
+  playerLink: string
 }
 
-export const AnimePlayer: FC<AnimePlayerProps> = ({ animeId }) => {
-  const { episodeLink } = useAnimePlayerEpisodeModel((state) => state.episode)
-
-  const { data: episodes, isLoading } = useGetAnimeEpisodes({
-    animeId: animeId,
-    translationId: 610,
+export const AnimePlayer: FC<AnimePlayerProps> = ({ playerLink }) => {
+  const playerLinkWithSettings = getPlayerLinkFromParams({
+    params: { season: 1, episode: 1 },
+    playerLink,
   })
-
-  if (!episodes && isLoading) return <p>loading...</p>
-  if (!episodes && !isLoading) return <p>error</p>
 
   return (
     <div className={styles.playerContainer}>
-      <iframe className={styles.player} src={episodeLink} allowFullScreen />
-      <Episodes episodes={episodes} />
+      <iframe
+        className={styles.player}
+        src={playerLinkWithSettings}
+        allowFullScreen
+      />
     </div>
   )
 }

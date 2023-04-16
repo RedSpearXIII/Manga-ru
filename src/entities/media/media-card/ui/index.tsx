@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useImageLoading } from "~shared/hooks"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
+import { BsFillImageFill } from "react-icons/all"
 
 interface MediaCardProps {
   media: { id: string; title: string; image: string }
@@ -15,7 +16,17 @@ export const MediaCard: FC<MediaCardProps> = ({ media, type }) => {
 
   return (
     <div className={clsx(styles.card)}>
-      <span className={`${!isLoaded && !isError && styles.cardImageLoader}`} />
+      {!isLoaded && !isError && (
+        <span className={clsx(styles.imageStatus, styles.cardImageLoader)} />
+      )}
+      {!isLoaded && isError && (
+        <div className={clsx(styles.imageStatus, styles.cardImageError)}>
+          <div>
+            <BsFillImageFill />
+            <p>Изображение отсутсвует</p>
+          </div>
+        </div>
+      )}
       <Link to={`/${type}/title/${media.id}`}>
         <img
           {...props}

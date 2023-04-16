@@ -32,6 +32,7 @@ export const Search = () => {
         maxLength={40}
         label={"Поиск"}
         placeholder={"Название аниме"}
+        className={"placeholder:text-current"}
         value={searchValue}
         onChange={onChange}
         icon={<FaSearch />}

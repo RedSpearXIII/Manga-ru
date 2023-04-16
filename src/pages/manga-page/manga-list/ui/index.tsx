@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect } from "react"
+import React, { Fragment, useEffect, useRef } from "react"
 import styles from "./styles.module.pcss"
-import { usePageOffset } from "~shared/hooks"
 import { useGetMangaList } from "~shared/api"
 import {
   MangaListFilter,
@@ -9,8 +8,12 @@ import {
 import { shallow } from "zustand/shallow"
 import { BiError } from "react-icons/all"
 import { MediaCard, MediaCardSkeleton } from "~entities/media"
+import { useInView } from "framer-motion"
 
 export const MangaList = () => {
+  const lastElementRef = useRef(null)
+  const lastElementInView = useInView(lastElementRef)
+
   const { searchQuery } = useMangaListFilterStore((state) => state, shallow)
 
   const {
@@ -25,16 +28,9 @@ export const MangaList = () => {
     searchQuery,
   })
 
-  const { y } = usePageOffset()
-
-  const bottomScrollPosition =
-    y + window.innerHeight + 400 - document.body.scrollHeight
-
   useEffect(() => {
-    if (hasNextPage && bottomScrollPosition >= 0) {
-      fetchNextPage()
-    }
-  }, [bottomScrollPosition >= 0])
+    if (lastElementInView && !isFetchingNextPage && hasNextPage) fetchNextPage()
+  }, [lastElementInView])
 
   const loaders = Array.from({ length: 6 }, (_, index) => (
     <MediaCardSkeleton key={index} />
@@ -72,6 +68,7 @@ export const MangaList = () => {
       <div className={styles.list}>
         {cards.length > 0 ? cards : <div></div>}
         {isFetchingNextPage && hasNextPage && loaders}
+        <span ref={lastElementRef} />
       </div>
     </div>
   )
