@@ -9,6 +9,7 @@ import SiteFeatures from "./site-features"
 import SiteLogo from "./site-logo"
 import SitePresentationFigures from "./site-presentation-figures"
 import SuspenseLoader from "./suspense-loader"
+import GalleryLightBox from "./gallery-lightbox"
 
 export {
   Avatar,
@@ -22,4 +23,5 @@ export {
   Select,
   MultiSelect,
   SuspenseLoader,
+  GalleryLightBox,
 }

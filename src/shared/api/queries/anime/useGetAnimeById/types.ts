@@ -13,7 +13,7 @@ export type AnimeDetailingResponse = {
   id: string
   title: string
   image: string
-  studio: { id: string; studio: string }[]
+  studio?: { id: string; studio: string }[]
   season: AnimeSeasons
   description?: string
   otherTitles: string[]
@@ -21,8 +21,8 @@ export type AnimeDetailingResponse = {
   releasedAt: string
   airedAt: string
   type: AnimeTypeVariants
-  episodesCount: number
-  episodesCountAired: number
+  episodesCount?: number
+  episodesCountAired?: number
   genres: { id: string; genre: string }[]
   status: AnimeStatuses
   ratingMpa: AnimeRatingMpa

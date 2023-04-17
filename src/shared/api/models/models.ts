@@ -1,5 +1,4 @@
 import { MangaGenres } from "~shared/types/manga"
-import { MediaType } from "~shared/types"
 
 export interface MangaModel {
   id: string
@@ -8,6 +7,6 @@ export interface MangaModel {
   url: string
   description: string
   genres: MangaGenres[]
-  types: MediaType
+  types: any /*TODO: Поправить тип*/
   chaptersCount: number
 }

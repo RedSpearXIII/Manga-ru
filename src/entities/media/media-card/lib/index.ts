@@ -1,2 +1,5 @@
 export * from "./convertToHue"
 export * from "./getMediaAccentColorStyles"
+export * from "./translateMediaSeason"
+export * from "./translateMediaStatus"
+export * from "./translateAnimeType"
