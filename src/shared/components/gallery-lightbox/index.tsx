@@ -4,12 +4,16 @@ import { Portal } from "~shared/components"
 interface GalleryLightBoxProps {
   isOpen: boolean
   onClose: () => void
-  imgElements: ReactNode
+  elements: ReactNode
 }
 
 const lightBoxVariants = {}
 
-const GalleryLightBox: FC = ({}) => {
+const GalleryLightBox: FC<GalleryLightBoxProps> = ({
+  onClose,
+  isOpen,
+  elements,
+}) => {
   return (
     <Portal>
       <div></div>
