@@ -1,6 +1,10 @@
 .wrapper {
-  @apply py-5;
+  @apply py-3;
 
   .gallery {
+    @apply flex gap-3 overflow-x-auto snap-x  pb-0.5;
+    .image {
+      @apply h-36 rounded snap-center;
+    }
   }
 }

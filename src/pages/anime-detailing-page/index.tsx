@@ -11,8 +11,8 @@ const AnimeDetailingPage = () => {
     <div style={cardAccentColorsStyles}>
       <AnimeContent />
       <div className={"container mx-auto px-2"}>
-        <AdditionalInfo />
         <PreviewImages />
+        <AdditionalInfo />
         <PagePlayer />
       </div>
     </div>

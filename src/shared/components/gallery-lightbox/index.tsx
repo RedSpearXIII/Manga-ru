@@ -1,10 +1,12 @@
-import React, { FC, ReactNode } from "react"
+import React, { FC } from "react"
 import { Portal } from "~shared/components"
+import { AnimatePresence, motion } from "framer-motion"
 
 interface GalleryLightBoxProps {
   isOpen: boolean
   onClose: () => void
-  elements: ReactNode
+  elements: string[]
+  startFrom?: number
 }
 
 const lightBoxVariants = {}
@@ -13,10 +15,13 @@ const GalleryLightBox: FC<GalleryLightBoxProps> = ({
   onClose,
   isOpen,
   elements,
+  startFrom,
 }) => {
   return (
     <Portal>
-      <div></div>
+      <AnimatePresence>
+        <motion.div></motion.div>
+      </AnimatePresence>
     </Portal>
   )
 }
