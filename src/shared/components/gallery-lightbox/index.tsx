@@ -1,29 +1,65 @@
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { Portal } from "~shared/components"
-import { AnimatePresence, motion } from "framer-motion"
+import styles from "./styles.module.pcss"
+import { BiChevronLeft, BiChevronRight } from "react-icons/all"
+import { Slide } from "./ui"
 
 interface GalleryLightBoxProps {
-  isOpen: boolean
+  isOpen: { startFrom?: number; opened: boolean }
   onClose: () => void
-  elements: string[]
-  startFrom?: number
+  images: string[]
 }
 
-const lightBoxVariants = {}
-
-const GalleryLightBox: FC<GalleryLightBoxProps> = ({
+const GalleryLightbox: FC<GalleryLightBoxProps> = ({
   onClose,
   isOpen,
-  elements,
-  startFrom,
+  images,
 }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(
+    isOpen.startFrom || 0
+  )
+
+  useEffect(() => {
+    document.body.style.overflowY = isOpen.opened ? "hidden" : "auto"
+  }, [isOpen.opened])
+
+  useEffect(() => {
+    setCurrentImageIndex(isOpen.startFrom || 0)
+  }, [isOpen.startFrom])
+
+  const handleNextSlideClick = () => {
+    setCurrentImageIndex((currentImageIndex + 1) % images.length)
+  }
+
+  const handlePrevSlideClick = () => {
+    setCurrentImageIndex(
+      currentImageIndex === 0 ? images.length - 1 : currentImageIndex - 1
+    )
+  }
+
   return (
     <Portal>
-      <AnimatePresence>
-        <motion.div></motion.div>
-      </AnimatePresence>
+      {isOpen.opened && (
+        <>
+          <div className={styles.content}>
+            <div className={styles.slideBtn} onClick={handlePrevSlideClick}>
+              <BiChevronLeft />
+            </div>
+            <div className={styles.slideContainer}>
+              <Slide
+                onClose={onClose}
+                currentImageIndex={currentImageIndex}
+                images={images}
+              />
+            </div>
+            <div className={styles.slideBtn} onClick={handleNextSlideClick}>
+              <BiChevronRight />
+            </div>
+          </div>
+        </>
+      )}
     </Portal>
   )
 }
 
-export default GalleryLightBox
+export default GalleryLightbox

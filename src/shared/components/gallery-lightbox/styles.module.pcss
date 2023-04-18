@@ -1,0 +1,14 @@
+.content {
+  @apply backdrop-blur-sm fixed z-50 left-0 top-0 h-full w-full items-center grid grid-cols-[50px_1fr_50px];
+}
+
+.slideContainer {
+  @apply h-full w-full relative overflow-hidden;
+}
+
+.slideBtn {
+  @apply cursor-pointer h-full flex items-center justify-center dark:hover:bg-gray-700 hover:bg-slate-300 transition-colors;
+  svg {
+    @apply text-[30px];
+  }
+}

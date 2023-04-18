@@ -12,7 +12,7 @@ const chevronVariants = {
 }
 
 export const UserPanel = () => {
-  const [isHover, hoverProps] = useHover()
+  const [isHover, hoverProps] = useHover(150)
 
   return (
     <div className={styles.panel} {...hoverProps}>

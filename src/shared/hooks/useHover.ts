@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 
 export function useHover(
-  timeout: number = 300
+  timeout: number = 0
 ): [boolean, { onMouseEnter: () => void; onMouseLeave: () => void }] {
   const [isHovered, setIsHovered] = useState(false)
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)

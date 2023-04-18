@@ -11,7 +11,7 @@ const chevronVariants = {
 }
 
 export const AddMangaToList = () => {
-  const [isHovered, hoverProps] = useHover()
+  const [isHovered, hoverProps] = useHover(300)
 
   const scope = useListAnimation(isHovered)
 

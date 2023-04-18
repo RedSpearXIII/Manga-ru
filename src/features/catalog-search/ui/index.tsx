@@ -14,6 +14,8 @@ const CatalogSearch = () => {
   useEffect(() => {
     if (searchInputRef && searchInputRef.current && searchOpen)
       searchInputRef.current.focus()
+
+    document.body.style.overflowY = searchOpen ? "hidden" : "auto"
   }, [searchOpen])
 
   return (
