@@ -1,8 +1,8 @@
 import React from "react"
-import { AnimePlayer } from "~features/anime-player"
 import { useParams } from "react-router-dom"
 import styles from "./styles.module.pcss"
 import { useGetAnimeById } from "~shared/api"
+import { Player } from "~widgets/player"
 
 export const PagePlayer = () => {
   const { animeId } = useParams()
@@ -10,10 +10,9 @@ export const PagePlayer = () => {
   const { data, isLoading } = useGetAnimeById({ animeId: animeId! })
   if (!data && !isLoading) return <p>""</p>
   if (!data && isLoading) return <p>Loading...</p>
-
   return (
     <div className={styles.playerPageContainer}>
-      <AnimePlayer playerLink={data.linkPlayer} />
+      <Player playerLink={data.linkPlayer} />
     </div>
   )
 }

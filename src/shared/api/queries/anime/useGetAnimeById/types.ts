@@ -17,7 +17,7 @@ export type AnimeDetailingResponse = {
   season: AnimeSeasons
   description?: string
   otherTitles: string[]
-  year: number
+  year?: number
   releasedAt: string
   airedAt: string
   type: AnimeTypeVariants

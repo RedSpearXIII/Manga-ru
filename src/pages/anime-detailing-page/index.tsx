@@ -6,7 +6,7 @@ import { getMediaAccentColorStyles } from "~entities/media/media-card/lib"
 import { PreviewImages } from "./ui/preview-images"
 
 const AnimeDetailingPage = () => {
-  const cardAccentColorsStyles = getMediaAccentColorStyles("#FFFFFF")
+  const cardAccentColorsStyles = getMediaAccentColorStyles("#4a98ff")
   return (
     <div style={cardAccentColorsStyles}>
       <AnimeContent />

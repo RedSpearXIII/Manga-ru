@@ -17,32 +17,39 @@ export const AdditionalInfo = () => {
 
   const type = translateAnimeType(data.type)
   const status = translateMediaStatus(data.status)
-  const seasons = `${data.episodesCount || "?"} / ${
-    data.episodesCountAired || "?"
+  const seasons = `${data.episodesCountAired || "?"} / ${
+    data.episodesCount || "?"
   }`
-  const releasedAt = format(parseISO(data.releasedAt), "d MMMM yyyyг", {
+  const releasedAt = format(parseISO(data.releasedAt), "d MMM yyyyг", {
     locale: ru,
   })
-  const airedAt = format(parseISO(data.airedAt), "d MMMM yyyyг", {
+  const airedAt = format(parseISO(data.airedAt), "d MMM yyyyг", {
     locale: ru,
   })
+  const year =
+    data.year ||
+    format(parseISO(data.airedAt), "yyyy", {
+      locale: ru,
+    })
 
   return (
     <div className={styles.additionalInfoContainer}>
       <div className={styles.infoBox}>
-        <h6>Дополнительная ифнормация</h6>
-        <div className={styles.infoContainer}>
+        <h6>Дополнительная информация</h6>
+        <div className={styles.infoContent}>
           <InfoItem title={"Серий"} value={seasons} />
           <InfoItem title={"Стартовал"} value={airedAt} />
-          {data.year && <InfoItem title={"Год"} value={data.year} />}
           <InfoItem title={"Выпущен"} value={releasedAt} />
+          <InfoItem title={"Год"} value={year} />
           {data.status && <InfoItem title={"Статус"} value={status} />}
           <InfoItem title={"Тип"} value={type} />
         </div>
       </div>
       <div className={styles.infoBox}>
         <h6>В списках у людей</h6>
-        <div className={styles.infoContainer}>1</div>
+        <div className={styles.statusDistribution}>
+          <div>1</div>
+        </div>
       </div>
     </div>
   )
