@@ -15,40 +15,47 @@ export const MediaCard: FC<MediaCardProps> = ({ media, type }) => {
   const { isLoaded, isError, ...props } = useImageLoading()
 
   return (
-    <div className={clsx(styles.card)}>
-      {!isLoaded && !isError && (
-        <span className={clsx(styles.imageStatus, styles.cardImageLoader)} />
-      )}
-      {!isLoaded && isError && (
-        <div className={clsx(styles.imageStatus, styles.cardImageError)}>
-          <div>
-            <BsFillImageFill />
-            <p>Изображение отсутсвует</p>
-          </div>
-        </div>
-      )}
-      <Link to={`/${type}/title/${media.id}`}>
-        <img
-          {...props}
-          className={clsx(styles.cardImage, isLoaded && styles.cardImageLoaded)}
-          alt={"Отсутствует изображение"}
-          src={media.image}
-        />
-      </Link>
+    <Link to={`/${type}/title/${media.id}`}>
+      <div className={styles.card}>
+        <div className={styles.imageContainer}>
+          {!isLoaded && !isError && (
+            <span
+              className={clsx(styles.imageStatus, styles.cardImageLoader)}
+            />
+          )}
+          {!isLoaded && isError && (
+            <div className={clsx(styles.imageStatus, styles.cardImageError)}>
+              <div>
+                <BsFillImageFill />
+                <p>Изображение отсутсвует</p>
+              </div>
+            </div>
+          )}
 
-      <Link className={styles.cardTitle} to={`/${type}/title/${media.id}`}>
-        {media.title}
-      </Link>
-    </div>
+          <img
+            {...props}
+            className={clsx(
+              styles.cardImage,
+              isLoaded && styles.cardImageLoaded
+            )}
+            alt={"Отсутствует изображение"}
+            src={media.image}
+          />
+        </div>
+
+        <p className={styles.cardTitle}>{media.title}</p>
+      </div>
+    </Link>
   )
 }
 
 export const MediaCardSkeleton = () => {
+  //TODO: поправить лоадер
   return (
     <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }}>
       <div className={styles.skeleton}>
-        <div className={styles.imageLoader}></div>
-        <div className={styles.titleLoader}></div>
+        <div className={styles.imageLoader} />
+        <div className={styles.titleLoader} />
       </div>
     </motion.div>
   )

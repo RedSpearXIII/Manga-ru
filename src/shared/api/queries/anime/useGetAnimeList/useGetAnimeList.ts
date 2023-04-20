@@ -13,6 +13,7 @@ export const useGetAnimeList = ({
   order,
   type,
   years,
+  translations,
 }: GetAnimeParams) =>
   useInfiniteQuery<AnimeResponse[]>(
     [
@@ -26,6 +27,7 @@ export const useGetAnimeList = ({
       order,
       type,
       years,
+      translations,
     ],
     async ({ pageParam = 0 }) => {
       const params = {
@@ -46,6 +48,7 @@ export const useGetAnimeList = ({
         `anime/${createArrayQueryParam([
           { paramName: "genres", array: genres },
           { paramName: "year", array: years },
+          { paramName: "translation", array: translations },
         ])}`,
         {
           params,

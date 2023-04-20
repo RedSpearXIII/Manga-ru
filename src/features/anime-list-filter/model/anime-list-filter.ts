@@ -6,6 +6,7 @@ import {
   AnimeRatingMpa,
   AnimeSeasons,
   AnimeStatuses,
+  AnimeTranslation,
   AnimeTypeVariants,
 } from "~shared/api"
 
@@ -19,6 +20,7 @@ type State = {
   minimalAge: AnimeMinimalAge | null
   type: AnimeTypeVariants | null
   years: string[]
+  translations: AnimeTranslation[]
 }
 
 type Actions = {
@@ -35,6 +37,9 @@ type Actions = {
   setRatingMpa: (value: AnimeRatingMpa | null) => void
   setMinimalAge: (value: AnimeMinimalAge | null) => void
   setType: (value: AnimeTypeVariants | null) => void
+  setTranslations: (value: AnimeTranslation[]) => void
+  removeTranslation: (value: number) => void
+  addTranslation: (translation: AnimeTranslation) => void
   resetFilter: () => void
 }
 
@@ -50,6 +55,7 @@ const initialState: State = {
   season: null,
   type: null,
   years: [],
+  translations: [],
 }
 
 export const useAnimeListFilterStore = create(
@@ -108,6 +114,23 @@ export const useAnimeListFilterStore = create(
     setType: (type) =>
       setState((store) => {
         store.type = type
+      }),
+    addTranslation: (translation) =>
+      setState((store) => {
+        const candidate = store.translations.find(
+          (el) => el.id === translation.id
+        )
+        if (!candidate) store.translations.push(translation)
+      }),
+    removeTranslation: (translationId) =>
+      setState((store) => {
+        store.translations = store.translations.filter(
+          (translation) => translation.id !== translationId
+        )
+      }),
+    setTranslations: (genres) =>
+      setState((store) => {
+        store.translations = genres
       }),
     resetFilter: () => setState(initialState),
   }))

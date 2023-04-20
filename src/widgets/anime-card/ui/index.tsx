@@ -11,12 +11,14 @@ export interface AnimeCardProps {
 
 export const AnimeCard: FC<AnimeCardProps> = ({ anime }) => {
   const [isHover, hoveredProps] = useHover(80)
-  const cardAccentColorsStyles = getMediaAccentColorStyles("#FFFFFF")
+  const cardAccentColorsStyles = getMediaAccentColorStyles(
+    anime.accentColor || "#FFFFFF"
+  )
 
   return (
     <div
       {...hoveredProps}
-      className={"relative"}
+      className={"w-full relative"}
       style={cardAccentColorsStyles}
     >
       <MediaCard media={anime} type={"anime"} />

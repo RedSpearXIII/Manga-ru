@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { GoSettings } from "react-icons/all"
 import { RatingMpa } from "../rating-mpa"
 import { Years } from "../years"
+import { Translations } from "../translation"
 
 export const ExtraFilter = () => {
   const extraFilterRef = useRef(null)
@@ -39,6 +40,9 @@ export const ExtraFilter = () => {
               </div>
               <div className={styles.filter}>
                 <Years />
+              </div>
+              <div className={styles.filter}>
+                <Translations />
               </div>
             </div>
           </motion.div>

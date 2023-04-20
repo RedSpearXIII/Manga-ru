@@ -6,9 +6,11 @@ import { Badge } from "~shared/components"
 import { useHover } from "~shared/hooks"
 import { AnimatePresence, motion } from "framer-motion"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
+import { getUserDeviceType } from "~shared/lib"
 
 export const FilterTags = () => {
   const [isHovered, hoveredProps] = useHover()
+  const userDeviceType = getUserDeviceType()
 
   const {
     orderBy,
@@ -29,6 +31,8 @@ export const FilterTags = () => {
     setMinimalAge,
     years,
     removeYear,
+    translations,
+    removeTranslation,
   } = useAnimeListFilterStore((state) => state, shallow)
 
   const resetSearchFilter = () => {
@@ -59,6 +63,10 @@ export const FilterTags = () => {
     removeYear(year)
   }
 
+  const removeTranslationItem = (translationId: number) => {
+    removeTranslation(translationId)
+  }
+
   const filterIsActive = !!(
     orderBy ||
     status ||
@@ -69,7 +77,8 @@ export const FilterTags = () => {
     season ||
     type ||
     minimalAge !== null ||
-    years.length > 0
+    years.length > 0 ||
+    translations.length > 0
   )
   if (!filterIsActive) return null
 
@@ -91,7 +100,7 @@ export const FilterTags = () => {
         )}
         {ratingMpa && (
           <div onClick={removeRatingMpaFilter} className={styles.tagItem}>
-            <Badge className={"bg-orange-400 dark:bg-orange-300"}>
+            <Badge className={"bg-orange-300"}>
               <div className={styles.content}>
                 MPA: {ratingMpa} <GrFormClose />
               </div>
@@ -179,9 +188,27 @@ export const FilterTags = () => {
             ))}
           </>
         )}
+        {translations.length > 0 && (
+          <>
+            {translations.map((translation) => (
+              <div
+                key={translation.id}
+                onClick={() => removeTranslationItem(translation.id)}
+                className={styles.tagItem}
+              >
+                <Badge className={"bg-pink-500"}>
+                  <div className={styles.content}>
+                    {translation.title} <GrFormClose />
+                  </div>
+                </Badge>
+              </div>
+            ))}
+          </>
+        )}
 
         <AnimatePresence>
-          {isHovered && (
+          {((isHovered && userDeviceType === "desktop") ||
+            userDeviceType !== "desktop") && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

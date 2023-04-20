@@ -5,7 +5,7 @@ import { AnimeTranslation } from "./types"
 export const useGetAnimeTranslation = () =>
   useQuery<AnimeTranslation[]>(`getAnimeTranslation`, async () => {
     try {
-      const { data } = await publicApi.get(`api/anime/translations`)
+      const { data } = await publicApi.get(`anime/translations`)
 
       return data.data
     } catch (e) {

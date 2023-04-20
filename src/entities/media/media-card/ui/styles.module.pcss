@@ -1,44 +1,59 @@
 .card {
-  @apply w-full relative;
+  @apply w-full grid grid-rows-[min-content_auto] relative;
 
   &:hover {
     color: var(--card-text-color);
   }
 
-  .cardImage {
-    @apply w-full h-64 object-cover rounded opacity-0 transition-opacity duration-500 ease-in drop-shadow-xl shadow-slate-900;
-  }
-  .cardImageLoaded {
-    @apply opacity-100;
-  }
-  .imageStatus {
-    @apply absolute left-0 top-0 w-full h-64 object-cover rounded;
-  }
-  .cardImageLoader {
-    @apply animate-pulse dark:bg-slate-800 bg-slate-200;
-  }
-  .cardImageError {
-    @apply dark:bg-slate-800 bg-slate-200 flex items-center justify-center;
-    svg {
-      @apply mx-auto text-xl;
+  .imageContainer {
+    @apply w-full xl:h-64 max-xl:h-auto relative overflow-hidden;
+
+    &:before {
+      content: "";
+      @apply block h-0 w-0 pb-[142.85714%];
     }
-    p {
-      @apply text-center text-sm px-2 mt-1;
+
+    .cardImage {
+      @apply w-full h-full absolute left-0 top-0 object-cover rounded opacity-0 transition-opacity duration-500 ease-in drop-shadow-xl shadow-slate-900;
+    }
+    .cardImageLoaded {
+      @apply opacity-100;
+    }
+    .imageStatus {
+      @apply w-full h-full absolute left-0 top-0 rounded;
+    }
+    .cardImageLoader {
+      @apply animate-pulse dark:bg-slate-800 bg-slate-200;
+    }
+    .cardImageError {
+      @apply dark:bg-slate-800 bg-slate-200 flex items-center justify-center;
+      svg {
+        @apply mx-auto text-xl;
+      }
+      p {
+        @apply text-center text-sm px-2 mt-1;
+      }
     }
   }
+
   .cardTitle {
-    @apply pt-1 line-clamp-2;
+    @apply mt-1 line-clamp-2 max-sm:text-xs;
     color: inherit !important;
   }
 }
 
 .skeleton {
-  @apply w-full animate-pulse;
+  @apply w-full grid grid-rows-[min-content_auto] relative;
+
+  &:before {
+    content: "";
+    @apply block h-0 w-0 pb-[142%];
+  }
 
   .imageLoader {
-    @apply w-full h-64 object-cover rounded dark:bg-slate-800 bg-slate-200;
+    @apply absolute -z-10 left-0 top-0 w-full h-full rounded dark:bg-slate-800 bg-slate-200;
   }
   .titleLoader {
-    @apply mt-3 h-6 dark:bg-slate-800 bg-slate-200 rounded;
+    @apply mt-1 h-6 w-full dark:bg-slate-800 bg-slate-200 rounded;
   }
 }

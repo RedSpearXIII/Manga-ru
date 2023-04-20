@@ -24,6 +24,7 @@ export type AnimeResponse = {
   genres: { id: string; genre: string }[]
   status: AnimeStatuses
   ratingMpa: AnimeRatingMpa
+  accentColor?: string
 }
 
 export type GetAnimeParams = {
@@ -37,4 +38,5 @@ export type GetAnimeParams = {
   order?: AnimeOrderVariants | null
   type?: AnimeTypeVariants | null
   years?: string[] | null
+  translations?: string[] | null
 }

@@ -22,6 +22,7 @@ export const AnimeList = () => {
     status,
     type,
     years,
+    translations,
   } = useAnimeListFilterStore((state) => state, shallow)
 
   const {
@@ -35,6 +36,7 @@ export const AnimeList = () => {
     pageSize: 30,
     searchQuery,
     genres: genres.map(({ id }) => id),
+    translations: translations.map(({ id }) => id.toString()),
     status,
     season,
     ratingMpa,
@@ -93,7 +95,7 @@ export const AnimeList = () => {
     )
 
   return (
-    <div className={"container mx-auto"}>
+    <div className={"container mx-auto px-2"}>
       <div className={styles.list}>
         {cards}
         {isFetchingNextPage && hasNextPage && loaders}
