@@ -4,7 +4,7 @@ import { AnimeListFilter } from "~features/anime-list-filter"
 
 export const AnimePage = () => {
   return (
-    <div>
+    <div className={"px-2"}>
       <AnimeListFilter />
 
       <AnimeList />

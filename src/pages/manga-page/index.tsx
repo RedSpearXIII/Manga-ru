@@ -3,7 +3,7 @@ import { MangaList } from "./manga-list"
 
 export const MangaPage = () => {
   return (
-    <div>
+    <div className={"px-2"}>
       <MangaList />
     </div>
   )

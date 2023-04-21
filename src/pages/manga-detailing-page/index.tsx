@@ -11,7 +11,7 @@ const MangaDetailingPage = () => {
 
   if (isError) return <h1>Такой манги не сущетсвует</h1>
   return (
-    <div>
+    <div className={"px-2"}>
       <MangaContent />
       <SimilarMangaList />
     </div>

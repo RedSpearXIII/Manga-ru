@@ -54,7 +54,9 @@ export const MediaCardSkeleton = () => {
   return (
     <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }}>
       <div className={styles.skeleton}>
-        <div className={styles.imageLoader} />
+        <div className={styles.imageLoaderContainer}>
+          <div className={styles.imageContainerLoader} />
+        </div>
         <div className={styles.titleLoader} />
       </div>
     </motion.div>
