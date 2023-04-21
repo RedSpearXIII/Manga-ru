@@ -1,8 +1,6 @@
 import React from "react"
 import { hexToHSL, hexToHue, hexToRgb, hslToHex } from "~shared/lib"
 
-//TODO: доработать функцию преобразования
-
 function getContrastColor(hex: string): string {
   // удаление символа # (если он есть)
   hex = hex.replace("#", "")

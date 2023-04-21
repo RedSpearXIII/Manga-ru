@@ -50,7 +50,6 @@ export const MediaCard: FC<MediaCardProps> = ({ media, type }) => {
 }
 
 export const MediaCardSkeleton = () => {
-  //TODO: поправить лоадер
   return (
     <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }}>
       <div className={styles.skeleton}>
