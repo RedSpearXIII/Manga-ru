@@ -1,9 +1,9 @@
 .wrapper {
-  @apply mx-auto xl:container;
+  @apply mx-auto container relative z-50;
   .filters {
-    @apply grid grid grid-cols-[auto_40px] items-center;
+    @apply grid grid-cols-[auto_40px] items-center gap-3;
     .filter {
-      @apply grid grid-cols-[repeat(6,220px)] max-2xl:grid-cols-[repeat(6,auto)] gap-3 mb-6;
+      @apply grid grid-cols-[repeat(6,230px)] max-2xl:grid-cols-[repeat(1,auto)] gap-3 mb-6;
     }
   }
 }

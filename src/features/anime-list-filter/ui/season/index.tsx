@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { Select } from "~shared/components"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
@@ -11,7 +11,11 @@ const options = [
   { value: "Summer", label: "Лето" },
 ]
 
-export const Season = () => {
+interface SeasonProps {
+  inExtraFilter?: boolean
+}
+
+const Season: FC<SeasonProps> = ({ inExtraFilter }) => {
   const { season, setSeason } = useAnimeListFilterStore(
     (state) => state,
     shallow
@@ -25,7 +29,10 @@ export const Season = () => {
         options={options}
         placeholder={"Любой"}
         label={"Сезон"}
+        color={inExtraFilter ? "slateDark" : undefined}
       />
     </div>
   )
 }
+
+export default Season

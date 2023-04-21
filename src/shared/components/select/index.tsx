@@ -120,7 +120,7 @@ const Select: FC<SelectProps> = forwardRef(
               />
 
               <div className={styles.selectIcon}>
-                {selectedItem ? (
+                {selectedItem || dropdownIsOpened ? (
                   <MdOutlineClear
                     className={"cursor-pointer"}
                     onClick={removeSelectItem}

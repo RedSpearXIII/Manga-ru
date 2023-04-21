@@ -1,11 +1,10 @@
-import React, { MouseEvent, useRef, useState } from "react"
+import React, { lazy, MouseEvent, Suspense, useRef, useState } from "react"
 import { useOnClickOutside } from "~shared/hooks"
 import styles from "./styles.module.pcss"
-import { AnimatePresence, motion } from "framer-motion"
 import { GoSettings } from "react-icons/all"
-import { RatingMpa } from "../rating-mpa"
-import { Years } from "../years"
-import { Translations } from "../translation"
+import { AnimatePresence } from "framer-motion"
+
+const ExtraFilterDropdown = lazy(() => import("./extra-filter-dropdown"))
 
 export const ExtraFilter = () => {
   const extraFilterRef = useRef(null)
@@ -26,26 +25,12 @@ export const ExtraFilter = () => {
       <div onClick={onClickExtraFilterBtn} className={styles.btn}>
         <GoSettings />
       </div>
+
       <AnimatePresence>
         {isOpened && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            className={styles.dropdown}
-          >
-            <div className={styles.filters}>
-              <div className={styles.filter}>
-                <RatingMpa />
-              </div>
-              <div className={styles.filter}>
-                <Years />
-              </div>
-              <div className={styles.filter}>
-                <Translations />
-              </div>
-            </div>
-          </motion.div>
+          <Suspense>
+            <ExtraFilterDropdown />
+          </Suspense>
         )}
       </AnimatePresence>
     </div>

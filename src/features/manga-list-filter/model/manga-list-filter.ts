@@ -1,16 +1,15 @@
 import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
-import { MangaStatus } from "~shared/types"
 
 type State = {
   searchQuery: string
-  status: MangaStatus | null
+  status: any //TODO: Доработать типы
   orderBy: "random" | "popular" | "views" | null
 }
 
 type Actions = {
   setSearchQuery: (queryString: string) => void
-  setStatus: (status: MangaStatus | null) => void
+  setStatus: (status: any | null) => void
   setOrderBy: (payload: "random" | "popular" | "views" | null) => void
   resetFilter: () => void
 }

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { Select } from "~shared/components"
 import { AnimeTypeVariants } from "~shared/api"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
@@ -13,7 +13,11 @@ const options = [
   { value: "tv", label: "Телесериал" },
 ]
 
-export const AnimeType = () => {
+interface AnimeTypeProps {
+  inExtraFilter?: boolean
+}
+
+const AnimeType: FC<AnimeTypeProps> = ({ inExtraFilter }) => {
   const { type, setType } = useAnimeListFilterStore((state) => state, shallow)
 
   return (
@@ -26,7 +30,10 @@ export const AnimeType = () => {
         options={options}
         placeholder={"Любой"}
         label={"Тип аниме"}
+        color={inExtraFilter ? "slateDark" : undefined}
       />
     </div>
   )
 }
+
+export default AnimeType

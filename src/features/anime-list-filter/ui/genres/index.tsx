@@ -1,10 +1,14 @@
-import React from "react"
+import React, { FC } from "react"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
 import { MultiSelect } from "~shared/components"
 import { useGetAnimeGenres } from "~shared/api"
 
-export const Genres = () => {
+interface GenresProps {
+  inExtraFilter?: boolean
+}
+
+const Genres: FC<GenresProps> = ({ inExtraFilter }) => {
   const { genres, setGenres } = useAnimeListFilterStore(
     (state) => state,
     shallow
@@ -41,7 +45,10 @@ export const Genres = () => {
         values={values}
         onValuesChange={onSelectGenre}
         options={genreOptions || []}
+        color={inExtraFilter ? "slateDark" : undefined}
       />
     </div>
   )
 }
+
+export default Genres

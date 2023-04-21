@@ -178,7 +178,7 @@ const MultiSelect: FC<SelectProps> = forwardRef(
               />
 
               <div className={styles.selectIcon}>
-                {itemsIsSelected ? (
+                {itemsIsSelected || dropdownIsOpened ? (
                   <MdOutlineClear
                     className={"cursor-pointer"}
                     onClick={removeAllSelectedItems}

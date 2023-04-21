@@ -6,7 +6,6 @@ export const AnimePage = () => {
   return (
     <div className={"px-2"}>
       <AnimeListFilter />
-
       <AnimeList />
     </div>
   )
