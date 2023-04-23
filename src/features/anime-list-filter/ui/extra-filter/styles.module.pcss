@@ -1,5 +1,5 @@
 .extraFilterContainer {
-  @apply 2xl:relative z-20;
+  @apply relative z-20;
   .btn {
     @apply h-10 w-10 dark:bg-slate-800 bg-slate-200 rounded flex items-center justify-center cursor-pointer drop-shadow;
     @apply dark:hover:text-orange-300 hover:text-orange-400 transition-colors;
@@ -7,5 +7,8 @@
     svg {
       @apply text-xl;
     }
+  }
+  .btnActive {
+    @apply dark:text-orange-300 text-orange-400;
   }
 }

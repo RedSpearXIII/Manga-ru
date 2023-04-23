@@ -1,9 +1,14 @@
-import React, { FC } from "react"
+import React, { FC, lazy, Suspense } from "react"
 import { MediaCard } from "~entities/media"
-import { useHover } from "~shared/hooks"
+import { useHover, useScreenSize } from "~shared/hooks"
 import { AnimeResponse } from "~shared/api"
-import { RightPanel } from "./right-panel"
 import { getMediaAccentColorStyles } from "~entities/media/media-card/lib"
+import { getUserDeviceType } from "~shared/lib"
+import { Breakpoints } from "~shared/types"
+
+const RightPanel = lazy(() =>
+  import("./right-panel").then((module) => ({ default: module.RightPanel }))
+)
 
 export interface AnimeCardProps {
   anime: AnimeResponse
@@ -15,6 +20,12 @@ export const AnimeCard: FC<AnimeCardProps> = ({ anime }) => {
     anime.accentColor || "#FFFFFF"
   )
 
+  const screenSize = useScreenSize()
+  const userDeviceType = getUserDeviceType()
+
+  const isLoadRightPanel =
+    screenSize >= Breakpoints.sm && userDeviceType === "desktop"
+
   return (
     <div
       {...hoveredProps}
@@ -22,7 +33,9 @@ export const AnimeCard: FC<AnimeCardProps> = ({ anime }) => {
       style={cardAccentColorsStyles}
     >
       <MediaCard media={anime} type={"anime"} />
-      {isHover && <RightPanel anime={anime} />}
+      {isLoadRightPanel && (
+        <Suspense>{isHover && <RightPanel anime={anime} />}</Suspense>
+      )}
     </div>
   )
 }

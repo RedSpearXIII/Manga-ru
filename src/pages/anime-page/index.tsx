@@ -1,5 +1,5 @@
 import React from "react"
-import { AnimeList } from "./ui/anime-list"
+import { AnimeList } from "./ui"
 import { AnimeListFilter } from "~features/anime-list-filter"
 
 export const AnimePage = () => {

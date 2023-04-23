@@ -1,0 +1,13 @@
+.statusDistribution {
+  @apply bg-slate-200 dark:bg-slate-800 rounded relative overflow-hidden;
+
+  .content {
+    @apply grid grid-cols-5 max-xl:grid-cols-3 max-lg:grid-cols-2 gap-2 max-w-full;
+    @apply px-4 pt-4 pb-6;
+  }
+  .distributionItem {
+    &:last-child {
+      @apply max-xl:col-span-2;
+    }
+  }
+}

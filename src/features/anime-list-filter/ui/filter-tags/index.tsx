@@ -7,6 +7,7 @@ import { useHover } from "~shared/hooks"
 import { AnimatePresence, motion } from "framer-motion"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { getUserDeviceType } from "~shared/lib"
+import { translateAnimeType } from "~entities/media"
 
 export const FilterTags = () => {
   const [isHovered, hoveredProps] = useHover()
@@ -150,12 +151,7 @@ export const FilterTags = () => {
           <div onClick={removeTypeFilter} className={styles.tagItem}>
             <Badge className={"bg-pink-400"}>
               <div className={styles.content}>
-                {type === "movie" && "Фильм"}
-                {type === "ona" && "Ona"}
-                {type === "ova" && "Ova"}
-                {type === "music" && "Музыкальный"}
-                {type === "special" && "Специальный"}
-                {type === "tv" && "Телесериал"}
+                {translateAnimeType(type)}
                 <GrFormClose />
               </div>
             </Badge>
