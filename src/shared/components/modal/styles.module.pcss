@@ -1,0 +1,21 @@
+.backdrop {
+  @apply bg-black/20 top-0 left-0 fixed w-screen h-screen flex items-center justify-center z-40 overflow-y-auto;
+
+  .modal {
+    @apply rounded overflow-hidden absolute my-3 w-full max-w-2xl z-50;
+    .topBar {
+      @apply bg-slate-300/90 dark:bg-slate-900/90 backdrop-blur-2xl py-5 text-2xl px-5 text-slate-200 flex flex-nowrap justify-between items-center;
+      p {
+        @apply text-lg text-slate-900 dark:text-slate-200;
+      }
+
+      .closeBtn {
+        @apply cursor-pointer text-slate-900 dark:text-slate-200 hover:text-orange-400 transition-colors;
+      }
+    }
+
+    .content {
+      @apply dark:bg-slate-800 bg-slate-200;
+    }
+  }
+}

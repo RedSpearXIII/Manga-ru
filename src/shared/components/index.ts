@@ -10,6 +10,7 @@ import SiteLogo from "./site-logo"
 import SitePresentationFigures from "./site-presentation-figures"
 import SuspenseLoader from "./suspense-loader"
 import GalleryLightbox from "./gallery-lightbox"
+import Modal from "./modal"
 
 export {
   Avatar,
@@ -24,4 +25,5 @@ export {
   MultiSelect,
   SuspenseLoader,
   GalleryLightbox,
+  Modal,
 }
