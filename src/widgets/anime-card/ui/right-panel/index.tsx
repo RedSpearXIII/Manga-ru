@@ -5,6 +5,7 @@ import { AnimeResponse, AnimeSeasons, AnimeStatuses } from "~shared/api"
 import { Badge } from "~shared/components"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
+import { translateMediaSeason } from "~entities/media"
 
 interface RightPanelProps {
   anime: AnimeResponse
@@ -13,6 +14,7 @@ interface RightPanelProps {
 export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
   const { setRatingMpa, addGenre, setStatus, setSeason } =
     useAnimeListFilterStore((state) => state, shallow)
+  const season = translateMediaSeason(anime.season)
 
   const onSetRatingMpa = () => {
     setRatingMpa(anime.ratingMpa)
@@ -35,7 +37,7 @@ export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
     >
       <div className={styles.topInfo}>
         <p className={styles.season} onClick={() => onSetSeason(anime.season)}>
-          {anime.season}
+          {season}
         </p>
         <Badge className={styles.mpaRating} onClick={onSetRatingMpa}>
           {anime.ratingMpa}
@@ -43,9 +45,11 @@ export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
       </div>
 
       <div className={styles.studio}>
-        <p className={styles.studioName}>Студия {anime.studio[0].studio}</p>
+        {anime.studio && (
+          <p className={styles.studioName}>Студия {anime.studio[0].studio}</p>
+        )}
         <div className={styles.animeProgress}>
-          <p>{anime.episodesCount} серий/я</p>-
+          <p>{anime.episodesCount} серий</p>-
           <p
             onClick={() => onSetStatus(anime.status)}
             className={styles.status}

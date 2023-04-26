@@ -3,6 +3,7 @@ import React, { FC } from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 import { ImSpinner9 } from "react-icons/all"
+import { Modal } from "~shared/components"
 
 interface MultiSelectDropdownProps {
   options: { value: string; label: string }[]
@@ -11,6 +12,9 @@ interface MultiSelectDropdownProps {
   isOpen: boolean
   selectedItems: { value: string; label: string }[]
   isLoading?: boolean
+  onModalClose: () => void
+  label?: string
+  withModal: boolean
 }
 
 export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
@@ -20,6 +24,9 @@ export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
   selectedItems,
   onRemoveItem,
   isLoading,
+  withModal,
+  label,
+  onModalClose,
 }) => {
   const selectItem = (item: { value: string; label: string }) => {
     onSelectItem(item)
@@ -35,6 +42,43 @@ export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
     elementIsSelected(item.value) ? removeItem(item.value) : selectItem(item)
   }
 
+  const listItems = (
+    <>
+      {options.length > 0 && !isLoading ? (
+        options.map((item, index) => (
+          <li
+            onClick={(e) => {
+              e.stopPropagation()
+              onClickItem(item)
+            }}
+            className={clsx(
+              elementIsSelected(item.value) && styles.itemSelected,
+              styles.item
+            )}
+            key={`${item.value}-${index}`}
+          >
+            {item.label}
+          </li>
+        ))
+      ) : isLoading ? (
+        <li className={styles.spinnerLoader}>
+          <ImSpinner9 />
+        </li>
+      ) : (
+        <li className={"text-center text-sm"}>Ничего не найдено :(</li>
+      )}
+    </>
+  )
+
+  if (withModal)
+    return (
+      <Modal onClose={onModalClose} isOpened={isOpen} title={label}>
+        <ul>{listItems}</ul>
+      </Modal>
+    )
+
+  //TODO: Разобраться почему модалка не закрывается при клике на backdrop
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -44,29 +88,7 @@ export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
         >
-          {options.length > 0 && !isLoading ? (
-            options.map((item, index) => (
-              <li
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onClickItem(item)
-                }}
-                className={clsx(
-                  elementIsSelected(item.value) && styles.itemSelected,
-                  styles.item
-                )}
-                key={`${item.value}-${index}`}
-              >
-                {item.label}
-              </li>
-            ))
-          ) : isLoading ? (
-            <li className={styles.spinnerLoader}>
-              <ImSpinner9 />
-            </li>
-          ) : (
-            <li className={"text-center text-sm"}>Ничего не найдено :(</li>
-          )}
+          {listItems}
         </motion.ul>
       )}
     </AnimatePresence>

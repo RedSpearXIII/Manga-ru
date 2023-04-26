@@ -11,8 +11,9 @@ import React, {
 import { SelectDropdown } from "./select-dropdown"
 import styles from "./styles.module.pcss"
 import { FiChevronDown, MdOutlineClear } from "react-icons/all"
-import { useOnClickOutside } from "~shared/hooks"
+import { useOnClickOutside, useScreenSize } from "~shared/hooks"
 import clsx from "clsx"
+import { Breakpoints } from "~shared/types"
 
 interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   placeholder?: string
@@ -80,8 +81,12 @@ const Select: FC<SelectProps> = forwardRef(
       setInputValue("")
     }
 
+    const screenSize = useScreenSize()
+
     useOnClickOutside(selectRef, () => {
-      setDropdownIsOpened(false)
+      if (screenSize > Breakpoints.xxl) {
+        setDropdownIsOpened(false)
+      }
     })
 
     const onInputBlur = () => {
@@ -132,10 +137,13 @@ const Select: FC<SelectProps> = forwardRef(
             </div>
 
             <SelectDropdown
+              withModal={screenSize < Breakpoints.xxl}
+              setIsOpen={setDropdownIsOpened}
               currentSelectedItem={value}
               isOpen={dropdownIsOpened}
               options={optionsList}
               onSelectItem={onSelectItem}
+              label={label}
             />
           </div>
         </div>

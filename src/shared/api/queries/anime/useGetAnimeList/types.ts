@@ -15,7 +15,7 @@ export type AnimeResponse = {
   id: string
   title: string
   image: string
-  studio: {
+  studio?: {
     id: string
     studio: string
   }[]

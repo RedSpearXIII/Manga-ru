@@ -1,19 +1,19 @@
 .dropdown {
   @apply absolute w-full p-2 bg-slate-200 dark:bg-slate-800 z-10 rounded drop-shadow max-h-96 overflow-y-hidden hover:overflow-y-auto scrollbar;
+}
 
-  .item {
-    @apply px-2 py-1.5 cursor-pointer text-sm rounded transition-colors;
-    @apply hover:bg-slate-300 hover:dark:bg-slate-700;
-  }
-  .itemSelected {
-    @apply bg-slate-300 dark:bg-slate-900 text-orange-400 dark:text-orange-300;
-  }
+.item {
+  @apply px-2 py-1.5 cursor-pointer text-sm rounded transition-colors;
+  @apply hover:bg-slate-300 hover:dark:bg-slate-700;
+}
+.itemSelected {
+  @apply bg-slate-300 dark:bg-slate-900 text-orange-400 dark:text-orange-300;
+}
 
-  .spinnerLoader {
-    @apply py-3;
+.spinnerLoader {
+  @apply py-3;
 
-    svg {
-      @apply mx-auto animate-spin;
-    }
+  svg {
+    @apply mx-auto animate-spin;
   }
 }

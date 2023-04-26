@@ -12,8 +12,9 @@ import React, {
 import { MultiSelectDropdown } from "./multi-select-dropdown"
 import styles from "./styles.module.pcss"
 import { FiChevronDown, MdOutlineClear } from "react-icons/all"
-import { useOnClickOutside } from "~shared/hooks"
+import { useOnClickOutside, useScreenSize } from "~shared/hooks"
 import clsx from "clsx"
+import { Breakpoints } from "~shared/types"
 
 interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   placeholder?: string
@@ -41,6 +42,7 @@ const MultiSelect: FC<SelectProps> = forwardRef(
     }: SelectProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
+    const screenSize = useScreenSize()
     const colorClass = color === "slateDark" && styles.slateDark
 
     const selectRef = useRef(null)
@@ -121,9 +123,16 @@ const MultiSelect: FC<SelectProps> = forwardRef(
       onValuesChange(values.filter((itemValue) => itemValue !== value))
     }
 
-    useOnClickOutside(selectRef, () => {
+    const onDropdownModalClose = () => {
       setDropdownIsOpened(false)
       setInputValue("")
+    }
+
+    useOnClickOutside(selectRef, () => {
+      if (screenSize >= Breakpoints.xxl) {
+        setDropdownIsOpened(false)
+        setInputValue("")
+      }
     })
 
     return (
@@ -190,6 +199,9 @@ const MultiSelect: FC<SelectProps> = forwardRef(
             </div>
 
             <MultiSelectDropdown
+              label={label}
+              withModal={screenSize < Breakpoints.xxl}
+              onModalClose={onDropdownModalClose}
               isLoading={isLoading}
               selectedItems={selectedItems}
               isOpen={dropdownIsOpened}
