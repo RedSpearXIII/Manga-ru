@@ -1,12 +1,10 @@
-import React, { FC, RefObject, useEffect, useState } from "react"
+import React, { RefObject, useEffect, useState } from "react"
 import { useInView } from "framer-motion"
-interface InViewPlaybackControllerProps {
+type Props = {
   playerRef: RefObject<HTMLIFrameElement>
 }
 
-export const InViewPlaybackController: FC<InViewPlaybackControllerProps> = ({
-  playerRef,
-}) => {
+export const InViewPlaybackController = ({ playerRef }: Props) => {
   const playerIFrame = playerRef?.current?.contentWindow
 
   const [playerAlreadyStarted, setPlayerAlreadyStarted] = useState(false)

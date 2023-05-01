@@ -1,5 +1,4 @@
 import React, {
-  FC,
   ForwardedRef,
   forwardRef,
   HTMLAttributes,
@@ -15,7 +14,7 @@ import { useOnClickOutside, useScreenSize } from "~shared/hooks"
 import clsx from "clsx"
 import { Breakpoints } from "~shared/types"
 
-interface SelectProps extends HTMLAttributes<HTMLDivElement> {
+type Props = {
   placeholder?: string
   label?: string
   value: string
@@ -24,8 +23,8 @@ interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   searchable?: boolean
   color?: "slateDark"
   isLoading?: boolean
-}
-const Select: FC<SelectProps> = forwardRef(
+} & HTMLAttributes<HTMLDivElement>
+const Select = forwardRef(
   (
     {
       label,
@@ -37,7 +36,7 @@ const Select: FC<SelectProps> = forwardRef(
       color,
       isLoading,
       ...other
-    }: SelectProps,
+    }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const colorClass = color === "slateDark" && styles.slateDark

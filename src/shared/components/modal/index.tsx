@@ -1,18 +1,18 @@
-import React, { FC, ReactNode, useEffect } from "react"
+import React, { ReactNode, useEffect } from "react"
 import { Portal } from "~shared/components"
 import styles from "./styles.module.pcss"
 import { AnimatePresence, motion } from "framer-motion"
 import { BiMinus } from "react-icons/all"
 import { dropIn, modalDropIn } from "./variants"
 
-interface ModalProps {
+type Props = {
   isOpened: boolean
   onClose: () => void
   children: ReactNode
   title?: string
 }
 
-const Modal: FC<ModalProps> = ({ children, onClose, isOpened, title }) => {
+const Modal = ({ children, onClose, isOpened, title }: Props) => {
   useEffect(() => {
     document.body.style.overflowY = isOpened ? "hidden" : "auto"
   }, [isOpened])

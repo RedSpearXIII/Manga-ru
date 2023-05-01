@@ -1,4 +1,4 @@
-import React, { FC, useRef } from "react"
+import React, { useRef } from "react"
 import styles from "./styles.module.pcss"
 import { getPlayerLinkFromParams } from "../lib"
 import { PlayerLighting } from "~features/player/player-lighting"
@@ -8,7 +8,7 @@ interface PlayerProps {
   playerLink: string
 }
 
-export const Player: FC<PlayerProps> = ({ playerLink }) => {
+export const Player = ({ playerLink }: PlayerProps) => {
   const playerRef = useRef(null)
 
   const playerLinkWithSettings = getPlayerLinkFromParams({

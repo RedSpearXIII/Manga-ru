@@ -1,5 +1,4 @@
 import React, {
-  FC,
   ForwardedRef,
   forwardRef,
   HTMLAttributes,
@@ -27,7 +26,7 @@ interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   isLoading?: boolean
 }
 
-const MultiSelect: FC<SelectProps> = forwardRef(
+const MultiSelect = forwardRef(
   (
     {
       label,

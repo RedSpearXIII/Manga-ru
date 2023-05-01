@@ -1,4 +1,4 @@
-import React, { FC, lazy, Suspense } from "react"
+import React, { lazy, Suspense } from "react"
 import { MediaCard } from "~entities/media"
 import { useHover, useScreenSize } from "~shared/hooks"
 import { AnimeResponse } from "~shared/api"
@@ -10,11 +10,11 @@ const RightPanel = lazy(() =>
   import("./right-panel").then((module) => ({ default: module.RightPanel }))
 )
 
-export interface AnimeCardProps {
+type Props = {
   anime: AnimeResponse
 }
 
-export const AnimeCard: FC<AnimeCardProps> = ({ anime }) => {
+export const AnimeCard = ({ anime }: Props) => {
   const [isHover, hoveredProps] = useHover(80)
   const cardAccentColorsStyles = getMediaAccentColorStyles(
     anime.accentColor || "#FFFFFF"

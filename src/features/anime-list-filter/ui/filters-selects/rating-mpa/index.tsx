@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 import { Select } from "~shared/components"
 import { AnimeRatingMpa } from "~shared/api"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
@@ -12,11 +12,11 @@ const options = [
   { value: "G", label: "G" },
 ]
 
-interface RatingMpaProps {
+type Props = {
   inExtraFilter?: boolean
 }
 
-export const RatingMpa: FC<RatingMpaProps> = ({ inExtraFilter }) => {
+export const RatingMpa = ({ inExtraFilter }: Props) => {
   const { ratingMpa, setRatingMpa } = useAnimeListFilterStore(
     (state) => state,
     shallow

@@ -1,11 +1,11 @@
-import React, { FC, HTMLAttributes, ReactNode } from "react"
+import React, { HTMLAttributes, ReactNode } from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 
-interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
+type Props = {
   children: ReactNode
-}
-const Badge: FC<BadgeProps> = ({ children, ...other }) => {
+} & HTMLAttributes<HTMLDivElement>
+const Badge = ({ children, ...other }: Props) => {
   return (
     <div {...other} className={clsx(styles.badge, other.className)}>
       {children}

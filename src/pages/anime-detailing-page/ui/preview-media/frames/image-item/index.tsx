@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 import styles from "./styles.module.pcss"
 import loaderStyles from "../../styles.module.pcss"
 import { useHover, useImageLoading } from "~shared/hooks"
@@ -6,12 +6,12 @@ import { HiMagnifyingGlass } from "react-icons/all"
 import { AnimatePresence, motion } from "framer-motion"
 import clsx from "clsx"
 
-interface ImageItemProps {
+type Props = {
   src: string
   onClick: () => void
 }
 
-export const ImageItem: FC<ImageItemProps> = ({ src, onClick }) => {
+export const ImageItem = ({ src, onClick }: Props) => {
   const [isHover, hoveredProps] = useHover()
 
   const { onLoad, isLoaded } = useImageLoading()

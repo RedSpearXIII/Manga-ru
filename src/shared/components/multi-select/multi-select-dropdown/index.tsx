@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion"
-import React, { FC } from "react"
+import React from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 import { ImSpinner9 } from "react-icons/all"
 import { Modal } from "~shared/components"
 
-interface MultiSelectDropdownProps {
+type Props = {
   options: { value: string; label: string }[]
   onSelectItem: (item: { value: string; label: string }) => void
   onRemoveItem: (value: string) => void
@@ -17,7 +17,7 @@ interface MultiSelectDropdownProps {
   withModal: boolean
 }
 
-export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
+export const MultiSelectDropdown = ({
   options,
   onSelectItem,
   isOpen,
@@ -27,7 +27,7 @@ export const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
   withModal,
   label,
   onModalClose,
-}) => {
+}: Props) => {
   const selectItem = (item: { value: string; label: string }) => {
     onSelectItem(item)
   }

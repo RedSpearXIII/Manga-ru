@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 import { Select } from "~shared/components"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
@@ -15,11 +15,11 @@ const options = [
   },
 ]
 
-interface StatusProps {
+type Props = {
   inExtraFilter?: boolean
 }
 
-export const Status: FC<StatusProps> = ({ inExtraFilter }) => {
+export const Status = ({ inExtraFilter }: Props) => {
   const { status, setStatus } = useAnimeListFilterStore(
     (state) => state,
     shallow

@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion"
-import React, { Dispatch, FC, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction } from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 import { ImSpinner9 } from "react-icons/all"
 import { Modal } from "~shared/components"
 
-interface SelectDropdownProps {
+type Props = {
   options: { value: string; label: string }[]
   onSelectItem: (value: string) => void
   isOpen: boolean
@@ -16,7 +16,7 @@ interface SelectDropdownProps {
   withModal: boolean
 }
 
-export const SelectDropdown: FC<SelectDropdownProps> = ({
+export const SelectDropdown = ({
   options,
   onSelectItem,
   isOpen,
@@ -25,7 +25,7 @@ export const SelectDropdown: FC<SelectDropdownProps> = ({
   setIsOpen,
   label,
   withModal,
-}) => {
+}: Props) => {
   const selectItem = (value: string) => {
     onSelectItem(value)
   }

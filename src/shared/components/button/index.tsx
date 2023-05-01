@@ -1,15 +1,15 @@
-import React, { ButtonHTMLAttributes, FC, ReactNode } from "react"
+import React, { ButtonHTMLAttributes, ReactNode } from "react"
 import { motion } from "framer-motion"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 import { ImSpinner9 } from "react-icons/all"
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type Props = {
   children: ReactNode
   isLoading?: boolean
-}
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
-const Button: FC<ButtonProps> = ({ children, isLoading, ...other }) => {
+const Button = ({ children, isLoading, ...other }: Props) => {
   return (
     <motion.button
       {...(other as any)}

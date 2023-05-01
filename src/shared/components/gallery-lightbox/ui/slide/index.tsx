@@ -1,20 +1,16 @@
 import { motion } from "framer-motion"
-import React, { FC, useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 import { getUserDeviceType } from "~shared/lib/user"
 
-interface SlideProps {
+type Props = {
   images: string[]
   currentImageIndex: number
   onClose: () => void
 }
 
-export const Slide: FC<SlideProps> = ({
-  images,
-  currentImageIndex,
-  onClose,
-}) => {
+export const Slide = ({ images, currentImageIndex, onClose }: Props) => {
   const userDevice = getUserDeviceType()
 
   const [isZoomed, setIsZoomed] = useState(false)

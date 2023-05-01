@@ -1,14 +1,14 @@
-import React, { FC } from "react"
+import React from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 
-interface InfoItemProps {
+type Props = {
   title: string
   value: string | number
   color: string
 }
 
-export const InfoItem: FC<InfoItemProps> = ({ title, value, color }) => {
+export const InfoItem = ({ title, value, color }: Props) => {
   return (
     <div className={styles.item}>
       <p className={styles.title}>{title}</p>

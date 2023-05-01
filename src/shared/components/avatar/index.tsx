@@ -1,11 +1,11 @@
-import React, { FC } from "react"
+import React from "react"
 import styles from "./styles.module.pcss"
 
-interface AvatarProps {
+type Props = {
   url?: string
 }
 
-const Avatar: FC<AvatarProps> = ({ url }) => {
+const Avatar = ({ url }: Props) => {
   return (
     <div className={styles.avatar}>
       <img alt={"user avatar"} src={url ? url : "/anifox-logo.png"} />

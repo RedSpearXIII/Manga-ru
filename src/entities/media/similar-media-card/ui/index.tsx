@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 
@@ -8,7 +8,7 @@ type Props = {
   image: string
 }
 
-export const SimilarMediaCard: FC<Props> = ({ image, title }) => {
+export const SimilarMediaCard = ({ image, title }: Props) => {
   return (
     <div className={styles.card}>
       <img className={styles.image} src={image} alt={"manga-image"} />

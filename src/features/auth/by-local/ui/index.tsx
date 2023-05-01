@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 import styles from "./styles.module.pcss"
 import { Button, Input } from "~shared/components"
 import { useForm } from "react-hook-form"
@@ -20,12 +20,11 @@ export type AuthByLocalFields = {
   repeatPassword: string
 }
 
-interface AuthByLocalProps {
+type Props = {
   onSuccess?: () => void
-  onError?: (message: string) => void
 }
 
-export const AuthByLocal: FC<AuthByLocalProps> = () => {
+export const AuthByLocal = ({ onSuccess }: Props) => {
   const { authByLocal, authError, isLoading } = useAuthByLocalStore()
   const AuthByLocalSchema = getValidationSchema()
 
@@ -38,11 +37,10 @@ export const AuthByLocal: FC<AuthByLocalProps> = () => {
   })
 
   const onSubmit = async (fields: AuthByLocalFields) => {
-    await authByLocal({
-      email: fields.email,
-      password: fields.password,
-      username: fields.username,
-    })
+    try {
+      await authByLocal(fields)
+      if (onSuccess) onSuccess()
+    } catch (e) {}
   }
 
   return (

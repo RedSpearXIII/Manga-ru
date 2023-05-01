@@ -1,14 +1,14 @@
-import React, { FC } from "react"
+import React from "react"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
 import { MultiSelect } from "~shared/components"
 import { useGetAnimeTranslation } from "~shared/api"
 
-interface TranslationProps {
+type Props = {
   inExtraFilter?: boolean
 }
 
-export const Translations: FC<TranslationProps> = ({ inExtraFilter }) => {
+export const Translations = ({ inExtraFilter }: Props) => {
   const { data, isLoading } = useGetAnimeTranslation()
 
   const { translations, setTranslations } = useAnimeListFilterStore(

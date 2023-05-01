@@ -1,13 +1,13 @@
-import React, { FC } from "react"
+import React from "react"
 import { MultiSelect } from "~shared/components"
 import { useGetAnimeYears } from "~shared/api/queries/anime/useGetAnimeYears"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 
-interface YearsProps {
+interface Props {
   inExtraFilter?: boolean
 }
 
-export const Years: FC<YearsProps> = ({ inExtraFilter }) => {
+export const Years = ({ inExtraFilter }: Props) => {
   const { years, setYears } = useAnimeListFilterStore()
 
   const onChange = (values: string[]) => {

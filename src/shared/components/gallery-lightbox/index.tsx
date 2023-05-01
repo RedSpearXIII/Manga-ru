@@ -1,20 +1,16 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Portal } from "~shared/components"
 import styles from "./styles.module.pcss"
 import { BiChevronLeft, BiChevronRight } from "react-icons/all"
 import { Slide } from "./ui"
 
-interface GalleryLightBoxProps {
+type Props = {
   isOpen: { startFrom?: number; opened: boolean }
   onClose: () => void
   images: string[]
 }
 
-const GalleryLightbox: FC<GalleryLightBoxProps> = ({
-  onClose,
-  isOpen,
-  images,
-}) => {
+const GalleryLightbox = ({ onClose, isOpen, images }: Props) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(
     isOpen.startFrom || 0
   )

@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 import { Select } from "~shared/components"
 import { AnimeMinimalAge } from "~shared/api"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
@@ -12,11 +12,11 @@ const options = [
   { value: "0", label: "0+" },
 ]
 
-interface MinimalAgeProps {
+type Props = {
   inExtraFilter?: boolean
 }
 
-export const MinimalAge: FC<MinimalAgeProps> = ({ inExtraFilter }) => {
+export const MinimalAge = ({ inExtraFilter }: Props) => {
   const { minimalAge, setMinimalAge } = useAnimeListFilterStore(
     (state) => state,
     shallow

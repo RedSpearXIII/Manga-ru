@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 import styles from "./styles.module.pcss"
 import { motion } from "framer-motion"
 import { AnimeResponse, AnimeSeasons, AnimeStatuses } from "~shared/api"
@@ -7,11 +7,11 @@ import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
 import { translateMediaSeason } from "~entities/media"
 
-interface RightPanelProps {
+type Props = {
   anime: AnimeResponse
 }
 
-export const RightPanel: FC<RightPanelProps> = ({ anime }) => {
+export const RightPanel = ({ anime }: Props) => {
   const { setRatingMpa, addGenre, setStatus, setSeason } =
     useAnimeListFilterStore((state) => state, shallow)
   const season = translateMediaSeason(anime.season)

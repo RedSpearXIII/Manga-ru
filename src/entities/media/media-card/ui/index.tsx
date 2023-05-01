@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import { useImageLoading } from "~shared/hooks"
@@ -11,7 +11,7 @@ interface MediaCardProps {
   type: "anime" | "manga"
 }
 
-export const MediaCard: FC<MediaCardProps> = ({ media, type }) => {
+export const MediaCard = ({ media, type }: MediaCardProps) => {
   const { isLoaded, isError, ...props } = useImageLoading()
 
   return (

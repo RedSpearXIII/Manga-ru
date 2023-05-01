@@ -1,10 +1,10 @@
-import React, { FC, ReactNode } from "react"
+import React, { ReactNode } from "react"
 import { createPortal } from "react-dom"
 
-interface PortalProps {
+type Props = {
   children: ReactNode
 }
-const Portal: FC<PortalProps> = ({ children }) => {
+const Portal = ({ children }: Props) => {
   return <div>{createPortal(children, document.body)}</div>
 }
 

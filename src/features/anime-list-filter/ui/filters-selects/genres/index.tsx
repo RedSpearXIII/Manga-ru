@@ -1,14 +1,14 @@
-import React, { FC } from "react"
+import React from "react"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
 import { MultiSelect } from "~shared/components"
 import { useGetAnimeGenres } from "~shared/api"
 
-interface GenresProps {
+type Props = {
   inExtraFilter?: boolean
 }
 
-export const Genres: FC<GenresProps> = ({ inExtraFilter }) => {
+export const Genres = ({ inExtraFilter }: Props) => {
   const { genres, setGenres } = useAnimeListFilterStore(
     (state) => state,
     shallow
