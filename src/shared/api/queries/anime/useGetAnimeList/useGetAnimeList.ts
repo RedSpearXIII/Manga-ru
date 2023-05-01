@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "react-query"
-import { createArrayQueryParam, publicApi } from "~shared/api"
+import { createArrayQueryParam, publicHttp } from "~shared/api"
 import { AnimeResponse, GetAnimeParams } from "./types"
 
 export const useGetAnimeList = ({
@@ -44,7 +44,7 @@ export const useGetAnimeList = ({
 
       const {
         data: { data },
-      } = await publicApi.get(
+      } = await publicHttp.get(
         `anime/${createArrayQueryParam([
           { paramName: "genres", array: genres },
           { paramName: "year", array: years },

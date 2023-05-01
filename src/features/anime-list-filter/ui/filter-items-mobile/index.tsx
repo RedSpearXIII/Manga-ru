@@ -11,7 +11,7 @@ import {
   Years,
 } from "../filters-selects"
 import { useExtraFilterStore } from "~features/anime-list-filter"
-import { getUserDeviceType } from "~shared/lib"
+import { getUserDeviceType } from "~shared/lib/user"
 import clsx from "clsx"
 
 const FilterItemsMobile = () => {

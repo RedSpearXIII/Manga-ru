@@ -21,7 +21,7 @@ const RightHoldersPage = () => {
   return (
     <div className={styles.content}>
       <div className={styles.copyrights}>
-        <h4>Для правооблодателей</h4>
+        <h4>Для правообладателей</h4>
       </div>
       <div className={styles.box}>
         <h6>

@@ -1,3 +1,16 @@
 .button {
+  @apply bg-orange-400 w-full flex justify-center items-center gap-3 transition-colors;
+}
+
+.buttonDisabled {
+  @apply backdrop-blur-sm opacity-80;
+}
+
+.loader {
+  @apply animate-spin left-3;
+}
+
+.button[type="submit"] {
+  @apply appearance-none;
   @apply bg-orange-400 w-full;
 }

@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import { publicApi } from "~shared/api"
+import { publicHttp } from "~shared/api"
 
 type AnimeTrailer = {
   url: string
@@ -13,7 +13,7 @@ type AnimeTrailer = {
 export const useGetAnimeTrailers = (animeId: string) =>
   useQuery<AnimeTrailer[]>(`getAnimeTrailers-${animeId}`, async () => {
     try {
-      const { data } = await publicApi.get(`anime/${animeId}/media`)
+      const { data } = await publicHttp.get(`anime/${animeId}/media`)
 
       return data.data
     } catch (e) {

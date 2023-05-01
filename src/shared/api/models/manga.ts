@@ -1,4 +1,4 @@
-export interface MangaModel {
+export interface Manga {
   id: string
   title: string
   image: string

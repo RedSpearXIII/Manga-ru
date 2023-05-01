@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import { publicApi } from "~shared/api"
+import { publicHttp } from "~shared/api"
 import { getAnimeEpisodesParams, getAnimeEpisodesResponse } from "./types"
 
 export const useGetAnimeEpisodes = ({
@@ -10,7 +10,7 @@ export const useGetAnimeEpisodes = ({
     `getAnimeEpisodes-${animeId}`,
     async () => {
       try {
-        const { data } = await publicApi.get(
+        const { data } = await publicHttp.get(
           `anime/${animeId}/media?translation=${translationId}`
         )
 

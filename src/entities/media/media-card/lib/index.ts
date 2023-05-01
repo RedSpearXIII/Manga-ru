@@ -1,4 +1,4 @@
-export * from "~shared/lib/hexToHue"
+export * from "~shared/lib/colors/hexToHue"
 export * from "./getMediaAccentColorStyles"
 export * from "./translateMediaSeason"
 export * from "./translateMediaStatus"

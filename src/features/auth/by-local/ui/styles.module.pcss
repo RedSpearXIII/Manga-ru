@@ -1,0 +1,22 @@
+.form {
+  @apply block bg-slate-100 dark:bg-gray-900 shadow-2xl p-8 rounded-xl flex flex-col gap-3;
+  @apply max-w-md w-full mx-auto;
+
+  .submitBtn {
+    @apply mt-3;
+  }
+
+  .fieldErrorMsg {
+    @apply text-xs text-red-500;
+  }
+
+  .authErrorMsg {
+    @apply bg-red-400/30 px-3 py-2 rounded mt-3 flex flex-nowrap items-center gap-2;
+    .icon {
+      @apply text-red-500 text-lg;
+    }
+    p {
+      @apply text-red-500 text-sm;
+    }
+  }
+}

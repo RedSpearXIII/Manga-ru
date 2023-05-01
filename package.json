@@ -9,22 +9,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.11",
+    "@hookform/resolvers": "^3.1.0",
     "@types/node": "^18.15.3",
     "axios": "^1.3.4",
     "clsx": "^1.2.1",
     "compose-function": "^3.0.3",
     "date-fns": "^2.29.3",
     "framer-motion": "^10.2.4",
-    "graphql": "^16.6.0",
     "immer": "^9.0.19",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.9.0",
     "string-hash": "^1.1.3",
+    "yup": "^1.1.1",
     "zustand": "^4.3.7"
   },
   "devDependencies": {

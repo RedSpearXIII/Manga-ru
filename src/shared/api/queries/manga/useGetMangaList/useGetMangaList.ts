@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "react-query"
-import { publicApi } from "~shared/api"
+import { publicHttp } from "~shared/api"
 
 export type MangaResponse = {
   id: string
@@ -24,7 +24,7 @@ export const useGetMangaList = ({ pageSize, searchQuery }: GetMangaParams) =>
 
       const {
         data: { data },
-      } = await publicApi.get("manga/", {
+      } = await publicHttp.get("manga/", {
         params,
       })
       return data

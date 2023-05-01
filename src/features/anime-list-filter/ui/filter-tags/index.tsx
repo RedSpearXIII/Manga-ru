@@ -6,7 +6,7 @@ import { Badge } from "~shared/components"
 import { useHover } from "~shared/hooks"
 import { AnimatePresence, motion } from "framer-motion"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
-import { getUserDeviceType } from "~shared/lib"
+import { getUserDeviceType } from "~shared/lib/user"
 import { translateAnimeType } from "~entities/media"
 
 export const FilterTags = () => {

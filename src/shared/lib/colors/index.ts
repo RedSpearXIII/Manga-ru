@@ -1,4 +1,3 @@
-export * from "./getUserDeviceType"
 export * from "./hexToHSL"
 export * from "./hexToHue"
 export * from "./hexToRgb"

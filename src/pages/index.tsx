@@ -28,9 +28,9 @@ const Routing = () => {
         </Route>
         <Route path="*" element={"NOT FOUND"} />
         <Route path={"/right-holders"} element={<RightHoldersPage />} />
+        <Route path={"/login"} element={<LoginPage />} />
+        <Route path={"/signup"} element={<SignupPage />} />
       </Route>
-      <Route path={"/login"} element={<LoginPage />} />
-      <Route path={"/signup"} element={<SignupPage />} />
     </Routes>
   )
 }

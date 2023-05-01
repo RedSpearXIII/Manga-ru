@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import { publicApi } from "~shared/api"
+import { publicHttp } from "~shared/api"
 
 interface Params {
   mangaId: string
@@ -18,7 +18,7 @@ export const useGetMangaSimilar = ({ mangaId }: Params) =>
       try {
         const {
           data: { data },
-        } = await publicApi.get(`manga/${mangaId}/similar`)
+        } = await publicHttp.get(`manga/${mangaId}/similar`)
 
         return data
       } catch (e) {

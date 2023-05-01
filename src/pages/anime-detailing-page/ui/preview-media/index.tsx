@@ -2,7 +2,7 @@ import React from "react"
 import styles from "./styles.module.pcss"
 import { Frames } from "./frames"
 import { Trailers } from "./trailers"
-import { getUserDeviceType } from "~shared/lib"
+import { getUserDeviceType } from "~shared/lib/user"
 import clsx from "clsx"
 
 export const PreviewMedia = () => {

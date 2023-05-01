@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import React, { FC, useEffect, useRef, useState } from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
-import { getUserDeviceType } from "~shared/lib"
+import { getUserDeviceType } from "~shared/lib/user"
 
 interface SlideProps {
   images: string[]

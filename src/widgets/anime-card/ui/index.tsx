@@ -3,7 +3,7 @@ import { MediaCard } from "~entities/media"
 import { useHover, useScreenSize } from "~shared/hooks"
 import { AnimeResponse } from "~shared/api"
 import { getMediaAccentColorStyles } from "~entities/media/media-card/lib"
-import { getUserDeviceType } from "~shared/lib"
+import { getUserDeviceType } from "~shared/lib/user"
 import { Breakpoints } from "~shared/types"
 
 const RightPanel = lazy(() =>

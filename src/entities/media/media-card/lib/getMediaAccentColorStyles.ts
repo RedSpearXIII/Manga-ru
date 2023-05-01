@@ -1,5 +1,5 @@
 import React from "react"
-import { hexToHSL, hexToHue, hexToRgb, hslToHex } from "~shared/lib"
+import { hexToHSL, hexToHue, hexToRgb, hslToHex } from "~shared/lib/colors"
 
 function getContrastColor(hex: string): string {
   // удаление символа # (если он есть)
