@@ -47,7 +47,7 @@ export const AnimeContent = () => {
 
         {data.description && (
           <div className={styles.animeContent}>
-            <h4>{data.title}</h4>
+            <h1>{data.title}</h1>
             <p className={styles.description}>
               {descriptionTruncated.truncated && !descriptionTruncated.opened
                 ? data.description.slice(0, 500) + "..."

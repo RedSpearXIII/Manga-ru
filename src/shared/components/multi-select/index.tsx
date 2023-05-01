@@ -15,7 +15,7 @@ import { useOnClickOutside, useScreenSize } from "~shared/hooks"
 import clsx from "clsx"
 import { Breakpoints } from "~shared/types"
 
-interface SelectProps extends HTMLAttributes<HTMLDivElement> {
+type Props = {
   placeholder?: string
   label?: string
   values: string[]
@@ -24,7 +24,7 @@ interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   searchable?: boolean
   color?: "slateDark"
   isLoading?: boolean
-}
+} & HTMLAttributes<HTMLDivElement>
 
 const MultiSelect = forwardRef(
   (
@@ -38,7 +38,7 @@ const MultiSelect = forwardRef(
       color,
       isLoading,
       ...other
-    }: SelectProps,
+    }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const screenSize = useScreenSize()

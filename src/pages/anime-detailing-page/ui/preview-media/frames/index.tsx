@@ -38,7 +38,7 @@ export const Frames = () => {
 
   return (
     <div>
-      <h6 className={"whitespace-nowrap"}>Кадры из аниме</h6>
+      <h3 className={"whitespace-nowrap"}>Кадры из аниме</h3>
       <div className={styles.gallery}>{images}</div>
 
       {!isLoading && (

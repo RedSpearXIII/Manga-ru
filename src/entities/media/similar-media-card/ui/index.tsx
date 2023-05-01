@@ -14,7 +14,7 @@ export const SimilarMediaCard = ({ image, title }: Props) => {
       <img className={styles.image} src={image} alt={"manga-image"} />
       <div className={styles.content}>
         <div className={styles.titleName}>
-          <h6>{title}</h6>
+          <h3>{title}</h3>
           <p>Lorem ipsum dolor sit</p>
         </div>
       </div>

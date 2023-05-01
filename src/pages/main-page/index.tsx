@@ -1,10 +1,8 @@
 import React from "react"
-import { SiteFeatures, SitePresentationFigures } from "~shared/components"
 const MainPage = () => {
   return (
     <div>
-      <SiteFeatures />
-      <SitePresentationFigures />
+      <h1 className={"text-center"}>Главная страница</h1>
     </div>
   )
 }

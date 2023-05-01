@@ -5,9 +5,7 @@ import Input from "./input"
 import Portal from "./portal"
 import Select from "./select"
 import MultiSelect from "./multi-select"
-import SiteFeatures from "./site-features"
 import SiteLogo from "./site-logo"
-import SitePresentationFigures from "./site-presentation-figures"
 import SuspenseLoader from "./suspense-loader"
 import GalleryLightbox from "./gallery-lightbox"
 import Modal from "./modal"
@@ -15,10 +13,8 @@ import Modal from "./modal"
 export {
   Avatar,
   Input,
-  SitePresentationFigures,
   SiteLogo,
   Portal,
-  SiteFeatures,
   Button,
   Badge,
   Select,

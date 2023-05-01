@@ -7,11 +7,11 @@ export const AdditionalInfo = () => {
   return (
     <div className={styles.additionalInfoContainer}>
       <div className={styles.infoBox}>
-        <h6>Дополнительная информация</h6>
+        <h3>Дополнительная информация</h3>
         <Characteristics />
       </div>
       <div className={styles.infoBox}>
-        <h6>В списках у людей</h6>
+        <h3>В списках у людей</h3>
         <StatusDistribution />
       </div>
     </div>

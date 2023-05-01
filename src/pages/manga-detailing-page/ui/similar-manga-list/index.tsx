@@ -28,7 +28,7 @@ export const SimilarMangaList = () => {
 
   return (
     <div className={"container mx-auto mt-6"}>
-      <h5>Похожие тайтлы</h5>
+      <h2>Похожие тайтлы</h2>
       <div className={clsx(!isShowAll && styles.listClosed)}>
         <div className={styles.list}>
           {isLoading ? (

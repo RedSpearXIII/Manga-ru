@@ -46,7 +46,7 @@ export const AuthByLocal = ({ onSuccess }: Props) => {
   return (
     <div>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h5>Регистрация</h5>
+        <h3>Регистрация</h3>
         <div>
           <Input
             type={"email"}

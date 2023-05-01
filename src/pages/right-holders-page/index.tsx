@@ -21,14 +21,14 @@ const RightHoldersPage = () => {
   return (
     <div className={styles.content}>
       <div className={styles.copyrights}>
-        <h4>Для правообладателей</h4>
+        <h1>Для правообладателей</h1>
       </div>
       <div className={styles.box}>
-        <h6>
+        <h3>
           Деятельность сайта <Link to={"/"}>anifox.club</Link> осуществляется в
           соответствии с законодательством Российской Федерации в области защиты
           информации и авторских прав на контент.
-        </h6>
+        </h3>
         <ul className={styles.list}>
           {policyContent.map(({ text }) => (
             <li className={styles.listItem}>{text}</li>
@@ -37,7 +37,7 @@ const RightHoldersPage = () => {
       </div>
 
       <div className={styles.box}>
-        <h6>
+        <h3>
           Если вы обнаружили материал, представленный на нашем сайте, который
           нарушает ваши авторские права, или же дискредитирует Вашу компанию,
           предоставляя неверную или искаженную информацию, пожалуйста свяжитесь
@@ -46,7 +46,7 @@ const RightHoldersPage = () => {
             abuse@anifox.club{" "}
           </Link>
           для решения этого вопроса.
-        </h6>
+        </h3>
         <ul className={styles.list}>
           <p>
             Для этого необходимо отправить e-mail с вашего корпоративного
@@ -70,7 +70,7 @@ const RightHoldersPage = () => {
       </div>
 
       <div className={styles.linksContainer}>
-        <h6>Разрешения для встраивания видео:</h6>
+        <h3>Разрешения для встраивания видео:</h3>
 
         <div className={styles.links}>
           <Link

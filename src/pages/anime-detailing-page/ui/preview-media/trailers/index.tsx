@@ -15,7 +15,7 @@ export const Trailers = () => {
 
   return (
     <div>
-      <h6>Тизер</h6>
+      <h3>Тизер</h3>
       {isLoading ? (
         <div className={loaderStyles.mediaLoader} />
       ) : (
@@ -23,7 +23,7 @@ export const Trailers = () => {
           className={styles.iframe}
           width="227"
           height="128"
-          src={data[0].playerUrl}
+          src={data[0].playerUrl.replace("http", "https")}
         />
       )}
     </div>

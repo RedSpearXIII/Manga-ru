@@ -36,10 +36,10 @@ export const MangaContent = () => {
           {isLoading ? (
             <div className={styles.titleNameLoader} />
           ) : (
-            <h4>{data.title}</h4>
+            <h1>{data.title}</h1>
           )}
           <div className={styles.titleDescription}>
-            <h6>Описание</h6>
+            <h3>Описание</h3>
             {isLoading ? (
               <div className={styles.descriptionLoader} />
             ) : (
