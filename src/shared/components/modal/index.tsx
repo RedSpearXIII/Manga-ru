@@ -18,7 +18,7 @@ const Modal = ({ children, onClose, isOpened, title }: Props) => {
   }, [isOpened])
 
   return (
-    <AnimatePresence initial={false}>
+    <AnimatePresence>
       {isOpened && (
         <Portal>
           <motion.div
@@ -27,26 +27,26 @@ const Modal = ({ children, onClose, isOpened, title }: Props) => {
             exit="exit"
             variants={dropIn}
             className={styles.backdrop}
-            onClick={onClose}
+            onClick={(e) => {
+              e.stopPropagation()
+              onClose()
+            }}
+          />
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={modalDropIn}
+            className={styles.modal}
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              onClick={(e) => {
-                e.stopPropagation()
-              }}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={modalDropIn}
-              className={styles.modal}
-            >
-              <div className={styles.topBar}>
-                <p>{title}</p>
-                <div className={styles.closeBtn} onClick={onClose}>
-                  <BiMinus />
-                </div>
+            <div className={styles.topBar}>
+              <p>{title}</p>
+              <div className={styles.closeBtn} onClick={onClose}>
+                <BiMinus />
               </div>
-              <div className={styles.content}>{children}</div>
-            </motion.div>
+            </div>
+            <div className={styles.content}>{children}</div>
           </motion.div>
         </Portal>
       )}

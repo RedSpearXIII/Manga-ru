@@ -16,6 +16,7 @@ export const modalDropIn: Variants = {
   hidden: {
     opacity: 0,
     scale: 0.8,
+    x: "-50%",
   },
   visible: {
     opacity: 1,
