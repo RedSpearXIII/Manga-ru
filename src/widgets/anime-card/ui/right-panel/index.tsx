@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styles from "./styles.module.pcss"
 import { motion } from "framer-motion"
 import { AnimeResponse, AnimeSeasons, AnimeStatuses } from "~shared/api"
@@ -6,12 +6,27 @@ import { Badge } from "~shared/components"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 import { shallow } from "zustand/shallow"
 import { translateMediaSeason } from "~entities/media"
+import { variants } from "./variants"
+import clsx from "clsx"
 
 type Props = {
   anime: AnimeResponse
 }
 
 export const RightPanel = ({ anime }: Props) => {
+  const panelRef = useRef<HTMLDivElement>(null)
+  const [isLeftPosition, setIsLeftPosition] = useState(false)
+
+  useEffect(() => {
+    const bodyRight = document.body.getBoundingClientRect().right
+    const elementRight = panelRef?.current?.getBoundingClientRect().right
+    if (elementRight) {
+      if (elementRight > bodyRight) {
+        setIsLeftPosition(true)
+      }
+    }
+  }, [panelRef])
+
   const { setRatingMpa, addGenre, setStatus, setSeason } =
     useAnimeListFilterStore((state) => state, shallow)
   const season = translateMediaSeason(anime.season)
@@ -31,9 +46,14 @@ export const RightPanel = ({ anime }: Props) => {
 
   return (
     <motion.div
-      className={styles.rightPanel}
-      initial={{ scale: 0.5, opacity: 0, left: "105%" }}
-      animate={{ scale: 1, opacity: 1, left: "105%" }}
+      className={clsx(
+        styles.rightPanel,
+        isLeftPosition && styles.leftPanelPosition
+      )}
+      initial={"initial"}
+      animate={"animate"}
+      ref={panelRef}
+      variants={variants}
     >
       <div className={styles.topInfo}>
         <p className={styles.season} onClick={() => onSetSeason(anime.season)}>

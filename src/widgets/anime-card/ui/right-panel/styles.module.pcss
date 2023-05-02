@@ -1,5 +1,5 @@
 .rightPanel {
-  @apply dark:bg-slate-800 bg-slate-200 drop-shadow backdrop-opacity-30 px-4 py-2 w-64 absolute rounded-md left-full top-2 z-10 overflow-hidden;
+  @apply dark:bg-slate-800 bg-slate-200 drop-shadow backdrop-opacity-30 left-[105%] px-4 py-2 w-64 absolute rounded-md top-2 z-10 overflow-hidden;
 
   .season {
     @apply cursor-pointer hover:underline;
@@ -37,4 +37,9 @@
       @apply mx-0.5 mb-1 py-0.5 grow text-center text-xs bg-[var(--card-background-color)] text-[var(--card-background-text-color)] px-2 rounded whitespace-nowrap opacity-90 hover:opacity-100 cursor-pointer;
     }
   }
+}
+
+.leftPanelPosition {
+  @apply left-0;
+  transform: translateX(-104%) !important;
 }
