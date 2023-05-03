@@ -1,5 +1,5 @@
 export * from "./useGetAnimeList"
-export * from "./useGetAnimeById"
+export * from "./useGetAnimeByUrl"
 export * from "./useGetAnimeGenres"
 export * from "./useGetAnimeTranslation"
 export * from "./useGetAnimeEpisodes"

@@ -29,10 +29,17 @@ export const useAuthByLocalStore = create<Store>((setState) => ({
   authByLocal: async (fields) => {
     try {
       setState({ authError: null, isLoading: true })
-      const { data } = await publicHttp.post("/auth/register", fields)
+      const response = await publicHttp.post("/auth/register", fields)
+      response.headers["set-cookie"]?.forEach((cookie) => {
+        document.cookie = cookie
+      })
       setState({ isSuccess: true })
     } catch (e) {
-      setState({ authError: "Ошибка при авторизации" })
+      if (e instanceof Error) {
+        // @ts-ignore
+        const error = e.response.data.error
+        setState({ authError: error })
+      }
     } finally {
       setState({ isLoading: false })
     }

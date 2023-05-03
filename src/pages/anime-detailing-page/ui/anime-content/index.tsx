@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import styles from "./styles.module.pcss"
 import { useParams } from "react-router-dom"
-import { useGetAnimeById } from "~shared/api"
+import { useGetAnimeByUrl } from "~shared/api"
 import clsx from "clsx"
 import { Badge } from "~shared/components"
 
 export const AnimeContent = () => {
-  const { animeId } = useParams()
-  const { data, isLoading } = useGetAnimeById({ animeId: animeId! })
+  const { animeUrl } = useParams()
+  const { data, isLoading } = useGetAnimeByUrl({ animeUrl: animeUrl! })
 
   const [descriptionTruncated, setDescriptionTruncated] = useState({
     truncated: false,

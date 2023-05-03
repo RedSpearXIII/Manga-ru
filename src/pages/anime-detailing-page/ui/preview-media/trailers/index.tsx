@@ -5,9 +5,9 @@ import styles from "./styles.module.pcss"
 import loaderStyles from "../styles.module.pcss"
 
 export const Trailers = () => {
-  const { animeId } = useParams()
+  const { animeUrl } = useParams()
 
-  const { data, isLoading, isError } = useGetAnimeTrailers(animeId!)
+  const { data, isLoading, isError } = useGetAnimeTrailers(animeUrl!)
 
   if (isError) return null
   if (!isLoading && !data) return null

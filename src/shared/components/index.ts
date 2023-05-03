@@ -5,9 +5,9 @@ import Input from "./input"
 import Portal from "./portal"
 import Select from "./select"
 import MultiSelect from "./multi-select"
+import LightboxGallery from "./lightbox-gallery"
 import SiteLogo from "./site-logo"
 import SuspenseLoader from "./suspense-loader"
-import GalleryLightbox from "./gallery-lightbox"
 import Modal from "./modal"
 
 export {
@@ -20,6 +20,6 @@ export {
   Select,
   MultiSelect,
   SuspenseLoader,
-  GalleryLightbox,
   Modal,
+  LightboxGallery,
 }

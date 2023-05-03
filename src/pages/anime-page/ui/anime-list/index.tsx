@@ -59,7 +59,7 @@ export const AnimeList = () => {
       ? data.pages.map((group, index) => (
           <Fragment key={index}>
             {group.map((anime) => (
-              <AnimeCard anime={anime} key={anime.id} />
+              <AnimeCard anime={anime} key={anime.url} />
             ))}
           </Fragment>
         ))

@@ -3,15 +3,15 @@ import { publicHttp } from "~shared/api"
 import { getAnimeEpisodesParams, getAnimeEpisodesResponse } from "./types"
 
 export const useGetAnimeEpisodes = ({
-  animeId,
+  animeUrl,
   translationId,
 }: getAnimeEpisodesParams) =>
   useQuery<getAnimeEpisodesResponse>(
-    `getAnimeEpisodes-${animeId}`,
+    `getAnimeEpisodes-${animeUrl}`,
     async () => {
       try {
         const { data } = await publicHttp.get(
-          `anime/${animeId}/media?translation=${translationId}`
+          `anime/${animeUrl}/media?translation=${translationId}`
         )
 
         return data.data

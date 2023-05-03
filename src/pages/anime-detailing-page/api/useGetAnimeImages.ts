@@ -1,10 +1,10 @@
 import { useQuery } from "react-query"
 import { publicHttp } from "~shared/api"
 
-export const useGetAnimeImages = (animeId: string) =>
-  useQuery<string[]>(`getAnimeImages-${animeId}`, async () => {
+export const useGetAnimeImages = (animeUrl: string) =>
+  useQuery<string[]>(`getAnimeImages-${animeUrl}`, async () => {
     try {
-      const { data } = await publicHttp.get(`anime/${animeId}/screenshots`)
+      const { data } = await publicHttp.get(`anime/${animeUrl}/screenshots`)
 
       return data.data
     } catch (e) {

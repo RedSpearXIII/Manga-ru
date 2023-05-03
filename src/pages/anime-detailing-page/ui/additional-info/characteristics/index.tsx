@@ -5,24 +5,29 @@ import { translateAnimeType, translateMediaStatus } from "~entities/media"
 import { format, parseISO } from "date-fns"
 import { ru } from "date-fns/locale"
 import { useParams } from "react-router-dom"
-import { useGetAnimeById } from "~shared/api"
+import { useGetAnimeByUrl } from "~shared/api"
 
-const MyComponent = () => {
-  const { animeId } = useParams()
+export const Characteristics = () => {
+  const { animeUrl } = useParams()
 
-  const { data, isLoading, isSuccess } = useGetAnimeById({ animeId: animeId! })
-
+  const { data, isLoading, isSuccess } = useGetAnimeByUrl({
+    animeUrl: animeUrl!,
+  })
   if (isLoading) return null
   if (!isSuccess) return null
+
+  console.log(data)
 
   const type = translateAnimeType(data.type)
   const status = translateMediaStatus(data.status)
   const seasons = `${data.episodesCountAired || "?"} / ${
     data.episodesCount || "?"
   }`
-  const releasedAt = format(parseISO(data.releasedAt), "d MMM yyyyг", {
-    locale: ru,
-  })
+  const releasedAt = data.releasedAt
+    ? format(parseISO(data.releasedAt), "d MMM yyyyг", {
+        locale: ru,
+      })
+    : "Еще выходит"
   const airedAt = format(parseISO(data.airedAt), "d MMM yyyyг", {
     locale: ru,
   })
@@ -45,5 +50,3 @@ const MyComponent = () => {
     </div>
   )
 }
-
-export default MyComponent

@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "./styles.module.pcss"
 import { StatusDistribution } from "./status-distribution"
-import Characteristics from "./characteristics"
+import { Characteristics } from "./characteristics"
 
 export const AdditionalInfo = () => {
   return (

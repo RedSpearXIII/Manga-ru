@@ -41,7 +41,7 @@ export const MangaList = () => {
       ? data.pages.map((group, index) => (
           <Fragment key={index}>
             {group.map((manga) => (
-              <MediaCard type={"manga"} key={manga.id} media={manga} />
+              <MediaCard type={"manga"} key={manga.url} media={manga} />
             ))}
           </Fragment>
         ))

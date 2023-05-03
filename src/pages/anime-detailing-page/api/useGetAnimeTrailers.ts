@@ -10,10 +10,10 @@ type AnimeTrailer = {
   hosting: string
 }
 
-export const useGetAnimeTrailers = (animeId: string) =>
-  useQuery<AnimeTrailer[]>(`getAnimeTrailers-${animeId}`, async () => {
+export const useGetAnimeTrailers = (animeUrl: string) =>
+  useQuery<AnimeTrailer[]>(`getAnimeTrailers-${animeUrl}`, async () => {
     try {
-      const { data } = await publicHttp.get(`anime/${animeId}/media`)
+      const { data } = await publicHttp.get(`anime/${animeUrl}/media`)
 
       return data.data
     } catch (e) {

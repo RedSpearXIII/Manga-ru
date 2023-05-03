@@ -1,7 +1,7 @@
 import { AnimeTranslation } from "~shared/api"
 
 export type getAnimeEpisodesParams = {
-  animeId: string
+  animeUrl: string
   translationId: number
 }
 

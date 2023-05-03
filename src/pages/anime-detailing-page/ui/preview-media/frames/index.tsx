@@ -1,30 +1,37 @@
 import React, { useState } from "react"
 import styles from "./styles.module.pcss"
 import loaderStyles from "../styles.module.pcss"
-import { GalleryLightbox } from "~shared/components"
 import { useGetAnimeImages } from "../../../api"
 import { useParams } from "react-router-dom"
 import { ImageItem } from "./image-item"
+import { LightboxGallery } from "~shared/components"
+import { useGetAnimeByUrl } from "~shared/api"
 
 export const Frames = () => {
-  const { animeId } = useParams()
+  const { animeUrl } = useParams()
 
-  const [lightboxIsOpened, setLightboxIsOpened] = useState<{
-    opened: boolean
-    startFrom?: number
-  }>({ opened: false })
-  const { data, isError, isLoading } = useGetAnimeImages(animeId!)
+  const { data, isError, isLoading } = useGetAnimeImages(animeUrl!)
+  const { data: animeData } = useGetAnimeByUrl({ animeUrl: animeUrl! })
 
-  if (isError && !data) return null
-  if (!isLoading && !data) return null
-
-  const onLightboxClose = () => {
-    setLightboxIsOpened({ opened: false, startFrom: 0 })
+  const [lightboxIsOpened, setLightboxIsOpened] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const closeLightbox = () => {
+    setLightboxIsOpened(false)
   }
 
   const openLightBox = (from: number) => {
-    setLightboxIsOpened({ opened: true, startFrom: from })
+    setLightboxIsOpened(true)
+    setCurrentImageIndex(from)
   }
+  const gotoNext = () =>
+    currentImageIndex + 1 < images.length &&
+    setCurrentImageIndex(currentImageIndex + 1)
+  const gotoPrevious = () =>
+    currentImageIndex > 0 && setCurrentImageIndex(currentImageIndex - 1)
+
+  if (isError && !data) return null
+  if (!isLoading && !data) return null
+  if (!isLoading && data.length <= 0) return null
 
   const loaders = Array.from({ length: 5 }).map((_, index) => (
     <div key={index} className={loaderStyles.mediaLoader} />
@@ -42,10 +49,14 @@ export const Frames = () => {
       <div className={styles.gallery}>{images}</div>
 
       {!isLoading && (
-        <GalleryLightbox
+        <LightboxGallery
+          title={animeData?.title}
+          currentIndex={currentImageIndex}
           images={data}
           isOpen={lightboxIsOpened}
-          onClose={onLightboxClose}
+          onClose={closeLightbox}
+          onNext={gotoNext}
+          onPrev={gotoPrevious}
         />
       )}
     </div>

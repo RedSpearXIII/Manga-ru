@@ -12,7 +12,7 @@ export type AnimeTypeVariants =
   | "tv"
 
 export type AnimeResponse = {
-  id: string
+  url: string
   title: string
   image: string
   studio?: {
