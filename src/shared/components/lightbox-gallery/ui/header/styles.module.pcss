@@ -1,12 +1,15 @@
 .header {
-  @apply bg-black/50 flex items-center justify-between h-12;
+  @apply flex justify-between h-12;
 
   .title {
-    @apply text-slate-100 pl-5;
+    @apply text-slate-100 pl-5 pt-2;
   }
 
-  .closeBtn {
-    @apply flex items-center justify-center h-12 w-12 bg-black/40 text-lg cursor-pointer;
-    @apply hover:bg-black/30 text-slate-100;
+  .panel {
+    @apply flex items-center h-12;
+    .panelBtn {
+      @apply flex items-center justify-center h-full w-12 bg-black/40 text-lg cursor-pointer;
+      @apply hover:bg-black/80 text-slate-100;
+    }
   }
 }

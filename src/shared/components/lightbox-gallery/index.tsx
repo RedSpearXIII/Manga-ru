@@ -1,9 +1,11 @@
-import React from "react"
+import React, { Dispatch, SetStateAction } from "react"
 import Lightbox from "react-spring-lightbox"
 import { ImageOverlay, Footer, Header } from "./ui"
+import { Portal } from "~shared/components"
 
 type Props = {
   currentIndex: number
+  setCurrentIndex: Dispatch<SetStateAction<number>>
   images: string[]
   isOpen: boolean
   onClose: () => void
@@ -14,6 +16,7 @@ type Props = {
 
 const LightboxGallery = ({
   currentIndex,
+  setCurrentIndex,
   onPrev,
   onNext,
   onClose,
@@ -26,22 +29,36 @@ const LightboxGallery = ({
     alt: "Ошибка при загрузке",
   }))
   return (
-    <Lightbox
-      renderHeader={() => <Header onClose={onClose} title={title} />}
-      renderFooter={() => (
-        <Footer
-          totalImageCount={images.length}
-          currentImageIndex={currentIndex}
-        />
+    <>
+      <Lightbox
+        pageTransitionConfig={{
+          from: { opacity: 0 },
+          enter: { opacity: 1 },
+          leave: { opacity: 0 },
+        }}
+        renderHeader={() => <Header onCloseLightbox={onClose} title={title} />}
+        renderFooter={() => (
+          <Footer
+            images={images}
+            setCurrentIndex={setCurrentIndex}
+            totalImageCount={images.length}
+            currentImageIndex={currentIndex}
+          />
+        )}
+        currentIndex={currentIndex}
+        images={imagesList}
+        isOpen={isOpen}
+        onClose={onClose}
+        onNext={onNext}
+        onPrev={onPrev}
+      />
+
+      {isOpen && (
+        <Portal>
+          <ImageOverlay />
+        </Portal>
       )}
-      renderImageOverlay={ImageOverlay}
-      currentIndex={currentIndex}
-      images={imagesList}
-      isOpen={isOpen}
-      onClose={onClose}
-      onNext={onNext}
-      onPrev={onPrev}
-    />
+    </>
   )
 }
 

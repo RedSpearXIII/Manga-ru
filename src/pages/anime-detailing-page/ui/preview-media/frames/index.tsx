@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 import styles from "./styles.module.pcss"
 import loaderStyles from "../styles.module.pcss"
-import { useGetAnimeImages } from "../../../api"
 import { useParams } from "react-router-dom"
 import { ImageItem } from "./image-item"
 import { LightboxGallery } from "~shared/components"
 import { useGetAnimeByUrl } from "~shared/api"
+import { useGetAnimeImages } from "../../../api"
 
 export const Frames = () => {
   const { animeUrl } = useParams()
@@ -18,11 +18,11 @@ export const Frames = () => {
   const closeLightbox = () => {
     setLightboxIsOpened(false)
   }
-
   const openLightBox = (from: number) => {
     setLightboxIsOpened(true)
     setCurrentImageIndex(from)
   }
+
   const gotoNext = () =>
     currentImageIndex + 1 < images.length &&
     setCurrentImageIndex(currentImageIndex + 1)
@@ -50,7 +50,8 @@ export const Frames = () => {
 
       {!isLoading && (
         <LightboxGallery
-          title={animeData?.title}
+          setCurrentIndex={setCurrentImageIndex}
+          title={`Кадры из аниме ${animeData?.title}`}
           currentIndex={currentImageIndex}
           images={data}
           isOpen={lightboxIsOpened}
