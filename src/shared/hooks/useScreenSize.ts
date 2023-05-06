@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
+
+export const resizeHandlers = new Set<Dispatch<SetStateAction<number>>>()
 
 export const useScreenSize = () => {
   const [windowSize, setWindowSize] = useState(window.innerWidth)
 
   useEffect(() => {
-    function handleResize() {
-      setWindowSize(window.innerWidth)
+    resizeHandlers.add(setWindowSize)
+
+    return () => {
+      resizeHandlers.delete(setWindowSize)
     }
-
-    window.addEventListener("resize", handleResize)
-    handleResize() // получаем начальную ширину экрана
-
-    return () => window.removeEventListener("resize", handleResize)
   }, [])
 
   return windowSize

@@ -35,8 +35,6 @@ export const Translations = ({ inExtraFilter }: Props) => {
           voice: translation.voice,
         }))
 
-      console.log(payload)
-
       setTranslations(payload)
     }
   }

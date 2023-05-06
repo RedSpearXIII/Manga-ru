@@ -28,6 +28,7 @@ const LightboxGallery = ({
     src: src,
     alt: "Ошибка при загрузке",
   }))
+
   return (
     <>
       <Lightbox
