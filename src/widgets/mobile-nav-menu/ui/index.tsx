@@ -10,11 +10,9 @@ import clsx from "clsx"
 const variants: Variants = {
   open: {
     height: "auto",
-    width: 60,
   },
   closed: {
-    height: 50,
-    width: 50,
+    height: 60,
   },
 }
 
@@ -26,7 +24,7 @@ export const MobileNavMenu = () => {
         <motion.ul
           variants={variants}
           animate={isOpened ? "open" : "closed"}
-          className={clsx(styles.menu, isOpened && styles.menuOpened)}
+          className={clsx(styles.menu)}
         >
           <NavItems />
           <MenuToggle />

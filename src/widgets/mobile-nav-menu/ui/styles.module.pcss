@@ -1,16 +1,12 @@
 .wrapper {
-  @apply z-30 fixed right-3 bottom-3;
+  @apply z-30 fixed right-3 bottom-3 w-[60px];
 
   .menu {
-    @apply rounded dark:bg-slate-800/80 bg-slate-200/50 backdrop-blur-2xl shadow-md;
-    @apply grid items-center justify-center cursor-pointer grid-rows-[50px] gap-y-6;
+    @apply rounded relative dark:bg-slate-800/80 bg-slate-200/50 backdrop-blur-2xl shadow-md;
+    @apply grid items-center justify-center cursor-pointer grid-rows-[auto_60px] gap-y-3;
 
     li {
       @apply list-none;
     }
-  }
-
-  .menuOpened {
-    @apply grid-rows-[auto_50px];
   }
 }
