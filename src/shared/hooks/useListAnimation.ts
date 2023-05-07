@@ -5,7 +5,6 @@ export const useListAnimation = (isOpen: boolean, duration?: number) => {
   const staggerMenuItems = stagger(duration || 0.1, {
     startDelay: duration || 0.15,
   })
-
   const [scope, animate] = useAnimate()
 
   useEffect(() => {

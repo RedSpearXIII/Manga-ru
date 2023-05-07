@@ -14,7 +14,7 @@ const initialState: State = {
   isOpened: false,
 }
 
-export const useMobileNavButtonStore = create<Store>((setState) => ({
+export const useMobileNavMenuStore = create<Store>((setState) => ({
   ...initialState,
   setIsOpen: (value) => setState({ isOpened: value }),
 }))

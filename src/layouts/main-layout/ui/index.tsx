@@ -3,7 +3,7 @@ import styles from "./styles.module.pcss"
 import { Outlet } from "react-router-dom"
 import { Header } from "~widgets/header"
 import { Footer } from "~widgets/footer"
-import { MobileNavButton } from "~widgets/mobile-nav-button"
+import { MobileNavMenu } from "~widgets/mobile-nav-menu"
 import { useScreenSize } from "~shared/hooks"
 import { Breakpoints } from "~shared/types"
 import clsx from "clsx"
@@ -13,12 +13,12 @@ export const MainLayout = () => {
 
   return (
     <div className={styles.layout}>
-      {screenSize <= Breakpoints.md ? <MobileNavButton /> : <Header />}
+      {screenSize <= Breakpoints.md ? <MobileNavMenu /> : <Header />}
 
       <div
         className={clsx(
           styles.pageContent,
-          screenSize > Breakpoints.md && "pt-28"
+          screenSize > Breakpoints.md ? "pt-28" : "pt-2"
         )}
       >
         <main>
