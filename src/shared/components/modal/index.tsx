@@ -1,9 +1,10 @@
-import React, { ReactNode, useEffect } from "react"
+import React, { ReactNode } from "react"
 import { Portal } from "~shared/components"
 import styles from "./styles.module.pcss"
 import { AnimatePresence, motion } from "framer-motion"
 import { BiMinus } from "react-icons/all"
 import { dropIn, modalDropIn } from "./variants"
+import { useDisableScroll } from "~shared/hooks"
 
 type Props = {
   isOpened: boolean
@@ -13,9 +14,7 @@ type Props = {
 }
 
 const Modal = ({ children, onClose, isOpened, title }: Props) => {
-  useEffect(() => {
-    document.body.style.overflowY = isOpened ? "hidden" : "auto"
-  }, [isOpened])
+  useDisableScroll(isOpened)
 
   return (
     <AnimatePresence>

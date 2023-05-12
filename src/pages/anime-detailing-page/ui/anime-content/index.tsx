@@ -1,40 +1,25 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import styles from "./styles.module.pcss"
 import { useParams } from "react-router-dom"
 import { useGetAnimeByUrl } from "~shared/api"
-import clsx from "clsx"
 import { Badge } from "~shared/components"
+import { Description } from "./description"
+import { Info } from "./info"
+import { useScreenSize } from "~shared/hooks"
+import { Breakpoints } from "~shared/types"
+import { BgImage } from "./bg-image"
 
 export const AnimeContent = () => {
   const { animeUrl } = useParams()
   const { data, isLoading } = useGetAnimeByUrl({ animeUrl: animeUrl! })
-
-  const [descriptionTruncated, setDescriptionTruncated] = useState({
-    truncated: false,
-    opened: false,
-  })
-
-  useEffect(() => {
-    if (data?.description) {
-      setDescriptionTruncated({
-        truncated: data.description.length > 500,
-        opened: false,
-      })
-    }
-  }, [data])
-
-  const uncoverDescription = () => {
-    setDescriptionTruncated((prev) => ({
-      truncated: prev.truncated,
-      opened: !prev.opened,
-    }))
-  }
+  const screenSize = useScreenSize()
 
   if (!data && !isLoading) return <h1>Error</h1>
   if (!data && isLoading) return <h1>loading</h1>
 
   return (
     <div className={styles.bg}>
+      <BgImage />
       <div className={styles.content}>
         <div className={styles.poster}>
           <img className={styles.image} src={data.image} alt={"Постер аниме"} />
@@ -45,26 +30,27 @@ export const AnimeContent = () => {
           </span>
         </div>
 
-        {data.description && (
-          <div className={styles.animeContent}>
-            <h1>{data.title}</h1>
-            <p className={styles.description}>
-              {descriptionTruncated.truncated && !descriptionTruncated.opened
-                ? data.description.slice(0, 500) + "..."
-                : data.description}
-
-              {descriptionTruncated.truncated && (
-                <span
-                  onClick={uncoverDescription}
-                  className={clsx(styles.showMore)}
-                >
-                  {descriptionTruncated.opened ? "Скрыть все" : "Показать всё"}
-                </span>
-              )}
-            </p>
-          </div>
-        )}
+        <div className={styles.rightBlock}>
+          <h1>{data.title}</h1>
+          {screenSize >= Breakpoints.lg && (
+            <>
+              <Info />
+              <Description />
+            </>
+          )}
+        </div>
       </div>
+      {screenSize < Breakpoints.lg && (
+        <>
+          <div className={styles.infoMobile}>
+            <Info />
+          </div>
+          <div className={styles.descriptionMobile}>
+            <p className={styles.descriptionMobileTitle}>Описание</p>
+            <Description />
+          </div>
+        </>
+      )}
     </div>
   )
 }

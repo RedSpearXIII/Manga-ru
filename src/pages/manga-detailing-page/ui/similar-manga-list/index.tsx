@@ -36,9 +36,8 @@ export const SimilarMangaList = () => {
           ) : (
             <>
               {data.map((manga) => (
-                <Link to={`/manga/title/${manga.id}`}>
+                <Link key={manga.id} to={`/manga/title/${manga.id}`}>
                   <SimilarMediaCard
-                    key={manga.id}
                     id={manga.id}
                     title={manga.title}
                     image={manga.image}

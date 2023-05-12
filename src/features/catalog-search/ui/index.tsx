@@ -4,6 +4,7 @@ import { FaSearch } from "react-icons/all"
 import { AnimatePresence, motion } from "framer-motion"
 import { useCatalogSearchStore } from "~features/catalog-search/model"
 import { Input, Portal } from "~shared/components"
+import { useDisableScroll } from "~shared/hooks"
 
 const CatalogSearch = () => {
   const { query, setQuery, searchOpen, toggleSearchOpen } =
@@ -11,11 +12,11 @@ const CatalogSearch = () => {
 
   const searchInputRef = useRef<HTMLInputElement>(null)
 
+  useDisableScroll(searchOpen)
+
   useEffect(() => {
     if (searchInputRef && searchInputRef.current && searchOpen)
       searchInputRef.current.focus()
-
-    document.body.style.overflowY = searchOpen ? "hidden" : "auto"
   }, [searchOpen])
 
   return (

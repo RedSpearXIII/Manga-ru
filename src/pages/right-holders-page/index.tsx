@@ -30,8 +30,10 @@ const RightHoldersPage = () => {
           информации и авторских прав на контент.
         </h3>
         <ul className={styles.list}>
-          {policyContent.map(({ text }) => (
-            <li className={styles.listItem}>{text}</li>
+          {policyContent.map(({ text }, index) => (
+            <li key={index} className={styles.listItem}>
+              {text}
+            </li>
           ))}
         </ul>
       </div>

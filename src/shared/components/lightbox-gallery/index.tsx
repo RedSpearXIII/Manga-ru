@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from "react"
 import Lightbox from "react-spring-lightbox"
 import { ImageOverlay, Footer, Header } from "./ui"
 import { Portal } from "~shared/components"
+import { useDisableScroll } from "~shared/hooks"
 
 type Props = {
   currentIndex: number
@@ -28,6 +29,8 @@ const LightboxGallery = ({
     src: src,
     alt: "Ошибка при загрузке",
   }))
+
+  useDisableScroll(isOpen)
 
   return (
     <>
