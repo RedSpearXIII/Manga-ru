@@ -12,7 +12,7 @@ const SuspenseLoader = () => {
     >
       <img
         alt={"anifox logo"}
-        src={"/anifox-logo-text.png"}
+        src={"/anifox-logo-text.webp"}
         className={styles.img}
       />
       <ImSpinner9 className={styles.spinner} />

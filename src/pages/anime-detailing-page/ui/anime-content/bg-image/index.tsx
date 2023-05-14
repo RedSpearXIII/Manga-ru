@@ -12,6 +12,7 @@ export const BgImage = () => {
     if (data) {
       const img = new Image()
       img.src = data[0]
+      img.loading = "eager"
       img.onload = () => {
         setImageSrc(data[0])
       }

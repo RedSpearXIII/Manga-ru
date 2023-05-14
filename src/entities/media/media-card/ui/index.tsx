@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
 import { useImageLoading } from "~shared/hooks"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
@@ -51,13 +50,11 @@ export const MediaCard = ({ media, type }: MediaCardProps) => {
 
 export const MediaCardSkeleton = () => {
   return (
-    <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }}>
-      <div className={styles.skeleton}>
-        <div className={styles.imageLoaderContainer}>
-          <div className={styles.imageContainerLoader} />
-        </div>
-        <div className={styles.titleLoader} />
+    <div className={styles.skeleton}>
+      <div className={styles.imageLoaderContainer}>
+        <div className={styles.imageContainerLoader} />
       </div>
-    </motion.div>
+      <div className={styles.titleLoader} />
+    </div>
   )
 }

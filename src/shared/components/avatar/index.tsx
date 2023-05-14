@@ -8,7 +8,7 @@ type Props = {
 const Avatar = ({ url }: Props) => {
   return (
     <div className={styles.avatar}>
-      <img alt={"user avatar"} src={url ? url : "/anifox-logo.png"} />
+      <img alt={"user avatar"} src={url ? url : "/anifox-logo.webp"} />
     </div>
   )
 }

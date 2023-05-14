@@ -44,6 +44,19 @@
 
 .skeleton {
   @apply w-full grid grid-rows-[min-content_auto] relative;
+  animation: show 0.15s ease-in;
+  @keyframes show {
+    0% {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      transform: none;
+    }
+  }
 
   .imageLoaderContainer {
     &:before {
