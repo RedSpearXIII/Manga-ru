@@ -1,0 +1,17 @@
+.authNavigateBar {
+  .loginText {
+    @apply text-center mb-1;
+  }
+  .services {
+    @apply grid items-center gap-x-1 grid-cols-3 justify-between;
+    .authByServiceBtn {
+      @apply flex gap-x-1 items-center px-2 py-1 justify-center rounded cursor-pointer dark:bg-slate-800 bg-slate-200;
+      img {
+        @apply w-6;
+      }
+      p {
+        @apply text-sm;
+      }
+    }
+  }
+}

@@ -3,22 +3,31 @@ import React, {
   InputHTMLAttributes,
   forwardRef,
   ForwardedRef,
+  DetailedHTMLProps,
 } from "react"
 import styles from "./styles.module.pcss"
+import sizeStyles from "./sizes.module.pcss"
+import { UiSizes } from "~shared/types"
+import clsx from "clsx"
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface Props
+  extends DetailedHTMLProps<
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size">,
+    HTMLInputElement
+  > {
   icon?: JSX.Element
   label?: string
   type?: HTMLInputTypeAttribute
+  size?: UiSizes
 }
 
 const Input = forwardRef(
   (
-    { icon: Icon, label, type, ...other }: InputProps,
+    { icon: Icon, label, type, size, ...other }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
-      <div className={styles.inputContainer}>
+      <div className={clsx(styles.inputContainer, size && sizeStyles[size])}>
         {label && <label>{label}</label>}
         <div>
           {Icon && Icon}

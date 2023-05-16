@@ -1,33 +1,29 @@
 import { create } from "zustand"
-import { AuthByLocalFields } from "../ui"
+import { LoginFields } from "../ui"
 import { publicHttp } from "~shared/api"
 
-type AuthByLocalParams = Omit<AuthByLocalFields, "repeatPassword">
-
 type State = {
-  authError: null | string
+  loginError: null | string
   isSuccess: boolean | null
-  fromUrl: string | null
 }
 type Actions = {
-  authByLocal: (fields: AuthByLocalParams) => Promise<void>
+  login: (fields: LoginFields) => Promise<void>
   resetState: () => void
 }
 type Store = State & Actions
 
 const initialState: State = {
-  authError: null,
-  fromUrl: null,
+  loginError: null,
   isSuccess: null,
 }
 
-export const useAuthByLocalStore = create<Store>((setState) => ({
+export const useLoginStore = create<Store>((setState) => ({
   ...initialState,
   resetState: () => setState(initialState),
-  authByLocal: async (fields) => {
+  login: async (fields) => {
     try {
-      setState({ authError: null })
-      const response = await publicHttp.post("/auth/register", fields)
+      setState({ loginError: null })
+      const response = await publicHttp.post("/auth/login", fields)
       response.headers["set-cookie"]?.forEach((cookie) => {
         document.cookie = cookie
       })
@@ -36,7 +32,7 @@ export const useAuthByLocalStore = create<Store>((setState) => ({
       if (e instanceof Error) {
         // @ts-ignore
         const error = e.response.data.error
-        setState({ authError: error })
+        setState({ loginError: error })
       }
     }
   },

@@ -1,17 +1,12 @@
-import { create } from "zustand"
-import { immer } from "zustand/middleware/immer"
+import { createStore } from "effector"
+import { setUser } from "./events"
 
-type Actions = {}
+export type State = {
+  id: string
+  username: string
+  email: string
+}
 
-type State = {}
+const $viewer = createStore<State>({} as State)
 
-type Store = Actions & State
-
-const initialState: State = {}
-
-export const useViewer = create(
-  immer<Store>((setState) => ({
-    ...initialState,
-    setViewer: () => setState((state) => {}),
-  }))
-)
+$viewer.on(setUser, (state, payload) => payload)

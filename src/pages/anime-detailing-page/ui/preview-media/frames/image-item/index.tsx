@@ -1,9 +1,9 @@
-import React from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styles from "./styles.module.pcss"
 import loaderStyles from "../../styles.module.pcss"
 import { useHover, useImageLoading } from "~shared/hooks"
 import { HiMagnifyingGlass } from "react-icons/all"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion, useInView } from "framer-motion"
 import clsx from "clsx"
 
 type Props = {
@@ -13,6 +13,16 @@ type Props = {
 
 export const ImageItem = ({ src, onClick }: Props) => {
   const [isHover, hoveredProps] = useHover()
+  const [imgSrc, setImgSrc] = useState<string | undefined>(undefined)
+  const imgRef = useRef(null)
+
+  const imgInView = useInView(imgRef, { margin: "0px 50px 0px 0px" })
+
+  useEffect(() => {
+    if (imgInView && !imgSrc) {
+      setImgSrc(src)
+    }
+  }, [imgInView])
 
   const { onLoad, isLoaded } = useImageLoading()
 
@@ -20,10 +30,11 @@ export const ImageItem = ({ src, onClick }: Props) => {
     <div {...hoveredProps} onClick={onClick} className={styles.imageContainer}>
       {!isLoaded && <div className={loaderStyles.mediaLoader} />}
       <img
+        ref={imgRef}
         onLoad={onLoad}
         alt={"Ошибка при загрузке"}
         className={clsx(styles.image, isHover && "brightness-50")}
-        src={src}
+        src={imgSrc}
       />
       <AnimatePresence>
         {isHover && (
