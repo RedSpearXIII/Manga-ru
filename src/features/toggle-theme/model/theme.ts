@@ -2,7 +2,6 @@ import { createEvent, createStore } from "effector"
 import { persist } from "effector-storage/local"
 
 type ThemeVariants = "light" | "dark"
-
 type State = {
   themeName: ThemeVariants
 }
@@ -19,10 +18,9 @@ const currentTheme: ThemeVariants =
       : prefersColorScheme()
     : prefersColorScheme()
 
-export const toggleTheme = createEvent()
-
 export const $theme = createStore<State>({ themeName: currentTheme })
 
+export const toggleTheme = createEvent()
 $theme.on(toggleTheme, (state) => {
   return { themeName: state.themeName === "dark" ? "light" : "dark" }
 })

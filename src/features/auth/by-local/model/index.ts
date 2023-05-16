@@ -1,1 +1,1 @@
-export * from "./auth-by-local"
+export * as authByLocalModel from "./auth-by-local"

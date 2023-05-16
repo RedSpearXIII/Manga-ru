@@ -10,9 +10,10 @@ import {
   MdAlternateEmail,
 } from "react-icons/all"
 import { getValidationSchema } from "../lib"
-import { useAuthByLocalStore } from "../model"
 import { AuthNavigateBar } from "~entities/auth/auth-navigate-bar"
 import { Link } from "react-router-dom"
+import { useStore } from "effector-react"
+import { authByLocalModel } from "../model"
 
 export type AuthByLocalFields = {
   email: string
@@ -26,7 +27,7 @@ type Props = {
 }
 
 export const AuthByLocal = ({ onSuccess }: Props) => {
-  const { authByLocal, authError } = useAuthByLocalStore()
+  const { authError } = useStore(authByLocalModel.$authByLocal)
   const AuthByLocalSchema = getValidationSchema()
 
   const {
@@ -39,7 +40,7 @@ export const AuthByLocal = ({ onSuccess }: Props) => {
 
   const onSubmit: SubmitHandler<AuthByLocalFields> = async (fields) => {
     try {
-      await authByLocal(fields)
+      await authByLocalModel.registerUserFx(fields)
       if (onSuccess) onSuccess()
     } catch (e) {}
   }

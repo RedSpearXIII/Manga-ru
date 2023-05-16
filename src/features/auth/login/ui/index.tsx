@@ -7,7 +7,8 @@ import { AiFillLock, BiErrorAlt, MdAlternateEmail } from "react-icons/all"
 import { getValidationSchema } from "../lib"
 import { AuthNavigateBar } from "~entities/auth/auth-navigate-bar"
 import { Link } from "react-router-dom"
-import { useLoginStore } from "../model"
+import { loginModel } from "../model"
+import { useStore } from "effector-react"
 
 export type LoginFields = {
   email: string
@@ -19,7 +20,7 @@ type Props = {
 }
 
 export const LoginForm = ({ onSuccess }: Props) => {
-  const { login, loginError } = useLoginStore()
+  const { loginError } = useStore(loginModel.$login)
   const LoginSchema = getValidationSchema()
   const {
     register,
@@ -31,8 +32,7 @@ export const LoginForm = ({ onSuccess }: Props) => {
 
   const onSubmit: SubmitHandler<LoginFields> = async (fields) => {
     try {
-      console.log("ОТРАБОТАЛ")
-      await login(fields)
+      await loginModel.loginUserFx(fields)
       if (onSuccess) onSuccess()
     } catch (e) {}
   }

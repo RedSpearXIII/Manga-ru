@@ -4,6 +4,7 @@ specifiers:
   '@hookform/resolvers': ^3.1.0
   '@tailwindcss/line-clamp': ^0.4.2
   '@types/compose-function': ^0.0.30
+  '@types/js-cookie': ^3.0.3
   '@types/node': ^18.15.3
   '@types/react': ^18.0.27
   '@types/react-dom': ^18.0.10
@@ -70,6 +71,7 @@ dependencies:
 devDependencies:
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.7
   '@types/compose-function': 0.0.30
+  '@types/js-cookie': 3.0.3
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@vitejs/plugin-react': 3.1.0_vite@4.2.1
@@ -750,6 +752,10 @@ packages:
 
   /@types/compose-function/0.0.30:
     resolution: {integrity: sha512-TY6zsIzbLU9nsRMVwaq5hYNSoglao3ZOm2I4jAi1EojDZJdF8vtDqBG+f086WJ17pwRH4sQseXp/U6GVxUxHwA==}
+    dev: true
+
+  /@types/js-cookie/3.0.3:
+    resolution: {integrity: sha512-Xe7IImK09HP1sv2M/aI+48a20VX+TdRJucfq4vfRVy6nWN8PYPOEnlMRSgxJAgYQIXJVL8dZ4/ilAM7dWNaOww==}
     dev: true
 
   /@types/node/18.15.5:

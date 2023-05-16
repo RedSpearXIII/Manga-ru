@@ -1,16 +1,14 @@
 import React from "react"
-import { $theme, toggleTheme } from "../model"
+import { themeModel } from "../model"
 import { BsMoonStarsFill, BsSunFill } from "react-icons/all"
 import styles from "./styles.module.pcss"
 import { useStore } from "effector-react"
 
 export const ToggleTheme = () => {
-  const { themeName } = useStore($theme)
+  const { themeName } = useStore(themeModel.$theme)
   return (
     <div
-      onClick={() => {
-        toggleTheme()
-      }}
+      onClick={() => themeModel.toggleTheme()}
       className={styles.toggleTheme}
     >
       <div className={styles.icon}>

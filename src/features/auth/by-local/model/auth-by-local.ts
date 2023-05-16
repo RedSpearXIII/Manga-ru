@@ -1,43 +1,46 @@
-import { create } from "zustand"
 import { AuthByLocalFields } from "../ui"
 import { publicHttp } from "~shared/api"
-
-type AuthByLocalParams = Omit<AuthByLocalFields, "repeatPassword">
+import { createEffect, createEvent, createStore, sample } from "effector"
+import { authByLocalErrorMapper, AuthByLocalErrors } from "../lib"
+import { AxiosErrorResponse } from "~shared/types"
 
 type State = {
   authError: null | string
   isSuccess: boolean | null
-  fromUrl: string | null
 }
-type Actions = {
-  authByLocal: (fields: AuthByLocalParams) => Promise<void>
-  resetState: () => void
-}
-type Store = State & Actions
 
 const initialState: State = {
   authError: null,
-  fromUrl: null,
   isSuccess: null,
 }
 
-export const useAuthByLocalStore = create<Store>((setState) => ({
-  ...initialState,
-  resetState: () => setState(initialState),
-  authByLocal: async (fields) => {
-    try {
-      setState({ authError: null })
-      const response = await publicHttp.post("/auth/register", fields)
-      response.headers["set-cookie"]?.forEach((cookie) => {
-        document.cookie = cookie
-      })
-      setState({ isSuccess: true })
-    } catch (e) {
-      if (e instanceof Error) {
-        // @ts-ignore
-        const error = e.response.data.error
-        setState({ authError: error })
-      }
-    }
-  },
-}))
+type AuthByLocalParams = Omit<AuthByLocalFields, "repeatPassword">
+
+const setAuthError = createEvent<string>()
+
+export const registerUserFx = createEffect<
+  AuthByLocalParams,
+  void,
+  AxiosErrorResponse<AuthByLocalErrors>
+>(async (fields: AuthByLocalParams) => {
+  const response = await publicHttp.post("/auth/register", fields)
+  response.headers["set-cookie"]?.forEach((cookie) => {
+    document.cookie = cookie
+  })
+})
+
+export const $authByLocal = createStore<State>(initialState)
+  .on(registerUserFx.doneData, () => ({
+    isSuccess: true,
+    authError: null,
+  }))
+  .on(setAuthError, (state, error) => ({
+    ...state,
+    authError: error,
+  }))
+
+sample({
+  clock: registerUserFx.failData,
+  fn: ({ response }) => authByLocalErrorMapper(response!.data.error),
+  target: setAuthError,
+})
