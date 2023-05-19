@@ -16,6 +16,7 @@ interface Props
     HTMLInputElement
   > {
   icon?: JSX.Element
+  rightIcon?: JSX.Element | false
   label?: string
   type?: HTMLInputTypeAttribute
   size?: UiSizes
@@ -23,15 +24,16 @@ interface Props
 
 const Input = forwardRef(
   (
-    { icon: Icon, label, type, size, ...other }: Props,
+    { icon: Icon, rightIcon: RightIcon, label, type, size, ...other }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
       <div className={clsx(styles.inputContainer, size && sizeStyles[size])}>
         {label && <label>{label}</label>}
         <div>
-          {Icon && Icon}
+          {Icon && <span className={styles.icon}>{Icon}</span>}
           <input ref={ref} type={type ? type : "text"} {...other} />
+          {RightIcon && <span className={styles.rightIcon}>{RightIcon}</span>}
         </div>
       </div>
     )

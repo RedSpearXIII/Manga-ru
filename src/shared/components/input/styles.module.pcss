@@ -3,12 +3,19 @@
     @apply text-sm;
   }
   div {
-    @apply bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center pr-5 drop-shadow;
+    @apply bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center pr-4 drop-shadow;
     input {
-      @apply p-2 w-full;
+      @apply pl-2 py-2 w-full;
     }
-    svg {
-      @apply ml-3 text-2xl;
+    .icon {
+      svg {
+        @apply ml-3 text-xl;
+      }
+    }
+    .rightIcon {
+      svg {
+        @apply text-xl;
+      }
     }
   }
 }

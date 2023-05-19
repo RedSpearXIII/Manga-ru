@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { FaSearch } from "react-icons/all"
+import { FaSearch, MdClear } from "react-icons/all"
 import { Input } from "~shared/components"
 import { useDebounce } from "~shared/hooks"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
@@ -26,6 +26,10 @@ export const Search = () => {
     setSearchValue(e.target.value)
   }
 
+  const clearSearch = () => {
+    setSearchQuery("")
+  }
+
   return (
     <div>
       <Input
@@ -36,6 +40,11 @@ export const Search = () => {
         value={searchValue}
         onChange={onChange}
         icon={<FaSearch />}
+        rightIcon={
+          searchValue.length > 0 && (
+            <MdClear cursor={"pointer"} onClick={clearSearch} />
+          )
+        }
       />
     </div>
   )

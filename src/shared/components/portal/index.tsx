@@ -5,7 +5,7 @@ type Props = {
   children: ReactNode
 }
 const Portal = ({ children }: Props) => {
-  return <div>{createPortal(children, document.body)}</div>
+  return <>{createPortal(children, document.body)}</>
 }
 
 export default Portal
