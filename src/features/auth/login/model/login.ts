@@ -20,7 +20,8 @@ export const loginUserFx = createEffect<
   void,
   AxiosErrorResponse<LoginErrors>
 >(async (fields: LoginFields) => {
-  const response = await publicHttp.post("/auth/register", fields)
+  const response = await publicHttp.post("/auth/login", fields)
+  console.log(response)
   response.headers["set-cookie"]?.forEach((cookie) => {
     document.cookie = cookie
   })
@@ -44,24 +45,3 @@ sample({
   fn: ({ response }) => loginErrorMapper(response!.data.error),
   target: setLoginError,
 })
-
-// export const useLoginStore = create<Store>((setState) => ({
-//   ...initialState,
-//   resetState: () => setState(initialState),
-//   login: async (fields) => {
-//     try {
-//       setState({ loginError: null })
-//       const response = await publicHttp.post("/auth/login", fields)
-//       response.headers["set-cookie"]?.forEach((cookie) => {
-//         document.cookie = cookie
-//       })
-//       setState({ isSuccess: true })
-//     } catch (e) {
-//       if (e instanceof Error) {
-//         // @ts-ignore
-//         const error = e.response.data.error
-//         setState({ loginError: error })
-//       }
-//     }
-//   },
-// }))

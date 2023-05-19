@@ -7,6 +7,7 @@ export type State = {
   email: string
 }
 
-const $viewer = createStore<State>({} as State)
-
-$viewer.on(setUser, (state, payload) => payload)
+const $viewer = createStore<State>({} as State).on(
+  setUser,
+  (state, payload) => payload
+)
