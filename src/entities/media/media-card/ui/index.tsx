@@ -6,15 +6,14 @@ import clsx from "clsx"
 import { BsFillImageFill } from "react-icons/all"
 
 interface MediaCardProps {
-  media: { url: string; title: string; image: string }
+  media: { url?: string; id?: string; title: string; image: string }
   type: "anime" | "manga"
 }
 
 export const MediaCard = ({ media, type }: MediaCardProps) => {
   const { isLoaded, isError, ...props } = useImageLoading()
-
   return (
-    <Link to={`/${type}/title/${media.url}`}>
+    <Link to={`/${type}/title/${media.url || media.id}`}>
       <div className={styles.card}>
         <div className={styles.imageContainer}>
           {!isLoaded && !isError && (

@@ -2,12 +2,17 @@
   @apply block bg-slate-100 dark:bg-gray-900 shadow-2xl p-8 rounded-xl flex flex-col gap-3;
   @apply max-w-md w-full mx-auto;
 
-  .submitBtn {
-    @apply mt-3;
-  }
-
-  .fieldErrorMsg {
-    @apply text-xs text-red-500;
+  form {
+    @apply flex flex-col gap-3;
+    div {
+      p {
+        @apply text-xs text-red-500;
+      }
+    }
+    button {
+      @apply mt-3;
+      @apply text-base;
+    }
   }
 
   .authErrorMsg {

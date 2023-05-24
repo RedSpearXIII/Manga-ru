@@ -21,10 +21,7 @@ export const loginUserFx = createEffect<
   AxiosErrorResponse<LoginErrors>
 >(async (fields: LoginFields) => {
   const response = await publicHttp.post("/auth/login", fields)
-  console.log(response)
-  response.headers["set-cookie"]?.forEach((cookie) => {
-    document.cookie = cookie
-  })
+  console.log("public", response)
 })
 
 const setLoginError = createEvent<string>()

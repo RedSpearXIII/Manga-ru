@@ -1,11 +1,23 @@
 import React from "react"
-import styles from "./styles.module.pcss"
-import { AuthByLocal } from "~features/auth/by-local"
+import { AuthByLocalForm } from "~features/auth/by-local"
+import { AuthByServices, AuthForm } from "~shared/components"
+import { useStore } from "effector-react"
+import { authByLocalModel } from "~features/auth/by-local"
+import { authByShikimoriModel } from "~features/auth/by-shikimori"
 
 const SignupPage = () => {
+  const { authError } = useStore(authByLocalModel.$authByLocal)
   return (
-    <div className={styles.wrapper}>
-      <AuthByLocal />
+    <div>
+      <AuthForm>
+        <AuthForm.Form>
+          <AuthByLocalForm />
+        </AuthForm.Form>
+        {authError && <AuthForm.AuthError>{authError}</AuthForm.AuthError>}
+        <AuthForm.AuthBarByServices>
+          <AuthByServices authByShikimori={authByShikimoriModel.loginFx} />
+        </AuthForm.AuthBarByServices>
+      </AuthForm>
     </div>
   )
 }

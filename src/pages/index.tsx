@@ -20,7 +20,7 @@ const Routing = () => {
         <Route path={"home"} element={<HomePage />} />
         <Route path={"manga"}>
           <Route index element={<MangaPage />} />
-          <Route path={"title/:mangaUrl"} element={<MangaDetailingPage />} />
+          <Route path={"title/:mangaId"} element={<MangaDetailingPage />} />
         </Route>
         <Route path={"anime"}>
           <Route index element={<AnimePage />} />

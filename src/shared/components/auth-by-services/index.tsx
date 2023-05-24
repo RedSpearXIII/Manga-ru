@@ -1,19 +1,25 @@
 import React from "react"
 import styles from "./styles.module.pcss"
-import vkLogo from "../assets/vk-logo.webp"
-import googleLogo from "../assets/google-logo.avif"
-import shikomoriLogo from "../assets/shikomori-logo.svg"
+import vkLogo from "./assets/vk-logo.webp"
+import googleLogo from "./assets/google-logo.webp"
+import shikomoriLogo from "./assets/shikomori-logo.svg"
 
-export const AuthNavigateBar = () => {
+type Props = {
+  authByShikimori: () => void
+  authByGoogle?: () => void
+  authByVk?: () => void
+}
+
+const AuthByServices = ({ authByShikimori, authByVk, authByGoogle }: Props) => {
   return (
     <div className={styles.authNavigateBar}>
       <p className={styles.loginText}>Войти через</p>
       <div className={styles.services}>
-        <div className={styles.authByServiceBtn}>
+        <div onClick={authByGoogle} className={styles.authByServiceBtn}>
           <img alt={"Google"} src={googleLogo} />
           <p>Google</p>
         </div>
-        <div className={styles.authByServiceBtn}>
+        <div onClick={authByShikimori} className={styles.authByServiceBtn}>
           <img
             alt={"Шикомори"}
             src={shikomoriLogo}
@@ -21,7 +27,7 @@ export const AuthNavigateBar = () => {
           />
           <p>Шикомори</p>
         </div>
-        <div className={styles.authByServiceBtn}>
+        <div onClick={authByVk} className={styles.authByServiceBtn}>
           <img alt={"VK"} src={vkLogo} />
           <p>Вконтакте</p>
         </div>
@@ -29,3 +35,5 @@ export const AuthNavigateBar = () => {
     </div>
   )
 }
+
+export default AuthByServices

@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "react-query"
 import { publicHttp } from "~shared/api"
 
 export type MangaResponse = {
-  url: string
+  id: string
   title: string
   image: string
 }

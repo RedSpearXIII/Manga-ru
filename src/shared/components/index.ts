@@ -9,6 +9,8 @@ import LightboxGallery from "./lightbox-gallery"
 import SiteLogo from "./site-logo"
 import SuspenseLoader from "./suspense-loader"
 import Modal from "./modal"
+import AuthForm from "./auth-form"
+import AuthByServices from "./auth-by-services"
 
 export {
   Avatar,
@@ -22,4 +24,6 @@ export {
   SuspenseLoader,
   Modal,
   LightboxGallery,
+  AuthForm,
+  AuthByServices,
 }

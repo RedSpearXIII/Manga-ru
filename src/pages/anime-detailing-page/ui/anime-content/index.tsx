@@ -23,19 +23,33 @@ export const AnimeContent = () => {
       <BgImage />
       <div className={styles.content}>
         <div className={styles.poster}>
-          <img className={styles.image} src={data.image} alt={"Постер аниме"} />
-          <span className={styles.minimalAgeBadge}>
-            <Badge className={"bg-orange-300"}>
-              {data.minimalAge ? `${data.minimalAge}+` : data.ratingMpa}
-            </Badge>
-          </span>
+          {isLoading ? (
+            <div className={styles.imageLoader} />
+          ) : (
+            <img
+              className={styles.image}
+              src={data.image}
+              alt={"Постер аниме"}
+            />
+          )}
+          {!isLoading && (
+            <span className={styles.minimalAgeBadge}>
+              <Badge className={"bg-orange-300"}>
+                {data.minimalAge ? `${data.minimalAge}+` : data.ratingMpa}
+              </Badge>
+            </span>
+          )}
         </div>
 
         <div className={styles.rightBlock}>
-          <div className={styles.topSection}>
-            <h1>{data.title}</h1>
-            <Rating rating={9.5} onRateMedia={() => {}} />
-          </div>
+          {isLoading ? (
+            <div className={styles.topSectionLoader} />
+          ) : (
+            <div className={styles.topSection}>
+              <h1>{data.title}</h1>
+              <Rating rating={9.5} onRateMedia={() => {}} />
+            </div>
+          )}
           {screenSize >= Breakpoints.lg && (
             <>
               <Info />

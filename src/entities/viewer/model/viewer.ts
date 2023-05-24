@@ -1,5 +1,4 @@
-import { createStore } from "effector"
-import { setUser } from "./events"
+import { createEvent, createStore } from "effector"
 
 export type State = {
   id: string
@@ -7,7 +6,9 @@ export type State = {
   email: string
 }
 
-const $viewer = createStore<State>({} as State).on(
-  setUser,
+export const setViewer = createEvent<State>()
+
+export const $viewer = createStore<State>({} as State).on(
+  setViewer,
   (state, payload) => payload
 )

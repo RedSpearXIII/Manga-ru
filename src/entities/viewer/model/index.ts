@@ -1,2 +1,1 @@
-export * from "./viewer"
-export * from "./events"
+export * as viewerModel from "./viewer"

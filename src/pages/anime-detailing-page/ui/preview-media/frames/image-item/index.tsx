@@ -16,7 +16,10 @@ export const ImageItem = ({ src, onClick }: Props) => {
   const [imgSrc, setImgSrc] = useState<string | undefined>(undefined)
   const imgRef = useRef(null)
 
-  const imgInView = useInView(imgRef, { margin: "0px 50px 0px 0px" })
+  const imgInView = useInView(imgRef, {
+    margin: "0px 50px 0px 0px",
+    once: true,
+  })
 
   useEffect(() => {
     if (imgInView && !imgSrc) {
