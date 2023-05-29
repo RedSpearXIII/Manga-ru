@@ -3,7 +3,7 @@ import styles from "./styles.module.pcss"
 import { ImSpinner9 } from "react-icons/all"
 import { motion } from "framer-motion"
 
-const SuspenseLoader = () => {
+const SuspensePageLoader = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -20,4 +20,4 @@ const SuspenseLoader = () => {
   )
 }
 
-export default SuspenseLoader
+export default SuspensePageLoader

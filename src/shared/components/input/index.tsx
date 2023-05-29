@@ -4,6 +4,7 @@ import React, {
   forwardRef,
   ForwardedRef,
   DetailedHTMLProps,
+  ReactNode,
 } from "react"
 import styles from "./styles.module.pcss"
 import sizeStyles from "./sizes.module.pcss"
@@ -17,7 +18,7 @@ interface Props
   > {
   icon?: JSX.Element
   rightIcon?: JSX.Element | false
-  label?: string
+  label?: string | ReactNode
   type?: HTMLInputTypeAttribute
   size?: UiSizes
 }
@@ -30,7 +31,7 @@ const Input = forwardRef(
     return (
       <div className={clsx(styles.inputContainer, size && sizeStyles[size])}>
         {label && <label>{label}</label>}
-        <div>
+        <div className={styles.input}>
           {Icon && <span className={styles.icon}>{Icon}</span>}
           <input ref={ref} type={type ? type : "text"} {...other} />
           {RightIcon && <span className={styles.rightIcon}>{RightIcon}</span>}

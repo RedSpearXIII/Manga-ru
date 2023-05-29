@@ -29,4 +29,5 @@ export type AnimeDetailingResponse = {
   minimalAge: number
   linkPlayer: string
   accentColor?: string
+  rating?: number
 }

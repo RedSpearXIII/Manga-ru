@@ -12,10 +12,6 @@ export default defineConfig({
     host: true,
     strictPort: true,
     port: 8000,
-    https: {
-      key: path.resolve(__dirname, "localhost-key.pem"),
-      cert: path.resolve(__dirname, "localhost.pem"),
-    },
   },
   resolve: {
     alias: [

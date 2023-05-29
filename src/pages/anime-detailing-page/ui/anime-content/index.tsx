@@ -8,7 +8,7 @@ import { Info } from "./info"
 import { useScreenSize } from "~shared/hooks"
 import { Breakpoints } from "~shared/types"
 import { BgImage } from "./bg-image"
-import { Rating } from "~entities/media/rating"
+import { AnimeRating } from "./anime-rating"
 
 export const AnimeContent = () => {
   const { animeUrl } = useParams()
@@ -47,7 +47,7 @@ export const AnimeContent = () => {
           ) : (
             <div className={styles.topSection}>
               <h1>{data.title}</h1>
-              <Rating rating={9.5} onRateMedia={() => {}} />
+              <AnimeRating animeRating={data.rating} />
             </div>
           )}
           {screenSize >= Breakpoints.lg && (

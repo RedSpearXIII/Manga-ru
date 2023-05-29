@@ -2,17 +2,19 @@
   label {
     @apply text-sm;
   }
-  div {
-    @apply bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center pr-4 drop-shadow;
+  .input {
+    @apply bg-slate-200 px-4 py-2 dark:bg-slate-800 rounded-lg flex items-center drop-shadow;
     input {
-      @apply pl-2 py-2 w-full;
+      @apply w-full;
     }
     .icon {
+      @apply pr-2;
       svg {
-        @apply ml-3 text-xl;
+        @apply text-xl;
       }
     }
     .rightIcon {
+      @apply pl-2;
       svg {
         @apply text-xl;
       }

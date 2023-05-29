@@ -7,10 +7,11 @@ import Select from "./select"
 import MultiSelect from "./multi-select"
 import LightboxGallery from "./lightbox-gallery"
 import SiteLogo from "./site-logo"
-import SuspenseLoader from "./suspense-loader"
+import SuspensePageLoader from "./suspense-page-loader"
 import Modal from "./modal"
 import AuthForm from "./auth-form"
 import AuthByServices from "./auth-by-services"
+import Tooltip from "./tooltip"
 
 export {
   Avatar,
@@ -21,9 +22,10 @@ export {
   Badge,
   Select,
   MultiSelect,
-  SuspenseLoader,
+  SuspensePageLoader,
   Modal,
   LightboxGallery,
   AuthForm,
   AuthByServices,
+  Tooltip,
 }

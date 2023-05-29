@@ -1,14 +1,20 @@
 import React from "react"
-import { Button, Input } from "~shared/components"
+import { Button, Input, Tooltip } from "~shared/components"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { AiFillLock, GiFox, MdAlternateEmail } from "react-icons/all"
+import {
+  AiFillLock,
+  BiInfoCircle,
+  GiFox,
+  MdAlternateEmail,
+} from "react-icons/all"
 import { getValidationSchema } from "../lib"
 import { authByLocalModel } from "../model"
 
 export type AuthByLocalFields = {
   email: string
   username: string
+  nickName: string
   password: string
   repeatPassword: string
 }
@@ -30,7 +36,8 @@ export const AuthByLocalForm = ({ onSuccess }: Props) => {
 
   const onSubmit: SubmitHandler<AuthByLocalFields> = async (fields) => {
     try {
-      await authByLocalModel.registerUserFx(fields)
+      const { repeatPassword, ...payload } = fields
+      await authByLocalModel.registerUserFx(payload)
       if (onSuccess) onSuccess()
     } catch (e) {}
   }
@@ -49,13 +56,36 @@ export const AuthByLocalForm = ({ onSuccess }: Props) => {
         />
         <p>{errors.email?.message}</p>
       </div>
+
       <div>
         <Input
           size={"sm"}
           icon={<GiFox />}
           {...register("username")}
+          label={"Логин"}
+          placeholder={"kaneki_ken"}
+        />
+        <p>{errors.username?.message}</p>
+      </div>
+
+      <div>
+        <Input
+          size={"sm"}
+          icon={<GiFox />}
+          {...register("nickName")}
           label={"Имя пользователя"}
           placeholder={"Канеки Кен"}
+          rightIcon={
+            <Tooltip
+              width={300}
+              label={
+                "Имя пользователя можно изменить в любое время через настройки профиля"
+              }
+              position={"leftTop"}
+            >
+              <BiInfoCircle />
+            </Tooltip>
+          }
         />
         <p>{errors.username?.message}</p>
       </div>
