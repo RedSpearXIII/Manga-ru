@@ -1,4 +1,4 @@
-import { useQuery } from "react-query"
+import { useQuery } from "@tanstack/react-query"
 import { publicHttp } from "~shared/api"
 import { getAnimeEpisodesParams, getAnimeEpisodesResponse } from "./types"
 
@@ -6,9 +6,9 @@ export const useGetAnimeEpisodes = ({
   animeUrl,
   translationId,
 }: getAnimeEpisodesParams) =>
-  useQuery<getAnimeEpisodesResponse>(
-    `getAnimeEpisodes-${animeUrl}`,
-    async () => {
+  useQuery<getAnimeEpisodesResponse>({
+    queryKey: [`getAnimeEpisodes-${animeUrl}`],
+    queryFn: async () => {
       try {
         const { data } = await publicHttp.get(
           `anime/${animeUrl}/media?translation=${translationId}`
@@ -18,5 +18,5 @@ export const useGetAnimeEpisodes = ({
       } catch (e) {
         console.log(e)
       }
-    }
-  )
+    },
+  })

@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { createArrayQueryParam, publicHttp } from "~shared/api"
 import { AnimeResponse, GetAnimeParams } from "./types"
 
@@ -15,8 +15,8 @@ export const useGetAnimeList = ({
   years,
   translations,
 }: GetAnimeParams) =>
-  useInfiniteQuery<AnimeResponse[]>(
-    [
+  useInfiniteQuery<AnimeResponse[]>({
+    queryKey: [
       "getAnimeList",
       searchQuery,
       status,
@@ -29,7 +29,7 @@ export const useGetAnimeList = ({
       years,
       translations,
     ],
-    async ({ pageParam = 0 }) => {
+    queryFn: async ({ pageParam = 0 }) => {
       const params = {
         pageSize: pageSize ? pageSize : 20,
         pageNum: pageParam,
@@ -56,11 +56,9 @@ export const useGetAnimeList = ({
       )
       return data
     },
-    {
-      getNextPageParam: (lastPage, allPages) => {
-        const nextPage = allPages.length
-        return lastPage.length !== 0 ? nextPage + 1 : undefined
-      },
-      refetchOnWindowFocus: false,
-    }
-  )
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = allPages.length
+      return lastPage.length !== 0 ? nextPage + 1 : undefined
+    },
+    refetchOnWindowFocus: false,
+  })

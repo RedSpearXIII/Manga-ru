@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { publicHttp } from "~shared/api"
 
 export type MangaResponse = {
@@ -13,9 +13,9 @@ interface GetMangaParams {
 }
 
 export const useGetMangaList = ({ pageSize, searchQuery }: GetMangaParams) =>
-  useInfiniteQuery<MangaResponse[]>(
-    ["getAnimeList", searchQuery],
-    async ({ pageParam = 0 }) => {
+  useInfiniteQuery<MangaResponse[]>({
+    queryKey: ["getAnimeList", searchQuery],
+    queryFn: async ({ pageParam = 0 }) => {
       const params = {
         pageSize: pageSize ? pageSize : 20,
         pageNum: pageParam,
@@ -29,11 +29,9 @@ export const useGetMangaList = ({ pageSize, searchQuery }: GetMangaParams) =>
       })
       return data
     },
-    {
-      getNextPageParam: (lastPage, allPages) => {
-        const nextPage = allPages.length
-        return lastPage.length !== 0 ? nextPage + 1 : undefined
-      },
-      refetchOnWindowFocus: false,
-    }
-  )
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = allPages.length
+      return lastPage.length !== 0 ? nextPage + 1 : undefined
+    },
+    refetchOnWindowFocus: false,
+  })

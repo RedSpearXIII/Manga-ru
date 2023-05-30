@@ -1,4 +1,4 @@
-import { useQuery } from "react-query"
+import { useQuery } from "@tanstack/react-query"
 import { publicHttp } from "~shared/api"
 
 type AnimeTrailer = {
@@ -11,12 +11,15 @@ type AnimeTrailer = {
 }
 
 export const useGetAnimeTrailers = (animeUrl: string) =>
-  useQuery<AnimeTrailer[]>(`getAnimeTrailers-${animeUrl}`, async () => {
-    try {
-      const { data } = await publicHttp.get(`anime/${animeUrl}/media`)
+  useQuery<AnimeTrailer[]>({
+    queryKey: [`getAnimeTrailers-${animeUrl}`],
+    queryFn: async () => {
+      try {
+        const { data } = await publicHttp.get(`anime/${animeUrl}/media`)
 
-      return data.data
-    } catch (e) {
-      console.log(e)
-    }
+        return data.data
+      } catch (e) {
+        console.log(e)
+      }
+    },
   })

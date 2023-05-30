@@ -1,4 +1,4 @@
-import { useQuery } from "react-query"
+import { useQuery } from "@tanstack/react-query"
 import { publicHttp } from "~shared/api"
 
 interface Params {
@@ -12,9 +12,9 @@ type MangaSimilarResponse = {
 }
 
 export const useGetMangaSimilar = ({ mangaId }: Params) =>
-  useQuery<MangaSimilarResponse[]>(
-    `manga-similar-${mangaId}`,
-    async () => {
+  useQuery<MangaSimilarResponse[]>({
+    queryKey: [`manga-similar-${mangaId}`],
+    queryFn: async () => {
       try {
         const {
           data: { data },
@@ -25,5 +25,5 @@ export const useGetMangaSimilar = ({ mangaId }: Params) =>
         console.log(e)
       }
     },
-    { refetchOnWindowFocus: false }
-  )
+    refetchOnWindowFocus: false,
+  })
