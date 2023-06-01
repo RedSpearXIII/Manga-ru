@@ -1,23 +1,15 @@
 .card {
-  @apply grid grid-cols-[85px_auto] gap-2 dark:bg-slate-800 bg-slate-200 shadow rounded overflow-hidden;
-
-  .image {
-    @apply object-cover h-[130px];
-  }
-
-  .content {
-    @apply pr-4 pt-1;
-    .titleName {
-      h3 {
-        @apply text-purple-300 leading-5 line-clamp-2 text-base;
-      }
-      p {
-        @apply text-xs line-clamp-5;
-      }
+  @apply w-32;
+  .top {
+    @apply relative;
+    .cardImage {
+      @apply h-48 w-full object-cover rounded;
+    }
+    .relationType {
+      @apply text-sm absolute px-4 py-2 rounded bottom-1 left-1/2 -translate-x-1/2 bg-slate-700/50 backdrop-blur-md text-slate-200 w-[90%] text-center;
     }
   }
-}
-
-.loader {
-  @apply animate-pulse;
+  .title {
+    @apply text-xs;
+  }
 }

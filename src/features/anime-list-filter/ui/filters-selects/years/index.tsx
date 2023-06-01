@@ -1,6 +1,6 @@
 import React from "react"
 import { MultiSelect } from "~shared/components"
-import { useGetAnimeYears } from "~shared/api/queries/anime/useGetAnimeYears"
+import { useGetAnimeYears } from "~shared/api"
 import { useAnimeListFilterStore } from "~features/anime-list-filter"
 
 interface Props {

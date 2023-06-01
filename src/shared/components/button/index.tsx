@@ -17,11 +17,13 @@ interface Props
   > {
   children: ReactNode
   isLoading?: boolean
+  icon?: ReactNode
+  rightIcon?: ReactNode
 }
 
 const Button = forwardRef(
   (
-    { children, isLoading, ...other }: Props,
+    { children, isLoading, icon, rightIcon, ...other }: Props,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     return (
@@ -30,23 +32,28 @@ const Button = forwardRef(
         {...(other as any)}
         className={clsx(
           styles.button,
-          isLoading && styles.buttonDisabled,
+          !isLoading && styles.buttonDisabled,
           other.className
         )}
         layout
         whileTap={{ y: 3 }}
         disabled={isLoading}
       >
-        {isLoading && (
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0.3 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className={styles.loader}
-          >
-            <ImSpinner9 />
-          </motion.div>
-        )}
-        <p>{children}</p>
+        <div className={styles.buttonContent}>
+          {isLoading ? (
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0.3 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className={styles.loader}
+            >
+              <ImSpinner9 />
+            </motion.div>
+          ) : (
+            icon && <div className={styles.icon}>{icon}</div>
+          )}
+          <p className={styles.buttonText}>{children}</p>
+          {rightIcon && <div className={styles.icon}>{rightIcon}</div>}
+        </div>
       </motion.button>
     )
   }

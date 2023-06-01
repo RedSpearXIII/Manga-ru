@@ -8,8 +8,7 @@ export const Studios = () => {
   const { data, isLoading } = useGetAnimeByUrl({ animeUrl: animeUrl! })
 
   if (!data && isLoading) return <p>loading...</p>
-  if (!data && !isLoading) return <p>error</p>
-
+  if (!data && !isLoading) return null
   if (!data.studio || data.studio.length < 0) return null
 
   return (

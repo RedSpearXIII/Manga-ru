@@ -1,74 +1,15 @@
-import React, { useState } from "react"
+import React from "react"
 import { useGetMangaSimilar } from "~shared/api"
-import { Link, useParams } from "react-router-dom"
-import styles from "./styles.module.pcss"
-import clsx from "clsx"
-import { SimilarMediaCard, SimilarMediaCardLoader } from "~entities/media"
+import { useParams } from "react-router-dom"
 
 export const SimilarMangaList = () => {
   const { mangaId } = useParams()
-
-  const [isShowAll, setIsShowAll] = useState(false)
-
-  const toggleShow = () => {
-    setIsShowAll((prev) => !prev)
-  }
-
-  const { data, isLoading } = useGetMangaSimilar({
+  const { data, isLoading, isError } = useGetMangaSimilar({
     mangaId: mangaId!,
   })
 
-  if (!data && !isLoading) return <p>Error</p>
-
+  if (isError) return null
   if (!isLoading && data && data.length === 0) return null
 
-  const loader = Array.from({ length: 10 }, (_, index) => (
-    <SimilarMediaCardLoader key={index} />
-  ))
-
-  return (
-    <div className={"container mx-auto mt-6"}>
-      <h2>Похожие тайтлы</h2>
-      <div className={clsx(!isShowAll && styles.listClosed)}>
-        <div className={styles.list}>
-          {isLoading ? (
-            loader
-          ) : (
-            <>
-              {data.map((manga) => (
-                <Link key={manga.id} to={`/manga/title/${manga.id}`}>
-                  <SimilarMediaCard
-                    id={manga.id}
-                    title={manga.title}
-                    image={manga.image}
-                  />
-                </Link>
-              ))}
-            </>
-          )}
-        </div>
-      </div>
-      {isLoading ? (
-        <div
-          className={
-            "h-5 w-28 animate-pulse dark:bg-slate-700 bg-slate-200 rounded mt-1"
-          }
-        />
-      ) : (
-        <p
-          onClick={toggleShow}
-          className={clsx(
-            styles.listShowToggler,
-            data.length <= 10 && "min-[1681px]:hidden",
-            data.length <= 8 && "min-[1384px]:hidden",
-            data.length <= 6 && "min-[1111px]:hidden",
-            data.length <= 4 && "min-[768px]:hidden",
-            data.length <= 2 && "hidden"
-          )}
-        >
-          {isShowAll ? "Скрыть" : "Показать всё"}
-        </p>
-      )}
-    </div>
-  )
+  return <div className={"container mx-auto mt-6"}></div>
 }

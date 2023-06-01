@@ -2,32 +2,48 @@ import React from "react"
 import { useHover } from "~shared/hooks"
 import styles from "./styles.module.pcss"
 import { BiChevronDown } from "react-icons/all"
-import { motion } from "framer-motion"
-import { useListAnimation } from "~shared/hooks"
+import { motion, Variants } from "framer-motion"
+import { Button } from "~shared/components"
 
-const chevronVariants = {
+const chevronVariants: Variants = {
   open: { rotate: 0 },
-  close: { rotate: 180 },
+  closed: { rotate: 180 },
+}
+const dropdownVariants: Variants = {
+  open: {
+    height: "auto",
+  },
+  closed: {
+    height: 0,
+  },
 }
 
 export const AddMangaToList = () => {
   const [isHovered, hoverProps] = useHover(300)
 
-  const scope = useListAnimation(isHovered)
-
   return (
-    <div className={styles.container} {...hoverProps} ref={scope}>
-      <div className={styles.button}>
-        <motion.div
-          variants={chevronVariants}
-          animate={isHovered ? "open" : "close"}
+    <div className={styles.container} {...hoverProps}>
+      <div className={"flex"}>
+        <Button
+          rightIcon={
+            <motion.div
+              variants={chevronVariants}
+              animate={isHovered ? "open" : "closed"}
+            >
+              <BiChevronDown />
+            </motion.div>
+          }
+          className={"flex-1"}
         >
-          <BiChevronDown size={24} />
-        </motion.div>
-        <p>Добавить в список</p>
+          Добавить в список
+        </Button>
       </div>
 
-      <motion.ul className={styles.dropdown}>
+      <motion.ul
+        variants={dropdownVariants}
+        animate={isHovered ? "open" : "closed"}
+        className={styles.dropdown}
+      >
         <li className={styles.dropdownItem}>Прочитано</li>
         <li className={styles.dropdownItem}>Читаю</li>
         <li className={styles.dropdownItem}>Планирую читать</li>

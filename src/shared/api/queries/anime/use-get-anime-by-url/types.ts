@@ -23,7 +23,7 @@ export type AnimeDetailingResponse = {
   type: AnimeTypeVariants
   episodesCount?: number
   episodesCountAired?: number
-  genres: { id: string; genre: string }[]
+  genres?: { id: string; genre: string }[]
   status: AnimeStatuses
   ratingMpa: AnimeRatingMpa
   minimalAge: number

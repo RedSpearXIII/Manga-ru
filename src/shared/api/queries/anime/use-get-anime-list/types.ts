@@ -20,7 +20,7 @@ export type AnimeResponse = {
     studio: string
   }[]
   season: AnimeSeasons
-  episodesCount: number
+  episodesCount?: number
   genres: { id: string; genre: string }[]
   status: AnimeStatuses
   ratingMpa: AnimeRatingMpa

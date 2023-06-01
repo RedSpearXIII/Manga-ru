@@ -9,8 +9,8 @@ import { AnimeCard } from "~widgets/anime-card"
 import { useInView } from "framer-motion"
 
 export const AnimeList = () => {
-  const lastElementRef = useRef(null)
-  const lastElementInView = useInView(lastElementRef)
+  const loadMoreTriggerRef = useRef(null)
+  const lastElementInView = useInView(loadMoreTriggerRef)
 
   const {
     searchQuery,
@@ -99,7 +99,7 @@ export const AnimeList = () => {
       <div className={styles.list}>
         {cards}
         {isFetchingNextPage && hasNextPage && loaders}
-        <span ref={lastElementRef} />
+        <span className={styles.loadMoreTrigger} ref={loadMoreTriggerRef} />
       </div>
     </div>
   )

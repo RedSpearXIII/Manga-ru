@@ -1,5 +1,11 @@
 import React from "react"
-import { AnimeContent, PreviewMedia, PagePlayer, AdditionalInfo } from "./ui"
+import {
+  AnimeContent,
+  PreviewMedia,
+  PagePlayer,
+  AdditionalInfo,
+  RelatedAnimeList,
+} from "./ui"
 
 const AnimeDetailingPage = () => {
   return (
@@ -8,6 +14,7 @@ const AnimeDetailingPage = () => {
       <div className={"container mx-auto px-2"}>
         <PreviewMedia />
         <AdditionalInfo />
+        <RelatedAnimeList />
         <PagePlayer />
       </div>
     </div>

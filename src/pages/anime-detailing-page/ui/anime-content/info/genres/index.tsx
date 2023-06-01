@@ -8,7 +8,8 @@ export const Genres = () => {
   const { data, isLoading } = useGetAnimeByUrl({ animeUrl: animeUrl! })
 
   if (!data && isLoading) return <p>loading...</p>
-  if (!data && !isLoading) return <p>error</p>
+  if (!data && !isLoading) return null
+  if (!data.genres || data.genres.length <= 0) return null
 
   return (
     <div className={styles.infoBlock}>

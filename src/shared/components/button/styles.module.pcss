@@ -1,5 +1,14 @@
 .button {
-  @apply bg-orange-400 w-full flex justify-center items-center gap-3 transition-colors;
+  @apply bg-orange-400 appearance-none gap-3 transition-colors px-2;
+  .buttonContent {
+    @apply flex items-center gap-x-1.5 justify-between;
+    .buttonText {
+      @apply whitespace-nowrap text-sm flex-1;
+    }
+  }
+  .icon {
+    @apply text-xl;
+  }
 }
 
 .buttonDisabled {
@@ -7,10 +16,9 @@
 }
 
 .loader {
-  @apply animate-spin left-3;
+  @apply animate-spin;
 }
 
 .button[type="submit"] {
-  @apply appearance-none;
-  @apply bg-orange-400 w-full;
+  @apply bg-orange-400;
 }
