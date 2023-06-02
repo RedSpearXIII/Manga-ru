@@ -24,10 +24,12 @@ export const BgImage = () => {
   return (
     <>
       {imageSrc && (
-        <div
-          className={styles.bgImage}
-          style={{ backgroundImage: `url(${imageSrc})` }}
-        />
+        <div className={styles.wrapper}>
+          <div
+            className={styles.bgImage}
+            style={{ backgroundImage: `url(${imageSrc})` }}
+          />
+        </div>
       )}
     </>
   )

@@ -1,13 +1,13 @@
 .backdrop {
-  @apply fixed left-0 top-0 z-30 w-screen h-screen bg-black/30;
+  @apply fixed flex justify-center items-center left-0 top-0 z-30 w-screen h-screen bg-black/30;
 
   .ratingDistribution {
-    @apply max-w-xs absolute w-full py-2 pl-3 pr-5 bottom-[10px] bg-slate-800/90 rounded drop-shadow backdrop-blur-2xl;
+    @apply max-w-xs w-full py-2 pl-3 pr-5 bg-slate-800/90 rounded drop-shadow backdrop-blur-2xl;
 
     .header {
       @apply text-white py-2 flex items-center justify-between;
 
-      .totalVotes {
+      .headerTitle {
         @apply flex items-center gap-x-1;
         span {
           @apply bg-slate-800 rounded px-2 drop-shadow;
@@ -46,5 +46,9 @@
         }
       }
     }
+  }
+
+  .totalVotes {
+    @apply text-slate-300 text-center text-sm;
   }
 }

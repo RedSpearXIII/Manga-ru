@@ -1,9 +1,9 @@
 import React from "react"
-import { useHover } from "~shared/hooks"
 import styles from "./styles.module.pcss"
-import { BiChevronDown } from "react-icons/all"
-import { motion, Variants } from "framer-motion"
 import { Button } from "~shared/components"
+import { motion, Variants } from "framer-motion"
+import { BiChevronDown } from "react-icons/all"
+import { useHover } from "~shared/hooks"
 
 const chevronVariants: Variants = {
   open: { rotate: 0 },
@@ -18,11 +18,18 @@ const dropdownVariants: Variants = {
   },
 }
 
-export const AddMangaToList = () => {
+const options = [
+  { title: "Смотрю", value: "Watching" },
+  { title: "Запланировано", value: "InPlan" },
+  { title: "Просмотрено", value: "Watched" },
+  { title: "Отложено", value: "Postponed" },
+]
+
+export const FavoriteListButton = () => {
   const [isHovered, hoverProps] = useHover(300)
 
   return (
-    <div className={styles.container} {...hoverProps}>
+    <div className={styles.favoriteListButton} {...hoverProps}>
       <div className={"flex"}>
         <Button
           rightIcon={
@@ -44,10 +51,9 @@ export const AddMangaToList = () => {
         animate={isHovered ? "open" : "closed"}
         className={styles.dropdown}
       >
-        <li className={styles.dropdownItem}>Прочитано</li>
-        <li className={styles.dropdownItem}>Читаю</li>
-        <li className={styles.dropdownItem}>Планирую читать</li>
-        <li className={styles.dropdownItem}>Заброшенно</li>
+        {options.map((option) => (
+          <li className={styles.dropdownItem}>{option.title}</li>
+        ))}
       </motion.ul>
     </div>
   )

@@ -8,31 +8,35 @@ import { RatingDistribution } from "./rating-distribution"
 import { AnimatePresence } from "framer-motion"
 import { useStore } from "effector-react"
 import { distributionRatingModel } from "../model"
+import { AiFillStar } from "react-icons/all"
 
-type Props = {
-  rating: number
+type RatingButtonProps = {
   onRateMedia: () => void
   ratingDistribution: { rating: number; count: number }[]
 }
 
-export const Rating = ({ rating, onRateMedia, ratingDistribution }: Props) => {
-  const color = getRatingColor(rating)
+export const RatingButton = ({
+  onRateMedia,
+  ratingDistribution,
+}: RatingButtonProps) => {
   const { distributionPanelIsOpened } = useStore(
     distributionRatingModel.$distributionRating
   )
 
   const openDistribution = () => {
-    !distributionPanelIsOpened &&
-      distributionRatingModel.setDistributionPanelIsOpened(true)
+    distributionRatingModel.setDistributionPanelIsOpened(true)
   }
+
   return (
     <>
       <div
         onClick={openDistribution}
-        className={clsx(styles.rating, styles[color])}
+        className={clsx(styles.rating, styles["green"])}
       >
-        <p>{rating} / 10</p>
-        <RatingIcon rating={rating} />
+        <p>Оценить аниме</p>
+        <div>
+          <AiFillStar />
+        </div>
       </div>
       <AnimatePresence>
         {distributionPanelIsOpened && (
@@ -42,5 +46,19 @@ export const Rating = ({ rating, onRateMedia, ratingDistribution }: Props) => {
         )}
       </AnimatePresence>
     </>
+  )
+}
+
+type MediaRatingProps = {
+  rating: number
+}
+export const MediaRating = ({ rating }: MediaRatingProps) => {
+  const color = getRatingColor(rating)
+
+  return (
+    <div className={clsx(styles.rating, styles[color])}>
+      <p>Рейтинг: {rating} / 10</p>
+      <RatingIcon rating={rating} />
+    </div>
   )
 }

@@ -1,5 +1,10 @@
 import { useState, useRef, useEffect } from "react"
 
+/**
+ * @params timeout - timeout before calling the onMouseLeave function
+ * @return [isHovered, hoveredProps]
+ */
+
 export function useHover(
   timeout: number = 0
 ): [boolean, { onMouseEnter: () => void; onMouseLeave: () => void }] {

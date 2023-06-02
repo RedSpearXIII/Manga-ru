@@ -5,7 +5,7 @@ import { AiFillStar, IoClose } from "react-icons/all"
 import {
   getRatingColor,
   getRatingDistributionWithPercentage,
-} from "~entities/rating/lib"
+} from "~entities/rating/rating-button/lib"
 import { motion } from "framer-motion"
 import clsx from "clsx"
 import { useDisableScroll, useOnClickOutside } from "~shared/hooks"
@@ -43,16 +43,16 @@ export const RatingDistribution = ({ ratingDistribution }: Props) => {
       className={styles.backdrop}
     >
       <motion.div
-        initial={{ left: 0, translateX: "-100%" }}
-        animate={{ left: 10, translateX: "0%" }}
-        exit={{ left: 0, translateX: "-100%" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.15 }}
         ref={distributionPanelRef}
         className={styles.ratingDistribution}
       >
         <div className={styles.header}>
-          <p className={styles.totalVotes}>
-            Всего оценок: <span>{totalVotes}</span>
+          <p className={styles.headerTitle}>
+            Нажмите на звездочку чтобы оценить аниме
           </p>
           <IoClose onClick={closePanel} />
         </div>
@@ -82,6 +82,8 @@ export const RatingDistribution = ({ ratingDistribution }: Props) => {
             </div>
           ))}
         </div>
+
+        <p className={styles.totalVotes}>Всего оценок: {totalVotes}</p>
       </motion.div>
     </motion.div>
   )

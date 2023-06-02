@@ -2,8 +2,7 @@ import React from "react"
 import styles from "./styles.module.pcss"
 import { useGetMangaById } from "~shared/api"
 import { useParams } from "react-router-dom"
-import { AddMangaToList } from "~features/add-manga-to-list"
-import { AddMangaToFavorites } from "~features/add-manga-to-favorites"
+import { FavoriteListButtons } from "~entities/favorite-media/favorite-list-buttons"
 
 export const MangaContent = () => {
   const { mangaId } = useParams()
@@ -24,10 +23,7 @@ export const MangaContent = () => {
               src={data?.image}
               alt={"title-image"}
             />
-            <div className={styles.actions}>
-              <AddMangaToList />
-              <AddMangaToFavorites />
-            </div>
+            <FavoriteListButtons />
           </>
         )}
       </div>

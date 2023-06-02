@@ -1,7 +1,6 @@
 import React, { useRef } from "react"
 import styles from "./styles.module.pcss"
 import { getPlayerLinkFromParams } from "../lib"
-import { PlayerLighting } from "~features/player/player-lighting"
 import { InViewPlaybackController } from "~features/player/in-view-playback-controller"
 
 interface PlayerProps {
@@ -18,7 +17,6 @@ export const Player = ({ playerLink }: PlayerProps) => {
 
   return (
     <div className={styles.playerContainer}>
-      <PlayerLighting />
       <InViewPlaybackController playerRef={playerRef} />
       <iframe
         ref={playerRef}

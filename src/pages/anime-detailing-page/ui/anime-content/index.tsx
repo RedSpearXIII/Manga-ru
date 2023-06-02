@@ -8,6 +8,7 @@ import { Info } from "./info"
 import { useScreenSize } from "~shared/hooks"
 import { Breakpoints } from "~shared/types"
 import { BgImage } from "./bg-image"
+import { FavoriteListButtons } from "~entities/favorite-media/favorite-list-buttons"
 import { AnimeRating } from "./anime-rating"
 
 export const AnimeContent = () => {
@@ -39,6 +40,7 @@ export const AnimeContent = () => {
               </Badge>
             </span>
           )}
+          {screenSize >= Breakpoints.lg && <FavoriteListButtons />}
         </div>
 
         <div className={styles.rightBlock}>
@@ -46,8 +48,14 @@ export const AnimeContent = () => {
             <div className={styles.topSectionLoader} />
           ) : (
             <div className={styles.topSection}>
-              <h1>{data.title}</h1>
-              <AnimeRating animeRating={data.rating} />
+              <div className={"w-fit"}>
+                <AnimeRating animeRating={data.rating} />
+              </div>
+              <div className={styles.topSectionTitle}>
+                <h1>{data.title}</h1>
+              </div>
+
+              {screenSize < Breakpoints.lg && <FavoriteListButtons />}
             </div>
           )}
           {screenSize >= Breakpoints.lg && (

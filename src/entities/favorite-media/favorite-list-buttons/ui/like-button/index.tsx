@@ -1,11 +1,11 @@
 import React from "react"
+import { motion } from "framer-motion"
 import styles from "./styles.module.pcss"
 import { AiFillHeart } from "react-icons/all"
-import { motion } from "framer-motion"
 
-export const AddMangaToFavorites = () => {
+export const LikeButton = () => {
   return (
-    <motion.div className={styles.button} whileTap={{ scale: 0.9 }}>
+    <motion.div className={styles.likeButton} whileTap={{ scale: 0.9 }}>
       <AiFillHeart />
     </motion.div>
   )
