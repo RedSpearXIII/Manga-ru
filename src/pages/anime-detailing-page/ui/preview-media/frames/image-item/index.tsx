@@ -1,43 +1,38 @@
-import React, { useEffect, useRef, useState } from "react"
+import React from "react"
 import styles from "./styles.module.pcss"
 import loaderStyles from "../../styles.module.pcss"
 import { useHover, useImageLoading } from "~shared/hooks"
 import { HiMagnifyingGlass } from "react-icons/all"
-import { AnimatePresence, motion, useInView } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import clsx from "clsx"
 
 type Props = {
   src: string
-  onClick: () => void
+  alt?: string
 }
 
-export const ImageItem = ({ src, onClick }: Props) => {
+export const ImageItem = ({ src, alt }: Props) => {
   const [isHover, hoveredProps] = useHover()
-  const [imgSrc, setImgSrc] = useState<string | undefined>(undefined)
-  const imgRef = useRef(null)
 
-  const imgInView = useInView(imgRef, {
-    margin: "0px 50px 0px 0px",
-    once: true,
-  })
-
-  useEffect(() => {
-    if (imgInView && !imgSrc) {
-      setImgSrc(src)
-    }
-  }, [imgInView])
-
-  const { onLoad, isLoaded } = useImageLoading()
-
+  const { isLoaded, onLoad } = useImageLoading()
   return (
-    <div {...hoveredProps} onClick={onClick} className={styles.imageContainer}>
-      {!isLoaded && <div className={loaderStyles.mediaLoader} />}
+    <a {...hoveredProps} href={src} className={styles.imageContainer}>
       <img
-        ref={imgRef}
         onLoad={onLoad}
-        alt={"Ошибка при загрузке"}
-        className={clsx(styles.image, isHover && "brightness-50")}
-        src={imgSrc}
+        alt={alt}
+        className={clsx(
+          styles.image,
+          isHover && "brightness-50",
+          !isLoaded && "opacity-0"
+        )}
+        src={src}
+      />
+      <div
+        className={clsx(
+          loaderStyles.mediaLoader,
+          "absolute left-0 top-0",
+          isLoaded && "hidden"
+        )}
       />
       <AnimatePresence>
         {isHover && (
@@ -56,6 +51,6 @@ export const ImageItem = ({ src, onClick }: Props) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </a>
   )
 }

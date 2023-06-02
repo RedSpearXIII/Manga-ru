@@ -1,0 +1,3 @@
+.lg-react-element {
+  @apply h-32 flex gap-2 items-center justify-items-start;
+}

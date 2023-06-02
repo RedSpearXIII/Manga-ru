@@ -1,8 +1,17 @@
 import React from "react"
 import { useGetAnimeTrailers } from "~pages/anime-detailing-page/api"
 import { useParams } from "react-router-dom"
-import styles from "./styles.module.pcss"
 import loaderStyles from "../styles.module.pcss"
+import styles from "./styles.module.pcss"
+import LightGallery from "lightgallery/react"
+import lgVideo from "lightgallery/plugins/video"
+import lgHash from "lightgallery/plugins/hash"
+import lgVimeoThumbnail from "lightgallery/plugins/vimeoThumbnail"
+import "lightgallery/css/lightgallery.css"
+import "lightgallery/css/lg-thumbnail.css"
+import "lightgallery/css/lg-video.css"
+import "../light-gallery.css"
+import { FaPlay } from "react-icons/all"
 
 export const Trailers = () => {
   const { animeUrl } = useParams()
@@ -15,16 +24,31 @@ export const Trailers = () => {
 
   return (
     <div>
-      <h3>Тизер</h3>
+      <h3>Видео</h3>
       {isLoading ? (
         <div className={loaderStyles.mediaLoader} />
       ) : (
-        <iframe
-          className={styles.iframe}
-          width="227"
-          height="128"
-          src={data[0].playerUrl.replace("http", "https")}
-        />
+        <div>
+          <LightGallery
+            galleryId={"anime-page-video-gallery"}
+            autoplayVideoOnSlide
+            speed={500}
+            plugins={[lgVideo, lgHash, lgVimeoThumbnail]}
+          >
+            {data.map((video) => (
+              <a className={styles.videoImageContainer} href={video.playerUrl}>
+                <img
+                  alt={video.name}
+                  src={video.imageUrl}
+                  data-src={video.playerUrl}
+                />
+                <div className={styles.playIcon}>
+                  <FaPlay />
+                </div>
+              </a>
+            ))}
+          </LightGallery>
+        </div>
       )}
     </div>
   )
