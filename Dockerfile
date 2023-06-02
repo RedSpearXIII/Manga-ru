@@ -11,7 +11,7 @@ RUN npm install -g pnpm
 RUN pnpm install
 RUN pnpm build
 
-ENV VITE_REACT_APP_API_URL=http://anifox.club:12200/api/
+ENV VITE_REACT_APP_API_URL=https://anifox.club/api/
 
 FROM nginx:1.23.3-alpine
 COPY --from=0 /app/dist /usr/share/nginx/html

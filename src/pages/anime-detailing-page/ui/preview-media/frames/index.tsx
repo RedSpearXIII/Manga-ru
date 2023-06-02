@@ -38,6 +38,8 @@ export const Frames = () => {
       ) : (
         <div className={styles.gallery}>
           <LightGallery
+            onAfterOpen={() => (document.body.style.overflowY = "hidden")}
+            onBeforeClose={() => (document.body.style.overflowY = "auto")}
             galleryId={"anime-page-frames-gallery"}
             resetScrollPosition
             download={false}

@@ -15,7 +15,6 @@ import { FaPlay } from "react-icons/all"
 
 export const Trailers = () => {
   const { animeUrl } = useParams()
-
   const { data, isLoading, isError } = useGetAnimeTrailers(animeUrl!)
 
   if (isError) return null
@@ -30,6 +29,8 @@ export const Trailers = () => {
       ) : (
         <div>
           <LightGallery
+            onAfterOpen={() => (document.body.style.overflowY = "hidden")}
+            onBeforeClose={() => (document.body.style.overflowY = "auto")}
             galleryId={"anime-page-video-gallery"}
             autoplayVideoOnSlide
             speed={500}

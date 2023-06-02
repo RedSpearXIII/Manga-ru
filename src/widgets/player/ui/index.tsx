@@ -7,6 +7,8 @@ interface PlayerProps {
   playerLink: string
 }
 
+//TODO: Пофиксить скролл до вверха страницы после закрытия плеера и переключения серии
+
 export const Player = ({ playerLink }: PlayerProps) => {
   const playerRef = useRef(null)
 
