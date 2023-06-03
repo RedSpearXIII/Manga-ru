@@ -2,11 +2,11 @@ import React, { lazy, MouseEvent, Suspense, useRef } from "react"
 import { useOnClickOutside, useScreenSize } from "~shared/hooks"
 import styles from "./styles.module.pcss"
 import { GoSettings } from "react-icons/all"
-import { useExtraFilterStore } from "~features/anime-list-filter"
-import { shallow } from "zustand/shallow"
+import { animeListExtraFilterModel } from "~features/anime-list-filter"
 import { Breakpoints } from "~shared/types"
 import { AnimatePresence } from "framer-motion"
 import clsx from "clsx"
+import { useStore } from "effector-react"
 
 const ExtraFilterDropdown = lazy(() =>
   import("./extra-filter-dropdown").then((module) => ({
@@ -18,18 +18,15 @@ export const ExtraFilter = () => {
   const screenSize = useScreenSize()
 
   const extraFilterRef = useRef(null)
-  const { isOpened, setIsOpened } = useExtraFilterStore(
-    (state) => state,
-    shallow
-  )
+  const { isOpened } = useStore(animeListExtraFilterModel.$extraFilterStore)
 
   const onClickExtraFilterBtn = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault()
-    setIsOpened(!isOpened)
+    animeListExtraFilterModel.setIsOpened(!isOpened)
   }
   const closeExtraFilter = () => {
     if (screenSize >= Breakpoints.xxl) {
-      setIsOpened(false)
+      animeListExtraFilterModel.setIsOpened(false)
     }
   }
 

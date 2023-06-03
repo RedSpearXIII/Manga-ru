@@ -1,1 +1,1 @@
-export * from "./manga-list-filter"
+export * as mangaListFilterModel from "./manga-list-filter"

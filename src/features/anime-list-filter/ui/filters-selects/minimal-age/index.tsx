@@ -1,8 +1,8 @@
 import React from "react"
 import { Select } from "~shared/components"
 import { AnimeMinimalAge } from "~shared/api"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
-import { shallow } from "zustand/shallow"
+import { animeListFilterModel } from "~features/anime-list-filter"
+import { useStore } from "effector-react"
 
 const options = [
   { value: "18", label: "18+" },
@@ -17,17 +17,16 @@ type Props = {
 }
 
 export const MinimalAge = ({ inExtraFilter }: Props) => {
-  const { minimalAge, setMinimalAge } = useAnimeListFilterStore(
-    (state) => state,
-    shallow
-  )
+  const minimalAge = useStore(animeListFilterModel.$minimalAge)
 
   return (
     <div>
       <Select
         value={minimalAge ? minimalAge.toString() : ""}
-        onValueChange={(val) =>
-          setMinimalAge(val ? (Number(val) as AnimeMinimalAge) : null)
+        onValueChange={(value) =>
+          animeListFilterModel.setMinimalAge({
+            minimalAge: value ? (Number(value) as AnimeMinimalAge) : null,
+          })
         }
         options={options}
         placeholder={"Любой"}

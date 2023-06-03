@@ -3,18 +3,18 @@ import styles from "./styles.module.pcss"
 import { useGetMangaList } from "~shared/api"
 import {
   MangaListFilter,
-  useMangaListFilterStore,
+  mangaListFilterModel,
 } from "~features/manga-list-filter"
-import { shallow } from "zustand/shallow"
 import { BiError } from "react-icons/all"
 import { MediaCard, MediaCardSkeleton } from "~entities/media"
 import { useInView } from "framer-motion"
+import { useStore } from "effector-react"
 
 export const MangaList = () => {
   const lastElementRef = useRef(null)
   const lastElementInView = useInView(lastElementRef)
 
-  const { searchQuery } = useMangaListFilterStore((state) => state, shallow)
+  const { searchQuery } = useStore(mangaListFilterModel.$mangaListFilter)
 
   const {
     data,

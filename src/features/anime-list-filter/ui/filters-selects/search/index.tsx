@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react"
 import { FaSearch, MdClear } from "react-icons/all"
 import { Input } from "~shared/components"
 import { useDebounce } from "~shared/hooks"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
+import { useStore } from "effector-react"
+import { animeListFilterModel } from "~features/anime-list-filter"
 
 export const Search = () => {
-  const searchQuery = useAnimeListFilterStore((state) => state.searchQuery)
-  const setSearchQuery = useAnimeListFilterStore(
-    (state) => state.setSearchQuery
-  )
+  const searchQuery = useStore(animeListFilterModel.$searchQuery)
 
   const [searchValue, setSearchValue] = useState(searchQuery)
   const debouncedValue = useDebounce(searchValue, 300)
@@ -19,7 +17,7 @@ export const Search = () => {
   }, [searchQuery])
 
   useEffect(() => {
-    setSearchQuery(debouncedValue)
+    animeListFilterModel.setSearchQuery({ queryString: debouncedValue })
   }, [debouncedValue])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +25,7 @@ export const Search = () => {
   }
 
   const clearSearch = () => {
-    setSearchQuery("")
+    animeListFilterModel.setSearchQuery({ queryString: "" })
   }
 
   return (

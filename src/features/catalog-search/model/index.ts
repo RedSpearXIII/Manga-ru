@@ -1,1 +1,1 @@
-export * from "./catalog-search"
+export * as catalogSearchModel from "./catalog-search"

@@ -3,9 +3,10 @@ import { Portal } from "~shared/components"
 import styles from "./styles.module.pcss"
 import { motion, Variants } from "framer-motion"
 import { MenuToggle } from "~widgets/mobile-nav-menu/ui/menu-toggle"
-import { useMobileNavMenuStore } from "../model"
+import { mobileNavMenuModel } from "../model"
 import { NavItems } from "./nav-items"
 import clsx from "clsx"
+import { useStore } from "effector-react"
 
 const variants: Variants = {
   open: {
@@ -17,7 +18,7 @@ const variants: Variants = {
 }
 
 export const MobileNavMenu = () => {
-  const { isOpened } = useMobileNavMenuStore()
+  const { isOpened } = useStore(mobileNavMenuModel.$mobileNavMenu)
   return (
     <Portal>
       <nav className={styles.wrapper}>

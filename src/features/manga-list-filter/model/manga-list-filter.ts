@@ -1,42 +1,24 @@
-import { create } from "zustand"
-import { immer } from "zustand/middleware/immer"
+import { createEvent, createStore } from "effector"
 
 type State = {
   searchQuery: string
-  status: any //TODO: Доработать типы
-  orderBy: "random" | "popular" | "views" | null
 }
-
-type Actions = {
-  setSearchQuery: (queryString: string) => void
-  setStatus: (status: any | null) => void
-  setOrderBy: (payload: "random" | "popular" | "views" | null) => void
-  resetFilter: () => void
-}
-
-type Store = State & Actions
 
 const initialState: State = {
-  orderBy: null,
-  status: null,
   searchQuery: "",
 }
 
-export const useMangaListFilterStore = create(
-  immer<Store>((setState) => ({
-    ...initialState,
-    setSearchQuery: (queryString) =>
-      setState((store) => {
-        store.searchQuery = queryString
-      }),
-    setStatus: (status) =>
-      setState((store) => {
-        store.status = status
-      }),
-    setOrderBy: (value) =>
-      setState((store) => {
-        store.orderBy = value
-      }),
-    resetFilter: () => setState(initialState),
+export const setSearchQuery = createEvent<{ queryString: string }>()
+export const resetFilter = createEvent()
+
+export const $mangaListFilter = createStore<State>(initialState)
+  .on(setSearchQuery, (state, payload) => ({
+    ...state,
+    searchQuery: payload.queryString,
   }))
+  .on(resetFilter, () => initialState)
+
+export const $filterIsActive = $mangaListFilter.map(
+  (state) => state.searchQuery
 )
+export const $searchQuery = $mangaListFilter.map((state) => state.searchQuery)

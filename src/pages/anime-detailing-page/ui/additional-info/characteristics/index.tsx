@@ -16,7 +16,7 @@ export const Characteristics = () => {
   if (isLoading) return null
   if (!isSuccess) return null
 
-  const type = translateAnimeType(data.type)
+  const type = data.type ? translateAnimeType(data.type) : "?"
   const status = translateMediaStatus(data.status)
   const seasons = `${data.episodesCountAired || "?"} / ${
     data.episodesCount || "?"

@@ -1,20 +1,16 @@
-import { create } from "zustand"
+import { createEvent, createStore } from "effector"
 
 type State = {
   isOpened: boolean
 }
 
-type Actions = {
-  setIsOpen: (value: boolean) => void
-}
-
-type Store = State & Actions
-
 const initialState: State = {
   isOpened: false,
 }
 
-export const useMobileNavMenuStore = create<Store>((setState) => ({
-  ...initialState,
-  setIsOpen: (value) => setState({ isOpened: value }),
-}))
+export const setIsOpen = createEvent<boolean>()
+
+export const $mobileNavMenu = createStore<State>(initialState).on(
+  setIsOpen,
+  (state, payload) => ({ ...state, isOpened: payload })
+)

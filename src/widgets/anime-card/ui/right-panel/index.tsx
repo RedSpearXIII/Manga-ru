@@ -3,8 +3,7 @@ import styles from "./styles.module.pcss"
 import { motion } from "framer-motion"
 import { AnimeResponse, AnimeSeasons, AnimeStatuses } from "~shared/api"
 import { Badge } from "~shared/components"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
-import { shallow } from "zustand/shallow"
+import { animeListFilterModel } from "~features/anime-list-filter"
 import { translateMediaSeason } from "~entities/media"
 import { variants } from "./variants"
 import clsx from "clsx"
@@ -27,21 +26,19 @@ export const RightPanel = ({ anime }: Props) => {
     }
   }, [panelRef])
 
-  const { setRatingMpa, addGenre, setStatus, setSeason } =
-    useAnimeListFilterStore((state) => state, shallow)
   const season = translateMediaSeason(anime.season)
 
   const onSetRatingMpa = () => {
-    setRatingMpa(anime.ratingMpa)
+    animeListFilterModel.setRatingMpa({ ratingMpa: anime.ratingMpa })
   }
   const onAddGenre = (id: string, genre: string) => {
-    addGenre({ id, genre })
+    animeListFilterModel.addGenre({ genre: { id, genre } })
   }
   const onSetStatus = (status: AnimeStatuses) => {
-    setStatus(status)
+    animeListFilterModel.setStatus({ status })
   }
   const onSetSeason = (season: AnimeSeasons) => {
-    setSeason(season)
+    animeListFilterModel.setSeason({ season })
   }
 
   return (

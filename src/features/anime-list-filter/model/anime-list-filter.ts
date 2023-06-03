@@ -1,14 +1,15 @@
-import { create } from "zustand"
-import { immer } from "zustand/middleware/immer"
 import {
+  AnimeGenre,
   AnimeMinimalAge,
   AnimeOrderVariants,
   AnimeRatingMpa,
   AnimeSeasons,
   AnimeStatuses,
+  AnimeStudio,
   AnimeTranslation,
   AnimeTypeVariants,
 } from "~shared/api"
+import { createEvent, createStore } from "effector"
 
 type State = {
   searchQuery: string
@@ -21,29 +22,8 @@ type State = {
   type: AnimeTypeVariants | null
   years: string[]
   translations: AnimeTranslation[]
+  studio: string | null
 }
-
-type Actions = {
-  setSearchQuery: (queryString: string) => void
-  setStatus: (status: AnimeStatuses | null) => void
-  setOrderBy: (payload: AnimeOrderVariants | null) => void
-  addGenre: (genre: { id: string; genre: string }) => void
-  setGenres: (genres: { id: string; genre: string }[]) => void
-  removeGenre: (genreId: string) => void
-  setYears: (years: string[]) => void
-  addYear: (year: string) => void
-  removeYear: (year: string) => void
-  setSeason: (value: AnimeSeasons | null) => void
-  setRatingMpa: (value: AnimeRatingMpa | null) => void
-  setMinimalAge: (value: AnimeMinimalAge | null) => void
-  setType: (value: AnimeTypeVariants | null) => void
-  setTranslations: (value: AnimeTranslation[]) => void
-  removeTranslation: (value: number) => void
-  addTranslation: (translation: AnimeTranslation) => void
-  resetFilter: () => void
-}
-
-export type Store = State & Actions
 
 const initialState: State = {
   orderBy: null,
@@ -56,82 +36,113 @@ const initialState: State = {
   type: null,
   years: [],
   translations: [],
+  studio: null,
 }
 
-export const useAnimeListFilterStore = create(
-  immer<Store>((setState) => ({
-    ...initialState,
-    setSearchQuery: (queryString) =>
-      setState((store) => {
-        store.searchQuery = queryString
-      }),
-    setStatus: (status) =>
-      setState((store) => {
-        store.status = status
-      }),
-    setOrderBy: (value) =>
-      setState((store) => {
-        store.orderBy = value
-      }),
-    addGenre: (genre) =>
-      setState((store) => {
-        const candidate = store.genres.find((el) => el.id === genre.id)
-        if (!candidate) store.genres.push(genre)
-      }),
-    removeGenre: (genreId) =>
-      setState((store) => {
-        store.genres = store.genres.filter((genre) => genre.id !== genreId)
-      }),
-    setGenres: (genres) =>
-      setState((store) => {
-        store.genres = genres
-      }),
-    addYear: (year) =>
-      setState((store) => {
-        const candidate = store.years.find((value) => value === year)
-        if (!candidate) store.years.push(year)
-      }),
-    removeYear: (year) =>
-      setState((store) => {
-        store.years = store.years.filter((value) => value !== year)
-      }),
-    setYears: (years) =>
-      setState((store) => {
-        store.years = years
-      }),
-    setSeason: (season) =>
-      setState((store) => {
-        store.season = season
-      }),
-    setRatingMpa: (rating) =>
-      setState((store) => {
-        store.ratingMpa = rating
-      }),
-    setMinimalAge: (ageValue) =>
-      setState((store) => {
-        store.minimalAge = ageValue
-      }),
-    setType: (type) =>
-      setState((store) => {
-        store.type = type
-      }),
-    addTranslation: (translation) =>
-      setState((store) => {
-        const candidate = store.translations.find(
-          (el) => el.id === translation.id
-        )
-        if (!candidate) store.translations.push(translation)
-      }),
-    removeTranslation: (translationId) =>
-      setState((store) => {
-        store.translations = store.translations.filter(
-          (translation) => translation.id !== translationId
-        )
-      }),
-    setTranslations: (genres) =>
-      setState((store) => {
-        store.translations = genres
-      }),
-    resetFilter: () => setState(initialState),
+export const setSearchQuery = createEvent<{ queryString: string }>()
+export const setStatus = createEvent<{ status: AnimeStatuses | null }>()
+export const setOrderBy = createEvent<{ orderBy: AnimeOrderVariants | null }>()
+export const addGenre = createEvent<{ genre: AnimeGenre }>()
+export const setGenres = createEvent<{ genres: AnimeGenre[] }>()
+export const removeGenre = createEvent<{ genreId: string }>()
+export const setYears = createEvent<{ years: string[] }>()
+export const addYear = createEvent<{ year: string }>()
+export const removeYear = createEvent<{ year: string }>()
+export const setSeason = createEvent<{ season: AnimeSeasons | null }>()
+export const setRatingMpa = createEvent<{ ratingMpa: AnimeRatingMpa | null }>()
+export const setMinimalAge = createEvent<{
+  minimalAge: AnimeMinimalAge | null
+}>()
+export const setType = createEvent<{ type: AnimeTypeVariants | null }>()
+export const setTranslations = createEvent<{
+  translations: AnimeTranslation[]
+}>()
+export const removeTranslation = createEvent<{ translationId: number }>()
+export const addTranslation = createEvent<{ translation: AnimeTranslation }>()
+export const setStudio = createEvent<{ studio: AnimeStudio }>()
+export const resetFilter = createEvent()
+
+export const $animeListFilter = createStore(initialState)
+  .on(setSearchQuery, (state, payload) => ({
+    ...state,
+    searchQuery: payload.queryString,
   }))
+  .on(setStatus, (state, { status }) => ({ ...state, status }))
+  .on(setOrderBy, (state, { orderBy }) => ({ ...state, orderBy }))
+  .on(addGenre, (state, payload) => {
+    const candidate = state.genres.find((el) => el.id === payload.genre.id)
+    if (candidate) return state
+    return { ...state, genres: [...state.genres, payload.genre] }
+  })
+  .on(removeGenre, (state, payload) => ({
+    ...state,
+    genres: state.genres.filter((genre) => genre.id !== payload.genreId),
+  }))
+  .on(setGenres, (state, { genres }) => ({ ...state, genres }))
+  .on(addYear, (state, payload) => {
+    const candidate = state.years.find((year) => year === payload.year)
+    if (candidate) return state
+    return { ...state, years: [...state.years, payload.year] }
+  })
+  .on(removeYear, (state, payload) => ({
+    ...state,
+    years: state.years.filter((year) => year !== payload.year),
+  }))
+  .on(setYears, (state, { years }) => ({ ...state, years }))
+  .on(setSeason, (state, { season }) => ({ ...state, season }))
+  .on(setRatingMpa, (state, { ratingMpa }) => ({ ...state, ratingMpa }))
+  .on(setMinimalAge, (state, { minimalAge }) => ({ ...state, minimalAge }))
+  .on(setMinimalAge, (state, { minimalAge }) => ({ ...state, minimalAge }))
+  .on(setType, (state, { type }) => ({ ...state, type }))
+  .on(addTranslation, (state, payload) => {
+    const candidate = state.translations.find(
+      (el) => el.id === payload.translation.id
+    )
+    if (!candidate) return state
+    return {
+      ...state,
+      translations: [...state.translations, payload.translation],
+    }
+  })
+  .on(removeTranslation, (state, payload) => ({
+    ...state,
+    translations: state.translations.filter(
+      (translation) => translation.id !== payload.translationId
+    ),
+  }))
+  .on(setTranslations, (state, { translations }) => ({
+    ...state,
+    translations,
+  }))
+  .on(setStudio, (state, payload) => ({
+    ...state,
+    studio: payload.studio.studio,
+  }))
+  .on(resetFilter, () => initialState)
+
+export const $filterIsActive = $animeListFilter.map(
+  (state) =>
+    state.orderBy ||
+    state.status ||
+    state.searchQuery ||
+    state.ratingMpa ||
+    state.studio ||
+    state.season ||
+    state.type ||
+    state.minimalAge !== null ||
+    state.genres.length > 0 ||
+    state.years.length > 0 ||
+    state.translations.length > 0
 )
+
+export const $orderBy = $animeListFilter.map((state) => state.orderBy)
+export const $status = $animeListFilter.map((state) => state.status)
+export const $searchQuery = $animeListFilter.map((state) => state.searchQuery)
+export const $ratingMpa = $animeListFilter.map((state) => state.ratingMpa)
+export const $studio = $animeListFilter.map((state) => state.studio)
+export const $genres = $animeListFilter.map((state) => state.genres)
+export const $season = $animeListFilter.map((state) => state.season)
+export const $type = $animeListFilter.map((state) => state.type)
+export const $minimalAge = $animeListFilter.map((state) => state.minimalAge)
+export const $years = $animeListFilter.map((state) => state.years)
+export const $translations = $animeListFilter.map((state) => state.translations)

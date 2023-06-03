@@ -1,20 +1,19 @@
 import React from "react"
-import { shallow } from "zustand/shallow"
 import { FaTags, GrFormClose } from "react-icons/all"
 import styles from "./styles.module.pcss"
 import { Badge } from "~shared/components"
 import { useHover } from "~shared/hooks"
 import { AnimatePresence, motion } from "framer-motion"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
+import { animeListFilterModel } from "~features/anime-list-filter"
 import { getUserDeviceType } from "~shared/lib/user"
 import { translateAnimeType } from "~entities/media"
+import { useStore } from "effector-react"
 
 export const FilterTags = () => {
   const [isHovered, hoveredProps] = useHover()
   const userDeviceType = getUserDeviceType()
 
   const {
-    orderBy,
     genres,
     ratingMpa,
     status,
@@ -22,65 +21,43 @@ export const FilterTags = () => {
     searchQuery,
     type,
     minimalAge,
-    setSearchQuery,
-    setRatingMpa,
-    resetFilter,
-    removeGenre,
-    setStatus,
-    setSeason,
-    setType,
-    setMinimalAge,
     years,
-    removeYear,
     translations,
-    removeTranslation,
-  } = useAnimeListFilterStore((state) => state, shallow)
+  } = useStore(animeListFilterModel.$animeListFilter)
+  const filterIsActive = useStore(animeListFilterModel.$filterIsActive)
 
   const resetSearchFilter = () => {
-    setSearchQuery("")
+    animeListFilterModel.setSearchQuery({ queryString: "" })
   }
   const removeGenreFilter = (id: string) => {
-    removeGenre(id)
+    animeListFilterModel.removeGenre({ genreId: id })
   }
   const removeStatusFilter = () => {
-    setStatus(null)
+    animeListFilterModel.setStatus({ status: null })
   }
   const removeRatingMpaFilter = () => {
-    setRatingMpa(null)
+    animeListFilterModel.setRatingMpa({ ratingMpa: null })
   }
   const removeSeasonFilter = () => {
-    setSeason(null)
+    animeListFilterModel.setSeason({ season: null })
   }
 
   const removeTypeFilter = () => {
-    setType(null)
+    animeListFilterModel.setType({ type: null })
   }
 
   const removeMinimalAgeFilter = () => {
-    setMinimalAge(null)
+    animeListFilterModel.setMinimalAge({ minimalAge: null })
   }
 
   const removeYearItem = (year: string) => {
-    removeYear(year)
+    animeListFilterModel.removeYear({ year })
   }
 
   const removeTranslationItem = (translationId: number) => {
-    removeTranslation(translationId)
+    animeListFilterModel.removeTranslation({ translationId })
   }
 
-  const filterIsActive = !!(
-    orderBy ||
-    status ||
-    searchQuery ||
-    ratingMpa ||
-    genres.length > 0 ||
-    status ||
-    season ||
-    type ||
-    minimalAge !== null ||
-    years.length > 0 ||
-    translations.length > 0
-  )
   if (!filterIsActive) return null
 
   return (
@@ -209,7 +186,7 @@ export const FilterTags = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={resetFilter}
+              onClick={() => animeListFilterModel.resetFilter()}
               className={styles.tagItem}
             >
               <Badge className={"bg-slate-700"}>

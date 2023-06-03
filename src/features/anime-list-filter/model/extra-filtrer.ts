@@ -1,24 +1,16 @@
-import { create } from "zustand"
-import { immer } from "zustand/middleware/immer"
+import { createEvent, createStore } from "effector"
 
 type State = {
   isOpened: boolean
 }
-type Actions = {
-  setIsOpened: (value: boolean) => void
-}
-type Store = State & Actions
 
 const initialState: State = {
   isOpened: false,
 }
 
-export const useExtraFilterStore = create(
-  immer<Store>((setState) => ({
-    ...initialState,
-    setIsOpened: (value) =>
-      setState((state) => {
-        state.isOpened = value
-      }),
-  }))
+export const setIsOpened = createEvent<boolean>()
+
+export const $extraFilterStore = createStore(initialState).on(
+  setIsOpened,
+  (state, payload) => ({ ...state, isOpened: payload })
 )

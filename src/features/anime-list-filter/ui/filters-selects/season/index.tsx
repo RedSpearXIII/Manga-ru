@@ -1,8 +1,8 @@
 import React from "react"
 import { Select } from "~shared/components"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
-import { shallow } from "zustand/shallow"
+import { animeListFilterModel } from "~features/anime-list-filter"
 import { AnimeSeasons } from "~shared/api"
+import { useStore } from "effector-react"
 
 const options = [
   { value: "Fall", label: "Осень" },
@@ -16,16 +16,17 @@ type Props = {
 }
 
 export const Season = ({ inExtraFilter }: Props) => {
-  const { season, setSeason } = useAnimeListFilterStore(
-    (state) => state,
-    shallow
-  )
+  const season = useStore(animeListFilterModel.$season)
 
   return (
     <div>
       <Select
         value={season || ""}
-        onValueChange={(val) => setSeason(val ? (val as AnimeSeasons) : null)}
+        onValueChange={(value) =>
+          animeListFilterModel.setSeason({
+            season: value ? (value as AnimeSeasons) : null,
+          })
+        }
         options={options}
         placeholder={"Любой"}
         label={"Сезон"}

@@ -1,18 +1,15 @@
 import React from "react"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
-import { shallow } from "zustand/shallow"
+import { animeListFilterModel } from "~features/anime-list-filter"
 import { MultiSelect } from "~shared/components"
 import { useGetAnimeGenres } from "~shared/api"
+import { useStore } from "effector-react"
 
 type Props = {
   inExtraFilter?: boolean
 }
 
 export const Genres = ({ inExtraFilter }: Props) => {
-  const { genres, setGenres } = useAnimeListFilterStore(
-    (state) => state,
-    shallow
-  )
+  const genres = useStore(animeListFilterModel.$genres)
 
   const { data, isLoading } = useGetAnimeGenres()
 
@@ -31,7 +28,7 @@ export const Genres = ({ inExtraFilter }: Props) => {
         .filter((genre) => values.includes(genre.value))
         .map((genre) => ({ id: genre.value, genre: genre.label }))
 
-      setGenres(genres)
+      animeListFilterModel.setGenres({ genres })
     }
   }
 

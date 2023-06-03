@@ -10,13 +10,14 @@ import {
   Season,
   Years,
 } from "../filters-selects"
-import { useExtraFilterStore } from "~features/anime-list-filter"
+import { animeListExtraFilterModel } from "~features/anime-list-filter"
 import { getUserDeviceType } from "~shared/lib/user"
 import clsx from "clsx"
+import { useStore } from "effector-react"
 
 const FilterItemsMobile = () => {
   const userDeviceType = getUserDeviceType()
-  const isOpened = useExtraFilterStore((store) => store.isOpened)
+  const { isOpened } = useStore(animeListExtraFilterModel.$extraFilterStore)
 
   if (!isOpened) return null
 

@@ -20,7 +20,6 @@
     "effector-react": "^22.5.2",
     "effector-storage": "^6.0.0",
     "framer-motion": "^10.2.4",
-    "immer": "^9.0.19",
     "js-cookie": "^3.0.5",
     "lightgallery": "^2.7.1",
     "path": "^0.12.7",
@@ -30,8 +29,7 @@
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.9.0",
     "string-hash": "^1.1.3",
-    "yup": "^1.1.1",
-    "zustand": "^4.3.7"
+    "yup": "^1.1.1"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",

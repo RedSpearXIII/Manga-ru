@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
 import { publicHttp } from "~shared/api"
 
+export type AnimeGenre = { id: string; genre: string }
+
 export const useGetAnimeGenres = () =>
-  useQuery<{ id: string; genre: string }[]>({
+  useQuery<AnimeGenre[]>({
     queryKey: ["getAnimeGenres"],
     queryFn: async () => {
       try {

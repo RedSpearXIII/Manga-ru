@@ -1,29 +1,21 @@
-import { create } from "zustand"
-import { immer } from "zustand/middleware/immer"
+import { createEvent, createStore } from "effector"
 
 type State = {
   query: string
-  searchOpen: boolean
+  searchIsOpen: boolean
 }
 
-type Actions = {
-  setQuery: (queryString: string) => void
-  toggleSearchOpen: () => void
+const initialState: State = {
+  query: "",
+  searchIsOpen: false,
 }
 
-type Store = State & Actions
+export const setQuery = createEvent<string>()
+export const toggleSearchOpen = createEvent()
 
-export const useCatalogSearchStore = create(
-  immer<Store>((setState) => ({
-    query: "",
-    searchOpen: false,
-    setQuery: (payload) =>
-      setState((store) => {
-        store.query = payload
-      }),
-    toggleSearchOpen: () =>
-      setState((store) => {
-        store.searchOpen = !store.searchOpen
-      }),
+export const $catalogSearch = createStore<State>(initialState)
+  .on(setQuery, (state, payload) => ({ ...state, query: payload }))
+  .on(toggleSearchOpen, (state) => ({
+    ...state,
+    searchIsOpen: !state.searchIsOpen,
   }))
-)

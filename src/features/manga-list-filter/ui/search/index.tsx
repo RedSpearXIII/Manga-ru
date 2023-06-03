@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { FaSearch } from "react-icons/all"
 import { Input } from "~shared/components"
-import { useMangaListFilterStore } from "~features/manga-list-filter"
+import { mangaListFilterModel } from "~features/manga-list-filter"
 import { useDebounce } from "~shared/hooks"
+import { useStore } from "effector-react"
 
 export const Search = () => {
-  const searchQuery = useMangaListFilterStore((state) => state.searchQuery)
-  const setSearchQuery = useMangaListFilterStore(
-    (state) => state.setSearchQuery
-  )
+  const searchQuery = useStore(mangaListFilterModel.$searchQuery)
 
   const [searchValue, setSearchValue] = useState(searchQuery)
   const debouncedValue = useDebounce(searchValue, 300)
@@ -19,7 +17,7 @@ export const Search = () => {
   }, [searchQuery])
 
   useEffect(() => {
-    setSearchQuery(debouncedValue)
+    mangaListFilterModel.setSearchQuery({ queryString: debouncedValue })
   }, [debouncedValue])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

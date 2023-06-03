@@ -6,19 +6,20 @@ import {
   FaPlay,
   IoNotificationsSharp,
 } from "react-icons/all"
-import { useMobileNavMenuStore } from "../../model"
+import { mobileNavMenuModel } from "../../model"
 import { Link } from "react-router-dom"
 import CatalogSearch from "~features/catalog-search/ui"
 import { ToggleTheme } from "~features/toggle-theme"
 import clsx from "clsx"
 import { motion, stagger, useAnimate } from "framer-motion"
+import { useStore } from "effector-react"
 
 const staggerItems = stagger(0.05, {
   startDelay: 0.15,
 })
 
 export const NavItems = () => {
-  const isOpened = useMobileNavMenuStore((state) => state.isOpened)
+  const { isOpened } = useStore(mobileNavMenuModel.$mobileNavMenu)
 
   const [scope, animate] = useAnimate()
 

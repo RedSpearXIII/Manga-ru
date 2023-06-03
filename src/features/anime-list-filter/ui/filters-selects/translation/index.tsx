@@ -1,8 +1,8 @@
 import React from "react"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
-import { shallow } from "zustand/shallow"
+import { animeListFilterModel } from "~features/anime-list-filter"
 import { MultiSelect } from "~shared/components"
 import { useGetAnimeTranslation } from "~shared/api"
+import { useStore } from "effector-react"
 
 type Props = {
   inExtraFilter?: boolean
@@ -11,10 +11,7 @@ type Props = {
 export const Translations = ({ inExtraFilter }: Props) => {
   const { data, isLoading } = useGetAnimeTranslation()
 
-  const { translations, setTranslations } = useAnimeListFilterStore(
-    (state) => state,
-    shallow
-  )
+  const translations = useStore(animeListFilterModel.$translations)
 
   const values = translations.map((translation) => translation.id.toString())
 
@@ -35,7 +32,7 @@ export const Translations = ({ inExtraFilter }: Props) => {
           voice: translation.voice,
         }))
 
-      setTranslations(payload)
+      animeListFilterModel.setTranslations({ translations: payload })
     }
   }
 

@@ -20,7 +20,7 @@ export type AnimeDetailingResponse = {
   year?: number
   releasedAt?: string
   airedAt: string
-  type: AnimeTypeVariants
+  type?: AnimeTypeVariants
   episodesCount?: number
   episodesCountAired?: number
   genres?: { id: string; genre: string }[]

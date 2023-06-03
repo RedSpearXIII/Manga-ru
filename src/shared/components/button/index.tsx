@@ -7,8 +7,10 @@ import React, {
 } from "react"
 import { motion } from "framer-motion"
 import styles from "./styles.module.pcss"
+import colorStyles from "./colors.module.pcss"
 import clsx from "clsx"
 import { ImSpinner9 } from "react-icons/all"
+import { UiColors } from "~shared/types/ui-colors"
 
 interface Props
   extends DetailedHTMLProps<
@@ -19,11 +21,12 @@ interface Props
   isLoading?: boolean
   icon?: ReactNode
   rightIcon?: ReactNode
+  color?: UiColors
 }
 
 const Button = forwardRef(
   (
-    { children, isLoading, icon, rightIcon, ...other }: Props,
+    { children, isLoading, icon, color = "orange", rightIcon, ...other }: Props,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     return (
@@ -33,7 +36,8 @@ const Button = forwardRef(
         className={clsx(
           styles.button,
           !isLoading && styles.buttonDisabled,
-          other.className
+          other.className,
+          colorStyles[color]
         )}
         layout
         whileTap={{ y: 3 }}

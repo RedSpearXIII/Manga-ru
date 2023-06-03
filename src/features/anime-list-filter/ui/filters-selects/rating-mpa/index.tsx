@@ -1,8 +1,8 @@
 import React from "react"
 import { Select } from "~shared/components"
 import { AnimeRatingMpa } from "~shared/api"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
-import { shallow } from "zustand/shallow"
+import { animeListFilterModel } from "~features/anime-list-filter"
+import { useStore } from "effector-react"
 
 const options = [
   { value: "PG", label: "PG" },
@@ -17,18 +17,17 @@ type Props = {
 }
 
 export const RatingMpa = ({ inExtraFilter }: Props) => {
-  const { ratingMpa, setRatingMpa } = useAnimeListFilterStore(
-    (state) => state,
-    shallow
-  )
+  const ratingMpa = useStore(animeListFilterModel.$ratingMpa)
 
   return (
     <div>
       <Select
         color={inExtraFilter ? "slateDark" : undefined}
         value={ratingMpa || ""}
-        onValueChange={(val) =>
-          setRatingMpa(val ? (val as AnimeRatingMpa) : null)
+        onValueChange={(value) =>
+          animeListFilterModel.setRatingMpa({
+            ratingMpa: value ? (value as AnimeRatingMpa) : null,
+          })
         }
         options={options}
         placeholder={"Любой"}

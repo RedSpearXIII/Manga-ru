@@ -1,8 +1,8 @@
 import React from "react"
 import { Select } from "~shared/components"
 import { AnimeTypeVariants } from "~shared/api"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
-import { shallow } from "zustand/shallow"
+import { animeListFilterModel } from "~features/anime-list-filter"
+import { useStore } from "effector-react"
 
 const options = [
   { value: "movie", label: "Фильм" },
@@ -18,14 +18,16 @@ type Props = {
 }
 
 export const AnimeType = ({ inExtraFilter }: Props) => {
-  const { type, setType } = useAnimeListFilterStore((state) => state, shallow)
+  const type = useStore(animeListFilterModel.$type)
 
   return (
     <div>
       <Select
         value={type || ""}
-        onValueChange={(val) =>
-          setType(val ? (val as AnimeTypeVariants) : null)
+        onValueChange={(value) =>
+          animeListFilterModel.setType({
+            type: value ? (value as AnimeTypeVariants) : null,
+          })
         }
         options={options}
         placeholder={"Любой"}

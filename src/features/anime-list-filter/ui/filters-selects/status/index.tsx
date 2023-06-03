@@ -1,8 +1,8 @@
 import React from "react"
 import { Select } from "~shared/components"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
-import { shallow } from "zustand/shallow"
+import { animeListFilterModel } from "~features/anime-list-filter"
 import { AnimeStatuses } from "~shared/api"
+import { useStore } from "effector-react"
 
 const options = [
   {
@@ -20,15 +20,16 @@ type Props = {
 }
 
 export const Status = ({ inExtraFilter }: Props) => {
-  const { status, setStatus } = useAnimeListFilterStore(
-    (state) => state,
-    shallow
-  )
+  const status = useStore(animeListFilterModel.$status)
   return (
     <div>
       <Select
         value={status || ""}
-        onValueChange={(val) => setStatus(val ? (val as AnimeStatuses) : null)}
+        onValueChange={(value) =>
+          animeListFilterModel.setStatus({
+            status: value ? (value as AnimeStatuses) : null,
+          })
+        }
         options={options}
         label={"Статус"}
         placeholder={"Любой"}

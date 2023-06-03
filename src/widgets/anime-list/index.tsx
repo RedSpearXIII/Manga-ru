@@ -1,12 +1,12 @@
 import React, { Fragment, Suspense, useEffect, useRef } from "react"
 import styles from "./styles.module.pcss"
-import { shallow } from "zustand/shallow"
 import { BiError, FaSadCry } from "react-icons/all"
 import { MediaCardSkeleton } from "~entities/media"
 import { useGetAnimeList } from "~shared/api"
-import { useAnimeListFilterStore } from "~features/anime-list-filter"
+import { animeListFilterModel } from "~features/anime-list-filter"
 import { AnimeCard } from "~widgets/anime-card"
 import { useInView } from "framer-motion"
+import { useStore } from "effector-react"
 
 export const AnimeList = () => {
   const loadMoreTriggerRef = useRef(null)
@@ -23,7 +23,22 @@ export const AnimeList = () => {
     type,
     years,
     translations,
-  } = useAnimeListFilterStore((state) => state, shallow)
+    studio,
+  } = useStore(animeListFilterModel.$animeListFilter)
+
+  console.log(
+    searchQuery,
+    genres,
+    minimalAge,
+    ratingMpa,
+    orderBy,
+    season,
+    status,
+    type,
+    years,
+    translations,
+    studio
+  )
 
   const {
     data,

@@ -1,7 +1,8 @@
 import { motion } from "framer-motion"
 import React from "react"
-import { useMobileNavMenuStore } from "../../model"
+import { mobileNavMenuModel } from "../../model"
 import styles from "./styles.module.pcss"
+import { useStore } from "effector-react"
 
 const Path = (props: any) => (
   <motion.path
@@ -13,10 +14,10 @@ const Path = (props: any) => (
 )
 
 export const MenuToggle = () => {
-  const { isOpened, setIsOpen } = useMobileNavMenuStore()
+  const { isOpened } = useStore(mobileNavMenuModel.$mobileNavMenu)
 
   const toggleMenu = () => {
-    setIsOpen(!isOpened)
+    mobileNavMenuModel.setIsOpen(!isOpened)
   }
 
   return (
