@@ -3,7 +3,7 @@ import { publicHttp } from "~shared/api"
 
 export const useGetAnimeRating = (animeUrl: string) =>
   useQuery({
-    queryKey: [`getAnimeUrl-${animeUrl}`],
+    queryKey: [`getAnimeRating-${animeUrl}`],
     queryFn: async () => {
       try {
         const { data } = await publicHttp.get<

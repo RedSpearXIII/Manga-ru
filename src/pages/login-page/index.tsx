@@ -4,14 +4,22 @@ import { AuthByServices, AuthForm } from "~shared/components"
 import { loginModel } from "~features/auth/login"
 import { authByShikimoriModel } from "~features/auth/by-shikimori"
 import { useStore } from "effector-react"
+import { useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
   const { loginError } = useStore(loginModel.$login)
+
+  const navigate = useNavigate()
+
+  const onLoginSuccess = () => {
+    navigate("/")
+  }
+
   return (
     <div>
       <AuthForm>
         <AuthForm.Form>
-          <LoginForm />
+          <LoginForm onSuccess={onLoginSuccess} />
         </AuthForm.Form>
         {loginError && <AuthForm.AuthError>{loginError}</AuthForm.AuthError>}
         <AuthForm.AuthBarByServices>

@@ -5,6 +5,7 @@ import { useHover } from "~shared/hooks"
 import { BiChevronDown } from "react-icons/all"
 import { ToggleTheme } from "~features/toggle-theme"
 import { Avatar } from "~shared/components"
+import { ProfileSection } from "./profile-section"
 
 const chevronVariants = {
   open: { rotate: 0 },
@@ -17,7 +18,9 @@ export const UserPanel = () => {
   return (
     <div className={styles.panel} {...hoverProps}>
       <div className={styles.button}>
-        <Avatar />
+        <div>
+          <Avatar />
+        </div>
 
         <motion.div
           animate={isHover ? "open" : "close"}
@@ -40,29 +43,23 @@ export const UserPanel = () => {
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
             >
-              a
+              <ProfileSection />
             </motion.div>
             <motion.div
               className={styles.dropdownItem}
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
-            >
-              b
-            </motion.div>
+            ></motion.div>
             <motion.div
               className={styles.dropdownItem}
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
-            >
-              c
-            </motion.div>
+            ></motion.div>
             <motion.div
               className={styles.dropdownItem}
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
-            >
-              d
-            </motion.div>
+            ></motion.div>
             <motion.div
               className={styles.dropdownItem}
               initial={{ scale: 0.5 }}

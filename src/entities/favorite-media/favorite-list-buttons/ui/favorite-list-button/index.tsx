@@ -4,6 +4,7 @@ import { Button } from "~shared/components"
 import { motion, Variants } from "framer-motion"
 import { BiChevronDown } from "react-icons/all"
 import { useHover } from "~shared/hooks"
+import { AnimeFavoriteListStatuses } from "~shared/api"
 
 const chevronVariants: Variants = {
   open: { rotate: 0 },
@@ -18,14 +19,18 @@ const dropdownVariants: Variants = {
   },
 }
 
-const options = [
+const options: { title: string; value: AnimeFavoriteListStatuses }[] = [
   { title: "Смотрю", value: "Watching" },
   { title: "Запланировано", value: "InPlan" },
   { title: "Просмотрено", value: "Watched" },
   { title: "Отложено", value: "Postponed" },
 ]
 
-export const FavoriteListButton = () => {
+type Props = {
+  onAddAnimeToFavoriteList: (status: AnimeFavoriteListStatuses) => void
+}
+
+export const FavoriteListButton = ({ onAddAnimeToFavoriteList }: Props) => {
   const [isHovered, hoverProps] = useHover(100)
 
   return (
@@ -52,7 +57,12 @@ export const FavoriteListButton = () => {
         className={styles.dropdown}
       >
         {options.map((option) => (
-          <li className={styles.dropdownItem}>{option.title}</li>
+          <li
+            onClick={() => onAddAnimeToFavoriteList(option.value)}
+            className={styles.dropdownItem}
+          >
+            {option.title}
+          </li>
         ))}
       </motion.ul>
     </div>

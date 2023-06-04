@@ -87,6 +87,9 @@ devDependencies:
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.21)
+  effector-logger:
+    specifier: ^0.14.0
+    version: 0.14.0(effector@22.8.5)
   eslint:
     specifier: ^8.40.0
     version: 8.40.0
@@ -1051,6 +1054,10 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: false
 
+  /detect-node@2.0.4:
+    resolution: {integrity: sha512-ZIzRpLJrOj7jjP2miAtgqIfmzbxa4ZOr5jJc601zklsfEx9oTzmmj2nVpIPRpNlRTIh8lc1kyViIY7BWSGNmKw==}
+    dev: true
+
   /detective@5.2.1:
     resolution: {integrity: sha512-v9XE1zRnz1wRtgurGu0Bs8uHKFSTdteYZNbIPFVhUZ39L/S79ppMpdmVOZAnoz1jfEFodc48n6MX483Xo3t1yw==}
     engines: {node: '>=0.8.0'}
@@ -1074,6 +1081,16 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: true
+
+  /effector-logger@0.14.0(effector@22.8.5):
+    resolution: {integrity: sha512-Y8K6lH0rVrh5hGeqyN4fknMMkhYAO/z8VV35CVZo577T8U5A25l9H+684EILCecBbVXgF9DHw88x1YgIS7Hicg==}
+    peerDependencies:
+      effector: ^22.8.3
+    dependencies:
+      detect-node: 2.0.4
+      effector: 22.8.5
+      just-debounce-it: 1.5.0
     dev: true
 
   /effector-react@22.5.2(effector@22.8.5)(react@18.2.0):
@@ -1548,6 +1565,10 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
+    dev: true
+
+  /just-debounce-it@1.5.0:
+    resolution: {integrity: sha512-itSWJS5d2DTSCizVJ2Z0Djx/dGmUGfZe7WNfUfVP23+htGcIcPHbEjL4eB8ljojTs/+oYwLexImRRCP0A2WXjA==}
     dev: true
 
   /levn@0.4.1:

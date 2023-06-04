@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
-import { loginModel } from "~features/auth/login"
+import { viewerModel } from "~entities/viewer"
 
 export const withViewerFetcher = (component: () => React.ReactNode) => () => {
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-      loginModel.getUserFx()
+      viewerModel.getUserFx()
     }
   }, [])
 

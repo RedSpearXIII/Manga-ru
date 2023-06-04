@@ -8,7 +8,7 @@ import { RatingDistribution } from "./rating-distribution"
 import { AiFillStar } from "react-icons/all"
 
 type RatingButtonProps = {
-  onRateMedia: () => void
+  onRateMedia: (rating: number) => void
   ratingDistribution: { rating: number; count: number }[]
 }
 
@@ -22,7 +22,12 @@ export const RatingButton = ({
       position={"bottom"}
       withoutLabelBackground
       width={320}
-      label={<RatingDistribution ratingDistribution={ratingDistribution} />}
+      label={
+        <RatingDistribution
+          onRateMedia={onRateMedia}
+          ratingDistribution={ratingDistribution}
+        />
+      }
     >
       <div className={clsx(styles.rating, styles["green"])}>
         <p>Оценить аниме</p>

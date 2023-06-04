@@ -1,7 +1,11 @@
 import React from "react"
 import styles from "./styles.module.pcss"
 import { useParams } from "react-router-dom"
-import { useGetAnimeByUrl } from "~shared/api"
+import {
+  AnimeFavoriteListStatuses,
+  useAddAnimeToFavoriteListMutation,
+  useGetAnimeByUrl,
+} from "~shared/api"
 import { Badge } from "~shared/components"
 import { Description } from "./description"
 import { Info } from "./info"
@@ -13,11 +17,17 @@ import { AnimeRating } from "./anime-rating"
 
 export const AnimeContent = () => {
   const { animeUrl } = useParams()
+  const { mutate } = useAddAnimeToFavoriteListMutation()
+
   const { data, isLoading } = useGetAnimeByUrl({ animeUrl: animeUrl! })
   const { screenWidth } = useScreenSize()
 
   if (!data && !isLoading) return <h1>Error</h1>
   if (!data && isLoading) return <h1>loading</h1>
+
+  const addAnimeToFavoriteList = (status: AnimeFavoriteListStatuses) => {
+    mutate({ status, animeUrl: animeUrl! })
+  }
 
   return (
     <div className={styles.bg}>
@@ -40,7 +50,12 @@ export const AnimeContent = () => {
               </Badge>
             </span>
           )}
-          {screenWidth >= Breakpoints.lg && <FavoriteListButtons />}
+          {screenWidth >= Breakpoints.lg && (
+            <FavoriteListButtons
+              onAddAnimeToFavoriteList={addAnimeToFavoriteList}
+              onLikeAnime={() => {}}
+            />
+          )}
         </div>
 
         <div className={styles.rightBlock}>
@@ -55,7 +70,12 @@ export const AnimeContent = () => {
                 <h1>{data.title}</h1>
               </div>
 
-              {screenWidth < Breakpoints.lg && <FavoriteListButtons />}
+              {screenWidth < Breakpoints.lg && (
+                <FavoriteListButtons
+                  onAddAnimeToFavoriteList={addAnimeToFavoriteList}
+                  onLikeAnime={() => {}}
+                />
+              )}
             </div>
           )}
           {screenWidth >= Breakpoints.lg && (

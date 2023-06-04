@@ -11,9 +11,13 @@ import clsx from "clsx"
 
 type Props = {
   ratingDistribution: { rating: number; count: number }[]
+  onRateMedia: (rating: number) => void
 }
 
-export const RatingDistribution = ({ ratingDistribution }: Props) => {
+export const RatingDistribution = ({
+  ratingDistribution,
+  onRateMedia,
+}: Props) => {
   const { ratings, totalVotes } =
     getRatingDistributionWithPercentage(ratingDistribution)
 
@@ -28,6 +32,7 @@ export const RatingDistribution = ({ ratingDistribution }: Props) => {
       <div className={styles.distributionTable}>
         {ratings.map(({ rating, count, percentage }) => (
           <div
+            onClick={() => onRateMedia(rating)}
             className={clsx(
               styles.tableRow,
               colorStyles[`${getRatingColor(rating)}`]

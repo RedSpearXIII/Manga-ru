@@ -3,6 +3,8 @@ import { publicHttp } from "~shared/api"
 import { createEffect, createEvent, createStore, sample } from "effector"
 import { authByLocalErrorMapper, AuthByLocalErrors } from "../lib"
 import { AxiosErrorResponse } from "~shared/types"
+import { viewerModel } from "~entities/viewer"
+import { AxiosResponse } from "axios"
 
 type State = {
   authError: null | string
@@ -20,11 +22,10 @@ const setAuthError = createEvent<string>()
 
 export const registerUserFx = createEffect<
   AuthByLocalParams,
-  void,
+  AxiosResponse<{ accessToken: string; refreshToken: string }>,
   AxiosErrorResponse<AuthByLocalErrors>
 >(async (fields: AuthByLocalParams) => {
-  const response = await publicHttp.post("/auth/register", fields)
-  console.log(response)
+  return await publicHttp.post("/auth/register", fields)
 })
 
 export const $authByLocal = createStore<State>(initialState)
@@ -36,6 +37,15 @@ export const $authByLocal = createStore<State>(initialState)
     ...state,
     authError: error,
   }))
+
+sample({
+  clock: registerUserFx.doneData,
+  fn: (response) => {
+    localStorage.setItem("accessToken", response.data.accessToken)
+    localStorage.setItem("refreshToken", response.data.refreshToken)
+  },
+  target: viewerModel.getUserFx,
+})
 
 sample({
   clock: registerUserFx.failData,

@@ -23,7 +23,10 @@ export const MangaContent = () => {
               src={data?.image}
               alt={"title-image"}
             />
-            <FavoriteListButtons />
+            <FavoriteListButtons
+              onAddAnimeToFavoriteList={() => {}}
+              onLikeAnime={() => {}}
+            />
           </>
         )}
       </div>
