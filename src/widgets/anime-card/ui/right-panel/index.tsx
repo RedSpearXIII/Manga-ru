@@ -29,7 +29,12 @@ export const RightPanel = ({ anime }: Props) => {
   const season = translateMediaSeason(anime.season)
 
   const onSetRatingMpa = () => {
+    if (!anime.ratingMpa) return
     animeListFilterModel.setRatingMpa({ ratingMpa: anime.ratingMpa })
+  }
+  const onSetMinimalAge = () => {
+    if (!anime.minimalAge) return
+    animeListFilterModel.setMinimalAge({ minimalAge: anime.minimalAge })
   }
   const onAddGenre = (id: string, genre: string) => {
     animeListFilterModel.addGenre({ genre: { id, genre } })
@@ -37,8 +42,10 @@ export const RightPanel = ({ anime }: Props) => {
   const onSetStatus = (status: AnimeStatuses) => {
     animeListFilterModel.setStatus({ status })
   }
-  const onSetSeason = (season: AnimeSeasons) => {
-    animeListFilterModel.setSeason({ season })
+  const onSetAnimeDate = () => {
+    animeListFilterModel.setSeason({ season: anime.season })
+    if (anime.year)
+      animeListFilterModel.addYear({ year: anime.year.toString() })
   }
 
   return (
@@ -53,12 +60,21 @@ export const RightPanel = ({ anime }: Props) => {
       variants={variants}
     >
       <div className={styles.topInfo}>
-        <p className={styles.season} onClick={() => onSetSeason(anime.season)}>
+        <p className={styles.season} onClick={onSetAnimeDate}>
           {season}
+          {anime.year && `, ${anime.year} год`}
         </p>
-        <Badge className={styles.mpaRating} onClick={onSetRatingMpa}>
-          {anime.ratingMpa}
-        </Badge>
+        {anime.minimalAge ? (
+          <Badge className={styles.mpaRating} onClick={onSetMinimalAge}>
+            {anime.minimalAge}+
+          </Badge>
+        ) : (
+          anime.ratingMpa && (
+            <Badge className={styles.mpaRating} onClick={onSetRatingMpa}>
+              {anime.ratingMpa}
+            </Badge>
+          )
+        )}
       </div>
 
       <div className={styles.studio}>

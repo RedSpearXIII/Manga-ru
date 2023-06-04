@@ -57,7 +57,7 @@ export const useGetAnimeList = ({
       return data
     },
     getNextPageParam: (lastPage, allPages) => {
-      const nextPage = allPages.length
+      const nextPage = allPages.length - 1
       return lastPage.length !== 0 ? nextPage + 1 : undefined
     },
     refetchOnWindowFocus: false,
