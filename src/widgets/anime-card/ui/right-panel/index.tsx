@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import styles from "./styles.module.pcss"
 import { motion } from "framer-motion"
-import { AnimeResponse, AnimeSeasons, AnimeStatuses } from "~shared/api"
+import { AnimeResponse, AnimeStatuses } from "~shared/api"
 import { Badge } from "~shared/components"
 import { animeListFilterModel } from "~features/anime-list-filter"
 import { translateMediaSeason } from "~entities/media"
@@ -48,6 +48,10 @@ export const RightPanel = ({ anime }: Props) => {
       animeListFilterModel.addYear({ year: anime.year.toString() })
   }
 
+  const onSetStudio = (studio: string) => {
+    animeListFilterModel.setStudio({ studio })
+  }
+
   return (
     <motion.div
       className={clsx(
@@ -79,7 +83,12 @@ export const RightPanel = ({ anime }: Props) => {
 
       <div className={styles.studio}>
         {anime.studio && (
-          <p className={styles.studioName}>Студия {anime.studio[0].studio}</p>
+          <p
+            onClick={() => onSetStudio(anime.studio[0].studio)}
+            className={styles.studioName}
+          >
+            Студия {anime.studio[0].studio}
+          </p>
         )}
         <div className={styles.animeProgress}>
           <p>{anime.episodesCount} серий</p>-

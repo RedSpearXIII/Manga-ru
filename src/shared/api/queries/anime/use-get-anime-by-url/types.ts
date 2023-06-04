@@ -1,7 +1,9 @@
 import {
+  AnimeGenre,
   AnimeRatingMpa,
   AnimeSeasons,
   AnimeStatuses,
+  AnimeStudio,
   AnimeTypeVariants,
 } from "~shared/api"
 
@@ -13,7 +15,7 @@ export type AnimeDetailingResponse = {
   url: string
   title: string
   image: string
-  studio?: { id: string; studio: string }[]
+  studio?: AnimeStudio[]
   season: AnimeSeasons
   description?: string
   otherTitles: string[]
@@ -23,7 +25,7 @@ export type AnimeDetailingResponse = {
   type?: AnimeTypeVariants
   episodesCount?: number
   episodesCountAired?: number
-  genres?: { id: string; genre: string }[]
+  genres?: AnimeGenre[]
   status: AnimeStatuses
   ratingMpa: AnimeRatingMpa
   minimalAge: number

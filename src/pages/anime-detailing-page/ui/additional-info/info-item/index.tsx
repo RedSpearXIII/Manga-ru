@@ -1,16 +1,17 @@
-import React from "react"
+import React, { DetailedHTMLProps, HTMLAttributes } from "react"
 import styles from "./styles.module.pcss"
 import clsx from "clsx"
 
-type Props = {
+interface Props
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   title: string
   value: string | number
   color: string
 }
 
-export const InfoItem = ({ title, value, color }: Props) => {
+export const InfoItem = ({ title, value, color, ...other }: Props) => {
   return (
-    <div className={styles.item}>
+    <div className={clsx(styles.item)} {...other}>
       <p className={styles.title}>{title}</p>
       <div className={clsx(`bg-${color}`, styles.value, `shadow-${color}`)}>
         <p>{value}</p>

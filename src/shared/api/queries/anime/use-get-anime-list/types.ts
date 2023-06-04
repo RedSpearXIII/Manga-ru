@@ -42,4 +42,5 @@ export type GetAnimeParams = {
   type?: AnimeTypeVariants | null
   years?: string[] | null
   translations?: string[] | null
+  studio?: string | null
 }

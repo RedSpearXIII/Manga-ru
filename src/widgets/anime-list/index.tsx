@@ -23,6 +23,7 @@ export const AnimeList = () => {
     type,
     years,
     translations,
+    studio,
   } = useStore(animeListFilterModel.$animeListFilter)
 
   const {
@@ -44,6 +45,7 @@ export const AnimeList = () => {
     order: orderBy,
     type,
     years,
+    studio,
   })
 
   useEffect(() => {

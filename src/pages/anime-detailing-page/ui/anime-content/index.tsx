@@ -71,10 +71,12 @@ export const AnimeContent = () => {
           <div className={styles.infoMobile}>
             <Info />
           </div>
-          <div className={styles.descriptionMobile}>
-            <p className={styles.descriptionMobileTitle}>Описание</p>
-            <Description />
-          </div>
+          {data.description && (
+            <div className={styles.descriptionMobile}>
+              <p className={styles.descriptionMobileTitle}>Описание</p>
+              <Description />
+            </div>
+          )}
         </>
       )}
     </div>

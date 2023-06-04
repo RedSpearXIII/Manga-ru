@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "./styles.module.pcss"
-import { Translations, RatingMpa, Years } from "../../filters-selects"
+import { Translations, RatingMpa, Years, Season } from "../../filters-selects"
 import { motion } from "framer-motion"
 
 export const ExtraFilterDropdown = () => {
@@ -17,6 +17,9 @@ export const ExtraFilterDropdown = () => {
         </div>
         <div className={styles.filter}>
           <Years inExtraFilter />
+        </div>
+        <div className={styles.filter}>
+          <Season inExtraFilter />
         </div>
         <div className={styles.filter}>
           <Translations inExtraFilter />

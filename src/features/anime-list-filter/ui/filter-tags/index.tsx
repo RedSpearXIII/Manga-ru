@@ -23,6 +23,7 @@ export const FilterTags = () => {
     minimalAge,
     years,
     translations,
+    studio,
   } = useStore(animeListFilterModel.$animeListFilter)
   const filterIsActive = useStore(animeListFilterModel.$filterIsActive)
 
@@ -56,6 +57,10 @@ export const FilterTags = () => {
 
   const removeTranslationItem = (translationId: number) => {
     animeListFilterModel.removeTranslation({ translationId })
+  }
+
+  const removeStudioFilter = () => {
+    animeListFilterModel.setStudio({ studio: null })
   }
 
   if (!filterIsActive) return null
@@ -177,6 +182,15 @@ export const FilterTags = () => {
               </div>
             ))}
           </>
+        )}
+        {studio && (
+          <div onClick={() => removeStudioFilter()} className={styles.tagItem}>
+            <Badge className={"bg-pink-500"}>
+              <div className={styles.content}>
+                {studio} <GrFormClose />
+              </div>
+            </Badge>
+          </div>
         )}
 
         <AnimatePresence>

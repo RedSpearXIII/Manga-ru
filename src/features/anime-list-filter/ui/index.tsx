@@ -7,7 +7,7 @@ import { useScreenSize } from "~shared/hooks"
 import { Breakpoints } from "~shared/types"
 import {
   Status,
-  Season,
+  Studios,
   AnimeType,
   Genres,
   MinimalAge,
@@ -27,7 +27,7 @@ export const AnimeListFilter = () => {
             <>
               <AnimeType />
               <Status />
-              <Season />
+              <Studios />
               <MinimalAge />
               <Genres />
             </>
