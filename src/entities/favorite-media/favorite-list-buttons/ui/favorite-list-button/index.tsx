@@ -26,7 +26,7 @@ const options = [
 ]
 
 export const FavoriteListButton = () => {
-  const [isHovered, hoverProps] = useHover(300)
+  const [isHovered, hoverProps] = useHover(100)
 
   return (
     <div className={styles.favoriteListButton} {...hoverProps}>

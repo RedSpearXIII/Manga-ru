@@ -23,22 +23,7 @@ export const AnimeList = () => {
     type,
     years,
     translations,
-    studio,
   } = useStore(animeListFilterModel.$animeListFilter)
-
-  console.log(
-    searchQuery,
-    genres,
-    minimalAge,
-    ratingMpa,
-    orderBy,
-    season,
-    status,
-    type,
-    years,
-    translations,
-    studio
-  )
 
   const {
     data,

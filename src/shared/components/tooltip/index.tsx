@@ -17,14 +17,17 @@ interface Props
   label: string | ReactNode
   keepLabelVisibleOnHover?: boolean
   width?: number
+  withoutLabelBackground?: boolean
   /** label doesn't disappear on hover */
   position?:
     | "top"
     | "bottom"
-    | "rightBottom"
-    | "rightTop"
-    | "leftBottom"
-    | "leftTop"
+    | "left"
+    | "right"
+    | "bottomRight"
+    | "topRight"
+    | "bottomLeft"
+    | "topLeft"
 }
 
 const Tooltip = forwardRef(
@@ -35,6 +38,7 @@ const Tooltip = forwardRef(
       keepLabelVisibleOnHover,
       position = "top",
       width,
+      withoutLabelBackground,
       ...other
     }: Props,
     ref: ForwardedRef<HTMLDivElement>
@@ -56,7 +60,11 @@ const Tooltip = forwardRef(
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               style={{ width: width || "fit-content" }}
-              className={clsx(styles.label, stylesPositions[position])}
+              className={clsx(
+                styles.label,
+                !withoutLabelBackground && styles.labelBackground,
+                stylesPositions[position]
+              )}
             >
               {label}
             </motion.div>

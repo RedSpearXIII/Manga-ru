@@ -29,6 +29,7 @@ export const loginUserFx = createEffect<
   AxiosErrorResponse<LoginErrors>
 >(async (fields: LoginFields) => {
   const response = await publicHttp.post("/auth/login", fields)
+  console.log(response)
   localStorage.setItem("accessToken", response.headers.Accesstoken)
   localStorage.setItem("refreshToken", response.headers.Refreshtoken)
 })

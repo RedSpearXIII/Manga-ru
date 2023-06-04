@@ -1,9 +1,14 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
-export const resizeHandlers = new Set<Dispatch<SetStateAction<number>>>()
+export const resizeHandlers = new Set<
+  Dispatch<SetStateAction<{ screenWidth: number; screenHeight: number }>>
+>()
 
 export const useScreenSize = () => {
-  const [windowSize, setWindowSize] = useState(window.innerWidth)
+  const [windowSize, setWindowSize] = useState({
+    screenWidth: window.innerWidth,
+    screenHeight: window.innerHeight,
+  })
 
   useEffect(() => {
     resizeHandlers.add(setWindowSize)

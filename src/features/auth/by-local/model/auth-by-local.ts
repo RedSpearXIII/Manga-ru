@@ -24,9 +24,7 @@ export const registerUserFx = createEffect<
   AxiosErrorResponse<AuthByLocalErrors>
 >(async (fields: AuthByLocalParams) => {
   const response = await publicHttp.post("/auth/register", fields)
-  response.headers["set-cookie"]?.forEach((cookie) => {
-    document.cookie = cookie
-  })
+  console.log(response)
 })
 
 export const $authByLocal = createStore<State>(initialState)

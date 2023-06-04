@@ -1,54 +1,50 @@
-.backdrop {
-  @apply fixed flex justify-center items-center left-0 top-0 z-30 w-screen h-screen bg-black/30;
+.ratingDistribution {
+  @apply max-w-xs w-full py-2 pl-3 pr-5 bg-slate-800/90 rounded drop-shadow backdrop-blur-2xl;
 
-  .ratingDistribution {
-    @apply max-w-xs w-full py-2 pl-3 pr-5 bg-slate-800/90 rounded drop-shadow backdrop-blur-2xl;
+  .header {
+    @apply text-white py-2 flex items-center justify-between;
 
-    .header {
-      @apply text-white py-2 flex items-center justify-between;
-
-      .headerTitle {
-        @apply flex items-center gap-x-1;
-        span {
-          @apply bg-slate-800 rounded px-2 drop-shadow;
-        }
-      }
-
-      svg {
-        @apply text-xl cursor-pointer;
+    .headerTitle {
+      @apply flex items-center gap-x-1;
+      span {
+        @apply bg-slate-800 rounded px-2 drop-shadow;
       }
     }
 
-    .distributionTable {
-      .tableRow {
-        @apply grid grid-cols-[50px_auto] gap-x-2 items-center;
-
-        .rating {
-          @apply relative cursor-pointer hover:scale-110 transition-transform;
-          p {
-            @apply text-xs left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute text-white;
-          }
-          svg {
-            @apply text-[50px];
-          }
-        }
-        .slider {
-          @apply w-full min-w-[10px] rounded h-4 bg-slate-600 relative overflow-hidden;
-          .sliderFillLine {
-            @apply w-0 h-full absolute left-0 top-0;
-          }
-          .count {
-            @apply text-xs absolute left-1 top-1/2 -translate-y-1/2 text-white;
-          }
-        }
-        .amount {
-          @apply text-sm;
-        }
-      }
+    svg {
+      @apply text-xl cursor-pointer;
     }
   }
 
-  .totalVotes {
-    @apply text-slate-300 text-center text-sm;
+  .distributionTable {
+    .tableRow {
+      @apply grid grid-cols-[50px_auto] gap-x-2 items-center;
+
+      .rating {
+        @apply relative cursor-pointer hover:scale-110 transition-transform;
+        p {
+          @apply text-xs left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute text-white;
+        }
+        svg {
+          @apply text-[50px];
+        }
+      }
+      .slider {
+        @apply w-full min-w-[10px] rounded h-4 bg-slate-600 relative overflow-hidden;
+        .sliderFillLine {
+          @apply w-0 h-full absolute left-0 top-0;
+        }
+        .count {
+          @apply text-xs absolute left-1 top-1/2 -translate-y-1/2 text-white;
+        }
+      }
+      .amount {
+        @apply text-sm;
+      }
+    }
   }
+}
+
+.totalVotes {
+  @apply text-slate-300 text-center text-sm;
 }

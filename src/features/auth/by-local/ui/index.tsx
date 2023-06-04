@@ -81,7 +81,7 @@ export const AuthByLocalForm = ({ onSuccess }: Props) => {
               label={
                 "Имя пользователя можно изменить в любое время через настройки профиля"
               }
-              position={"leftTop"}
+              position={"bottomLeft"}
             >
               <BiInfoCircle />
             </Tooltip>

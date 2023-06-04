@@ -41,7 +41,7 @@ const MultiSelect = forwardRef(
     }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
-    const screenSize = useScreenSize()
+    const { screenWidth } = useScreenSize()
     const colorClass = color === "slateDark" && styles.slateDark
 
     const selectRef = useRef(null)
@@ -128,7 +128,7 @@ const MultiSelect = forwardRef(
     }
 
     useOnClickOutside(selectRef, () => {
-      if (screenSize >= Breakpoints.xxl) {
+      if (screenWidth >= Breakpoints.xxl) {
         setDropdownIsOpened(false)
         setInputValue("")
       }
@@ -199,7 +199,7 @@ const MultiSelect = forwardRef(
 
             <MultiSelectDropdown
               label={label}
-              withModal={screenSize < Breakpoints.xxl}
+              withModal={screenWidth < Breakpoints.xxl}
               onModalClose={onDropdownModalClose}
               isLoading={isLoading}
               selectedItems={selectedItems}

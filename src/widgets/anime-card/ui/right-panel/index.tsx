@@ -76,20 +76,22 @@ export const RightPanel = ({ anime }: Props) => {
         </div>
       </div>
 
-      <div className={styles.genres}>
-        {anime.genres.map(({ genre, id }, index) => {
-          if (index < 3)
-            return (
-              <div
-                className={styles.genre}
-                onClick={() => onAddGenre(id, genre)}
-                key={id}
-              >
-                {genre}
-              </div>
-            )
-        })}
-      </div>
+      {anime.genres && anime.genres.length > 0 && (
+        <div className={styles.genres}>
+          {anime.genres.map(({ genre, id }, index) => {
+            if (index < 3)
+              return (
+                <div
+                  className={styles.genre}
+                  onClick={() => onAddGenre(id, genre)}
+                  key={id}
+                >
+                  {genre}
+                </div>
+              )
+          })}
+        </div>
+      )}
     </motion.div>
   )
 }

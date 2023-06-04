@@ -80,10 +80,10 @@ const Select = forwardRef(
       setInputValue("")
     }
 
-    const screenSize = useScreenSize()
+    const { screenWidth } = useScreenSize()
 
     useOnClickOutside(selectRef, () => {
-      if (screenSize > Breakpoints.xxl) {
+      if (screenWidth > Breakpoints.xxl) {
         setDropdownIsOpened(false)
       }
     })
@@ -136,7 +136,7 @@ const Select = forwardRef(
             </div>
 
             <SelectDropdown
-              withModal={screenSize < Breakpoints.xxl}
+              withModal={screenWidth < Breakpoints.xxl}
               setIsOpen={setDropdownIsOpened}
               currentSelectedItem={value}
               isOpen={dropdownIsOpened}
