@@ -4,7 +4,9 @@ import {
   AiFillHome,
   FaBookOpen,
   FaPlay,
+  FaUserPlus,
   IoNotificationsSharp,
+  RiLoginBoxFill,
 } from "react-icons/all"
 import { mobileNavMenuModel } from "../../model"
 import { Link } from "react-router-dom"
@@ -13,6 +15,7 @@ import { ToggleTheme } from "~features/toggle-theme"
 import clsx from "clsx"
 import { motion, stagger, useAnimate } from "framer-motion"
 import { useStore } from "effector-react"
+import { viewerModel } from "~entities/viewer"
 
 const staggerItems = stagger(0.05, {
   startDelay: 0.15,
@@ -20,6 +23,7 @@ const staggerItems = stagger(0.05, {
 
 export const NavItems = () => {
   const { isOpened } = useStore(mobileNavMenuModel.$mobileNavMenu)
+  const isAuth = useStore(viewerModel.$isAuth)
 
   const [scope, animate] = useAnimate()
 
@@ -50,6 +54,23 @@ export const NavItems = () => {
       transition={{ delay: 0.15 }}
       className={styles.nav}
     >
+      {!isAuth && (
+        <>
+          <li>
+            <Link className={styles.navItem} to={"/login"}>
+              <RiLoginBoxFill />
+              <p>Войти</p>
+            </Link>
+          </li>
+
+          <li>
+            <Link className={styles.navItem} to={"/signup"}>
+              <FaUserPlus className={"translate-x-0.5"} />
+              <p>Регистр.</p>
+            </Link>
+          </li>
+        </>
+      )}
       <li className={clsx(styles.navItem, styles.toggleThemeBtn)}>
         <ToggleTheme />
         <p>Тема</p>

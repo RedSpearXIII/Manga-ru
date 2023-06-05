@@ -24,7 +24,7 @@ export type State = {
 
 export const setViewer = createEvent<Viewer>()
 
-export const getUserFx = createEffect<void, Viewer, any>(async () => {
+export const getUserFx = createEffect<void, Viewer, void>(async () => {
   const response = await authHttp.get("/users/whoami")
   return response.data
 })

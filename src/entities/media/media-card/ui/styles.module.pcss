@@ -37,7 +37,7 @@
   }
 
   .cardTitle {
-    @apply mt-1 line-clamp-2 text-sm max-sm:text-xs;
+    @apply mt-1 line-clamp-2 text-sm max-sm:text-xs h-10 max-sm:h-8;
     color: inherit !important;
   }
 }
@@ -71,6 +71,12 @@
   }
 
   .titleLoader {
-    @apply mt-2 dark:bg-slate-800 bg-slate-200 animate-pulse max-xl:h-3 xl:h-5 rounded;
+    @apply mt-1 h-10 max-sm:h-8;
+    .firstRow {
+      @apply h-4 mb-1 max-sm:h-3 dark:bg-slate-800 bg-slate-200 animate-pulse w-full rounded;
+    }
+    .secondRow {
+      @apply h-4 max-sm:h-3 dark:bg-slate-800 bg-slate-200 animate-pulse w-[40%] rounded;
+    }
   }
 }

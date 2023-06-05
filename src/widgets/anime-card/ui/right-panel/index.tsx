@@ -84,7 +84,7 @@ export const RightPanel = ({ anime }: Props) => {
       <div className={styles.studio}>
         {anime.studio && (
           <p
-            onClick={() => onSetStudio(anime.studio[0].studio)}
+            onClick={() => onSetStudio(anime.studio![0].studio)}
             className={styles.studioName}
           >
             Студия {anime.studio[0].studio}
