@@ -14,6 +14,7 @@ import lgThumbnail from "lightgallery/plugins/thumbnail"
 import lgZoom from "lightgallery/plugins/zoom"
 import lgHash from "lightgallery/plugins/hash"
 import lgVimeoThumbnail from "lightgallery/plugins/vimeoThumbnail"
+import { LIGHTBOX_LICENCE_KEY } from "~shared/config"
 
 export const Frames = () => {
   const { animeUrl } = useParams()
@@ -45,6 +46,7 @@ export const Frames = () => {
             download={false}
             speed={500}
             plugins={[lgThumbnail, lgZoom, lgHash, lgVimeoThumbnail]}
+            licenseKey={LIGHTBOX_LICENCE_KEY}
           >
             {data.map((src) => (
               <ImageItem

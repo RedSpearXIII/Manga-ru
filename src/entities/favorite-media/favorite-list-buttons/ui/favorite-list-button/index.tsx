@@ -58,6 +58,7 @@ export const FavoriteListButton = ({ onAddAnimeToFavoriteList }: Props) => {
       >
         {options.map((option) => (
           <li
+            key={option.value}
             onClick={() => onAddAnimeToFavoriteList(option.value)}
             className={styles.dropdownItem}
           >

@@ -13,7 +13,7 @@ module.exports = plugin(function ({ addComponents,theme  }) {
       "&::-webkit-scrollbar-thumb": {
         // "@apply dark:bg-slate-800 dark:hover:bg-slate-700 bg-gray-300 hover:bg-slate-400;
         borderRadius: "0.15rem",
-        backgroundColor: "#ffa458",
+        backgroundColor: "rgba(105,105,105,0.3)",
       },
     },
   })

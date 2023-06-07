@@ -33,13 +33,11 @@ const Routing = () => {
         </Route>
         <Route path="*" element={"NOT FOUND"} />
         <Route path={"/right-holders"} element={<RightHoldersPage />} />
-
+        <Route path={"profile/:id"} element={<ProfilePage />}>
+          {/*<Route index  />*/}
+        </Route>
         {isAuth ? (
-          <>
-            <Route path={"profile/:id"}>
-              <Route index element={<ProfilePage />} />
-            </Route>
-          </>
+          <></>
         ) : (
           <>
             <Route path={"/login"} element={<LoginPage />} />

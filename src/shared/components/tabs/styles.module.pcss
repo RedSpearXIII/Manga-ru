@@ -1,0 +1,17 @@
+.tabs {
+  @apply flex justify-center items-center w-fit;
+
+  .tab {
+    @apply py-2 px-6 flex items-center gap-x-1 cursor-pointer hover:dark:bg-slate-800 hover:bg-slate-300 transition-colors;
+    @apply hover:text-orange-400 dark:hover:text-orange-300 dark:text-slate-400 text-slate-900;
+
+    .tabIcon {
+      svg {
+        @apply text-xl;
+      }
+    }
+  }
+  .tabActive {
+    @apply dark:bg-slate-800 bg-slate-300 text-orange-400 dark:text-orange-300 border-b-2 border-orange-400;
+  }
+}

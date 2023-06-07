@@ -1,21 +1,21 @@
 .backdrop {
-  @apply bg-black/30 backdrop-blur-sm top-0 left-0 fixed w-screen h-screen z-40;
-}
+  @apply bg-black/30 backdrop-blur-sm top-0 left-0 fixed w-screen h-screen z-40 flex justify-center items-start overflow-y-auto py-10;
 
-.modal {
-  @apply rounded overflow-hidden fixed left-1/2 top-[25vh] max-sm:w-[90vw] w-full max-w-2xl z-50;
-  .topBar {
-    @apply bg-slate-300/90 dark:bg-slate-900/90 backdrop-blur-2xl py-5 text-2xl px-5 text-slate-200 flex flex-nowrap justify-between items-center;
-    p {
-      @apply text-lg text-slate-900 dark:text-slate-200;
+  .modal {
+    @apply rounded overflow-hidden max-sm:w-[90vw] w-full max-w-2xl;
+    .topBar {
+      @apply bg-slate-300 dark:bg-slate-900 py-5 text-2xl px-5 text-slate-200 flex flex-nowrap justify-between items-center;
+      p {
+        @apply text-lg text-slate-900 dark:text-slate-200;
+      }
+
+      .closeBtn {
+        @apply cursor-pointer text-slate-900 dark:text-slate-200 transition-colors;
+      }
     }
 
-    .closeBtn {
-      @apply cursor-pointer text-slate-900 dark:text-slate-200 transition-colors;
+    .content {
+      @apply dark:bg-slate-800 bg-slate-200;
     }
-  }
-
-  .content {
-    @apply dark:bg-slate-800 bg-slate-200 overflow-y-auto scrollbar max-h-[50vh];
   }
 }

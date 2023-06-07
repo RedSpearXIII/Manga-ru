@@ -32,6 +32,7 @@ export const RatingDistribution = ({
       <div className={styles.distributionTable}>
         {ratings.map(({ rating, count, percentage }) => (
           <div
+            key={rating}
             onClick={() => onRateMedia(rating)}
             className={clsx(
               styles.tableRow,

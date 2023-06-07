@@ -173,7 +173,7 @@ const MultiSelect = forwardRef(
                 <div className={styles.placeholder}>{placeholder}</div>
               )}
               <input
-                disabled={!searchable}
+                disabled={!searchable || screenWidth < Breakpoints.xxl}
                 onFocus={() => {
                   setInputInFocus(true)
                 }}

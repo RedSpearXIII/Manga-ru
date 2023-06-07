@@ -11,6 +11,7 @@ import Modal from "./modal"
 import AuthForm from "./auth-form"
 import AuthByServices from "./auth-by-services"
 import Tooltip from "./tooltip"
+import Tabs from "./tabs"
 
 export {
   Avatar,
@@ -26,4 +27,5 @@ export {
   AuthForm,
   AuthByServices,
   Tooltip,
+  Tabs,
 }

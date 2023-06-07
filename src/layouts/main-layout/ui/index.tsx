@@ -27,7 +27,7 @@ export const MainLayout = () => {
       <div
         className={clsx(
           styles.pageContent,
-          screenWidth > Breakpoints.md ? "pt-28" : "pt-2"
+          screenWidth > Breakpoints.md ? "mt-28" : "pt-2"
         )}
       >
         <main>

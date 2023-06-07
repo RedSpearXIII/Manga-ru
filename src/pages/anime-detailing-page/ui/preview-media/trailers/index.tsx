@@ -12,6 +12,7 @@ import "lightgallery/css/lg-thumbnail.css"
 import "lightgallery/css/lg-video.css"
 import "../light-gallery.css"
 import { FaPlay } from "react-icons/all"
+import { LIGHTBOX_LICENCE_KEY } from "~shared/config"
 
 export const Trailers = () => {
   const { animeUrl } = useParams()
@@ -35,9 +36,14 @@ export const Trailers = () => {
             autoplayVideoOnSlide
             speed={500}
             plugins={[lgVideo, lgHash, lgVimeoThumbnail]}
+            licenseKey={LIGHTBOX_LICENCE_KEY}
           >
             {data.map((video) => (
-              <a className={styles.videoImageContainer} href={video.playerUrl}>
+              <a
+                key={video.playerUrl}
+                className={styles.videoImageContainer}
+                href={video.playerUrl}
+              >
                 <img
                   alt={video.name}
                   src={video.imageUrl}

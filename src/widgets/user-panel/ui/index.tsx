@@ -38,35 +38,15 @@ export const UserPanel = () => {
             exit={{ opacity: 0 }}
             className={styles.dropdown}
           >
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            >
+            <div className={styles.dropdownItem}>
               <ProfileSection />
-            </motion.div>
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            ></motion.div>
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            ></motion.div>
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            ></motion.div>
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            >
+            </div>
+            <div className={styles.dropdownItem}></div>
+            <div className={styles.dropdownItem}></div>
+            <div className={styles.dropdownItem}></div>
+            <div className={styles.dropdownItem}>
               <ToggleTheme />
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

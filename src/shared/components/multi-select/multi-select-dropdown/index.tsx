@@ -72,7 +72,12 @@ export const MultiSelectDropdown = ({
 
   if (withModal)
     return (
-      <Modal onClose={onModalClose} isOpened={isOpen} title={label}>
+      <Modal
+        centered={options.length < 15}
+        onClose={onModalClose}
+        isOpened={isOpen}
+        title={label}
+      >
         <ul>{listItems}</ul>
       </Modal>
     )
