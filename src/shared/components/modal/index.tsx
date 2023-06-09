@@ -13,9 +13,17 @@ type Props = {
   children: ReactNode
   title?: string
   centered?: boolean
+  width?: number
 }
 
-const Modal = ({ children, onClose, isOpened, centered, title }: Props) => {
+const Modal = ({
+  children,
+  onClose,
+  isOpened,
+  centered,
+  title,
+  width,
+}: Props) => {
   useDisableScroll(isOpened)
 
   return (
@@ -25,7 +33,7 @@ const Modal = ({ children, onClose, isOpened, centered, title }: Props) => {
           <motion.div
             initial="hidden"
             animate="visible"
-            exit="exit"
+            exit="hidden"
             variants={modalAnimateVariants}
             className={clsx(styles.backdrop, centered && "items-center")}
             onClick={(e) => {
@@ -33,7 +41,11 @@ const Modal = ({ children, onClose, isOpened, centered, title }: Props) => {
               onClose()
             }}
           >
-            <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div
+              style={{ ...(width && { maxWidth: width }) }}
+              className={styles.modal}
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className={styles.topBar}>
                 <p>{title}</p>
                 <div className={styles.closeBtn} onClick={onClose}>

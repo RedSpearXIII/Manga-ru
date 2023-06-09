@@ -8,12 +8,10 @@ import { AxiosResponse } from "axios"
 
 type State = {
   authError: null | string
-  isSuccess: boolean | null
 }
 
 const initialState: State = {
   authError: null,
-  isSuccess: null,
 }
 
 type AuthByLocalParams = Omit<AuthByLocalFields, "repeatPassword">
@@ -30,7 +28,6 @@ export const registerUserFx = createEffect<
 
 export const $authByLocal = createStore<State>(initialState)
   .on(registerUserFx.doneData, () => ({
-    isSuccess: true,
     authError: null,
   }))
   .on(setAuthError, (state, error) => ({

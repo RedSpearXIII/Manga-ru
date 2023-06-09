@@ -8,12 +8,10 @@ import { viewerModel } from "~entities/viewer"
 
 type Store = {
   loginError: null | string
-  isSuccess: boolean | null
 }
 
 const initialState: Store = {
   loginError: null,
-  isSuccess: null,
 }
 
 export const loginUserFx = createEffect<
@@ -31,11 +29,9 @@ const setLoginError = createEvent<string>()
 export const $login = createStore<Store>(initialState)
   .on(loginUserFx.doneData, (state) => ({
     ...state,
-    isSuccess: true,
     loginError: null,
   }))
   .on(setLoginError, (state, payload) => ({
-    isSuccess: null,
     loginError: payload,
   }))
 

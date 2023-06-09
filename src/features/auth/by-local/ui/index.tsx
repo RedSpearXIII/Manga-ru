@@ -4,12 +4,15 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import {
   AiFillLock,
+  BiErrorAlt,
   BiInfoCircle,
   GiFox,
   MdAlternateEmail,
 } from "react-icons/all"
 import { getValidationSchema } from "../lib"
 import { authByLocalModel } from "../model"
+import styles from "./styles.module.pcss"
+import { useStore } from "effector-react"
 
 export type AuthByLocalFields = {
   email: string
@@ -25,6 +28,7 @@ type Props = {
 
 export const AuthByLocalForm = ({ onSuccess }: Props) => {
   const AuthByLocalSchema = getValidationSchema()
+  const { authError } = useStore(authByLocalModel.$authByLocal)
 
   const {
     register,
@@ -43,7 +47,7 @@ export const AuthByLocalForm = ({ onSuccess }: Props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <h3>Регистрация</h3>
       <div>
         <Input
@@ -54,7 +58,7 @@ export const AuthByLocalForm = ({ onSuccess }: Props) => {
           label={"Email"}
           placeholder={"sharingan@ghoul.zxc"}
         />
-        <p>{errors.email?.message}</p>
+        <p className={styles.fieldErrorMsg}>{errors.email?.message}</p>
       </div>
 
       <div>
@@ -65,7 +69,7 @@ export const AuthByLocalForm = ({ onSuccess }: Props) => {
           label={"Логин"}
           placeholder={"kaneki_ken"}
         />
-        <p>{errors.username?.message}</p>
+        <p className={styles.fieldErrorMsg}>{errors.username?.message}</p>
       </div>
 
       <div>
@@ -87,7 +91,7 @@ export const AuthByLocalForm = ({ onSuccess }: Props) => {
             </Tooltip>
           }
         />
-        <p>{errors.username?.message}</p>
+        <p className={styles.fieldErrorMsg}>{errors.username?.message}</p>
       </div>
       <div>
         <Input
@@ -98,7 +102,7 @@ export const AuthByLocalForm = ({ onSuccess }: Props) => {
           label={"Пароль"}
           placeholder={"Введите пароль"}
         />
-        <p>{errors.password?.message}</p>
+        <p className={styles.fieldErrorMsg}>{errors.password?.message}</p>
       </div>
       <div>
         <Input
@@ -109,12 +113,21 @@ export const AuthByLocalForm = ({ onSuccess }: Props) => {
           label={"Повтор пароля"}
           placeholder={"Повторите пароль"}
         />
-        <p>{errors.repeatPassword?.message}</p>
+        <p className={styles.fieldErrorMsg}>{errors.repeatPassword?.message}</p>
       </div>
-
-      <Button isLoading={isSubmitting} type={"submit"}>
-        Зарегистрироваться
-      </Button>
+      {authError && (
+        <div className={styles.authErrorMsg}>
+          <div className={styles.icon}>
+            <BiErrorAlt />
+          </div>
+          <p>{authError}</p>
+        </div>
+      )}
+      <div className={styles.submitBtn}>
+        <Button className={"flex-1"} isLoading={isSubmitting} type={"submit"}>
+          Зарегистрироваться
+        </Button>
+      </div>
     </form>
   )
 }

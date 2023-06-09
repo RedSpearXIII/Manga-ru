@@ -1,0 +1,21 @@
+.form {
+  @apply flex flex-col gap-3;
+
+  .authErrorMsg {
+    @apply bg-red-400/30 px-3 py-2 rounded mt-3 flex flex-nowrap items-center gap-2;
+    .icon {
+      @apply text-red-500 text-lg;
+    }
+    p {
+      @apply text-red-500 text-sm;
+    }
+  }
+
+  .fieldErrorMsg {
+    @apply text-xs text-red-500;
+  }
+
+  .submitBtn {
+    @apply mt-3 flex;
+  }
+}

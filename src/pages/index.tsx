@@ -3,11 +3,10 @@ import { Route, Routes } from "react-router-dom"
 import { MainLayout } from "~layouts/main-layout"
 import { useStore } from "effector-react"
 import { viewerModel } from "~entities/viewer"
+import { AuthForm } from "~widgets/auth-form"
 
 const HomePage = lazy(() => import("~pages/home-page"))
 const MainPage = lazy(() => import("~pages/main-page"))
-const LoginPage = lazy(() => import("~pages/login-page"))
-const SignupPage = lazy(() => import("~pages/signup-page"))
 const MangaPage = lazy(() => import("~pages/manga-page"))
 const AnimePage = lazy(() => import("~pages/anime-page"))
 const MangaDetailingPage = lazy(() => import("~pages/manga-detailing-page"))
@@ -40,8 +39,8 @@ const Routing = () => {
           <></>
         ) : (
           <>
-            <Route path={"/login"} element={<LoginPage />} />
-            <Route path={"/signup"} element={<SignupPage />} />
+            <Route path={"/login"} element={<AuthForm />} />
+            <Route path={"/signup"} element={<AuthForm />} />
           </>
         )}
       </Route>

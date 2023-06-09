@@ -8,8 +8,6 @@ import MultiSelect from "./multi-select"
 import SiteLogo from "./site-logo"
 import SuspensePageLoader from "./suspense-page-loader"
 import Modal from "./modal"
-import AuthForm from "./auth-form"
-import AuthByServices from "./auth-by-services"
 import Tooltip from "./tooltip"
 import Tabs from "./tabs"
 
@@ -24,8 +22,6 @@ export {
   MultiSelect,
   SuspensePageLoader,
   Modal,
-  AuthForm,
-  AuthByServices,
   Tooltip,
   Tabs,
 }

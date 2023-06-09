@@ -10,6 +10,7 @@ type Props = {
   image: string
   type?: string
   episodesCount?: number
+  year?: number
 }
 
 export const RelatedMediaCard = ({
@@ -18,6 +19,7 @@ export const RelatedMediaCard = ({
   relationType,
   type,
   episodesCount,
+  year,
 }: Props) => {
   const mediaType = translateAnimeType(type as any)
   return (
@@ -30,8 +32,18 @@ export const RelatedMediaCard = ({
         </div>
         <div className={styles.info}>
           {mediaType && <p>{mediaType}</p>}
-          {mediaType && episodesCount && <RxDotFilled />}
-          {episodesCount && <p>{episodesCount} эп.</p>}
+          {mediaType && episodesCount && (
+            <>
+              <RxDotFilled />
+              <p>{episodesCount} эп.</p>
+            </>
+          )}
+          {year && (
+            <>
+              <RxDotFilled />
+              <p>{year} г.</p>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -45,7 +57,7 @@ export const RelatedMediaCardLoader = () => {
         className={clsx(styles.image, "dark:bg-slate-700 bg-slate-300 h-full")}
       />
       <div className={styles.content}>
-        <div className={"mt-2"}>
+        <div>
           <div
             className={
               "dark:bg-slate-700 bg-slate-300 h-4 max-w-[120px] rounded"
@@ -57,6 +69,9 @@ export const RelatedMediaCardLoader = () => {
             className={"dark:bg-slate-700 bg-slate-300 h-2 w-[30%] rounded"}
           />
         </div>
+        <div
+          className={"dark:bg-slate-700 bg-slate-300 h-2 max-w-[120px] rounded"}
+        />
       </div>
     </div>
   )

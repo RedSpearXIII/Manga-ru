@@ -5,13 +5,13 @@ FROM node:18.13.0-alpine
 WORKDIR /app
 
 COPY . .
+COPY .env .
 
 RUN npm install -g pnpm
 
 RUN pnpm install
 RUN pnpm build
 
-ENV VITE_REACT_APP_API_URL=https://anifox.club/api/
 
 FROM nginx:1.23.3-alpine
 COPY --from=0 /app/dist /usr/share/nginx/html

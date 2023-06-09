@@ -7,7 +7,4 @@ export const modalAnimateVariants: Variants = {
   visible: {
     opacity: 1,
   },
-  exit: {
-    opacity: 0,
-  },
 }
