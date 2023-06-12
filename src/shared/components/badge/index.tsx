@@ -4,11 +4,15 @@ import clsx from "clsx"
 
 type Props = {
   children: ReactNode
+  title?: string
 } & HTMLAttributes<HTMLDivElement>
-const Badge = ({ children, ...other }: Props) => {
+const Badge = ({ children, title, ...other }: Props) => {
   return (
-    <div {...other} className={clsx(styles.badge, other.className)}>
-      {children}
+    <div>
+      {title && <p className={styles.title}>{title}</p>}
+      <div {...other} className={clsx(styles.badge, other.className)}>
+        {children}
+      </div>
     </div>
   )
 }

@@ -22,7 +22,7 @@ export const AnimeContent = () => {
   const { data, isLoading } = useGetAnimeByUrl({ animeUrl: animeUrl! })
   const { screenWidth } = useScreenSize()
 
-  if (!data && !isLoading) return <h1>Error</h1>
+  if (!data && !isLoading) return null
   if (!data && isLoading) return <h1>loading</h1>
 
   const addAnimeToFavoriteList = (status: AnimeFavoriteListStatuses) => {
