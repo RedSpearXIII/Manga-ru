@@ -1,6 +1,5 @@
 import React from "react"
-import styles from "./styles.module.pcss"
-import { InfoItem } from "../info-item"
+import styles from "../styles.module.pcss"
 import { translateAnimeType, translateMediaStatus } from "~entities/media"
 import { format, parseISO } from "date-fns"
 import { ru } from "date-fns/locale"
@@ -57,20 +56,23 @@ export const Characteristics = () => {
   }
 
   return (
-    <div className={styles.characteristics}>
-      <InfoItem color={"emerald-400"} title={"Серий"} value={seasons} />
-      <InfoItem color={"cyan-500"} title={"Стартовал"} value={airedAt} />
-      <InfoItem color={"orange-300"} title={"Выпущен"} value={releasedAt} />
-      <div className={"cursor-pointer"} onClick={showAnimeWithYear}>
-        <InfoItem color={"rose-500"} title={"Год"} value={year} />
-      </div>
-      {data.status && (
-        <div onClick={showAnimeWithStatus} className={"cursor-pointer"}>
-          <InfoItem color={"purple-400"} title={"Статус"} value={status} />
+    <div className={styles.infoBlock}>
+      <p className={styles.title}>О аниме: </p>
+      <div className={styles.content}>
+        <div className={styles.item}>Серий: {seasons}</div>
+        <div className={styles.item}>Стартовал: {airedAt}</div>
+        <div className={styles.item}>Выпущен: {releasedAt}</div>
+        <div className={styles.item} onClick={showAnimeWithYear}>
+          Год: {year}
         </div>
-      )}
-      <div onClick={showAnimeWithType} className={"cursor-pointer"}>
-        <InfoItem color={"pink-400"} title={"Тип"} value={type} />
+        {data.status && (
+          <div className={styles.item} onClick={showAnimeWithStatus}>
+            Статус: {status}
+          </div>
+        )}
+        <div onClick={showAnimeWithType} className={styles.item}>
+          Тип: {type}
+        </div>
       </div>
     </div>
   )

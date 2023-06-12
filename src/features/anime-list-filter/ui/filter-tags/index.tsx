@@ -6,7 +6,7 @@ import { useHover } from "~shared/hooks"
 import { AnimatePresence, motion } from "framer-motion"
 import { animeListFilterModel } from "~features/anime-list-filter"
 import { getUserDeviceType } from "~shared/lib/user"
-import { translateAnimeType } from "~entities/media"
+import { translateAnimeType, translateMediaSeason } from "~entities/media"
 import { useStore } from "effector-react"
 
 export const FilterTags = () => {
@@ -120,10 +120,7 @@ export const FilterTags = () => {
           <div onClick={removeSeasonFilter} className={styles.tagItem}>
             <Badge className={"bg-emerald-400"}>
               <div className={styles.content}>
-                {season === "Fall" && "Осень"}
-                {season === "Spring" && "Весна"}
-                {season === "Winter" && "Зима"}
-                {season === "Summer" && "Лето"}
+                {translateMediaSeason(season)}
                 <GrFormClose />
               </div>
             </Badge>

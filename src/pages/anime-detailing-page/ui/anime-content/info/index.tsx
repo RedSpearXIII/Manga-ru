@@ -2,6 +2,7 @@ import React from "react"
 import styles from "./styles.module.pcss"
 import { Genres } from "./genres"
 import { Studios } from "./studios"
+import { Characteristics } from "./characteristics"
 import { useGetAnimeByUrl } from "~shared/api"
 import { useParams } from "react-router-dom"
 
@@ -15,6 +16,7 @@ export const Info = () => {
     <div className={styles.info}>
       <Genres />
       <Studios />
+      <Characteristics />
     </div>
   )
 }
