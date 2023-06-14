@@ -13,6 +13,7 @@ const MangaDetailingPage = lazy(() => import("~pages/manga-detailing-page"))
 const AnimeDetailingPage = lazy(() => import("~pages/anime-detailing-page"))
 const RightHoldersPage = lazy(() => import("~pages/right-holders-page"))
 const ProfilePage = lazy(() => import("~pages/profile-page"))
+const WatchPage = lazy(() => import("~pages/watch-page"))
 
 const Routing = () => {
   const { isAuth } = useStore(viewerModel.$viewer)
@@ -44,6 +45,7 @@ const Routing = () => {
           </>
         )}
       </Route>
+      <Route path={"watch"} element={<WatchPage />} />
     </Routes>
   )
 }

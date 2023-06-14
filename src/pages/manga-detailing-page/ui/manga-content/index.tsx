@@ -2,7 +2,8 @@ import React from "react"
 import styles from "./styles.module.pcss"
 import { useGetMangaById } from "~shared/api"
 import { useParams } from "react-router-dom"
-import { FavoriteListButtons } from "~entities/favorite-media/favorite-list-buttons"
+import { SetMediaStatusButton } from "~features/media-status/set-media-status"
+import { AddMediaToFavoritesButton } from "~features/favorite-media/add-media-to-favorites"
 
 export const MangaContent = () => {
   const { mangaId } = useParams()
@@ -23,10 +24,10 @@ export const MangaContent = () => {
               src={data?.image}
               alt={"title-image"}
             />
-            <FavoriteListButtons
-              onAddAnimeToFavoriteList={() => {}}
-              onLikeAnime={() => {}}
-            />
+            <div className={styles.posterButtons}>
+              <SetMediaStatusButton mangaUrl={mangaId!} />
+              <AddMediaToFavoritesButton />
+            </div>
           </>
         )}
       </div>

@@ -1,10 +1,11 @@
-export type AnimeFavoriteListStatuses =
+export type AnimeTrackStatuses =
   | "InPlan"
   | "Watching"
   | "Watched"
   | "Postponed"
+  | "Dropped"
 
-export type AddAnimeToFavoriteListParams = {
+export type SetAnimeStatusParams = {
   animeUrl: string
-  status: AnimeFavoriteListStatuses
+  status: AnimeTrackStatuses
 }

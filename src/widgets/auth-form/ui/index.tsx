@@ -14,12 +14,14 @@ type Props = {
 }
 
 export const AuthForm = ({ displayedForm, setDisplayedForm }: Props) => {
-  const [form, setForm] = useState<Forms>(displayedForm || "login")
-
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
   const isAuthPage = pathname === "/login" || pathname === "/signup"
+
+  const [form, setForm] = useState<Forms>(
+    displayedForm || isAuthPage ? (pathname.replace("/", "") as Forms) : "login"
+  )
 
   useEffect(() => {
     if (setDisplayedForm) setDisplayedForm(form)

@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query"
 import { authHttp } from "~shared/api"
-import { AddAnimeToFavoriteListParams } from "./types"
+import { SetAnimeStatusParams } from "./types"
 
-export const useAddAnimeToFavoriteListMutation = () =>
+export const useSetAnimeStatus = () =>
   useMutation({
-    mutationFn: async ({ animeUrl, status }: AddAnimeToFavoriteListParams) => {
+    mutationFn: async ({ animeUrl, status }: SetAnimeStatusParams) => {
       try {
         const {
           data: { data },

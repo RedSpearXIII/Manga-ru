@@ -1,33 +1,25 @@
 import React from "react"
 import styles from "./styles.module.pcss"
 import { useParams } from "react-router-dom"
-import {
-  AnimeFavoriteListStatuses,
-  useAddAnimeToFavoriteListMutation,
-  useGetAnimeByUrl,
-} from "~shared/api"
+import { useGetAnimeByUrl } from "~shared/api"
 import { Badge } from "~shared/components"
 import { Description } from "./description"
 import { Info } from "./info"
 import { useScreenSize } from "~shared/hooks"
 import { Breakpoints } from "~shared/types"
 import { BgImage } from "./bg-image"
-import { FavoriteListButtons } from "~entities/favorite-media/favorite-list-buttons"
 import { AnimeRating } from "./anime-rating"
+import { AddMediaToFavoritesButton } from "~features/favorite-media/add-media-to-favorites"
+import { SetMediaStatusButton } from "~features/media-status/set-media-status"
 
 export const AnimeContent = () => {
   const { animeUrl } = useParams()
-  const { mutate } = useAddAnimeToFavoriteListMutation()
 
   const { data, isLoading } = useGetAnimeByUrl({ animeUrl: animeUrl! })
   const { screenWidth } = useScreenSize()
 
   if (!data && !isLoading) return null
   if (!data && isLoading) return <h1>loading</h1>
-
-  const addAnimeToFavoriteList = (status: AnimeFavoriteListStatuses) => {
-    mutate({ status, animeUrl: animeUrl! })
-  }
 
   return (
     <div className={styles.bg}>
@@ -51,10 +43,10 @@ export const AnimeContent = () => {
             </span>
           )}
           {screenWidth >= Breakpoints.lg && (
-            <FavoriteListButtons
-              onAddAnimeToFavoriteList={addAnimeToFavoriteList}
-              onLikeAnime={() => {}}
-            />
+            <div className={styles.manageAnimeButtons}>
+              <SetMediaStatusButton animeUrl={animeUrl!} />
+              <AddMediaToFavoritesButton />
+            </div>
           )}
         </div>
 
@@ -71,10 +63,10 @@ export const AnimeContent = () => {
               </div>
 
               {screenWidth < Breakpoints.lg && (
-                <FavoriteListButtons
-                  onAddAnimeToFavoriteList={addAnimeToFavoriteList}
-                  onLikeAnime={() => {}}
-                />
+                <div className={styles.manageAnimeButtons}>
+                  <SetMediaStatusButton animeUrl={animeUrl!} />
+                  <AddMediaToFavoritesButton />
+                </div>
               )}
             </div>
           )}

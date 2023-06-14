@@ -4,7 +4,12 @@ import { Button } from "~shared/components"
 import { motion, Variants } from "framer-motion"
 import { BiChevronDown } from "react-icons/all"
 import { useHover } from "~shared/hooks"
-import { AnimeFavoriteListStatuses } from "~shared/api"
+import {
+  AnimeTrackStatuses,
+  FAVORITE_LIST_DISTRIBUTION_QUERY_KEY,
+  useSetAnimeStatus,
+} from "~shared/api"
+import { useQueryClient } from "@tanstack/react-query"
 
 const chevronVariants: Variants = {
   open: { rotate: 0 },
@@ -19,7 +24,7 @@ const dropdownVariants: Variants = {
   },
 }
 
-const options: { title: string; value: AnimeFavoriteListStatuses }[] = [
+const options: { title: string; value: AnimeTrackStatuses }[] = [
   { title: "Смотрю", value: "Watching" },
   { title: "Запланировано", value: "InPlan" },
   { title: "Просмотрено", value: "Watched" },
@@ -27,11 +32,38 @@ const options: { title: string; value: AnimeFavoriteListStatuses }[] = [
 ]
 
 type Props = {
-  onAddAnimeToFavoriteList: (status: AnimeFavoriteListStatuses) => void
-}
+  animeUrl?: string | undefined
+  mangaUrl?: string | undefined
+  onSuccess?: () => void
+} & ({ animeUrl: string } | { mangaUrl: string })
 
-export const FavoriteListButton = ({ onAddAnimeToFavoriteList }: Props) => {
+export const SetMediaStatusButton = ({
+  animeUrl,
+  mangaUrl,
+  onSuccess,
+}: Props) => {
   const [isHovered, hoverProps] = useHover(100)
+
+  const queryClient = useQueryClient()
+  const { mutate } = useSetAnimeStatus()
+
+  const setMediaStatus = (status: AnimeTrackStatuses) => {
+    if (animeUrl) {
+      mutate(
+        { status, animeUrl: animeUrl! },
+        {
+          onSuccess: () => {
+            onSuccess && onSuccess()
+            queryClient.invalidateQueries({
+              queryKey: [FAVORITE_LIST_DISTRIBUTION_QUERY_KEY(animeUrl!)],
+            })
+          },
+        }
+      )
+    }
+    if (mangaUrl) {
+    }
+  }
 
   return (
     <div className={styles.favoriteListButton} {...hoverProps}>
@@ -59,7 +91,7 @@ export const FavoriteListButton = ({ onAddAnimeToFavoriteList }: Props) => {
         {options.map((option) => (
           <li
             key={option.value}
-            onClick={() => onAddAnimeToFavoriteList(option.value)}
+            onClick={() => setMediaStatus(option.value)}
             className={styles.dropdownItem}
           >
             {option.title}

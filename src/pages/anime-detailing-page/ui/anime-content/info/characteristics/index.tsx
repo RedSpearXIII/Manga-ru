@@ -57,7 +57,7 @@ export const Characteristics = () => {
 
   return (
     <div className={styles.infoBlock}>
-      <p className={styles.title}>О аниме: </p>
+      <p className={styles.title}>Об аниме: </p>
       <div className={styles.content}>
         <div className={styles.item}>Серий: {seasons}</div>
         <div className={styles.item}>Стартовал: {airedAt}</div>
