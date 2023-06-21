@@ -1,17 +1,16 @@
 import React from "react"
 import { animeListFilterModel } from "~features/anime-list-filter"
 import { MultiSelect } from "~shared/components"
-import { useGetAnimeGenres } from "~shared/api"
-import { useStore } from "effector-react"
+import { getAnimeGenres } from "~shared/api"
+import { useStore, useUnit } from "effector-react"
 
 type Props = {
   inExtraFilter?: boolean
 }
 
 export const Genres = ({ inExtraFilter }: Props) => {
+  const { pending, data } = useUnit(getAnimeGenres)
   const genres = useStore(animeListFilterModel.$genres)
-
-  const { data, isLoading } = useGetAnimeGenres()
 
   const values = genres.map((genre) => genre.id)
 
@@ -36,7 +35,7 @@ export const Genres = ({ inExtraFilter }: Props) => {
     <div>
       <MultiSelect
         searchable
-        isLoading={isLoading}
+        isLoading={pending}
         label={"Жанры"}
         placeholder={"Любой"}
         values={values}

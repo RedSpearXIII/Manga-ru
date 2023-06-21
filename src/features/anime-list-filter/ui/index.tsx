@@ -7,7 +7,7 @@ import { useScreenSize } from "~shared/hooks"
 import { Breakpoints } from "~shared/types"
 import {
   Status,
-  Season,
+  Studios,
   AnimeType,
   Genres,
   MinimalAge,
@@ -16,18 +16,18 @@ import {
 const FilterItemsMobile = lazy(() => import("./filter-items-mobile"))
 
 export const AnimeListFilter = () => {
-  const screenSize = useScreenSize()
+  const { screenWidth } = useScreenSize()
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.filters}>
         <div className={styles.filter}>
           <Search />
-          {screenSize >= Breakpoints.xxl && (
+          {screenWidth >= Breakpoints.xxl && (
             <>
               <AnimeType />
               <Status />
-              <Season />
+              <Studios />
               <MinimalAge />
               <Genres />
             </>
@@ -38,7 +38,7 @@ export const AnimeListFilter = () => {
         </div>
       </div>
 
-      {screenSize < Breakpoints.xxl && (
+      {screenWidth < Breakpoints.xxl && (
         <Suspense>
           <FilterItemsMobile />
         </Suspense>

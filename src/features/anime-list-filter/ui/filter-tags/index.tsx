@@ -6,7 +6,7 @@ import { useHover } from "~shared/hooks"
 import { AnimatePresence, motion } from "framer-motion"
 import { animeListFilterModel } from "~features/anime-list-filter"
 import { getUserDeviceType } from "~shared/lib/user"
-import { translateAnimeType } from "~entities/media"
+import { translateAnimeType, translateMediaSeason } from "~entities/media"
 import { useStore } from "effector-react"
 
 export const FilterTags = () => {
@@ -23,6 +23,7 @@ export const FilterTags = () => {
     minimalAge,
     years,
     translations,
+    studio,
   } = useStore(animeListFilterModel.$animeListFilter)
   const filterIsActive = useStore(animeListFilterModel.$filterIsActive)
 
@@ -56,6 +57,10 @@ export const FilterTags = () => {
 
   const removeTranslationItem = (translationId: number) => {
     animeListFilterModel.removeTranslation({ translationId })
+  }
+
+  const removeStudioFilter = () => {
+    animeListFilterModel.setStudio({ studio: null })
   }
 
   if (!filterIsActive) return null
@@ -115,10 +120,7 @@ export const FilterTags = () => {
           <div onClick={removeSeasonFilter} className={styles.tagItem}>
             <Badge className={"bg-emerald-400"}>
               <div className={styles.content}>
-                {season === "Fall" && "Осень"}
-                {season === "Spring" && "Весна"}
-                {season === "Winter" && "Зима"}
-                {season === "Summer" && "Лето"}
+                {translateMediaSeason(season)}
                 <GrFormClose />
               </div>
             </Badge>
@@ -177,6 +179,15 @@ export const FilterTags = () => {
               </div>
             ))}
           </>
+        )}
+        {studio && (
+          <div onClick={() => removeStudioFilter()} className={styles.tagItem}>
+            <Badge className={"bg-pink-500"}>
+              <div className={styles.content}>
+                {studio} <GrFormClose />
+              </div>
+            </Badge>
+          </div>
         )}
 
         <AnimatePresence>

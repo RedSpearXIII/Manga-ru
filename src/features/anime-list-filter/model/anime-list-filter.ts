@@ -5,9 +5,12 @@ import {
   AnimeRatingMpa,
   AnimeSeasons,
   AnimeStatuses,
-  AnimeStudio,
   AnimeTranslation,
   AnimeTypeVariants,
+  getAnimeGenres,
+  getAnimeStudios,
+  getAnimeTranslation,
+  getAnimeYears,
 } from "~shared/api"
 import { createEvent, createStore } from "effector"
 
@@ -59,7 +62,7 @@ export const setTranslations = createEvent<{
 }>()
 export const removeTranslation = createEvent<{ translationId: number }>()
 export const addTranslation = createEvent<{ translation: AnimeTranslation }>()
-export const setStudio = createEvent<{ studio: AnimeStudio }>()
+export const setStudio = createEvent<{ studio: string | null }>()
 export const resetFilter = createEvent()
 
 export const $animeListFilter = createStore(initialState)
@@ -116,7 +119,7 @@ export const $animeListFilter = createStore(initialState)
   }))
   .on(setStudio, (state, payload) => ({
     ...state,
-    studio: payload.studio.studio,
+    studio: payload.studio,
   }))
   .on(resetFilter, () => initialState)
 
@@ -146,3 +149,8 @@ export const $type = $animeListFilter.map((state) => state.type)
 export const $minimalAge = $animeListFilter.map((state) => state.minimalAge)
 export const $years = $animeListFilter.map((state) => state.years)
 export const $translations = $animeListFilter.map((state) => state.translations)
+
+getAnimeYears.start()
+getAnimeStudios.start()
+getAnimeGenres.start()
+getAnimeTranslation.start()

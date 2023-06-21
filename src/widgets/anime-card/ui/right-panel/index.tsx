@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import styles from "./styles.module.pcss"
 import { motion } from "framer-motion"
-import { AnimeResponse, AnimeSeasons, AnimeStatuses } from "~shared/api"
+import { AnimeResponse, AnimeStatuses } from "~shared/api"
 import { Badge } from "~shared/components"
 import { animeListFilterModel } from "~features/anime-list-filter"
 import { translateMediaSeason } from "~entities/media"
@@ -29,7 +29,12 @@ export const RightPanel = ({ anime }: Props) => {
   const season = translateMediaSeason(anime.season)
 
   const onSetRatingMpa = () => {
+    if (!anime.ratingMpa) return
     animeListFilterModel.setRatingMpa({ ratingMpa: anime.ratingMpa })
+  }
+  const onSetMinimalAge = () => {
+    if (!anime.minimalAge) return
+    animeListFilterModel.setMinimalAge({ minimalAge: anime.minimalAge })
   }
   const onAddGenre = (id: string, genre: string) => {
     animeListFilterModel.addGenre({ genre: { id, genre } })
@@ -37,8 +42,14 @@ export const RightPanel = ({ anime }: Props) => {
   const onSetStatus = (status: AnimeStatuses) => {
     animeListFilterModel.setStatus({ status })
   }
-  const onSetSeason = (season: AnimeSeasons) => {
-    animeListFilterModel.setSeason({ season })
+  const onSetAnimeDate = () => {
+    animeListFilterModel.setSeason({ season: anime.season })
+    if (anime.year)
+      animeListFilterModel.addYear({ year: anime.year.toString() })
+  }
+
+  const onSetStudio = (studio: string) => {
+    animeListFilterModel.setStudio({ studio })
   }
 
   return (
@@ -53,17 +64,31 @@ export const RightPanel = ({ anime }: Props) => {
       variants={variants}
     >
       <div className={styles.topInfo}>
-        <p className={styles.season} onClick={() => onSetSeason(anime.season)}>
+        <p className={styles.season} onClick={onSetAnimeDate}>
           {season}
+          {anime.year && `, ${anime.year} год`}
         </p>
-        <Badge className={styles.mpaRating} onClick={onSetRatingMpa}>
-          {anime.ratingMpa}
-        </Badge>
+        {anime.minimalAge ? (
+          <Badge className={styles.mpaRating} onClick={onSetMinimalAge}>
+            {anime.minimalAge}+
+          </Badge>
+        ) : (
+          anime.ratingMpa && (
+            <Badge className={styles.mpaRating} onClick={onSetRatingMpa}>
+              {anime.ratingMpa}
+            </Badge>
+          )
+        )}
       </div>
 
       <div className={styles.studio}>
         {anime.studio && (
-          <p className={styles.studioName}>Студия {anime.studio[0].studio}</p>
+          <p
+            onClick={() => onSetStudio(anime.studio![0].studio)}
+            className={styles.studioName}
+          >
+            Студия {anime.studio[0].studio}
+          </p>
         )}
         <div className={styles.animeProgress}>
           <p>{anime.episodesCount} серий</p>-
@@ -76,20 +101,22 @@ export const RightPanel = ({ anime }: Props) => {
         </div>
       </div>
 
-      <div className={styles.genres}>
-        {anime.genres.map(({ genre, id }, index) => {
-          if (index < 3)
-            return (
-              <div
-                className={styles.genre}
-                onClick={() => onAddGenre(id, genre)}
-                key={id}
-              >
-                {genre}
-              </div>
-            )
-        })}
-      </div>
+      {anime.genres && anime.genres.length > 0 && (
+        <div className={styles.genres}>
+          {anime.genres.map(({ genre, id }, index) => {
+            if (index < 3)
+              return (
+                <div
+                  className={styles.genre}
+                  onClick={() => onAddGenre(id, genre)}
+                  key={id}
+                >
+                  {genre}
+                </div>
+              )
+          })}
+        </div>
+      )}
     </motion.div>
   )
 }

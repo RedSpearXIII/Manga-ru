@@ -16,18 +16,18 @@ const MobileNavMenu = lazy(() =>
 )
 
 export const MainLayout = () => {
-  const screenSize = useScreenSize()
+  const { screenWidth } = useScreenSize()
 
   return (
     <div className={styles.layout}>
       <Suspense>
-        {screenSize <= Breakpoints.md ? <MobileNavMenu /> : <Header />}
+        {screenWidth <= Breakpoints.md ? <MobileNavMenu /> : <Header />}
       </Suspense>
 
       <div
         className={clsx(
           styles.pageContent,
-          screenSize > Breakpoints.md ? "pt-28" : "pt-2"
+          screenWidth > Breakpoints.md ? "mt-28" : "pt-2"
         )}
       >
         <main>

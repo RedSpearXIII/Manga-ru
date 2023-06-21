@@ -9,6 +9,7 @@ import {
   RatingMpa,
   Season,
   Years,
+  Studios,
 } from "../filters-selects"
 import { animeListExtraFilterModel } from "~features/anime-list-filter"
 import { getUserDeviceType } from "~shared/lib/user"
@@ -31,6 +32,9 @@ const FilterItemsMobile = () => {
       >
         <div className={styles.filterItem}>
           <AnimeType />
+        </div>
+        <div className={styles.filterItem}>
+          <Studios />
         </div>
         <div className={styles.filterItem}>
           <Genres />

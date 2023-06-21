@@ -1,5 +1,5 @@
 export * from "./anime-content"
 export * from "./page-player"
-export * from "./additional-info"
+export * from "./anime-status-distribution-chart"
 export * from "./preview-media"
 export * from "./related-anime-list"

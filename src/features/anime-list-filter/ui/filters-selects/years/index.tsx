@@ -1,8 +1,8 @@
 import React from "react"
 import { MultiSelect } from "~shared/components"
-import { useGetAnimeYears } from "~shared/api"
+import { getAnimeYears } from "~shared/api"
 import { animeListFilterModel } from "~features/anime-list-filter"
-import { useStore } from "effector-react"
+import { useStore, useUnit } from "effector-react"
 
 interface Props {
   inExtraFilter?: boolean
@@ -15,7 +15,8 @@ export const Years = ({ inExtraFilter }: Props) => {
     animeListFilterModel.setYears({ years: values })
   }
 
-  const { data, isLoading } = useGetAnimeYears()
+  /*Вызов запроса происходит в сторе чтобы загрузить данные сразу*/
+  const { data, pending } = useUnit(getAnimeYears)
 
   return (
     <div>
@@ -27,7 +28,7 @@ export const Years = ({ inExtraFilter }: Props) => {
         values={years}
         onValuesChange={onChange}
         options={data || []}
-        isLoading={isLoading}
+        isLoading={pending}
       />
     </div>
   )

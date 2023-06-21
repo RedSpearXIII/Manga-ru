@@ -15,7 +15,7 @@ const ExtraFilterDropdown = lazy(() =>
 )
 
 export const ExtraFilter = () => {
-  const screenSize = useScreenSize()
+  const { screenWidth } = useScreenSize()
 
   const extraFilterRef = useRef(null)
   const { isOpened } = useStore(animeListExtraFilterModel.$extraFilterStore)
@@ -25,7 +25,7 @@ export const ExtraFilter = () => {
     animeListExtraFilterModel.setIsOpened(!isOpened)
   }
   const closeExtraFilter = () => {
-    if (screenSize >= Breakpoints.xxl) {
+    if (screenWidth >= Breakpoints.xxl) {
       animeListExtraFilterModel.setIsOpened(false)
     }
   }
@@ -41,7 +41,7 @@ export const ExtraFilter = () => {
         <GoSettings />
       </div>
 
-      {screenSize >= Breakpoints.xxl && (
+      {screenWidth >= Breakpoints.xxl && (
         <AnimatePresence>
           {isOpened && (
             <Suspense>

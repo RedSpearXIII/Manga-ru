@@ -53,7 +53,10 @@ export const MediaCardSkeleton = () => {
       <div className={styles.imageLoaderContainer}>
         <div className={styles.imageContainerLoader} />
       </div>
-      <div className={styles.titleLoader} />
+      <div className={styles.titleLoader}>
+        <div className={styles.firstRow} />
+        <div className={styles.secondRow} />
+      </div>
     </div>
   )
 }

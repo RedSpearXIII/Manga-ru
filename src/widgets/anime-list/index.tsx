@@ -26,20 +26,6 @@ export const AnimeList = () => {
     studio,
   } = useStore(animeListFilterModel.$animeListFilter)
 
-  console.log(
-    searchQuery,
-    genres,
-    minimalAge,
-    ratingMpa,
-    orderBy,
-    season,
-    status,
-    type,
-    years,
-    translations,
-    studio
-  )
-
   const {
     data,
     isLoading,
@@ -59,6 +45,7 @@ export const AnimeList = () => {
     order: orderBy,
     type,
     years,
+    studio,
   })
 
   useEffect(() => {

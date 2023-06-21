@@ -1,0 +1,23 @@
+.wrapper {
+  @apply container mx-auto h-full w-full flex items-end;
+
+  .bannerContent {
+    @apply flex items-end justify-between w-full;
+
+    .presentUser {
+      @apply flex items-end;
+      .userAvatar {
+        @apply h-40 rounded-t;
+      }
+      .username {
+        @apply text-2xl text-white p-4;
+      }
+    }
+    .stats {
+      @apply p-4 bg-slate-800/30 backdrop-blur-xl rounded-t text-white flex flex-col gap-x-2 items-center;
+      .statsItem {
+        @apply flex items-center gap-x-1;
+      }
+    }
+  }
+}

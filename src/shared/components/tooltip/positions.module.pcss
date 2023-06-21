@@ -1,24 +1,32 @@
 .bottom {
-  top: calc(100% + 10px);
+  top: calc(100% + 5px);
   @apply -translate-x-1/2 left-1/2;
 }
 .top {
-  bottom: calc(100% + 10px);
+  bottom: calc(100% + 5px);
   @apply -translate-x-1/2 left-1/2;
 }
-.rightBottom {
-  top: calc(100% + 10px);
+.left {
+  @apply top-1/2 -translate-y-1/2;
+  right: calc(100% + 5px);
+}
+.right {
+  @apply top-1/2 -translate-y-1/2;
+  left: calc(100% + 5px);
+}
+.bottomRight {
+  top: calc(100% + 5px);
   @apply left-0;
 }
-.rightTop {
-  bottom: calc(100% + 10px);
+.topRight {
+  bottom: calc(100% + 5px);
   @apply left-0;
 }
-.leftBottom {
-  top: calc(100% + 10px);
+.bottomLeft {
+  top: calc(100% + 5px);
   @apply right-0;
 }
-.leftTop {
-  bottom: calc(100% + 10px);
+.topLeft {
+  bottom: calc(100% + 5px);
   @apply right-0;
 }

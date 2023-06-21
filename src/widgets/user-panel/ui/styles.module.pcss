@@ -4,35 +4,4 @@
   .button {
     @apply transition-colors flex items-center;
   }
-  .dropdown {
-    @apply bg-slate-100 dark:bg-slate-800 rounded p-2 gap-2 drop-shadow dark:text-white text-black absolute right-0 top-20 w-[500px];
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: repeat(3, minmax(60px, auto));
-    grid-template-areas:
-      "a a b"
-      "c d b"
-      "c d e";
-
-    .dropdownItem {
-      @apply rounded h-full dark:bg-slate-700 bg-slate-200;
-    }
-
-    & :first-child {
-      grid-area: a;
-    }
-    & :nth-child(2) {
-      grid-area: b;
-    }
-    & :nth-child(3) {
-      grid-area: c;
-    }
-    & :nth-child(4) {
-      grid-area: d;
-    }
-    & :last-child {
-      grid-area: e;
-    }
-  }
 }

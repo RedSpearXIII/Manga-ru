@@ -2,9 +2,11 @@ import React from "react"
 import { Button, Input } from "~shared/components"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { AiFillLock, MdAlternateEmail } from "react-icons/all"
+import { AiFillLock, BiErrorAlt, MdAlternateEmail } from "react-icons/all"
 import { getValidationSchema } from "../lib"
 import { loginModel } from "../model"
+import styles from "~features/auth/by-local/ui/styles.module.pcss"
+import { useStore } from "effector-react"
 
 export type LoginFields = {
   email: string
@@ -17,6 +19,9 @@ type Props = {
 
 export const LoginForm = ({ onSuccess }: Props) => {
   const LoginSchema = getValidationSchema()
+
+  const { loginError } = useStore(loginModel.$login)
+
   const {
     register,
     handleSubmit,
@@ -33,7 +38,7 @@ export const LoginForm = ({ onSuccess }: Props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <h3>Войти</h3>
       <div>
         <Input
@@ -44,7 +49,7 @@ export const LoginForm = ({ onSuccess }: Props) => {
           label={"Email"}
           placeholder={"sharingan@ghoul.zxc"}
         />
-        <p>{errors.email?.message}</p>
+        <p className={styles.fieldErrorMsg}>{errors.email?.message}</p>
       </div>
       <div>
         <Input
@@ -55,9 +60,16 @@ export const LoginForm = ({ onSuccess }: Props) => {
           label={"Пароль"}
           placeholder={"Введите пароль"}
         />
-        <p>{errors.password?.message}</p>
+        <p className={styles.fieldErrorMsg}>{errors.password?.message}</p>
       </div>
-
+      {loginError && (
+        <div className={styles.authErrorMsg}>
+          <div className={styles.icon}>
+            <BiErrorAlt />
+          </div>
+          <p>{loginError}</p>
+        </div>
+      )}
       <Button isLoading={isSubmitting} type={"submit"}>
         Войти
       </Button>

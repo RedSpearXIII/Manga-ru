@@ -1,0 +1,11 @@
+.chartContainer {
+  @apply bg-slate-200 dark:bg-slate-800 rounded flex items-center;
+  @apply p-2;
+
+  .responsiveContainer {
+    @apply relative;
+    .totalVotes {
+      @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2;
+    }
+  }
+}

@@ -3,8 +3,8 @@ import {
   AnimeContent,
   PreviewMedia,
   PagePlayer,
-  AdditionalInfo,
   RelatedAnimeList,
+  AnimeStatusDistributionChart,
 } from "./ui"
 
 const AnimeDetailingPage = () => {
@@ -13,7 +13,14 @@ const AnimeDetailingPage = () => {
       <AnimeContent />
       <div className={"container mx-auto px-2"}>
         <PreviewMedia />
-        <AdditionalInfo />
+        <div
+          className={
+            "grid grid-cols-[400px_auto] max-sm:grid-cols-1 gap-1 my-5"
+          }
+        >
+          <AnimeStatusDistributionChart />
+          {/*<div>1</div>*/}
+        </div>
         <RelatedAnimeList />
         <PagePlayer />
       </div>

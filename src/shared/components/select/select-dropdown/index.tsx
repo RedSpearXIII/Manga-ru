@@ -61,6 +61,7 @@ export const SelectDropdown = ({
   if (withModal)
     return (
       <Modal
+        centered={options.length < 15}
         title={label}
         isOpened={isOpen}
         onClose={() => {

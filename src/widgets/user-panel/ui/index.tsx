@@ -1,10 +1,10 @@
 import React from "react"
 import styles from "./styles.module.pcss"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useHover } from "~shared/hooks"
 import { BiChevronDown } from "react-icons/all"
-import { ToggleTheme } from "~features/toggle-theme"
 import { Avatar } from "~shared/components"
+import { Dropdown } from "./dropdown"
 
 const chevronVariants = {
   open: { rotate: 0 },
@@ -17,7 +17,9 @@ export const UserPanel = () => {
   return (
     <div className={styles.panel} {...hoverProps}>
       <div className={styles.button}>
-        <Avatar />
+        <div>
+          <Avatar />
+        </div>
 
         <motion.div
           animate={isHover ? "open" : "close"}
@@ -27,52 +29,7 @@ export const UserPanel = () => {
         </motion.div>
       </div>
 
-      <AnimatePresence>
-        {isHover && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={styles.dropdown}
-          >
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            >
-              a
-            </motion.div>
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            >
-              b
-            </motion.div>
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            >
-              c
-            </motion.div>
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            >
-              d
-            </motion.div>
-            <motion.div
-              className={styles.dropdownItem}
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-            >
-              <ToggleTheme />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Dropdown isOpened={isHover} />
     </div>
   )
 }

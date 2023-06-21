@@ -16,6 +16,7 @@ const getEnvVar = (key: string) => {
 }
 
 export const API_URL = getEnvVar("VITE_REACT_APP_API_URL")
+export const LIGHTBOX_LICENCE_KEY = getEnvVar("VITE_REACT_LIGHTBOX_LICENCE_KEY")
 
 export const NODE_ENV = getEnvVar("MODE")
 

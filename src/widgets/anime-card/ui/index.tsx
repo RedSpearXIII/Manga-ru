@@ -20,11 +20,11 @@ export const AnimeCard = ({ anime }: Props) => {
     anime.accentColor || "#FFFFFF"
   )
 
-  const screenSize = useScreenSize()
+  const { screenWidth } = useScreenSize()
   const userDeviceType = getUserDeviceType()
 
   const isLoadRightPanel =
-    screenSize >= Breakpoints.sm && userDeviceType === "desktop"
+    screenWidth >= Breakpoints.sm && userDeviceType === "desktop"
 
   return (
     <div

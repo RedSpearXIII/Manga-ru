@@ -8,15 +8,16 @@ import { Info } from "./info"
 import { useScreenSize } from "~shared/hooks"
 import { Breakpoints } from "~shared/types"
 import { BgImage } from "./bg-image"
-import { FavoriteListButtons } from "~entities/favorite-media/favorite-list-buttons"
 import { AnimeRating } from "./anime-rating"
+import { AnimeListManageBtns } from "./anime-list-manage-btns"
 
 export const AnimeContent = () => {
   const { animeUrl } = useParams()
-  const { data, isLoading } = useGetAnimeByUrl({ animeUrl: animeUrl! })
-  const screenSize = useScreenSize()
 
-  if (!data && !isLoading) return <h1>Error</h1>
+  const { data, isLoading } = useGetAnimeByUrl({ animeUrl: animeUrl! })
+  const { screenWidth } = useScreenSize()
+
+  if (!data && !isLoading) return null
   if (!data && isLoading) return <h1>loading</h1>
 
   return (
@@ -40,7 +41,7 @@ export const AnimeContent = () => {
               </Badge>
             </span>
           )}
-          {screenSize >= Breakpoints.lg && <FavoriteListButtons />}
+          {screenWidth >= Breakpoints.lg && <AnimeListManageBtns />}
         </div>
 
         <div className={styles.rightBlock}>
@@ -55,10 +56,10 @@ export const AnimeContent = () => {
                 <h1>{data.title}</h1>
               </div>
 
-              {screenSize < Breakpoints.lg && <FavoriteListButtons />}
+              {screenWidth < Breakpoints.lg && <AnimeListManageBtns />}
             </div>
           )}
-          {screenSize >= Breakpoints.lg && (
+          {screenWidth >= Breakpoints.lg && (
             <>
               <Info />
               <Description />
@@ -66,15 +67,17 @@ export const AnimeContent = () => {
           )}
         </div>
       </div>
-      {screenSize < Breakpoints.lg && (
+      {screenWidth < Breakpoints.lg && (
         <>
           <div className={styles.infoMobile}>
             <Info />
           </div>
-          <div className={styles.descriptionMobile}>
-            <p className={styles.descriptionMobileTitle}>Описание</p>
-            <Description />
-          </div>
+          {data.description && (
+            <div className={styles.descriptionMobile}>
+              <p className={styles.descriptionMobileTitle}>Описание</p>
+              <Description />
+            </div>
+          )}
         </>
       )}
     </div>

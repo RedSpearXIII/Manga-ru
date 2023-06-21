@@ -1,8 +1,7 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./styles.module.pcss"
 import { UserPanel } from "~widgets/user-panel"
 import { NoticePanel } from "~widgets/notice-panel"
-import useSticky from "~widgets/header/hooks/useSticky"
 import clsx from "clsx"
 import { Button, SiteLogo } from "~shared/components"
 import { AiOutlineUserAdd, BiLogIn, FaBookOpen, FaPlay } from "react-icons/all"
@@ -19,7 +18,7 @@ const links = [
 
 export const Header = () => {
   const isAuth = useStore(viewerModel.$isAuth)
-  const isSticky = useSticky()
+  const [isHidden, setIsHidden] = useState(false)
 
   const navLinks = links.map(({ to, title, icon: Icon }) => (
     <Link className={styles.link} key={to} to={to}>
@@ -28,8 +27,30 @@ export const Header = () => {
     </Link>
   ))
 
+  useEffect(() => {
+    const onScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop
+
+      if (scrollTop > lastScrollTop && !isHidden) {
+        setIsHidden(true)
+      } else {
+        setIsHidden(false)
+      }
+
+      // Сохраняем текущее значение прокрутки
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop
+    }
+
+    let lastScrollTop = 0
+
+    document.addEventListener("scroll", onScroll)
+    return () => {
+      document.removeEventListener("scroll", onScroll)
+    }
+  }, [])
+
   return (
-    <div className={clsx(styles.wrapper, !isSticky && styles.hidden)}>
+    <div className={clsx(styles.wrapper, isHidden && styles.hidden)}>
       <header className={styles.header}>
         <SiteLogo />
 

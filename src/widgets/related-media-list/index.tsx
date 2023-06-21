@@ -21,7 +21,7 @@ export const RelatedMediaList = ({ listData, isLoading, listType }: Props) => {
     setIsShowAll((prev) => !prev)
   }
 
-  const loader = Array.from({ length: 10 }, (_, index) => (
+  const loader = Array.from({ length: 5 }, (_, index) => (
     <RelatedMediaCardLoader key={index} />
   ))
   return (
@@ -33,11 +33,10 @@ export const RelatedMediaList = ({ listData, isLoading, listType }: Props) => {
             onClick={toggleShow}
             className={clsx(
               styles.listShowToggler,
-              listData.length <= 12 && "min-[1681px]:hidden",
-              listData.length <= 10 && "min-[1535px]:hidden",
-              listData.length <= 8 && "min-[1024px]:hidden",
-              listData.length <= 6 && "min-[768px]:hidden",
-              listData.length <= 4 && "min-[640px]:hidden",
+              listData.length <= 10 && "2xl:hidden",
+              listData.length <= 8 && "xl:hidden",
+              listData.length <= 6 && "lg:hidden",
+              listData.length <= 4 && "sm:hidden",
               listData.length <= 2 && "hidden"
             )}
           >
@@ -58,6 +57,7 @@ export const RelatedMediaList = ({ listData, isLoading, listType }: Props) => {
                   to={`/${listType}/title/${anime.url}`}
                 >
                   <RelatedMediaCard
+                    year={anime.year}
                     title={anime.title}
                     image={anime.image}
                     relationType={related.type}

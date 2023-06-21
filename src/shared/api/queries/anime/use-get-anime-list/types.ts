@@ -21,10 +21,13 @@ export type AnimeResponse = {
   }[]
   season: AnimeSeasons
   episodesCount?: number
-  genres: { id: string; genre: string }[]
+  genres?: { id: string; genre: string }[]
   status: AnimeStatuses
-  ratingMpa: AnimeRatingMpa
+  ratingMpa?: AnimeRatingMpa
   accentColor?: string
+  year?: number
+  type?: AnimeTypeVariants
+  minimalAge?: AnimeMinimalAge
 }
 
 export type GetAnimeParams = {
@@ -39,4 +42,5 @@ export type GetAnimeParams = {
   type?: AnimeTypeVariants | null
   years?: string[] | null
   translations?: string[] | null
+  studio?: string | null
 }

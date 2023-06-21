@@ -3,15 +3,12 @@ import styles from "./styles.module.pcss"
 import { RatingIcon } from "./rating-icon"
 import { getRatingColor } from "../lib"
 import clsx from "clsx"
-import { Portal } from "~shared/components"
+import { Tooltip } from "~shared/components"
 import { RatingDistribution } from "./rating-distribution"
-import { AnimatePresence } from "framer-motion"
-import { useStore } from "effector-react"
-import { distributionRatingModel } from "../model"
 import { AiFillStar } from "react-icons/all"
 
 type RatingButtonProps = {
-  onRateMedia: () => void
+  onRateMedia: (rating: number) => void
   ratingDistribution: { rating: number; count: number }[]
 }
 
@@ -19,33 +16,26 @@ export const RatingButton = ({
   onRateMedia,
   ratingDistribution,
 }: RatingButtonProps) => {
-  const { distributionPanelIsOpened } = useStore(
-    distributionRatingModel.$distributionRating
-  )
-
-  const openDistribution = () => {
-    distributionRatingModel.setDistributionPanelIsOpened(true)
-  }
-
   return (
-    <>
-      <div
-        onClick={openDistribution}
-        className={clsx(styles.rating, styles["green"])}
-      >
+    <Tooltip
+      keepLabelVisibleOnHover
+      position={"bottom"}
+      withoutLabelBackground
+      width={320}
+      label={
+        <RatingDistribution
+          onRateMedia={onRateMedia}
+          ratingDistribution={ratingDistribution}
+        />
+      }
+    >
+      <div className={clsx(styles.rating, styles["green"])}>
         <p>Оценить аниме</p>
         <div>
           <AiFillStar />
         </div>
       </div>
-      <AnimatePresence>
-        {distributionPanelIsOpened && (
-          <Portal>
-            <RatingDistribution ratingDistribution={ratingDistribution} />
-          </Portal>
-        )}
-      </AnimatePresence>
-    </>
+    </Tooltip>
   )
 }
 

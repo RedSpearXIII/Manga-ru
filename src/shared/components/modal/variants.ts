@@ -1,29 +1,10 @@
 import { Variants } from "framer-motion"
 
-export const dropIn: Variants = {
+export const modalAnimateVariants: Variants = {
   hidden: {
     opacity: 0,
   },
   visible: {
     opacity: 1,
-  },
-  exit: {
-    opacity: 0,
-  },
-}
-
-export const modalDropIn: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.8,
-    x: "-50%",
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.8,
   },
 }

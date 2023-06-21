@@ -1,18 +1,18 @@
 .card {
-  @apply grid grid-cols-[65px_auto] dark:bg-slate-800 bg-slate-200 shadow rounded overflow-hidden;
+  @apply grid grid-cols-[85px_auto] dark:bg-slate-800 bg-slate-200 shadow rounded overflow-hidden;
 
   .image {
-    @apply object-cover h-[100px];
+    @apply object-cover h-[125px] w-full;
   }
 
   .content {
     @apply p-2 flex flex-col justify-between;
     .titleName {
       h3 {
-        @apply text-orange-400 dark:text-orange-300 leading-5 line-clamp-2 text-sm;
+        @apply text-orange-400 dark:text-orange-300 leading-5 text-sm;
       }
       p {
-        @apply text-xs line-clamp-2 text-slate-900 dark:text-slate-400;
+        @apply text-xs line-clamp-3 text-slate-900 dark:text-slate-400;
       }
     }
     .info {
