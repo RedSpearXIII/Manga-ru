@@ -7,6 +7,10 @@ import {
   AnimeStatuses,
   AnimeTranslation,
   AnimeTypeVariants,
+  getAnimeGenres,
+  getAnimeStudios,
+  getAnimeTranslation,
+  getAnimeYears,
 } from "~shared/api"
 import { createEvent, createStore } from "effector"
 
@@ -145,3 +149,8 @@ export const $type = $animeListFilter.map((state) => state.type)
 export const $minimalAge = $animeListFilter.map((state) => state.minimalAge)
 export const $years = $animeListFilter.map((state) => state.years)
 export const $translations = $animeListFilter.map((state) => state.translations)
+
+getAnimeYears.start()
+getAnimeStudios.start()
+getAnimeGenres.start()
+getAnimeTranslation.start()

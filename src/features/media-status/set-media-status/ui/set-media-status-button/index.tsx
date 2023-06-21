@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 import styles from "./styles.module.pcss"
-import { Button } from "~shared/components"
+import { Button, Modal } from "~shared/components"
 import { motion, Variants } from "framer-motion"
 import { BiChevronDown } from "react-icons/all"
 import { useHover } from "~shared/hooks"
@@ -10,6 +10,7 @@ import {
   useSetAnimeStatus,
 } from "~shared/api"
 import { useQueryClient } from "@tanstack/react-query"
+import { AuthForm } from "~widgets/auth-form"
 
 const chevronVariants: Variants = {
   open: { rotate: 0 },
@@ -35,19 +36,28 @@ type Props = {
   animeUrl?: string | undefined
   mangaUrl?: string | undefined
   onSuccess?: () => void
+  isAuth: boolean
 } & ({ animeUrl: string } | { mangaUrl: string })
 
 export const SetMediaStatusButton = ({
   animeUrl,
   mangaUrl,
   onSuccess,
+  isAuth,
 }: Props) => {
   const [isHovered, hoverProps] = useHover(100)
-
   const queryClient = useQueryClient()
+
+  const [authModalIsOpen, setAuthModalIsOpen] = useState(false)
+  const onAuthSuccess = () => {
+    setAuthModalIsOpen(false)
+  }
+
   const { mutate } = useSetAnimeStatus()
 
   const setMediaStatus = (status: AnimeTrackStatuses) => {
+    if (!isAuth) return setAuthModalIsOpen(true)
+
     if (animeUrl) {
       mutate(
         { status, animeUrl: animeUrl! },
@@ -98,6 +108,21 @@ export const SetMediaStatusButton = ({
           </li>
         ))}
       </motion.ul>
+
+      <Modal
+        title={"Войдите в аккаунт чтобы добавлять аниме в списки"}
+        width={500}
+        isOpened={authModalIsOpen}
+        onClose={() => setAuthModalIsOpen(false)}
+      >
+        <div>
+          <AuthForm
+            onSignupSuccess={onAuthSuccess}
+            onLoginSuccess={onAuthSuccess}
+            onAuthByServicesSuccess={onAuthSuccess}
+          />
+        </div>
+      </Modal>
     </div>
   )
 }

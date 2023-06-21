@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@farfetched/core':
+    specifier: ^0.8.12
+    version: 0.8.12(effector@22.8.5)
   '@hookform/resolvers':
     specifier: ^3.1.0
     version: 3.1.0(react-hook-form@7.43.9)
@@ -608,6 +611,14 @@ packages:
     resolution: {integrity: sha512-ElyB54bJIhXQYVKjDSvCkPO1iU1tSAeVQJbllWJq1XQSmmA4dgFk8CbiBGpiOPxleE48vDogxCtmMYku4HSVLA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@farfetched/core@0.8.12(effector@22.8.5):
+    resolution: {integrity: sha512-xAcpmMzxxDLn9XwpjxHbA1qVeLZ5FFyPWx4g63KqzTkYZ+vhesMMZWG5iYKgttffOZFYWS3PBAzIA4cW/GIKwA==}
+    peerDependencies:
+      effector: ^22.5.0
+    dependencies:
+      effector: 22.8.5
+    dev: false
 
   /@hookform/resolvers@3.1.0(react-hook-form@7.43.9):
     resolution: {integrity: sha512-z0A8K+Nxq+f83Whm/ajlwE6VtQlp/yPHZnXw7XWVPIGm1Vx0QV8KThU3BpbBRfAZ7/dYqCKKBNnQh85BkmBKkA==}

@@ -1,11 +1,10 @@
 import React from "react"
 import styles from "./styles.module.pcss"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useHover } from "~shared/hooks"
 import { BiChevronDown } from "react-icons/all"
-import { ToggleTheme } from "~features/toggle-theme"
 import { Avatar } from "~shared/components"
-import { ProfileSection } from "./profile-section"
+import { Dropdown } from "./dropdown"
 
 const chevronVariants = {
   open: { rotate: 0 },
@@ -30,26 +29,7 @@ export const UserPanel = () => {
         </motion.div>
       </div>
 
-      <AnimatePresence>
-        {isHover && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={styles.dropdown}
-          >
-            <div className={styles.dropdownItem}>
-              <ProfileSection />
-            </div>
-            <div className={styles.dropdownItem}></div>
-            <div className={styles.dropdownItem}></div>
-            <div className={styles.dropdownItem}></div>
-            <div className={styles.dropdownItem}>
-              <ToggleTheme />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Dropdown isOpened={isHover} />
     </div>
   )
 }

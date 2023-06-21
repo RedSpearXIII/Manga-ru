@@ -1,16 +1,15 @@
 import React from "react"
 import { animeListFilterModel } from "~features/anime-list-filter"
 import { MultiSelect } from "~shared/components"
-import { useGetAnimeTranslation } from "~shared/api"
-import { useStore } from "effector-react"
+import { useStore, useUnit } from "effector-react"
+import { getAnimeTranslation } from "~shared/api"
 
 type Props = {
   inExtraFilter?: boolean
 }
 
 export const Translations = ({ inExtraFilter }: Props) => {
-  const { data, isLoading } = useGetAnimeTranslation()
-
+  const { data, pending } = useUnit(getAnimeTranslation)
   const translations = useStore(animeListFilterModel.$translations)
 
   const values = translations.map((translation) => translation.id.toString())
@@ -41,7 +40,7 @@ export const Translations = ({ inExtraFilter }: Props) => {
       <MultiSelect
         searchable
         color={inExtraFilter ? "slateDark" : undefined}
-        isLoading={isLoading}
+        isLoading={pending}
         label={"Озвучки"}
         placeholder={"Любые"}
         values={values}

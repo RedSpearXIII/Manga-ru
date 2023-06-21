@@ -1,15 +1,16 @@
 import React from "react"
 import { Select } from "~shared/components"
-import { useGetAnimeStudios } from "~shared/api"
+import { getAnimeStudios } from "~shared/api"
 import { animeListFilterModel } from "~features/anime-list-filter"
 import { useStore } from "effector-react"
+import { useUnit } from "effector-react/effector-react.umd"
 
 type Props = {
   inExtraFilter?: boolean
 }
 
 export const Studios = ({ inExtraFilter }: Props) => {
-  const { data, isLoading } = useGetAnimeStudios()
+  const { data, pending } = useUnit(getAnimeStudios)
   const studio = useStore(animeListFilterModel.$studio)
 
   const studioOptions = data
@@ -29,7 +30,7 @@ export const Studios = ({ inExtraFilter }: Props) => {
           })
         }
         searchable
-        isLoading={isLoading}
+        isLoading={pending}
         options={studioOptions}
         placeholder={"Любой"}
         label={"Студия"}

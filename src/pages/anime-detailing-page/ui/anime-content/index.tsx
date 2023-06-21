@@ -9,8 +9,7 @@ import { useScreenSize } from "~shared/hooks"
 import { Breakpoints } from "~shared/types"
 import { BgImage } from "./bg-image"
 import { AnimeRating } from "./anime-rating"
-import { AddMediaToFavoritesButton } from "~features/favorite-media/add-media-to-favorites"
-import { SetMediaStatusButton } from "~features/media-status/set-media-status"
+import { AnimeListManageBtns } from "./anime-list-manage-btns"
 
 export const AnimeContent = () => {
   const { animeUrl } = useParams()
@@ -42,12 +41,7 @@ export const AnimeContent = () => {
               </Badge>
             </span>
           )}
-          {screenWidth >= Breakpoints.lg && (
-            <div className={styles.manageAnimeButtons}>
-              <SetMediaStatusButton animeUrl={animeUrl!} />
-              <AddMediaToFavoritesButton />
-            </div>
-          )}
+          {screenWidth >= Breakpoints.lg && <AnimeListManageBtns />}
         </div>
 
         <div className={styles.rightBlock}>
@@ -62,12 +56,7 @@ export const AnimeContent = () => {
                 <h1>{data.title}</h1>
               </div>
 
-              {screenWidth < Breakpoints.lg && (
-                <div className={styles.manageAnimeButtons}>
-                  <SetMediaStatusButton animeUrl={animeUrl!} />
-                  <AddMediaToFavoritesButton />
-                </div>
-              )}
+              {screenWidth < Breakpoints.lg && <AnimeListManageBtns />}
             </div>
           )}
           {screenWidth >= Breakpoints.lg && (

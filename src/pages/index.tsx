@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom"
 import { MainLayout } from "~layouts/main-layout"
 import { useStore } from "effector-react"
 import { viewerModel } from "~entities/viewer"
-import { AuthForm } from "~widgets/auth-form"
 
 const HomePage = lazy(() => import("~pages/home-page"))
 const MainPage = lazy(() => import("~pages/main-page"))
@@ -14,6 +13,8 @@ const AnimeDetailingPage = lazy(() => import("~pages/anime-detailing-page"))
 const RightHoldersPage = lazy(() => import("~pages/right-holders-page"))
 const ProfilePage = lazy(() => import("~pages/profile-page"))
 const WatchPage = lazy(() => import("~pages/watch-page"))
+const AuthPage = lazy(() => import("~pages/auth-page"))
+const SettingsPage = lazy(() => import("~pages/settings-page"))
 
 const Routing = () => {
   const { isAuth } = useStore(viewerModel.$viewer)
@@ -33,15 +34,17 @@ const Routing = () => {
         </Route>
         <Route path="*" element={"NOT FOUND"} />
         <Route path={"/right-holders"} element={<RightHoldersPage />} />
-        <Route path={"profile/:id"} element={<ProfilePage />}>
-          {/*<Route index  />*/}
-        </Route>
         {isAuth ? (
-          <></>
+          <>
+            <Route path={"/settings"} element={<SettingsPage />} />
+            <Route path={"profile/:id"} element={<ProfilePage />}>
+              {/*<Route index  />*/}
+            </Route>
+          </>
         ) : (
           <>
-            <Route path={"/login"} element={<AuthForm />} />
-            <Route path={"/signup"} element={<AuthForm />} />
+            <Route path={"/login"} element={<AuthPage />} />
+            <Route path={"/signup"} element={<AuthPage />} />
           </>
         )}
       </Route>

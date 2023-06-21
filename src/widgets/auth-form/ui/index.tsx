@@ -11,9 +11,18 @@ type Forms = "signup" | "login"
 type Props = {
   displayedForm?: Forms
   setDisplayedForm?: Dispatch<SetStateAction<Forms>>
+  onLoginSuccess?: () => void
+  onSignupSuccess?: () => void
+  onAuthByServicesSuccess?: () => void
 }
 
-export const AuthForm = ({ displayedForm, setDisplayedForm }: Props) => {
+export const AuthForm = ({
+  displayedForm,
+  setDisplayedForm,
+  onAuthByServicesSuccess,
+  onSignupSuccess,
+  onLoginSuccess,
+}: Props) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -43,7 +52,7 @@ export const AuthForm = ({ displayedForm, setDisplayedForm }: Props) => {
     <div className={styles.rootForm}>
       {form === "signup" ? (
         <>
-          <AuthByLocalForm />
+          <AuthByLocalForm onSuccess={onSignupSuccess} />
           <hr className={styles.separator} />
           <div className={styles.switchForm}>
             <p>Уже есть аккаунт? </p>
@@ -54,7 +63,7 @@ export const AuthForm = ({ displayedForm, setDisplayedForm }: Props) => {
         </>
       ) : (
         <>
-          <LoginForm />
+          <LoginForm onSuccess={onLoginSuccess} />
           <hr className={styles.separator} />
           <div className={styles.switchForm}>
             <p>Еще нет аккаунта? </p>

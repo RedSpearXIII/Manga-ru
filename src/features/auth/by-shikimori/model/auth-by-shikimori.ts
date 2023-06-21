@@ -1,4 +1,4 @@
-import { createEffect, createEvent, createStore, sample } from "effector"
+import { createEffect, createEvent, createStore } from "effector"
 import { publicHttp } from "~shared/api"
 
 type State = {
@@ -13,17 +13,16 @@ export const loginFx = createEffect<void, string>(async () => {
   const response = await publicHttp.get<string>("/auth/shikimori/login")
   return response.data
 })
-const redirectUser = createEvent<string>()
+
+export const saveTokens = createEvent<{
+  accessToken: string
+  refreshToken: string
+}>()
 
 export const $authByShikimori = createStore<State>(initialState).on(
-  redirectUser,
+  saveTokens,
   (state, payload) => {
-    window.location.href = payload
+    localStorage.setItem("accessToken", payload.accessToken)
+    localStorage.setItem("refreshToken", payload.refreshToken)
   }
 )
-
-sample({
-  clock: loginFx.doneData,
-  fn: (redirectUrl) => redirectUrl,
-  target: redirectUser,
-})

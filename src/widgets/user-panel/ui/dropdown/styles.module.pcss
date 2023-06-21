@@ -1,0 +1,30 @@
+.dropdown {
+  @apply bg-slate-100 dark:bg-slate-800 rounded gap-2 drop-shadow dark:text-white text-black absolute right-0 top-20 w-[300px];
+
+  .content {
+    @apply grid grid-cols-2 items-center justify-center gap-x-2 gap-y-1 mb-2 p-2;
+
+    .item {
+      @apply bg-slate-200 dark:bg-slate-900 rounded flex gap-x-1 items-center p-2 justify-center cursor-pointer;
+      @apply hover:bg-slate-300 hover:dark:bg-slate-700 dark:text-slate-200 text-slate-800 transition-colors;
+      svg {
+        @apply text-base;
+      }
+      p {
+        @apply text-sm text-inherit;
+      }
+    }
+  }
+
+  .footer {
+    @apply bg-slate-300 dark:bg-slate-700 p-2 rounded grid grid-cols-2;
+
+    .footerItem {
+      @apply flex gap-x-1 items-center justify-center;
+      p,
+      svg {
+        @apply text-sm;
+      }
+    }
+  }
+}
